@@ -2,6 +2,7 @@ import arcade
 import arcade.gui
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import SPRITE_SIZE
+from rpg.views.game_view import GameView
 
 
 class PantallaPrueba(arcade.View):
@@ -17,8 +18,11 @@ class PantallaPrueba(arcade.View):
     def on_show_view(self):
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
-        self.setup_team(":characters:Female/Female 18-4.png", 200, 200)
-        self.setup_enemies(":characters:Female/Female 18-4.png", 1000, 200)
+        self.setup_team(":characters:Female/Female 18-4.png", 340, 290)
+        self.setup_team(":characters:Male/Male 01-1.png", 230, 350)
+        self.setup_team(":characters:Male/Male 08-1.png", 280, 460)
+        self.setup_team(":characters:Soldier/Soldier 03-1.png", 390, 410)
+        self.setup_enemies(":characters:Boss/Boss 01.png", 1000, 380)
 
     def on_hide_view(self):
         self.manager.disable()
@@ -41,10 +45,12 @@ class PantallaPrueba(arcade.View):
         self.character_sprite.center_x = x
         self.character_sprite.center_y = y
 
+        self.character_sprite.scale = 2
+
         self.character_sprite.textures = arcade.load_spritesheet(
             sheet_name,
-            sprite_width = SPRITE_SIZE + 32,
-            sprite_height = SPRITE_SIZE + 32,
+            sprite_width = SPRITE_SIZE,
+            sprite_height = SPRITE_SIZE,
             columns = 3,
             count = 12,
         )
@@ -55,14 +61,15 @@ class PantallaPrueba(arcade.View):
 
     def setup_enemies(self, sheet_name, x, y):
         self.character_sprite = CharacterSprite(sheet_name)
+        self.character_sprite.scale = 2
 
         self. character_sprite.center_x = x
         self.character_sprite.center_y = y
 
         self.character_sprite.textures = arcade.load_spritesheet(
             sheet_name,
-            sprite_width = SPRITE_SIZE + 30,
-            sprite_height= SPRITE_SIZE + 30,
+            sprite_width = 96,
+            sprite_height= 96,
             columns = 3,
             count = 12,
         )
