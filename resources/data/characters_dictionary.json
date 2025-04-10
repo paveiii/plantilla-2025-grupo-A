@@ -17,7 +17,7 @@
   "grey_dog": {
     "images": "Animal/Dog 01-2.png"
   },
-  "enemigo1": {
+  "enemy": {
     "images": "Soldier/Soldier 01-1.png"
   }
 
