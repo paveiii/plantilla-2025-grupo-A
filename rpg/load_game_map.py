@@ -90,10 +90,8 @@ def load_map(map_name):
                     character_sprite = RandomWalkingSprite(
                         f":characters:{character_data['images']}", game_map.scene
                     )
-                if character_object.properties.get("movement") == "enemy":
-                    character_sprite = Enemigos(
-                        #f":characters:{character_data['images']}", game_map.scene,
-                    )
+                #if character_object.properties.get("movement") == "enemy":
+                    #character_sprite = Enemigos(f":characters:{character_data['images']}", game_map.scene,)
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"
