@@ -54,10 +54,10 @@ class InBattleView(arcade.View):
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
 
-        self.setup_team(":characters:Soldier/Soldier 03-1.png", 430, 490)
         self.setup_team(":characters:Female/Female 18-4.png", 345, 345)
         self.setup_team(":characters:Male/Male 01-1.png", 180, 430)
         self.setup_team(":characters:Male/Male 08-1.png", 280, 565)
+        self.setup_team(":characters:Soldier/Soldier 03-1.png", 430, 490)
         self.setup_enemies(":characters:Boss/Boss 01.png", 1000, 430)
 
     def on_hide_view(self):
