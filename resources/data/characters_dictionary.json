@@ -3,7 +3,7 @@
     "images": "Enemy/Enemy 06-1.png"
   },
   "white_cat": {
-    "images": "Soldier/Soldier 01-1.png"
+    "images": "Animal/Cat 01-1.png"
   },
   "grey_cat": {
     "images": "Animal/Cat 01-2.png"
@@ -18,7 +18,7 @@
     "images": "Animal/Dog 01-2.png"
   },
   "enemy": {
-    "images": "Soldier/Soldier 01-1.png"
+    "images": "Enemy/Enemy 15-1.png"
   }
 
 }

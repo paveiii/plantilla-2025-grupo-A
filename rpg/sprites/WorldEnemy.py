@@ -1,6 +1,7 @@
 import math
 
 import arcade
+from arcade import SpriteCircle, check_for_collision, SpriteList
 
 from rpg.sprites.character_sprite import CharacterSprite
 
@@ -8,11 +9,11 @@ class WorldEnemy(CharacterSprite):
 
     enemigos_batalla = []
 
-    def __init__(self, sheet_name, scene, jugador, speed=1,radio_deteccion = 200,vida_max = 100, stamina_max = 100):
+    def __init__(self, sheet_name, scene, jugador:None, speed=1,radio_deteccion = 200,vida_max = 100, stamina_max = 100):
         super().__init__(sheet_name)
         self.speed = speed
         self.scene = scene
-        self.jugador = jugador
+        self.jugador = None
         self.radio_deteccion = radio_deteccion
         self.vida_max = vida_max
         self.stamina_max = stamina_max

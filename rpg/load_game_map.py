@@ -9,7 +9,7 @@ from os.path import isfile, join
 import arcade
 from arcade.experimental.lights import Light, LightLayer
 
-from rpg.sprites.WorldEnemy import Enemigos
+from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
@@ -85,13 +85,14 @@ def load_map(map_name):
             shape = character_object.shape
 
             if isinstance(shape, list) and len(shape) == 2:
+
                 # Point
                 if character_object.properties.get("movement") == "random":
                     character_sprite = RandomWalkingSprite(
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 #if character_object.properties.get("movement") == "enemy":
-                    #character_sprite = Enemigos(f":characters:{character_data['images']}", game_map.scene,)
+                # character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene)
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"
