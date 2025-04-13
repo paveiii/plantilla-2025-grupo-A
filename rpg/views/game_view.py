@@ -128,7 +128,7 @@ class GameView(arcade.View):
     Main application class.
     """
 
-    def __init__(self, map_list):
+    def __init__(self, map_list, player):
         super().__init__()
 
         arcade.set_background_color(arcade.color.AMAZON)
@@ -139,7 +139,7 @@ class GameView(arcade.View):
         self.ui_manager.enable()
 
         # Player sprite
-        self.player_sprite = None
+        self.player_sprite = player
         self.player_sprite_list = None
 
         # Track the current state of what key is pressed
@@ -228,9 +228,6 @@ class GameView(arcade.View):
 
     def setup(self):
         """Set up the game variables. Call to re-start the game."""
-
-        # Create the player character
-        self.player_sprite = PlayerSprite(":characters:Female/Female 19-1.png")
 
         # Spawn the player
         start_x = constants.STARTING_X

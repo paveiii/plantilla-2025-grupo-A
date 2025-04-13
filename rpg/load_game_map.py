@@ -26,7 +26,7 @@ class GameMap:
     background_color = arcade.color.AMAZON
 
 
-def load_map(map_name):
+def load_map(map_name,player):
     """
     Load a map
     """
@@ -91,8 +91,8 @@ def load_map(map_name):
                     character_sprite = RandomWalkingSprite(
                         f":characters:{character_data['images']}", game_map.scene
                     )
-                #if character_object.properties.get("movement") == "enemy":
-                # character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene)
+                if character_object.properties.get("movement") == "enemy":
+                    character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene,player)
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"
@@ -177,7 +177,7 @@ def load_map(map_name):
     return game_map
 
 
-def load_maps():
+def load_maps(player):
     """
     Load all the Tiled maps from a directory.
     (Must use the .json extension.)
@@ -202,7 +202,7 @@ def load_maps():
 
     # Loop and load each file
     map_name = load_maps.map_file_names.pop(0)
-    load_maps.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json")
+    load_maps.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json",player)
 
     files_left = load_maps.file_count - len(load_maps.map_file_names)
     progress = 100 * files_left / load_maps.file_count

@@ -9,16 +9,12 @@ class WorldEnemy(CharacterSprite):
 
     enemigos_batalla = []
 
-    def __init__(self, sheet_name, scene, jugador:None, speed=1,radio_deteccion = 200,vida_max = 100, stamina_max = 100):
+    def __init__(self, sheet_name, scene, jugador:None, speed=1,radio_deteccion = 200):
         super().__init__(sheet_name)
         self.speed = speed
         self.scene = scene
-        self.jugador = None
+        self.jugador = jugador
         self.radio_deteccion = radio_deteccion
-        self.vida_max = vida_max
-        self.stamina_max = stamina_max
-        self.vida = vida_max
-        self.stamina = stamina_max
         self.destination = None
         self.wall_list = None
 
