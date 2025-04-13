@@ -3,7 +3,7 @@ from rpg.constants import SPRITE_SIZE
 
 class BattleAlly(arcade.Sprite):
 
-    def __init__(self, sheet_name, displayName, displayDescription, maxStamina, maxHealth, restoredStamina, dialogueNoItem, dialogueWithItem:"", requirementItemName:""):
+    def __init__(self, sheet_name, displayName, displayDescription, maxStamina, maxHealth, restoredStamina):
         super().__init__()
         self.textures = arcade.load_spritesheet(
             sheet_name,
@@ -27,16 +27,11 @@ class BattleAlly(arcade.Sprite):
         self.displayName = displayName
         self.displayDescription = displayDescription
 
-        self.dialogueNoItem = dialogueNoItem #Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
-        self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
-        self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
-
         self.actions = []
 
     def changeHealth(self, amount:float):
         self.currentHealth += amount
     def changeStamina(self, amount:float):
         self.currentHealth += amount
-    #Funcion para ganar Stamina, llamada durante la batalla.
     def recoverStamina(self):
         self.currentStamina += self.restoredStamina

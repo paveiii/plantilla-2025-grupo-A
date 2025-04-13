@@ -92,7 +92,7 @@ def load_map(map_name,player):
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 if character_object.properties.get("movement") == "enemy":
-                    character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene,player)
+                    character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene,player, None)
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"
