@@ -9,7 +9,7 @@ from os.path import isfile, join
 import arcade
 from arcade.experimental.lights import Light, LightLayer
 
-from rpg.sprites.Enemigos import Enemigos
+from rpg.sprites.WorldEnemy import Enemigos
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite

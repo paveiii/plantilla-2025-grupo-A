@@ -4,7 +4,7 @@ import arcade
 
 from rpg.sprites.character_sprite import CharacterSprite
 
-class Enemigos(CharacterSprite):
+class WorldEnemy(CharacterSprite):
 
     enemigos_batalla = []
 
@@ -24,12 +24,12 @@ class Enemigos(CharacterSprite):
     def detectar_jugador(self):
         distancia = arcade.get_distance_between_sprites(self.jugador, self)
         if self.radio_deteccion > distancia >= 16:  #16 es el radio de los sprites
-            if self not in Enemigos.enemigos_batalla and distancia <= 16:
-                Enemigos.enemigos_batalla.append(self)
+            if self not in WorldEnemy.enemigos_batalla and distancia <= 16:
+                WorldEnemy.enemigos_batalla.append(self)
             return True
         else:
-            if self in Enemigos.enemigos_batalla:
-                Enemigos.enemigos_batalla.remove(self)
+            if self in WorldEnemy.enemigos_batalla:
+                WorldEnemy.enemigos_batalla.remove(self)
             return False
 
 
