@@ -3,7 +3,7 @@ from rpg.constants import SPRITE_SIZE
 
 class BattleAlly(arcade.Sprite):
 
-    def __init__(self, sheet_name, displayName, displayDescription, maxStamina, maxHealth, restoredStamina, dialogueNoItem, dialogueWithItem:"", requirementItemName:""):
+    def __init__(self, sheet_name, displayName, displayDescription, type, maxStamina, maxHealth, restoredStamina, dialogueNoItem, dialogueWithItem:"", requirementItemName:""):
         super().__init__()
         self.textures = arcade.load_spritesheet(
             sheet_name,
@@ -22,8 +22,11 @@ class BattleAlly(arcade.Sprite):
         self.currentStamina = maxStamina
         self.currentHealth = maxHealth
 
-        self.restoredStamina = restoredStamina #Per turn
+        self.restoredStamina = restoredStamina #Por turno.
 
+        #Esta variable es para que la IA la use para determinar que clase de personaje es.
+        #Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
+        self.type = type
         self.displayName = displayName
         self.displayDescription = displayDescription
 
