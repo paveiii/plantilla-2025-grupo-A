@@ -1,0 +1,17 @@
+{
+  "ActionTemplate":
+    {
+      "name": "", "description": "", "actionType":"Damage/Heal/ApplyEffect/Revive",
+      "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+    "Action1":
+    {
+      "name": "", "description": "", "actionType":"Damage",
+      "effectName" : "", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+    "Action2":
+    {
+      "name": "", "description": "", "actionType":"ApplyEffect",
+      "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    }
+}

@@ -1,45 +1,35 @@
+import json
+
 import arcade
+
+from rpg.BattleBuddy import BattleBuddy
 from rpg.constants import SPRITE_SIZE
 
-class BattleAlly(arcade.Sprite):
+class BattleAlly(BattleBuddy):
 
     def __init__(self, sheet_name, displayName, displayDescription, type, maxStamina, maxHealth, restoredStamina, dialogueNoItem, dialogueWithItem:"", requirementItemName:""):
-        super().__init__()
-        self.textures = arcade.load_spritesheet(
-            sheet_name,
-            sprite_width=SPRITE_SIZE,
-            sprite_height=SPRITE_SIZE,
-            columns=3,
-            count=12,
-        )
-        self.should_update = 0
-        self.cur_texture_index = 0
-        self.texture = self.textures[self.cur_texture_index]
-
-        self.maxStamina = maxStamina
-        self.maxHealth = maxHealth
-
-        self.currentStamina = maxStamina
-        self.currentHealth = maxHealth
-
-        self.restoredStamina = restoredStamina #Por turno.
+        super().__init__(sheet_name, displayName, displayDescription, maxStamina, maxHealth, restoredStamina)
 
         #Esta variable es para que la IA la use para determinar que clase de personaje es.
         #Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
         self.type = type
-        self.displayName = displayName
-        self.displayDescription = displayDescription
 
         self.dialogueNoItem = dialogueNoItem #Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
         self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
         self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
 
-        self.actions = []
+    def __init__(self, characterDictionaryPath:str, characterName:str):
+        super().__init__(characterDictionaryPath, characterName)
 
-    def changeHealth(self, amount:float):
-        self.currentHealth += amount
-    def changeStamina(self, amount:float):
-        self.currentHealth += amount
-    #Funcion para ganar Stamina, llamada durante la batalla.
-    def recoverStamina(self):
-        self.currentStamina += self.restoredStamina
+        with open(characterDictionaryPath,"r") as f:
+            data = json.load(f)
+
+            # Esta variable es para que la IA la use para determinar que clase de personaje es.
+            # Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
+            self.type = data[characterName]["type"]
+
+            self.dialogueNoItem = data[characterName]["dialogueNoItem"]  # Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
+            self.dialogueRecruit = data[characterName]["dialogueWithItem"]  # Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
+            self.requirementItemName = data[characterName]["requirementItemName"]  # Nombre del objeto necesitado para reclutar al personaje.
+
+
