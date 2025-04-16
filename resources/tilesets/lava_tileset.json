@@ -1,0 +1,14 @@
+{ "columns":3,
+ "image":"lava_tileset.png",
+ "imageheight":96,
+ "imagewidth":96,
+ "margin":0,
+ "name":"lava_tileset",
+ "spacing":0,
+ "tilecount":9,
+ "tiledversion":"1.7.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.6"
+}
