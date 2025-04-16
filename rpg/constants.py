@@ -38,3 +38,7 @@ MESSAGE_BOX_MARGIN = 30
 
 # How fast does the camera pan to the user
 CAMERA_SPEED = 0.1
+
+# Character battle positions (in order)
+x_positions = [430, 180, 345, 280]
+y_positions = [490, 430, 345, 565]

@@ -1,0 +1,7 @@
+{
+  "EffectTemplate":
+    {
+      "name": "aaaa", "description": "", "effectType":"#Damage/Heal/Multiplier",
+      "durationInTurns": 0,"amount" : 0, "statAffected" : ""
+    }
+}
