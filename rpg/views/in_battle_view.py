@@ -4,7 +4,7 @@ import json
 
 import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
-from rpg.constants import SPRITE_SIZE, SCREEN_WIDTH
+from rpg.constants import SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions
 
 
 
@@ -37,10 +37,15 @@ class InBattleView(arcade.View):
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
 
-        self.setup_team(":characters:Female/Female 18-4.png", 345, 345)
-        self.setup_team(":characters:Male/Male 01-1.png", 180, 430)
-        self.setup_team(":characters:Male/Male 08-1.png", 280, 565)
-        self.setup_team(":characters:Soldier/Soldier 03-1.png", 430, 490)
+        new_x = x_positions
+        new_y = y_positions
+        for character in list(self.team.values())[1:]: # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
+            while len(new_x) > 0:
+                self.setup_team(character["sheet_name"], new_x[0], new_y[0])
+                del new_x[0]
+                del new_y[0]
+                break
+
         self.setup_enemies(":characters:Boss/Boss 01.png", 1000, 430)
 
     def on_hide_view(self):
@@ -200,7 +205,7 @@ class InBattleView(arcade.View):
         if self.option == "attack" or self.option == "skill":
 
             # Transformar el diccionario en una lista (excluyendo el template) para poder acceder por índice
-            characters = list(self.team.values())[1:]
+            characters = list(self.team.values())[1:] # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
 
             # Crear una lista con las acciones del personaje al que le toca el turno
             current_ally_actions = characters[self.current_ally]["actions"]
@@ -218,7 +223,7 @@ class InBattleView(arcade.View):
 
         elif self.option == "item":
             for item in self.items.values():
-                if item["type"] != "weapon":
+                if item["type"] != "weapon": # Para cada item compara si el tipo es distinto de weapon y si es distinto lo añade
                     button = arcade.gui.UIFlatButton(text = item["short_name"], width = button_width, height = 30)
                     self.contenedor.add(button.with_space_around(10))
                     num_buttons += 1
