@@ -34,3 +34,5 @@ class Action():
             self.effect = None
             if(self.actionType == "ApplyEffect"): self.effect = Effect("../resources/data/effects_dictionary.json",data[actionName]["effectName"])
 
+    def get_name(self):
+        return self.displayName

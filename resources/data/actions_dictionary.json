@@ -1,17 +1,35 @@
 {
   "ActionTemplate":
     {
-      "name": "", "description": "", "actionType":"Damage/Heal/ApplyEffect/Revive",
+      "name": "", "description": "", "option": "attack/skill", "actionType":"Damage/Heal/ApplyEffect/Revive",
       "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
     },
     "Action1":
     {
-      "name": "", "description": "", "actionType":"Damage",
+      "name": "Attack1", "description": "", "option": "attack", "actionType":"Damage",
       "effectName" : "", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
     },
     "Action2":
     {
-      "name": "", "description": "", "actionType":"ApplyEffect",
+      "name": "Skill1", "description": "", "option": "skill", "actionType":"ApplyEffect",
+      "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+
+    "Action3":
+    {
+      "name": "Attack2", "description": "", "option": "attack", "actionType":"ApplyEffect",
+      "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+
+    "Action4":
+    {
+      "name": "Attack3", "description": "", "option": "attack", "actionType":"ApplyEffect",
+      "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+
+    "Action5":
+    {
+      "name": "Attack4", "description": "", "option": "attack", "actionType":"ApplyEffect",
       "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
     }
 }

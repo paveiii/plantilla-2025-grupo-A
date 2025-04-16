@@ -1,16 +1,17 @@
-from time import sleep
-
 import arcade
 import arcade.gui
+import json
+
+import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import SPRITE_SIZE, SCREEN_WIDTH
-from rpg.views.game_view import GameView
+
 
 
 class InBattleView(arcade.View):
     def __init__(self):
         super().__init__()
-        self.action = "menu"
+        self.option = "menu"
 
         self.player_sprites = arcade.SpriteList()
         self.enemy_sprites = arcade.SpriteList()
@@ -18,37 +19,19 @@ class InBattleView(arcade.View):
         self.manager = arcade.gui.UIManager()
         self.activated = False
 
-        self.fila1 = arcade.gui.UIBoxLayout(vertical = False, space_between = 20)
-        self.fila2 = arcade.gui.UIBoxLayout(vertical = False, space_between = 20)
+        self.main_buttons()
 
-        attack_button = arcade.gui.UIFlatButton(text = "Attack", width = 200)
-        self.fila1.add(attack_button)
-        attack_button.on_click = self.on_click_attack
+        file = open("../resources/data/battleCharacters_dictionary.json", "r")
+        self.team = json.load(file)
 
-        skill_button = arcade.gui.UIFlatButton(text = "Skill", width = 200)
-        self.fila1.add(skill_button)
-        skill_button.on_click = self.on_click_skill
+        file = open("../resources/data/actions_dictionary.json", "r")
+        self.actions = json.load(file)
 
-        item_button = arcade.gui.UIFlatButton(text = "Item", width = 200)
-        self.fila2.add(item_button)
-        item_button.on_click = self.on_click_item
+        file = open("../resources/data/item_dictionary.json", "r")
+        self.items = json.load(file)
 
-        rest_button = arcade.gui.UIFlatButton(text = "Rest", width = 200)
-        self.fila2.add(rest_button)
-        rest_button.on_click = self.on_click_rest
+        self.current_ally = 0
 
-        self.contenedor = arcade.gui.UIBoxLayout()
-        self.contenedor.add(self.fila1.with_space_around(bottom = 20))
-        self.contenedor.add(self.fila2)
-
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x = "center",
-                anchor_y = "bottom",
-                align_y = 35,
-                child = self.contenedor
-            )
-        )
 
     def on_show_view(self):
         self.manager.enable()
@@ -64,11 +47,6 @@ class InBattleView(arcade.View):
         self.manager.disable()
 
     def on_draw(self):
-        """
-        Method that redraws the UI buttons each time we call the pause menu. See game_view.py for more.
-        input: None
-        output: None
-        """
         current_width = self.get_width()
         border_width = 10
 
@@ -91,27 +69,23 @@ class InBattleView(arcade.View):
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
-        if self.action == "menu":
-            self.manager.draw()
-            self.manager.enable()
-
+        self.manager.draw()
+        self.manager.enable()
 
     def on_click_attack(self, event):
-        self.on_hide_view()
-        self.action = "attack"
+        self.option = "attack"
+        self.change_buttons()
 
     def on_click_skill(self, event):
-        self.on_hide_view()
-        self.action = "skill"
+        self.option = "skill"
+        self.change_buttons()
 
     def on_click_item(self, event):
-        self.on_hide_view()
-        self.action = "item"
+        self.option = "item"
+        self.change_buttons()
 
     def on_click_rest(self, event):
-        self.on_hide_view()
-        self.action = "rest"
-
+        self.option = "rest"
 
     def setup_team(self, sheet_name, x, y):
         self.character_sprite = CharacterSprite(sheet_name)
@@ -165,7 +139,8 @@ class InBattleView(arcade.View):
             self.window.show_view(self.window.views["game"])
 
         if key == arcade.key.ESCAPE:
-            self.action = "menu"
+            self.main_buttons()
+            self.option = "menu"
 
         if key == arcade.key.ENTER:
             print("battle pause menu")
@@ -180,3 +155,93 @@ class InBattleView(arcade.View):
         window_size = self.window.get_size()
         current_height = window_size[1]
         return current_height
+
+    def main_buttons(self):
+        self.manager.clear()
+
+        self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+        self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+
+        attack_button = arcade.gui.UIFlatButton(text="Attack", width=200)
+        self.fila1.add(attack_button)
+        attack_button.on_click = self.on_click_attack
+
+        skill_button = arcade.gui.UIFlatButton(text="Skill", width=200)
+        self.fila1.add(skill_button)
+        skill_button.on_click = self.on_click_skill
+
+        item_button = arcade.gui.UIFlatButton(text="Item", width=200)
+        self.fila2.add(item_button)
+        item_button.on_click = self.on_click_item
+
+        rest_button = arcade.gui.UIFlatButton(text="Rest", width=200)
+        self.fila2.add(rest_button)
+        rest_button.on_click = self.on_click_rest
+
+        self.contenedor = arcade.gui.UIBoxLayout()
+        self.contenedor.add(self.fila1.with_space_around(bottom=20))
+        self.contenedor.add(self.fila2)
+
+        self.manager.add(
+            arcade.gui.UIAnchorWidget(
+                anchor_x="center",
+                anchor_y="bottom",
+                align_y=35,
+                child=self.contenedor
+            )
+        )
+
+    def change_buttons(self):
+        self.manager.clear()
+        self.contenedor.clear()
+        num_buttons = 0
+        button_width = 300
+
+        if self.option == "attack" or self.option == "skill":
+
+            # Transformar el diccionario en una lista (excluyendo el template) para poder acceder por índice
+            characters = list(self.team.values())[1:]
+
+            # Crear una lista con las acciones del personaje al que le toca el turno
+            current_ally_actions = characters[self.current_ally]["actions"]
+
+            # Crear el nuevo layout de botones a partir de la opción elegida en el menú principal de botones
+            for current_action in current_ally_actions:
+                for global_action in self.actions:
+                    if current_action == global_action: # Compara los nombres de las acciones del personaje con los del JSON de acciones
+                        action_data = self.actions[global_action] # Guarda los datos de la acción del JSON que se está mirando
+
+                        if action_data["option"] == self.option: # Compara si la opción actual es igual que la de la acción del JSON
+                            button = arcade.gui.UIFlatButton(text = action_data["name"], width = button_width, height = 30)
+                            self.contenedor.add(button.with_space_around(10))
+                            num_buttons += 1
+
+        elif self.option == "item":
+            for item in self.items.values():
+                if item["type"] != "weapon":
+                    button = arcade.gui.UIFlatButton(text = item["short_name"], width = button_width, height = 30)
+                    self.contenedor.add(button.with_space_around(10))
+                    num_buttons += 1
+
+        y_pos = 0
+        if num_buttons == 4:
+            y_pos = 25
+        if num_buttons == 3:
+            y_pos = 65
+        if num_buttons == 2:
+            y_pos = 105
+        if num_buttons == 1:
+            y_pos = 145
+
+        self.manager.add(
+            arcade.gui.UIAnchorWidget(
+                anchor_x="left",
+                anchor_y="bottom",
+                align_x = 30,
+                align_y=y_pos,
+                child=self.contenedor
+            )
+        )
+
+        self.manager.enable()
+        self.manager.draw()

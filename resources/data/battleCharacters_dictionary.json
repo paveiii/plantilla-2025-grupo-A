@@ -7,5 +7,45 @@
       "dialogueWithItem" : "",
       "requirementItemName" : "",
       "actions" : ["ActionTemplate","Action2"]
+    },
+
+  "TestCharacter1":
+    {
+      "sheet_name": ":characters:Male/Male 01-1.png","name": "1", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : "",
+      "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
+    },
+
+  "TestCharacter2":
+    {
+      "sheet_name": ":characters:Male/Male 08-1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : "",
+      "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
+    },
+
+  "TestCharacter3":
+    {
+      "sheet_name": ":characters:Female/Female 18-4.png","name": "3", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : "",
+      "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
+    },
+
+  "TestCharacter4":
+    {
+      "sheet_name": ":characters:Soldier/Soldier 03-1.png","name": "4", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : "",
+      "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
     }
 }
