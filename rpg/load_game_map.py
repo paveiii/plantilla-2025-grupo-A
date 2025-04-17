@@ -51,6 +51,12 @@ def load_map(map_name,player):
         "water_blocking": {
             "use_spatial_hash": True,
         },
+        "decoration_blocking": {
+            "use_spatial_hash": True,
+        },
+        "decoration_blocking2": {
+            "use_spacial_hash": True,
+        }
     }
 
     # Read in the tiled map
