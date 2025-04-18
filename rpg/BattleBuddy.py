@@ -3,7 +3,7 @@ import json
 import arcade
 
 from rpg.Action import Action
-from rpg.constants import SPRITE_SIZE
+from rpg.constants import CHARACTER_SPRITE_SIZE
 
 class BattleBuddy(arcade.Sprite):
 
@@ -11,8 +11,8 @@ class BattleBuddy(arcade.Sprite):
         super().__init__()
         self.textures = arcade.load_spritesheet(
             sheet_name,
-            sprite_width=SPRITE_SIZE,
-            sprite_height=SPRITE_SIZE,
+            sprite_width=CHARACTER_SPRITE_SIZE,
+            sprite_height=CHARACTER_SPRITE_SIZE,
             columns=3,
             count=12,
         )
@@ -41,8 +41,8 @@ class BattleBuddy(arcade.Sprite):
             super().__init__()
             self.textures = arcade.load_spritesheet(
                 data[characterName]["sheet_name"],
-                sprite_width=SPRITE_SIZE,
-                sprite_height=SPRITE_SIZE,
+                sprite_width=CHARACTER_SPRITE_SIZE,
+                sprite_height=CHARACTER_SPRITE_SIZE,
                 columns=3,
                 count=12,
             )

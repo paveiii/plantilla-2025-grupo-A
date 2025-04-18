@@ -199,12 +199,8 @@ class GameView(arcade.View):
             arcade.set_background_color(self.my_map.background_color)
 
         map_height = self.my_map.map_size[1]
-        self.player_sprite.center_x = (
-            start_x * constants.SPRITE_SIZE + constants.SPRITE_SIZE / 2
-        )
-        self.player_sprite.center_y = (
-            map_height - start_y
-        ) * constants.SPRITE_SIZE - constants.SPRITE_SIZE / 2
+        self.player_sprite.center_x = start_x * constants.MAP_TILE_SIZE + constants.MAP_TILE_SIZE/2 #* constants.SPRITE_SIZE + constants.SPRITE_SIZE / 2
+        self.player_sprite.center_y = (map_height - start_y) * constants.MAP_TILE_SIZE - constants.MAP_TILE_SIZE/2 #* constants.SPRITE_SIZE - constants.SPRITE_SIZE / 2
         self.scroll_to_player(1.0)
         self.player_sprite_list = arcade.SpriteList()
         self.player_sprite_list.append(self.player_sprite)

@@ -20,7 +20,7 @@ class LoadingView(arcade.View):
         self.progress = 0
         self.map_list = None
         arcade.set_background_color(arcade.color.ALMOND)
-        self.player_sprite = PlayerSprite(":characters:Female/Female 19-1.png")
+        self.player_sprite = PlayerSprite(":characters:test/testWalk.png")
 
     def on_draw(self):
         arcade.start_render()

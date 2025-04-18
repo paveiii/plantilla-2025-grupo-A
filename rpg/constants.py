@@ -7,7 +7,8 @@ SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 SCREEN_TITLE = "Python Community RPG"
 TILE_SCALING = 1.0
-SPRITE_SIZE = 32
+CHARACTER_SPRITE_SIZE = 64 #Original: 32
+MAP_TILE_SIZE = 32
 
 # How fast does the player move
 MOVEMENT_SPEED = 3
@@ -20,9 +21,9 @@ BOTTOM_VIEWPORT_MARGIN = 300
 TOP_VIEWPORT_MARGIN = 300
 
 # What map, and what position we start at
-STARTING_MAP = "mapa_edad_media"
-STARTING_X = 33 #75 para mapa edad media
-STARTING_Y = 16 #35 para mapa edad media
+STARTING_MAP = "test_map"
+STARTING_X = 30 #75 para mapa edad media
+STARTING_Y = 29 #35 para mapa edad media
 
 # Key mappings
 KEY_UP = [arcade.key.UP, arcade.key.W]

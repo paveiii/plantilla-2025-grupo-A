@@ -4,7 +4,7 @@ import json
 
 import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
-from rpg.constants import SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions
+from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions
 
 
 
@@ -102,8 +102,8 @@ class InBattleView(arcade.View):
 
         self.character_sprite.textures = arcade.load_spritesheet(
             sheet_name,
-            sprite_width = SPRITE_SIZE,
-            sprite_height = SPRITE_SIZE,
+            sprite_width = CHARACTER_SPRITE_SIZE,
+            sprite_height = CHARACTER_SPRITE_SIZE,
             columns = 3,
             count = 12,
         )

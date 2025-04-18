@@ -1,6 +1,6 @@
 import arcade
 from rpg.BattleBuddy import BattleBuddy
-from rpg.constants import SPRITE_SIZE
+from rpg.constants import CHARACTER_SPRITE_SIZE
 
 class BattleAlly(BattleBuddy):
 
