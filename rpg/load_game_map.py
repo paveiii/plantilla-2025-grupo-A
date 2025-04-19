@@ -1,6 +1,7 @@
 """
 Load maps
 """
+import random
 import json
 import os
 from collections import OrderedDict
@@ -73,7 +74,6 @@ def load_map(map_name,player):
         character_object_list = my_map.object_lists["characters"]
 
         for character_object in character_object_list:
-
             if "type" not in character_object.properties:
                 print(
                     f"No 'type' field for character in map {map_name}. {character_object.properties}"
@@ -97,8 +97,10 @@ def load_map(map_name,player):
                     character_sprite = RandomWalkingSprite(
                         f":characters:{character_data['images']}", game_map.scene
                     )
+                #Spawn de enemigos.
                 if character_object.properties.get("movement") == "enemy":
-                    character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene,player, None)
+                    i = random.randint(0, len(character_data['images']) - 1)
+                    character_sprite = WorldEnemy(f":characters:{character_data['images'][i]}", game_map.scene,player, None)
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"
