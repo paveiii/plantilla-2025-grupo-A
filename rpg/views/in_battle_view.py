@@ -32,6 +32,16 @@ class InBattleView(arcade.View):
 
         self.current_ally = 0
 
+        self.allow_inputs = True
+        self.player_turn = True
+
+        self.action_buttons = []
+
+        self.description_widget = None
+        self.description_is_displayed = False
+
+        self.stage = 1
+
 
     def on_show_view(self):
         self.manager.enable()
@@ -79,18 +89,40 @@ class InBattleView(arcade.View):
 
     def on_click_attack(self, event):
         self.option = "attack"
+        self.stage = 2
         self.change_buttons()
 
     def on_click_skill(self, event):
         self.option = "skill"
+        self.stage = 2
         self.change_buttons()
 
     def on_click_item(self, event):
         self.option = "item"
+        self.stage = 2
         self.change_buttons()
 
     def on_click_rest(self, event):
         self.option = "rest"
+
+    def on_click_button(self, event):
+        print("b")
+        self.allow_inputs = False
+        self.manager.clear()
+        self.manager.disable()
+
+        # Aquí iría el código de lo que pase
+
+        if self.current_ally <= 2:
+            self.current_ally += 1
+            self.allow_inputs = True
+            self.manager.remove(self.contenedor)
+            self.stage = 1
+            self.main_buttons()
+            self.option = "menu"
+        else:
+            self.current_ally = 0
+            self.player_turn = False
 
     def setup_team(self, sheet_name, x, y):
         self.character_sprite = CharacterSprite(sheet_name)
@@ -104,8 +136,8 @@ class InBattleView(arcade.View):
             sheet_name,
             sprite_width = CHARACTER_SPRITE_SIZE,
             sprite_height = CHARACTER_SPRITE_SIZE,
-            columns = 3,
-            count = 12,
+            columns = 9,
+            count = 36,
         )
         start_index = SPRITE_INFO[Direction.RIGHT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
@@ -123,8 +155,8 @@ class InBattleView(arcade.View):
             sheet_name,
             sprite_width = 96,
             sprite_height= 96,
-            columns = 3,
-            count = 12,
+            columns = 9,
+            count = 36,
         )
         start_index = SPRITE_INFO[Direction.LEFT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
@@ -134,22 +166,26 @@ class InBattleView(arcade.View):
 
     def on_key_press(self, key, _modifiers):
 
-        if key == arcade.key.P and self.activated == False:
-            print("pantalla de prueba")
-            self.window.show_view(self.window.views["prueba"])
-            self.activated = True
+        if self.allow_inputs:
 
-        if key == arcade.key.P and self.activated == True:
-            print("show game view")
-            self.window.show_view(self.window.views["game"])
+            if key == arcade.key.P and self.activated == False:
+                print("pantalla de prueba")
+                self.window.show_view(self.window.views["prueba"])
+                self.activated = True
 
-        if key == arcade.key.ESCAPE:
-            self.main_buttons()
-            self.option = "menu"
+            if key == arcade.key.P and self.activated == True:
+                print("show game view")
+                self.window.show_view(self.window.views["game"])
 
-        if key == arcade.key.ENTER:
-            print("battle pause menu")
-            self.window.show_view(self.window.views["battle_pause"])
+            if key == arcade.key.ESCAPE:
+                self.stage = 1
+                self.manager.remove(self.description_widget)
+                self.main_buttons()
+                self.option = "menu"
+
+            if key == arcade.key.ENTER:
+                print("battle pause menu")
+                self.window.show_view(self.window.views["battle_pause"])
 
     def get_width(self):
         window_size = self.window.get_size()
@@ -217,8 +253,15 @@ class InBattleView(arcade.View):
                         action_data = self.actions[global_action] # Guarda los datos de la acción del JSON que se está mirando
 
                         if action_data["option"] == self.option: # Compara si la opción actual es igual que la de la acción del JSON
-                            button = arcade.gui.UIFlatButton(text = action_data["name"], width = button_width, height = 30)
+                            button_row = arcade.gui.UIBoxLayout(vertical = False, space_between = 10)
+
+                            button = arcade.gui.UIFlatButton(
+                                text = action_data["name"],
+                                width = button_width,
+                                height = 30)
                             self.contenedor.add(button.with_space_around(10))
+                            button.on_click = self.on_click_button
+                            self.action_buttons.append(button)
                             num_buttons += 1
 
         elif self.option == "item":
@@ -226,6 +269,7 @@ class InBattleView(arcade.View):
                 if item["type"] != "weapon": # Para cada item compara si el tipo es distinto de weapon y si es distinto lo añade
                     button = arcade.gui.UIFlatButton(text = item["short_name"], width = button_width, height = 30)
                     self.contenedor.add(button.with_space_around(10))
+                    button.on_click = self.on_click_button
                     num_buttons += 1
 
         y_pos = 0
@@ -250,3 +294,35 @@ class InBattleView(arcade.View):
 
         self.manager.enable()
         self.manager.draw()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        if self.stage == 2:
+            for button in self.action_buttons:
+                if button.rect.collide_with_point(x, y):
+                    print(f"Mouse está sobre: {button.text}")
+                    if self.option == "attack" or self.option == "skill":
+                        for action in self.actions.values():
+                            if action["name"] == button.text:
+                                self.display_action_description(f'{action["description"]}\n\nStamina: {action["staminaExpense"]}')
+
+    def display_action_description(self, text):
+        if self.description_is_displayed:
+            self.manager.remove(self.description_widget)
+
+        label = arcade.gui.UITextArea(
+            text = text,
+            text_color = arcade.color.WHITE,
+            font_size = 12,
+            height = 100,
+            width = 300
+        )
+
+        self.description_widget = arcade.gui.UIAnchorWidget(
+                anchor_x="center",
+                anchor_y="bottom",
+                align_y=40,
+                child=label
+            )
+
+        self.manager.add(self.description_widget)
+        self.description_is_displayed = True
