@@ -1,6 +1,7 @@
 """
 Load maps
 """
+import random
 import json
 import os
 from collections import OrderedDict
@@ -73,7 +74,6 @@ def load_map(map_name,player):
         character_object_list = my_map.object_lists["characters"]
 
         for character_object in character_object_list:
-
             if "type" not in character_object.properties:
                 print(
                     f"No 'type' field for character in map {map_name}. {character_object.properties}"
@@ -97,8 +97,14 @@ def load_map(map_name,player):
                     character_sprite = RandomWalkingSprite(
                         f":characters:{character_data['images']}", game_map.scene
                     )
+                #Spawn de enemigos.
                 if character_object.properties.get("movement") == "enemy":
-                    character_sprite = WorldEnemy(f":characters:{character_data['images']}", game_map.scene,player, None)
+                    #POR HACER: HACER UNA FUNCION QUE LEA LOS NOMBRES DE LOS DICCIONARIOS DE LOS INTEGRANTES DEL EQUIPO
+                    #DEL ENEMIGO, LOS CARGUE Y LOS META EN UNA LISTA PARA LUEGO PASARLA POR ARGUMENTO EN EL CONSTRUCTOR
+                    #WORLD ENEMY
+
+                    i = random.randint(0, len(character_data['sheet_names']) - 1)
+                    character_sprite = WorldEnemy(f":characters:{character_data['sheet_names'][i]}", game_map.scene,player, None,character_data["speed"],character_data["detectionRadius"])
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"

@@ -17,5 +17,9 @@
   "grey_dog": {
     "images": "Animal/Dog 01-2.png"
   },
-  "enemy": {"images": "Test/testEnemy1.png"}
+    "WorldEnemyTest":
+    {
+      "sheet_names": ["Test/testEnemy1.png","Test/testEnemy2.png"],"name": "", "battleTeammate_names": ["","","",""],
+      "speed": 2, "detectionRadius" : 500
+    }
 }
