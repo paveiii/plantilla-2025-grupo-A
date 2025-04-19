@@ -6,7 +6,8 @@ import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions
 
-
+# Para probar
+from rpg.views.game_view import GameView
 
 class InBattleView(arcade.View):
     def __init__(self):
@@ -18,6 +19,7 @@ class InBattleView(arcade.View):
 
         self.manager = arcade.gui.UIManager()
         self.activated = False
+        self.contenedor = arcade.gui.UIBoxLayout()
 
         self.main_buttons()
 
@@ -42,8 +44,16 @@ class InBattleView(arcade.View):
 
         self.stage = 1
 
+        self.inventory = []
+
 
     def on_show_view(self):
+        self.window.views["game"].inventory_add("Apple")
+        self.window.views["game"].inventory_add("Lesser Healing Potion")
+        self.inventory = self.window.views["game"].get_inventory()
+
+        print("Inventario cargado:", self.inventory)
+
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
 
@@ -118,6 +128,7 @@ class InBattleView(arcade.View):
             self.allow_inputs = True
             self.manager.remove(self.contenedor)
             self.stage = 1
+            self.action_buttons.clear()
             self.main_buttons()
             self.option = "menu"
         else:
@@ -180,6 +191,7 @@ class InBattleView(arcade.View):
             if key == arcade.key.ESCAPE:
                 self.stage = 1
                 self.manager.remove(self.description_widget)
+                self.action_buttons.clear()
                 self.main_buttons()
                 self.option = "menu"
 
@@ -198,6 +210,7 @@ class InBattleView(arcade.View):
         return current_height
 
     def main_buttons(self):
+        self.contenedor.clear()
         self.manager.clear()
 
         self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
@@ -219,7 +232,6 @@ class InBattleView(arcade.View):
         self.fila2.add(rest_button)
         rest_button.on_click = self.on_click_rest
 
-        self.contenedor = arcade.gui.UIBoxLayout()
         self.contenedor.add(self.fila1.with_space_around(bottom=20))
         self.contenedor.add(self.fila2)
 
@@ -265,11 +277,12 @@ class InBattleView(arcade.View):
                             num_buttons += 1
 
         elif self.option == "item":
-            for item in self.items.values():
+            for item in self.inventory:
                 if item["type"] != "weapon": # Para cada item compara si el tipo es distinto de weapon y si es distinto lo añade
                     button = arcade.gui.UIFlatButton(text = item["short_name"], width = button_width, height = 30)
                     self.contenedor.add(button.with_space_around(10))
                     button.on_click = self.on_click_button
+                    self.action_buttons.append(button)
                     num_buttons += 1
 
         y_pos = 0
@@ -303,7 +316,11 @@ class InBattleView(arcade.View):
                     if self.option == "attack" or self.option == "skill":
                         for action in self.actions.values():
                             if action["name"] == button.text:
-                                self.display_action_description(f'{action["description"]}\n\nStamina: {action["staminaExpense"]}')
+                                self.display_action_description(f'{action["description"]}\n\nStamina expense: {action["staminaExpense"]} sp')
+                    elif self.option == "item":
+                        for item in self.inventory:
+                            if item["short_name"] == button.text:
+                                self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
 
     def display_action_description(self, text):
         if self.description_is_displayed:

@@ -652,3 +652,12 @@ class GameView(arcade.View):
         cur_map = self.map_list[self.cur_map_name]
         if cur_map.light_layer:
             cur_map.light_layer.resize(width, height)
+
+    def get_inventory(self):
+        return self.player_sprite.inventory
+    def inventory_add(self, object_name):
+        file = open("../resources/data/item_dictionary.json", "r")
+        items = json.load(file)
+        for item in items.values():
+            if object_name == item["short_name"]:
+                self.player_sprite.inventory.append(item)
