@@ -2,6 +2,8 @@
 Loading screen
 """
 import arcade
+
+from rpg import constants
 from rpg.draw_bar import draw_bar
 from rpg.load_game_map import load_maps
 from rpg.sprites.player_sprite import PlayerSprite
@@ -20,7 +22,7 @@ class LoadingView(arcade.View):
         self.progress = 0
         self.map_list = None
         arcade.set_background_color(arcade.color.ALMOND)
-        self.player_sprite = PlayerSprite(":characters:test/testWalk.png")
+        self.player_sprite = PlayerSprite(":characters:" + constants.PLAYER_SPRITE_PATH)
 
     def on_draw(self):
         arcade.start_render()

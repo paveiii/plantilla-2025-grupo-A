@@ -10,6 +10,10 @@ TILE_SCALING = 1.0
 CHARACTER_SPRITE_SIZE = 64 #Original: 32
 MAP_TILE_SIZE = 32
 
+#Ruta del Sprite del jugador en la carpeta "resources/characters"
+PLAYER_SPRITE_PATH = "test/testWalk.png"
+
+
 # How fast does the player move
 MOVEMENT_SPEED = 3
 
