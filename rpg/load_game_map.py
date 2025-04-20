@@ -12,10 +12,12 @@ from arcade.experimental.lights import Light, LightLayer
 from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
+from rpg.sprites.WorldAlly import WorldAlly
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
 from rpg.sprites.random_walking_sprite import RandomWalkingSprite
+
 
 class GameMap:
     name = None
@@ -77,8 +79,8 @@ def load_map(map_name,player):
         f = open("../resources/data/battleCharacters_dictionary.json")
         battleCharacter_dictionary = json.load(f)
 
-        f = open("../resources/data/actions_dictionary.json")
-        actions_dictionary = json.load(f)
+        #f = open("../resources/data/actions_dictionary.json")
+        #actions_dictionary = json.load(f)
 
         for character_object in character_object_list:
             if "type" not in character_object.properties:
@@ -95,6 +97,7 @@ def load_map(map_name,player):
                 continue
 
             character_data = character_dictionary[character_type]
+            print(character_data)
             shape = character_object.shape
 
             if isinstance(shape, list) and len(shape) == 2:
@@ -105,7 +108,7 @@ def load_map(map_name,player):
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 #Spawn de enemigos.
-                if character_object.properties.get("movement") == "enemy":
+                elif character_object.properties.get("movement") == "enemy":
 
                     #Carga  en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
                     #En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
@@ -137,10 +140,22 @@ def load_map(map_name,player):
 
                     #Se crea el enemigo en el nivel.
                     character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyNames[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyNames,character_data["speed"],character_data["detectionRadius"])
+
+                #Spawn de aliados.
+                elif character_object.properties.get("movement") == "ally":
+                    #POR HACER: PERSONAJES ALEATORIOS.
+                    #           SPAWN DE OBJETO DE REQUERIMIENTO.
+                    battleKey = character_data["battleTeammate_name"]
+                    requirementItemName = character_data["requirementItemName"]
+                    dialogueNoItem = character_data["dialogueNoItem"]
+                    dialogueWithItem = character_data["dialogueWithItem"]
+
+                    allyBattleCharacter = character_data['battleTeammate_name']
+                    print(allyBattleCharacter)
+                    character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[allyBattleCharacter]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
+
                 else:
-                    character_sprite = CharacterSprite(
-                        f":characters:{character_data['images']}"
-                    )
+                    character_sprite = CharacterSprite(f":characters:{character_data['images']}")
                 character_sprite.position = shape
             elif isinstance(shape, list) and len(shape[0]) == 2:
                 # Rect or polygon.

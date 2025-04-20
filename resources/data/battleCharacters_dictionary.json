@@ -21,11 +21,8 @@
 
   "TestCharacter2":
     {
-      "sheet_name": ":characters:Test/testBuddy1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "sheet_name": "Test/testBuddy1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
       "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
-      "requirementItemName" : "",
       "actions" : ["Action1","Action2", "Action5"]
     },
 

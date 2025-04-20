@@ -13,8 +13,3 @@ class BattleAlly(BattleBuddy):
         #Esta variable es para que la IA la use para determinar que clase de personaje es.
         #Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
         self.type = type
-
-        self.dialogueNoItem = dialogueNoItem #Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
-        self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
-        self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
-

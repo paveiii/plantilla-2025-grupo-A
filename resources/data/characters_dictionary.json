@@ -21,5 +21,12 @@
     {
       "battleTeammate_names": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 2, "detectionRadius" : 500
+    },
+    "WorldAllyTest":
+    {
+      "battleTeammate_name": "TestCharacter2",
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : ""
     }
 }
