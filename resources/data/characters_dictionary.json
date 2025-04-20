@@ -19,7 +19,7 @@
   },
     "WorldEnemyTest":
     {
-      "sheet_names": ["Test/testEnemy1.png","Test/testEnemy2.png"],"name": "", "battleTeammate_names": ["","","",""],
+      "battleTeammate_names": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 2, "detectionRadius" : 500
     }
 }

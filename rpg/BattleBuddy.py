@@ -7,7 +7,7 @@ from rpg.constants import CHARACTER_SPRITE_SIZE
 
 class BattleBuddy(arcade.Sprite):
 
-    def __init__(self, sheet_name, displayName, displayDescription, maxStamina, maxHealth, restoredStamina, actions):
+    def __init__(self, sheet_name, displayName, displayDescription, maxHealth, maxStamina, restoredStamina, actions):
         super().__init__()
         self.textures = arcade.load_spritesheet(
             sheet_name,
@@ -16,6 +16,9 @@ class BattleBuddy(arcade.Sprite):
             columns=3,
             count=12,
         )
+
+        self.sheetName = sheet_name
+
         self.should_update = 0
         self.cur_texture_index = 0
         self.texture = self.textures[self.cur_texture_index]
@@ -34,66 +37,6 @@ class BattleBuddy(arcade.Sprite):
         self.displayDescription = displayDescription
 
         self.actions = actions
-    def __init__(self, characterDictionaryPath:str, characterName:str):
-        with open(characterDictionaryPath,"r") as f:
-            data = json.load(f)
-
-            super().__init__()
-            self.textures = arcade.load_spritesheet(
-                data[characterName]["sheet_name"],
-                sprite_width=CHARACTER_SPRITE_SIZE,
-                sprite_height=CHARACTER_SPRITE_SIZE,
-                columns=3,
-                count=12,
-            )
-            self.should_update = 0
-            self.cur_texture_index = 0
-            self.texture = self.textures[self.cur_texture_index]
-
-            self.maxStamina = data[characterName]["maxStamina"]
-            self.maxHealth = data[characterName]["maxHealth"]
-
-            self.currentStamina = self.maxStamina
-            self.currentHealth = self.maxHealth
-
-            self.restoredStamina = data[characterName]["restoredStamina"]  # Por turno.
-
-            self.displayName = data[characterName]["name"]
-            self.displayDescription = data[characterName]["description"]
-
-            self.actions = []
-            actionNames = data[characterName]["actions"]
-            for name in actionNames:
-                # RECORDAR CAMBIAR ESTA RUTA A UNA RELATIVA SEGURA.
-                """
-                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                ░░░░░░░░░░▄█▀▀▀█░░░░░░░░░░░░░
-                ░░░░░▄░░░▄▌▒▒▒▒█▌░░░░░▄██▄▄▄░
-                ░░░░██░▄█▒▒▒▒▒█░░░░░▄█▒▒▀▒▒▒▌
-                ░░░█▒▒▀▀▒▒▒▒▒▒▒▀▀█▄█▒▒▒▒▒▒▄█░
-                ░░▐▒▒▒▒▒▒▒▒▒▒▒▒▒░░█▀▀▀█▄▒▒▀▀▌
-                ▐███▒▒▒▒▒▒▒▒▐▒▒▄█▀░▄▄▄▄░▌▒▒█░
-                ▐▒▒▀▒▒▒▒▒▐▄▒▐▀▀░░▄████▒▌██▀░░
-                ▐▒▒▒▒▒▒▒▒▒▐▀▀░░▄██████▒▀█░░░░
-                ░█▒▒▒▒▒▒▒▒██▀██▒▒████▒▒▒█▌░░░
-                ░░█▄▄▄▄▄▄█▄▄▄█▒█▄▒▒▒▄▒▒▄▌█░░░
-                ░▄█▀░░░░░░░▄▄█▒▒▒▀▀▀▒▄▀░░▐▌░░
-                ▐█▄▄▄▄▀▀▀▀▀░▄▄▌▒▐▒▒▒▐▌░░░░█░░
-                ░░░█▄▄▄▄▄▄█▀▒▒▒▒▌▒▒▒▒▌░░░░░█░
-                ░░░░▐▒▒▒▒▒▒▒▒▒▒▒▌▒▒▒▒█░░░░░▐▌
-                ░░░░█▒▒▒▐▒▒▒▒▒█▒█▒▒▒▒▒▌░░░░█░
-                ░░░▐▒▒▒█▒▒▒▒▒▒▒█▐▒▒▒▒▒█▄▄▄█░░
-                ░░░▌▒▒▒▐▒▌▒▒▒▒▒█▌▀▀█▀▀▀░░░░░░
-                ░▄█▒▒▒▒▐▒▌▒▒▒▒▒▐█░░█░░░░░░░░░
-                ░█▒▒▒▒▒▒▌█▒▒▒▒▒▐█▀▀░░░░░░░░░░
-                ▐▒▒▒▒▒▒▒▌▒█▒▒▒▒▒▐░░░░░░░░░░░░
-                ░█▒▒▒▒▒▄█▒▒▀█▒▒▒█░░░░░░░░░░░░
-                ░░█▄▄▀▀░░▀█▄▄▄▄█░░░░░░░░░░░░░
-                ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                """
-                newAction = Action("../resources/data/actions_dictionary.json",name)
-                self.actions.append(newAction)
-            print(self.actions)
 
     def changeHealth(self, amount:float):
         self.currentHealth += amount
@@ -102,8 +45,3 @@ class BattleBuddy(arcade.Sprite):
     #Funcion para ganar Stamina, llamada durante la batalla.
     def recoverStamina(self):
         self.currentStamina += self.restoredStamina
-
-#Pequeña prueba de un integrante del equipo.
-#integrante = BattleBuddy("../resources/data/battleCharacters_dictionary.json","CharacterTemplate")
-#print(integrante.actions[0].effect)
-#print(integrante.actions[1].effect)

@@ -9,13 +9,13 @@ from os.path import isfile, join
 
 import arcade
 from arcade.experimental.lights import Light, LightLayer
+from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
 from rpg.sprites.random_walking_sprite import RandomWalkingSprite
-
 
 class GameMap:
     name = None
@@ -73,6 +73,13 @@ def load_map(map_name,player):
         character_dictionary = json.load(f)
         character_object_list = my_map.object_lists["characters"]
 
+        #Cargar los personajes de batalla.
+        f = open("../resources/data/battleCharacters_dictionary.json")
+        battleCharacter_dictionary = json.load(f)
+
+        f = open("../resources/data/actions_dictionary.json")
+        actions_dictionary = json.load(f)
+
         for character_object in character_object_list:
             if "type" not in character_object.properties:
                 print(
@@ -99,12 +106,37 @@ def load_map(map_name,player):
                     )
                 #Spawn de enemigos.
                 if character_object.properties.get("movement") == "enemy":
-                    #POR HACER: HACER UNA FUNCION QUE LEA LOS NOMBRES DE LOS DICCIONARIOS DE LOS INTEGRANTES DEL EQUIPO
-                    #DEL ENEMIGO, LOS CARGUE Y LOS META EN UNA LISTA PARA LUEGO PASARLA POR ARGUMENTO EN EL CONSTRUCTOR
-                    #WORLD ENEMY
 
-                    i = random.randint(0, len(character_data['sheet_names']) - 1)
-                    character_sprite = WorldEnemy(f":characters:{character_data['sheet_names'][i]}", game_map.scene,player, None,character_data["speed"],character_data["detectionRadius"])
+                    #Carga  en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
+                    #En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
+                    availableBattleEnemyNames = []
+                    for battleCharacter_name in character_data["battleTeammate_names"]:
+                        if battleCharacter_name not in battleCharacter_dictionary:
+                            print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
+                            continue
+                        availableBattleEnemyNames.append(battleCharacter_name)
+
+                    #Lista que contiene los nombres de los enemigos que apareceran en batalla.
+                    battleEnemyNames = []
+
+
+                    battleTeammatesAmount = character_data["battleTeammates_amount"]
+
+                    #En caso de que la cantidad de enemigos en batalla sea aleatoria, se toma como maximo "battleTeammates_amount"
+                    if(character_data["random_amount"] == True):
+                        battleTeammatesAmount = random.randint(1,battleTeammatesAmount)
+
+                    for i in range(0,battleTeammatesAmount):
+                        randomNameIndex = random.randint(0, len(availableBattleEnemyNames) - 1)
+                        battleEnemyNames.append(availableBattleEnemyNames[randomNameIndex])
+
+                    #Se toma el nombre de un enemigo del equipo que aparecera en batalla para mostrar su Sprite en el nivel.
+                    #Notese que se usa la lista final para favorecer la aparicion
+                    #de los Sprites de los enemigos mas abundantes en el equipo.
+                    randomSpriteIndex = random.randint(0, len(battleEnemyNames) - 1)
+
+                    #Se crea el enemigo en el nivel.
+                    character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyNames[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyNames,character_data["speed"],character_data["detectionRadius"])
                 else:
                     character_sprite = CharacterSprite(
                         f":characters:{character_data['images']}"

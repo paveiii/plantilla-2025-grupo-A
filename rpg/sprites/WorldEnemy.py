@@ -7,15 +7,18 @@ from rpg.sprites.character_sprite import CharacterSprite
 
 class WorldEnemy(CharacterSprite):
 
-    def __init__(self, sheet_name, scene, jugador:None, enemigosParaBatalla, speed=1,radio_deteccion = 200):
+    def __init__(self, sheet_name, scene, jugador, enemigosBatallaNombres, velocidad=1, radio_deteccion = 200):
         super().__init__(sheet_name)
-        self.enemigos_batalla = enemigosParaBatalla
-        self.speed = speed
+        #Notese que esto es una lista de las Keys de battleCharacters_dictionary
+        #para que puedan ser cargados posteriormente cuando se inicie una batalla.
+        self.enemigos_batalla = enemigosBatallaNombres
+        self.speed = velocidad
         self.scene = scene
         self.jugador = jugador
         self.radio_deteccion = radio_deteccion
         self.destination = None
         self.wall_list = None
+        print(enemigosBatallaNombres)
 
     def detectar_jugador(self):
         distancia = arcade.get_distance_between_sprites(self.jugador, self)

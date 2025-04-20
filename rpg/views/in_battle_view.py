@@ -23,6 +23,9 @@ class InBattleView(arcade.View):
 
         self.main_buttons()
 
+        #PROXIMAMENTE: CREAR METODOS QUE CARGUEN LOS INTEGRANTES DE AMBOS EQUIPOS EN BASE A INFORMACION
+        #DEL JUGADOR Y DEL WORLD_ENEMY.
+
         file = open("../resources/data/battleCharacters_dictionary.json", "r")
         self.team = json.load(file)
 

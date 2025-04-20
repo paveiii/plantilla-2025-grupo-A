@@ -47,5 +47,17 @@
       "dialogueWithItem" : "",
       "requirementItemName" : "",
       "actions" : ["Action1","Action2", "Action3", "Action4"]
+    },
+    "TestEnemy1":
+    {
+      "sheet_name": "Test/testEnemy1.png","name": "TestEnemy1", "description": "Test1",
+      "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 10,
+      "actions" : ["Action1"]
+    },
+    "TestEnemy2":
+    {
+      "sheet_name": "Test/testEnemy2.png","name": "TestEnemy2", "description": "Test2",
+      "maxHealth" : 75, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action2"]
     }
 }
