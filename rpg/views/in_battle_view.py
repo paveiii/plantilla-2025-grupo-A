@@ -64,7 +64,7 @@ class InBattleView(arcade.View):
         new_y = y_positions
         for character in list(self.team.values())[1:]: # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
             while len(new_x) > 0:
-                self.setup_team(character["sheet_name"], new_x[0], new_y[0])
+                self.setup_team(f":characters:{character['sheet_name']}", new_x[0], new_y[0])
                 del new_x[0]
                 del new_y[0]
                 break

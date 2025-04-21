@@ -11,7 +11,7 @@
 
   "TestCharacter1":
     {
-      "sheet_name": ":characters:Test/testWalk.png","name": "1", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "sheet_name": "Test/testWalk.png","name": "1", "description": "", "type":"Tank/Medic/Captain/Fighter",
       "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
@@ -28,7 +28,7 @@
 
   "TestCharacter3":
     {
-      "sheet_name": ":characters:Test/testBuddy2.png","name": "3", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "sheet_name": "Test/testBuddy2.png","name": "3", "description": "", "type":"Tank/Medic/Captain/Fighter",
       "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
@@ -38,7 +38,7 @@
 
   "TestCharacter4":
     {
-      "sheet_name": ":characters:Test/testBuddy3.png","name": "4", "description": "", "type":"Tank/Medic/Captain/Fighter",
+      "sheet_name": "Test/testBuddy3.png","name": "4", "description": "", "type":"Tank/Medic/Captain/Fighter",
       "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
