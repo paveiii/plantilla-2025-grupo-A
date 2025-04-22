@@ -4,7 +4,7 @@ import json
 
 import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
-from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions
+from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions, CHARACTER_POINTER_SPEED
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -26,14 +26,14 @@ class InBattleView(arcade.View):
         #PROXIMAMENTE: CREAR METODOS QUE CARGUEN LOS INTEGRANTES DE AMBOS EQUIPOS EN BASE A INFORMACION
         #DEL JUGADOR Y DEL WORLD_ENEMY.
 
-        file = open("../resources/data/battleCharacters_dictionary.json", "r")
-        self.team = json.load(file)
+        with open("../resources/data/battleCharacters_dictionary.json", "r") as file:
+            self.team = json.load(file)
 
-        file = open("../resources/data/actions_dictionary.json", "r")
-        self.actions = json.load(file)
+        with open("../resources/data/actions_dictionary.json", "r") as file:
+            self.actions = json.load(file)
 
-        file = open("../resources/data/item_dictionary.json", "r")
-        self.items = json.load(file)
+        with open("../resources/data/item_dictionary.json", "r") as file:
+            self.items = json.load(file)
 
         self.current_ally = 0
 
@@ -48,6 +48,14 @@ class InBattleView(arcade.View):
         self.stage = 1
 
         self.inventory = []
+
+        self.x_positions = x_positions.copy()
+        self.y_positions = y_positions.copy()
+
+        self.pointer_x = self.x_positions[self.current_ally]
+        self.pointer_y = self.y_positions[self.current_ally]
+
+        self.pointer_is_up = False
 
 
     def on_show_view(self):
@@ -92,13 +100,41 @@ class InBattleView(arcade.View):
                                            border_width = border_width,
                                            color = arcade.color.WHITE)
 
+        arcade.draw_triangle_filled(x1=self.x_positions[self.current_ally] - 2,
+                                    y1=self.pointer_y + 64,
+                                    x2=self.x_positions[self.current_ally] - 9,
+                                    y2=self.pointer_y + 92,
+                                    x3=self.x_positions[self.current_ally] + 5,
+                                    y3=self.pointer_y + 92,
+                                    color=arcade.color.BLACK)
 
+        arcade.draw_triangle_filled(x1=self.x_positions[self.current_ally] - 2,
+                                    y1=self.pointer_y + 70,
+                                    x2=self.x_positions[self.current_ally] - 7,
+                                    y2=self.pointer_y + 90,
+                                    x3=self.x_positions[self.current_ally] + 3,
+                                    y3=self.pointer_y + 90,
+                                    color=arcade.color.WHITE)
 
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
         self.manager.draw()
         self.manager.enable()
+
+    def on_update(self, delta_time: float):
+
+        if not self.pointer_is_up:
+            self.pointer_y += CHARACTER_POINTER_SPEED
+
+            if self.pointer_y >= self.y_positions[self.current_ally] + 10:
+                self.pointer_is_up = True
+
+        else:
+            self.pointer_y -= CHARACTER_POINTER_SPEED
+
+            if self.pointer_y <= self.y_positions[self.current_ally]:
+                self.pointer_is_up = False
 
     def on_click_attack(self, event):
         self.option = "attack"
@@ -117,12 +153,23 @@ class InBattleView(arcade.View):
 
     def on_click_rest(self, event):
         self.option = "rest"
+        if self.current_ally <= 2:
+            self.current_ally += 1
+
+            self.pointer_x = self.x_positions[self.current_ally]
+            self.pointer_y = self.y_positions[self.current_ally]
+        else:
+            self.current_ally = 0
+            self.player_turn = False
 
     def on_click_button(self, event):
         print("b")
         self.allow_inputs = False
         self.manager.clear()
         self.manager.disable()
+        self.action_buttons.clear()
+        self.main_buttons()
+        self.option = "menu"
 
         # Aquí iría el código de lo que pase
 
@@ -134,6 +181,9 @@ class InBattleView(arcade.View):
             self.action_buttons.clear()
             self.main_buttons()
             self.option = "menu"
+
+            self.pointer_x = self.x_positions[self.current_ally]
+            self.pointer_y = self.y_positions[self.current_ally]
         else:
             self.current_ally = 0
             self.player_turn = False

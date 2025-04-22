@@ -2,7 +2,7 @@
   "CharacterTemplate":
     {
       "sheet_name": "","name": "", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally/enemy", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : "",
@@ -12,7 +12,7 @@
   "TestCharacter1":
     {
       "sheet_name": "Test/testWalk.png","name": "1", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : "",
@@ -22,14 +22,14 @@
   "TestCharacter2":
     {
       "sheet_name": "Test/testBuddy1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "actions" : ["Action1","Action2", "Action5"]
     },
 
   "TestCharacter3":
     {
       "sheet_name": "Test/testBuddy2.png","name": "3", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : "",
@@ -39,7 +39,7 @@
   "TestCharacter4":
     {
       "sheet_name": "Test/testBuddy3.png","name": "4", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : "",
@@ -48,13 +48,13 @@
     "TestEnemy1":
     {
       "sheet_name": "Test/testEnemy1.png","name": "TestEnemy1", "description": "Test1",
-      "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 10,
       "actions" : ["Action1"]
     },
     "TestEnemy2":
     {
       "sheet_name": "Test/testEnemy2.png","name": "TestEnemy2", "description": "Test2",
-      "maxHealth" : 75, "maxStamina" : 75, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 75, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action2"]
     }
 }

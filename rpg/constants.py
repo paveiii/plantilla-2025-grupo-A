@@ -11,7 +11,7 @@ CHARACTER_SPRITE_SIZE = 64 #Original: 32
 MAP_TILE_SIZE = 32
 
 #Ruta del Sprite del jugador en la carpeta "resources/characters"
-PLAYER_SPRITE_PATH = "test/testWalk.png"
+PLAYER_SPRITE_PATH = "Test/testWalk.png"
 
 
 # How fast does the player move
@@ -47,3 +47,5 @@ CAMERA_SPEED = 0.1
 # Character battle positions (in order)
 x_positions = [430, 180, 345, 280]
 y_positions = [490, 430, 345, 565]
+
+CHARACTER_POINTER_SPEED = 0.2
