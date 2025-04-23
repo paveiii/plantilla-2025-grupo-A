@@ -57,13 +57,14 @@ class InBattleView(arcade.View):
 
         self.pointer_is_up = False
 
-
-    def on_show_view(self):
         self.window.views["game"].inventory_add("Apple")
         self.window.views["game"].inventory_add("Lesser Healing Potion")
         self.inventory = self.window.views["game"].get_inventory()
 
         print("Inventario cargado:", self.inventory)
+
+
+    def on_show_view(self):
 
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
