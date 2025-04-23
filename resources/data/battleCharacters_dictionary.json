@@ -2,7 +2,7 @@
   "CharacterTemplate":
     {
       "sheet_name": "","name": "", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "role": "ally/enemy", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "role": "ally/enemy/boss", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : "",

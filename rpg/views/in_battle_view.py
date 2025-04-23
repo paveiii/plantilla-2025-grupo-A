@@ -4,7 +4,7 @@ import json
 
 import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
-from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, x_positions, y_positions, CHARACTER_POINTER_SPEED
+from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions, CHARACTER_POINTER_SPEED
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -49,8 +49,8 @@ class InBattleView(arcade.View):
 
         self.inventory = []
 
-        self.x_positions = x_positions.copy()
-        self.y_positions = y_positions.copy()
+        self.x_positions = ally_x_positions.copy()
+        self.y_positions = ally_y_positions.copy()
 
         self.pointer_x = self.x_positions[self.current_ally]
         self.pointer_y = self.y_positions[self.current_ally]
@@ -69,8 +69,8 @@ class InBattleView(arcade.View):
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
 
-        new_x = x_positions
-        new_y = y_positions
+        new_x = ally_x_positions
+        new_y = ally_y_positions
         for character in list(self.team.values())[1:]: # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
             while len(new_x) > 0:
                 self.setup_team(f":characters:{character['sheet_name']}", new_x[0], new_y[0])
