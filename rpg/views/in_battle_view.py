@@ -5,6 +5,7 @@ import json
 import rpg.views
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions, CHARACTER_POINTER_SPEED
+from rpg.sprites.WorldEnemy import WorldEnemy
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -234,8 +235,8 @@ class InBattleView(arcade.View):
         if self.allow_inputs:
 
             if key == arcade.key.P and self.activated == False:
-                print("pantalla de prueba")
-                self.window.show_view(self.window.views["prueba"])
+                print("pantalla de batalla")
+                self.window.show_view(self.window.views["in_battle"])
                 self.activated = True
 
             if key == arcade.key.P and self.activated == True:

@@ -5,7 +5,9 @@ from arcade import SpriteCircle, check_for_collision, SpriteList
 
 from rpg.sprites.character_sprite import CharacterSprite
 
-class WorldEnemy(CharacterSprite):
+from rpg.views.activate_in_battle_view import ActivateInBattleView
+
+class WorldEnemy(CharacterSprite, arcade.View):
 
     def __init__(self, sheet_name, scene, jugador, enemigosBatallaNombres, velocidad=1, radio_deteccion = 200):
         super().__init__(sheet_name)
@@ -22,9 +24,10 @@ class WorldEnemy(CharacterSprite):
 
     def detectar_jugador(self):
         distancia = arcade.get_distance_between_sprites(self.jugador, self)
-        if self.radio_deteccion > distancia >= 16:  #16 es el radio de los sprites
+        if self.radio_deteccion > distancia >= 8:  #16 es el radio de los sprites
             if distancia <= 18:
                 print("JUGADOR COLISIONA CON EL ENEMIGO")
+                switch_to_battle = ActivateInBattleView()
             return True
         else:
             return False
@@ -51,3 +54,4 @@ class WorldEnemy(CharacterSprite):
         else:
             self.change_x = 0
             self.change_y = 0
+
