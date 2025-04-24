@@ -81,6 +81,8 @@ def load_map(map_name,player):
         f = open("../resources/data/battleCharacters_dictionary.json")
         battleCharacter_dictionary = json.load(f)
 
+        allyNamesSpawned = []
+
         #f = open("../resources/data/actions_dictionary.json")
         #actions_dictionary = json.load(f)
 
@@ -146,7 +148,6 @@ def load_map(map_name,player):
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
                     #SPAWN DE OBJETO DE REQUERIMIENTO.
-                    #EVITAR REPETICION DE PERSONAJES ALIADOS
 
                     # Carga  en la lista los nombres de los posibles aliados que pueden aparecer en la batalla.
                     # En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
@@ -155,26 +156,32 @@ def load_map(map_name,player):
                         if battleCharacter_name not in battleCharacter_dictionary:
                             print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
                             continue
+                        elif battleCharacter_name in allyNamesSpawned:
+                            print("BOLASSSSSSSSSSSSSSSSSSSSS")
+                            print(battleCharacter_name + " Ya está en la lista.")
+                            continue
                         availableBattleAllyNames.append(battleCharacter_name)
+
+                        print(allyNamesSpawned)
                         print(availableBattleAllyNames)
 
-                    # Se toma el nombre de un enemigo del equipo que aparecera en batalla para mostrar su Sprite en el nivel.
-                    # Notese que se usa la lista final para favorecer la aparicion
-                    # de los Sprites de los enemigos mas abundantes en el equipo.
-                    randomIndex = random.randint(0, len(availableBattleAllyNames) - 1)
+                    if(len(availableBattleAllyNames) > 0):
+                        randomIndex = random.randint(0, len(availableBattleAllyNames) - 1)
 
-                    battleKey = availableBattleAllyNames[randomIndex]
+                        battleKey = availableBattleAllyNames[randomIndex]
+                        allyNamesSpawned.append(battleKey)
 
-                    requirementItemName = character_data["requirementItemName"]
-                    dialogueNoItem = character_data["dialogueNoItem"]
-                    dialogueWithItem = character_data["dialogueWithItem"]
+                        requirementItemName = character_data["requirementItemName"]
+                        dialogueNoItem = character_data["dialogueNoItem"]
+                        dialogueWithItem = character_data["dialogueWithItem"]
 
-                    print(battleKey)
-                    character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
-
+                        print(battleKey)
+                        character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
+                    else:
+                        character_sprite = None
                 else:
-                    character_sprite = CharacterSprite(f":characters:{character_data['images']}")
-                character_sprite.position = shape
+                    character_sprite = None
+                if(character_sprite is not None): character_sprite.position = shape
             elif isinstance(shape, list) and len(shape[0]) == 2:
                 # Rect or polygon.
                 location = [shape[0][0], shape[0][1]]
@@ -193,8 +200,10 @@ def load_map(map_name,player):
                 )
                 continue
 
-            print(f"Adding character {character_type} at {character_sprite.position}")
-            game_map.scene.add_sprite("characters", character_sprite)
+            if(character_sprite != None):
+                print(f"Adding character {character_type} at {character_sprite.position}")
+                print(character_sprite)
+                game_map.scene.add_sprite("characters", character_sprite)
 
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]

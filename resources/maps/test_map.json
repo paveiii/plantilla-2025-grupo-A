@@ -205,6 +205,29 @@
                  "width":0,
                  "x":1796,
                  "y":1196
+                }, 
+                {
+                 "height":0,
+                 "id":13,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1676,
+                 "y":1072
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -213,7 +236,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":13,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.11.2",
