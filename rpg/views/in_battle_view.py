@@ -73,21 +73,11 @@ class InBattleView(arcade.View):
 
     def on_show_view(self):
         print(self.enemy_collision_list)
+        print(self.enemy_list)
         for enemy in self.enemy_collision_list:
-            print("hola")
-            enemy_object = BattleEnemy(self.enemies[enemy]['sheet_name'],
-                                       self.enemies[enemy]['name'],
-                                       self.enemies[enemy]['description'],
-                                       self.enemies[enemy]['max_stamina'],
-                                       self.enemies[enemy]['max_health'],
-                                       self.enemies[enemy]['restoredStamina'])
-
-
+            enemy_object = BattleEnemy(f":characters:{self.enemies[enemy]['sheet_name']}",self.enemies[enemy]['name'],self.enemies[enemy]['description'],self.enemies[enemy]['maxStamina'],self.enemies[enemy]['maxHealth'],self.enemies[enemy]['restoredStamina'],None)
             self.enemy_list.append(enemy_object)
             print(self.enemy_list)
-        print(self.enemy_collision_list)
-
-
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
 

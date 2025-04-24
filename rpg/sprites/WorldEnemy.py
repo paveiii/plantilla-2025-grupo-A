@@ -27,7 +27,6 @@ class WorldEnemy(CharacterSprite, arcade.View):
         if self.radio_deteccion > distancia >= 8:  #16 es el radio de los sprites
             if distancia <= 18:
                 print("JUGADOR COLISIONA CON EL ENEMIGO")
-                print(self.enemigos_batalla)
                 switch_to_battle = ActivateInBattleView(self.enemigos_batalla)
             return True
         else:
