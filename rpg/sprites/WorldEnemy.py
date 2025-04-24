@@ -26,8 +26,7 @@ class WorldEnemy(CharacterSprite, arcade.View):
         distancia = arcade.get_distance_between_sprites(self.jugador, self)
         if self.radio_deteccion > distancia >= 8:  #16 es el radio de los sprites
             if distancia <= 18:
-                self.window.show_view(self.window.views["prueba"])
-                switch_to_battle = ActivateInBattleView()
+                pass
             return True
         else:
             return False
