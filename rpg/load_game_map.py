@@ -157,13 +157,9 @@ def load_map(map_name,player):
                             print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
                             continue
                         elif battleCharacter_name in allyNamesSpawned:
-                            print("BOLASSSSSSSSSSSSSSSSSSSSS")
                             print(battleCharacter_name + " Ya está en la lista.")
                             continue
                         availableBattleAllyNames.append(battleCharacter_name)
-
-                        print(allyNamesSpawned)
-                        print(availableBattleAllyNames)
 
                     if(len(availableBattleAllyNames) > 0):
                         randomIndex = random.randint(0, len(availableBattleAllyNames) - 1)
@@ -175,7 +171,6 @@ def load_map(map_name,player):
                         dialogueNoItem = character_data["dialogueNoItem"]
                         dialogueWithItem = character_data["dialogueWithItem"]
 
-                        print(battleKey)
                         character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
                     else:
                         character_sprite = None
