@@ -114,12 +114,12 @@ def load_map(map_name,player):
 
                     #Carga  en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
                     #En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
-                    availableBattleEnemyNames = []
+                    availableBattleAllyNames = []
                     for battleCharacter_name in character_data["battleTeammate_names"]:
                         if battleCharacter_name not in battleCharacter_dictionary:
                             print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
                             continue
-                        availableBattleEnemyNames.append(battleCharacter_name)
+                        availableBattleAllyNames.append(battleCharacter_name)
 
                     #Lista que contiene los nombres de los enemigos que apareceran en batalla.
                     battleEnemyNames = []
@@ -132,8 +132,8 @@ def load_map(map_name,player):
                         battleTeammatesAmount = random.randint(1,battleTeammatesAmount)
 
                     for i in range(0,battleTeammatesAmount):
-                        randomNameIndex = random.randint(0, len(availableBattleEnemyNames) - 1)
-                        battleEnemyNames.append(availableBattleEnemyNames[randomNameIndex])
+                        randomNameIndex = random.randint(0, len(availableBattleAllyNames) - 1)
+                        battleEnemyNames.append(availableBattleAllyNames[randomNameIndex])
 
                     #Se toma el nombre de un enemigo del equipo que aparecera en batalla para mostrar su Sprite en el nivel.
                     #Notese que se usa la lista final para favorecer la aparicion
@@ -145,16 +145,32 @@ def load_map(map_name,player):
 
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
-                    #POR HACER: PERSONAJES ALEATORIOS.
-                    #           SPAWN DE OBJETO DE REQUERIMIENTO.
-                    battleKey = character_data["battleTeammate_name"]
+                    #SPAWN DE OBJETO DE REQUERIMIENTO.
+                    #EVITAR REPETICION DE PERSONAJES ALIADOS
+
+                    # Carga  en la lista los nombres de los posibles aliados que pueden aparecer en la batalla.
+                    # En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
+                    availableBattleAllyNames = []
+                    for battleCharacter_name in character_data["battleTeammate_names"]:
+                        if battleCharacter_name not in battleCharacter_dictionary:
+                            print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
+                            continue
+                        availableBattleAllyNames.append(battleCharacter_name)
+                        print(availableBattleAllyNames)
+
+                    # Se toma el nombre de un enemigo del equipo que aparecera en batalla para mostrar su Sprite en el nivel.
+                    # Notese que se usa la lista final para favorecer la aparicion
+                    # de los Sprites de los enemigos mas abundantes en el equipo.
+                    randomIndex = random.randint(0, len(availableBattleAllyNames) - 1)
+
+                    battleKey = availableBattleAllyNames[randomIndex]
+
                     requirementItemName = character_data["requirementItemName"]
                     dialogueNoItem = character_data["dialogueNoItem"]
                     dialogueWithItem = character_data["dialogueWithItem"]
 
-                    allyBattleCharacter = character_data['battleTeammate_name']
-                    print(allyBattleCharacter)
-                    character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[allyBattleCharacter]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
+                    print(battleKey)
+                    character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
 
                 else:
                     character_sprite = CharacterSprite(f":characters:{character_data['images']}")

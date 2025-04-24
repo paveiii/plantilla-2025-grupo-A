@@ -136,6 +136,75 @@
                  "width":0,
                  "x":1568,
                  "y":960
+                }, 
+                {
+                 "height":0,
+                 "id":10,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1572,
+                 "y":1192
+                }, 
+                {
+                 "height":0,
+                 "id":11,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1784,
+                 "y":956
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1796,
+                 "y":1196
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -144,7 +213,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":9,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.11.2",

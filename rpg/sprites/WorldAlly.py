@@ -3,13 +3,14 @@ import math
 import arcade
 from arcade import SpriteCircle, check_for_collision, SpriteList
 
+from rpg.BattleAlly import BattleAlly
 from rpg.sprites.character_sprite import CharacterSprite
 
 class WorldAlly(CharacterSprite):
 
     def __init__(self, sheet_name, scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem):
         super().__init__(sheet_name)
-        self.enemigos_batalla = battleKey
+        self.aliadoBatalla= battleKey
         self.scene = scene
         self.jugador = player
         self.destination = None

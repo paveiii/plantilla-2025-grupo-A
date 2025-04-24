@@ -24,7 +24,7 @@
     },
     "WorldAllyTest":
     {
-      "battleTeammate_name": "TestCharacter2",
+      "battleTeammate_names": ["TestCharacter1","TestCharacter2","TestCharacter3","TestCharacter4"],
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : ""
