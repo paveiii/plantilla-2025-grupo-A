@@ -1,6 +1,7 @@
 """
 Load maps
 """
+import sys
 import random
 import json
 import os
@@ -9,7 +10,8 @@ from os.path import isfile, join
 
 import arcade
 from arcade.experimental.lights import Light, LightLayer
-from pyglet.gl.wglext_arb import wglWaitForSbcOML
+if sys.platform == "win32":
+    from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.sprites.WorldAlly import WorldAlly
