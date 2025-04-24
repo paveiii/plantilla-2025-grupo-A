@@ -1,0 +1,14 @@
+{ "columns":8,
+ "image":"..\/tilesets\/tilesCueva.png",
+ "imageheight":4096,
+ "imagewidth":256,
+ "margin":0,
+ "name":"tilesCueva",
+ "spacing":0,
+ "tilecount":1024,
+ "tiledversion":"1.11.1-99-gec89c545",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.10"
+}
