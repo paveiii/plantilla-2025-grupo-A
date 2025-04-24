@@ -377,6 +377,9 @@ class InBattleView(arcade.View):
                                 self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
 
     def display_action_description(self, text):
+        if self.description_is_displayed and self.description_widget.child.text == text:
+            return
+
         if self.description_is_displayed:
             self.manager.remove(self.description_widget)
 
