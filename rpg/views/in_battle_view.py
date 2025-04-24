@@ -2,10 +2,11 @@ import arcade
 import arcade.gui
 import json
 
-import rpg.views
+from rpg.sprites.WorldEnemy import WorldEnemy
+from rpg.BattleEnemy import BattleEnemy
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions, CHARACTER_POINTER_SPEED
-from rpg.sprites.WorldEnemy import WorldEnemy
+from rpg.views.activate_in_battle_view import ActivateInBattleView
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -36,6 +37,12 @@ class InBattleView(arcade.View):
         with open("../resources/data/item_dictionary.json", "r") as file:
             self.items = json.load(file)
 
+        self.enemy_collision_list = []
+        self.enemy_list = []
+
+        with open("../resources/data/battleCharacters_dictionary.json", "r") as file:
+            self.enemies = json.load(file)
+
         self.current_ally = 0
 
         self.allow_inputs = True
@@ -64,8 +71,22 @@ class InBattleView(arcade.View):
 
         print("Inventario cargado:", self.inventory)
 
-
     def on_show_view(self):
+        print(self.enemy_collision_list)
+        for enemy in self.enemy_collision_list:
+            print("hola")
+            enemy_object = BattleEnemy(self.enemies[enemy]['sheet_name'],
+                                       self.enemies[enemy]['name'],
+                                       self.enemies[enemy]['description'],
+                                       self.enemies[enemy]['max_stamina'],
+                                       self.enemies[enemy]['max_health'],
+                                       self.enemies[enemy]['restoredStamina'])
+
+
+            self.enemy_list.append(enemy_object)
+            print(self.enemy_list)
+        print(self.enemy_collision_list)
+
 
         self.manager.enable()
         arcade.set_background_color(arcade.color.GREEN)
