@@ -10,5 +10,8 @@
              "damage_amount": 10},
   "Lesser_Healing_Potion": {"short_name": "Lesser Healing Potion",
               "type": "Potion",
-              "heal_amount": 10}
+              "heal_amount": 10},
+  "TEST": {"sheet_name": "Test/test.png","short_name": "TESTNAME",
+              "type": "TYPE",
+              "heal_amount": 999}
 }

@@ -10,6 +10,7 @@ from os.path import isfile, join
 
 import arcade
 from arcade.experimental.lights import Light, LightLayer
+from arcade import Sprite
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
@@ -72,6 +73,41 @@ def load_map(map_name,player):
 
     game_map.scene = arcade.Scene.from_tilemap(my_map)
 
+    if "searchable" in my_map.object_lists:
+        f = open("../resources/data/item_dictionary.json")
+        item_dictionary = json.load(f)
+        item_object_list = my_map.object_lists["searchable"]
+
+        for item_object in item_object_list:
+            if "item_type" not in item_object.properties:
+                print(
+                    f"No 'item_type' field for character in map {map_name}. {item_object.properties}"
+                )
+                continue
+
+            item_key = item_object.properties["item_key"]
+            if item_key not in item_dictionary:
+                print(
+                    f"Unable to find '{item_key}' in characters_dictionary.json."
+                )
+                continue
+
+            item_data = item_dictionary[item_key]
+            print(item_data)
+            shape = item_object.shape
+            item_sprite = None
+
+            if isinstance(shape, list) and len(shape) == 2:
+                # Point
+                if item_object.properties.get("item_type") == "Requirement":
+                    sheetName = f":items:{item_data['sheet_name']}"
+                    item_sprite = Sprite(sheetName)
+            if (item_sprite is not None): item_sprite.position = shape
+            if (item_sprite != None):
+                print(f"Adding item {item_key} at {item_sprite.position}")
+                print(item_sprite)
+                game_map.scene.add_sprite("searchable", item_sprite)
+
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
         character_dictionary = json.load(f)
@@ -105,7 +141,6 @@ def load_map(map_name,player):
             shape = character_object.shape
 
             if isinstance(shape, list) and len(shape) == 2:
-
                 # Point
                 if character_object.properties.get("movement") == "random":
                     character_sprite = RandomWalkingSprite(
