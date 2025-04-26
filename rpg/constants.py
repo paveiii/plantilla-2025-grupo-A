@@ -15,7 +15,7 @@ PLAYER_SPRITE_PATH = "Test/testWalk.png"
 
 
 # How fast does the player move
-MOVEMENT_SPEED = 10
+MOVEMENT_SPEED = 8
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.

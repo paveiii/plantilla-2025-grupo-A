@@ -68,10 +68,32 @@ def load_map(map_name,player):
     # Read in the tiled map
     print(f"Loading map: {map_name}")
     my_map = arcade.tilemap.load_tilemap(
-        map_name, scaling=TILE_SCALING, layer_options=layer_options
+map_name, scaling=TILE_SCALING, layer_options=layer_options
     )
 
     game_map.scene = arcade.Scene.from_tilemap(my_map)
+
+    # Get all the tiled sprite lists
+    game_map.map_layers = my_map.sprite_lists
+
+    # Define the size of the map, in tiles
+    game_map.map_size = my_map.width, my_map.height
+
+    # Set the background color
+    game_map.background_color = my_map.background_color
+
+    game_map.properties = my_map.properties
+
+    # Any layer with '_blocking' in it, will be a wall
+    game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
+    game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
+    for layer, sprite_list in game_map.map_layers.items():
+        if "_blocking" in layer:
+            game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["wall_list"].extend(sprite_list)
+        if "_slowdown" in layer:
+            game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["slowdown_list"].extend(sprite_list)
 
     if "searchable" in my_map.object_lists:
         f = open("../resources/data/item_dictionary.json")
@@ -85,14 +107,14 @@ def load_map(map_name,player):
                 )
                 continue
 
-            item_key = item_object.properties["item_key"]
-            if item_key not in item_dictionary:
+            itemKey = item_object.properties["item_key"]
+            if itemKey not in item_dictionary:
                 print(
-                    f"Unable to find '{item_key}' in characters_dictionary.json."
+                    f"Unable to find '{itemKey}' in characters_dictionary.json."
                 )
                 continue
 
-            item_data = item_dictionary[item_key]
+            item_data = item_dictionary[itemKey]
             print(item_data)
             shape = item_object.shape
             item_sprite = None
@@ -102,11 +124,11 @@ def load_map(map_name,player):
                 if item_object.properties.get("item_type") == "Requirement":
                     sheetName = f":items:{item_data['sheet_name']}"
                     item_sprite = Sprite(sheetName)
-            if (item_sprite is not None): item_sprite.position = shape
+            if (item_sprite != None): item_sprite.position = shape
             if (item_sprite != None):
-                print(f"Adding item {item_key} at {item_sprite.position}")
-                print(item_sprite)
+                print(f"Adding item {itemKey} at {item_sprite.position}")
                 game_map.scene.add_sprite("searchable", item_sprite)
+                print(game_map.map_layers)
 
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
@@ -269,31 +291,6 @@ def load_map(map_name,player):
         dummy_light = Light(x, y, radius, color, mode)
         game_map.light_layer.add(dummy_light)
         print("Added default light")
-
-    # Get all the tiled sprite lists
-    # Get all the tiled sprite lists
-    game_map.map_layers = my_map.sprite_lists
-
-    # Define the size of the map, in tiles
-    game_map.map_size = my_map.width, my_map.height
-
-    # Set the background color
-    game_map.background_color = my_map.background_color
-
-    game_map.properties = my_map.properties
-
-    # Any layer with '_blocking' in it, will be a wall
-    game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
-    game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
-    for layer, sprite_list in game_map.map_layers.items():
-        if "_blocking" in layer:
-            game_map.scene.remove_sprite_list_by_object(sprite_list)
-            game_map.scene["wall_list"].extend(sprite_list)
-        if "_slowdown" in layer:
-            game_map.scene.remove_sprite_list_by_object(sprite_list)
-            game_map.scene["slowdown_list"].extend(sprite_list)
-
-
     return game_map
 
 

@@ -604,6 +604,7 @@ class GameView(arcade.View):
     def search(self):
         """Search for things"""
         map_layers = self.map_list[self.cur_map_name].map_layers
+        print(map_layers)
         if "searchable" not in map_layers:
             print(f"No searchable sprites on {self.cur_map_name} map layer.")
             return
@@ -624,7 +625,7 @@ class GameView(arcade.View):
                 self.player_sprite.inventory.append(lookup_item)
             else:
                 print(
-                    "The 'item' property was not set for the sprite. Can't get any items from this."
+                    "The 'item key' property was not set for the sprite. Can't get any items from this."
                 )
 
     def on_key_release(self, key, modifiers):
