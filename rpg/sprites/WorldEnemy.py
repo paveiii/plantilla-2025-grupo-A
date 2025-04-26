@@ -7,7 +7,7 @@ from rpg.sprites.character_sprite import CharacterSprite
 
 from rpg.views.activate_in_battle_view import ActivateInBattleView
 
-class WorldEnemy(CharacterSprite, arcade.View):
+class WorldEnemy(CharacterSprite):
 
     def __init__(self, sheet_name, scene, jugador, enemigosBatallaNombres, velocidad=1, radio_deteccion = 200):
         super().__init__(sheet_name)

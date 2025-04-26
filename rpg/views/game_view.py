@@ -12,7 +12,7 @@ import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
 from rpg.message_box import MessageBox
-from rpg.sprites.player_sprite import PlayerSprite
+from rpg.sprites.WorldItem import WorldItem
 
 
 class DebugMenu(arcade.gui.UIBorder, arcade.gui.UIWindowLikeMixin):
@@ -614,6 +614,22 @@ class GameView(arcade.View):
             self.player_sprite, searchable_sprites
         )
         print(f"Found {len(sprites_in_range)} searchable sprite(s) in range.")
+        # Funcion para Sprites puestos en el nivel por medio de puntos.
+        for sprite in sprites_in_range:
+            if sprite.__class__ == WorldItem:
+                self.message_box = MessageBox(
+                    self, f"Found: {sprite.itemKey}"
+                )
+                sprite.remove_from_sprite_lists()
+                lookup_item = self.item_dictionary[sprite.itemKey]
+                self.player_sprite.inventory.append(lookup_item)
+                continue
+            else:
+                print(
+                    "The 'item key' property was not set for the sprite. Can't get any items from this."
+                )
+
+        #Funcion para Sprites puestos en el nivel a mano.
         for sprite in sprites_in_range:
             if "item_key" in sprite.properties:
                 self.message_box = MessageBox(

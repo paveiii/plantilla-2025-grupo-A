@@ -11,11 +11,13 @@ from os.path import isfile, join
 import arcade
 from arcade.experimental.lights import Light, LightLayer
 from arcade import Sprite
+
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.sprites.WorldAlly import WorldAlly
+from rpg.sprites.WorldItem import WorldItem
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
@@ -95,15 +97,20 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
 
+    #IMPLEMENTACION DE ITEMS EN EL MAPA: TO-DO
+    # - Hacer un diccionario nuevo para almacenar toda la informacion referida a los Items del mundo.
+    # - Implementar los objetos de requerimiento de aliados.
+    # Opcional: Encontrar una forma de evitar tener un Sprite invisible para cargar la capa "Searchable"
+
     if "searchable" in my_map.object_lists:
         f = open("../resources/data/item_dictionary.json")
         item_dictionary = json.load(f)
         item_object_list = my_map.object_lists["searchable"]
 
         for item_object in item_object_list:
-            if "item_type" not in item_object.properties:
+            if "item_key" not in item_object.properties:
                 print(
-                    f"No 'item_type' field for character in map {map_name}. {item_object.properties}"
+                    f"No 'item_key' field for character in map {map_name}. {item_object.properties}"
                 )
                 continue
 
@@ -117,17 +124,18 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             item_data = item_dictionary[itemKey]
             print(item_data)
             shape = item_object.shape
-            item_sprite = None
+            worldSprite = None
 
             if isinstance(shape, list) and len(shape) == 2:
                 # Point
-                if item_object.properties.get("item_type") == "Requirement":
-                    sheetName = f":items:{item_data['sheet_name']}"
-                    item_sprite = Sprite(sheetName)
-            if (item_sprite != None): item_sprite.position = shape
-            if (item_sprite != None):
-                print(f"Adding item {itemKey} at {item_sprite.position}")
-                game_map.scene.add_sprite("searchable", item_sprite)
+                sheetName = f":items:{item_data['sheet_name']}"
+                type = f":items:{item_data['type']}"
+
+                worldSprite = WorldItem(sheetName,itemKey,type)
+            if (worldSprite != None): worldSprite.position = shape
+            if (worldSprite != None):
+                print(f"Adding item {itemKey} at {worldSprite.position}")
+                game_map.scene.add_sprite("searchable", worldSprite)
                 print(game_map.map_layers)
 
     if "characters" in my_map.object_lists:
