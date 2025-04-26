@@ -1038,13 +1038,24 @@
         {
          "draworder":"topdown",
          "id":17,
-         "name":"enemies",
+         "name":"characters",
          "objects":[
                 {
                  "height":0,
                  "id":65,
                  "name":"ENEMY1",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldEnemyTest"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1069,6 +1080,17 @@
                  "id":69,
                  "name":"ENEMY3",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldEnemyTest"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1087,6 +1109,52 @@
                  "width":0,
                  "x":2890.91,
                  "y":1869.7
+                }, 
+                {
+                 "height":0,
+                 "id":85,
+                 "name":"ALLY2",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2132,
+                 "y":114
+                }, 
+                {
+                 "height":0,
+                 "id":86,
+                 "name":"ALLY3",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldAllyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2556,
+                 "y":1554
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1110,30 +1178,6 @@
                  "width":0,
                  "x":304,
                  "y":54
-                }, 
-                {
-                 "height":0,
-                 "id":75,
-                 "name":"ALLY2",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2144,
-                 "y":144
-                }, 
-                {
-                 "height":0,
-                 "id":76,
-                 "name":"ALLY3",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2599,
-                 "y":1554
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1142,10 +1186,10 @@
          "y":0
         }],
  "nextlayerid":21,
- "nextobjectid":84,
+ "nextobjectid":87,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
