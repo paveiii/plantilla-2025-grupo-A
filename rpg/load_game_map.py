@@ -10,7 +10,7 @@ from os.path import isfile, join
 
 import arcade
 from arcade.experimental.lights import Light, LightLayer
-if sys.platform == "win32":
+if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
@@ -249,11 +249,15 @@ def load_map(map_name,player):
 
     # Any layer with '_blocking' in it, will be a wall
     game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
+    game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
     for layer, sprite_list in game_map.map_layers.items():
         if "_blocking" in layer:
             game_map.scene.remove_sprite_list_by_object(sprite_list)
-
             game_map.scene["wall_list"].extend(sprite_list)
+        if "_slowdown" in layer:
+            game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["slowdown_list"].extend(sprite_list)
+
 
     return game_map
 

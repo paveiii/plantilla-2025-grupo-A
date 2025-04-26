@@ -487,6 +487,13 @@ class GameView(arcade.View):
             self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
             self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
+
+        # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
+        slowdown_hit = arcade.check_for_collision_with_list(self.player_sprite, self.my_map.scene["slowdown_list"])
+        for things in slowdown_hit:
+            self.player_sprite.change_y *= 0.8
+            self.player_sprite.change_x *= 0.8
+
         # Call update to move the sprite
         self.physics_engine.update()
 
@@ -531,6 +538,8 @@ class GameView(arcade.View):
         else:
             # No doors, scroll normally
             self.scroll_to_player()
+
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
