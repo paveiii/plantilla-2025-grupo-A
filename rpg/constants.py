@@ -51,8 +51,8 @@ ally_y_positions = [490, 430, 345, 565]
 
 # Enemies battle positions
 enemy_x_positions = [SCREEN_WIDTH - 430,
-                     SCREEN_WIDTH - 180,
-                     SCREEN_WIDTH - 345,
+                     SCREEN_WIDTH - 230,
+                     SCREEN_WIDTH - 380,
                      SCREEN_WIDTH - 280]
 enemy_y_positions = [490, 430, 345, 565]
 
