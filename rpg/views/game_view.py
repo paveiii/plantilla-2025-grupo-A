@@ -181,6 +181,8 @@ class GameView(arcade.View):
         color = arcade.csscolor.WHITE
         self.player_light = Light(x, y, radius, color, mode)
 
+        self.inventory = []
+
     def switch_map(self, map_name, start_x, start_y):
         """
         Switch the current map
@@ -307,8 +309,8 @@ class GameView(arcade.View):
                     x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
                 )
 
-            if len(self.player_sprite.inventory) > i:
-                item_name = self.player_sprite.inventory[i]["short_name"]
+            if len(self.inventory) > i:
+                item_name = self.inventory[i]["short_name"]
             else:
                 item_name = ""
 
@@ -560,8 +562,6 @@ class GameView(arcade.View):
             self.window.show_view(self.window.views["inventory"])
         elif key == arcade.key.ESCAPE:
             self.window.show_view(self.window.views["main_menu"])
-        elif key == arcade.key.P:
-            self.window.show_view(self.window.views["in_battle"])
         elif key in constants.SEARCH:
             self.search()
         elif key == arcade.key.KEY_1:
@@ -622,7 +622,7 @@ class GameView(arcade.View):
                 )
                 sprite.remove_from_sprite_lists()
                 lookup_item = self.item_dictionary[sprite.itemKey]
-                self.player_sprite.inventory.append(lookup_item)
+                self.inventory.append(lookup_item)
                 continue
             else:
                 print(
@@ -638,7 +638,7 @@ class GameView(arcade.View):
                 sprite.remove_from_sprite_lists()
                 lookup_item = self.item_dictionary[sprite.properties["item_key"]]
                 print(lookup_item)
-                self.player_sprite.inventory.append(lookup_item)
+                self.inventory.append(lookup_item)
             else:
                 print(
                     "The 'item key' property was not set for the sprite. Can't get any items from this."
@@ -681,10 +681,10 @@ class GameView(arcade.View):
             cur_map.light_layer.resize(width, height)
 
     def get_inventory(self):
-        return self.player_sprite.inventory
+        return self.inventory
     def inventory_add(self, object_name):
         file = open("../resources/data/item_dictionary.json", "r")
         items = json.load(file)
         for item in items.values():
             if object_name == item["short_name"]:
-                self.player_sprite.inventory.append(item)
+                self.inventory.append(item)
