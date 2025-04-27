@@ -98,45 +98,48 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene["slowdown_list"].extend(sprite_list)
 
     #IMPLEMENTACION DE ITEMS EN EL MAPA: TO-DO
-    # - Hacer un diccionario nuevo para almacenar toda la informacion referida a los Items del mundo.
-    # - Implementar los objetos de requerimiento de aliados.
+    # - Implementar los items de requerimiento de aliados.
     # Opcional: Encontrar una forma de evitar tener un Sprite invisible para cargar la capa "Searchable"
 
     if "searchable" in my_map.object_lists:
+        item_object_list = my_map.object_lists["searchable"]
+
+        f = open("../resources/data/worldItem_dictionary.json")
+        worldItem_dictionary = json.load(f)
+
         f = open("../resources/data/item_dictionary.json")
         item_dictionary = json.load(f)
-        item_object_list = my_map.object_lists["searchable"]
 
         for item_object in item_object_list:
             if "item_key" not in item_object.properties:
                 print(
-                    f"No 'item_key' field for character in map {map_name}. {item_object.properties}"
+                    f"No 'type' field for character in map {map_name}. {item_object.properties}"
                 )
                 continue
 
-            itemKey = item_object.properties["item_key"]
-            if itemKey not in item_dictionary:
-                print(
-                    f"Unable to find '{itemKey}' in characters_dictionary.json."
-                )
-                continue
-
-            item_data = item_dictionary[itemKey]
-            print(item_data)
+            item_data = worldItem_dictionary[item_object.properties.get("item_key")]
             shape = item_object.shape
-            worldSprite = None
+            item_sprite = None
 
-            if isinstance(shape, list) and len(shape) == 2:
-                # Point
-                sheetName = f":items:{item_data['sheet_name']}"
-                type = f":items:{item_data['type']}"
+            if(isinstance(shape, list) and len(shape)) == 2:
+                availableItemKeys = []
+                for item_key in item_data["item_keys"]:
+                    if item_key not in item_dictionary:
+                        print(item_key + " no se encuentra en el diccionario de Items.")
+                        continue
+                    availableItemKeys.append(item_key)
 
-                worldSprite = WorldItem(sheetName,itemKey,type)
-            if (worldSprite != None): worldSprite.position = shape
-            if (worldSprite != None):
-                print(f"Adding item {itemKey} at {worldSprite.position}")
-                game_map.scene.add_sprite("searchable", worldSprite)
-                print(game_map.map_layers)
+                randomKeyIndex = random.randint(0, len(availableItemKeys) - 1)
+                itemKey = availableItemKeys[randomKeyIndex]
+                itemDict = item_dictionary[itemKey]
+                spriteSheet = itemDict["sheet_name"]
+
+                item_sprite = WorldItem(f":items:{spriteSheet}",itemKey)
+                item_sprite.position = shape
+            if (item_sprite != None):
+                 print(f"Adding character {item_sprite.itemKey} at {item_sprite.position}")
+                 game_map.scene.add_sprite("searchable", item_sprite)
+
 
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
@@ -147,7 +150,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
         f = open("../resources/data/battleCharacters_dictionary.json")
         battleCharacter_dictionary = json.load(f)
 
-        allyNamesSpawned = []
+        spawnedAlliesKeys = []
 
         #f = open("../resources/data/actions_dictionary.json")
         #actions_dictionary = json.load(f)
@@ -167,7 +170,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                 continue
 
             character_data = character_dictionary[character_type]
-            print(character_data)
             shape = character_object.shape
 
             if isinstance(shape, list) and len(shape) == 2:
@@ -179,17 +181,17 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                 #Spawn de enemigos.
                 elif character_object.properties.get("movement") == "enemy":
 
-                    #Carga  en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
+                    #Carga en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
                     #En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
-                    availableBattleAllyNames = []
-                    for battleCharacter_name in character_data["battleTeammate_names"]:
-                        if battleCharacter_name not in battleCharacter_dictionary:
-                            print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
+                    availableBattleAllyKeys = []
+                    for battleCharacter_key in character_data["battleTeammate_keys"]:
+                        if battleCharacter_key not in battleCharacter_dictionary:
+                            print(battleCharacter_key + " no se encuentra en el diccionario de personajes de batalla.")
                             continue
-                        availableBattleAllyNames.append(battleCharacter_name)
+                        availableBattleAllyKeys.append(battleCharacter_key)
 
                     #Lista que contiene los nombres de los enemigos que apareceran en batalla.
-                    battleEnemyNames = []
+                    battleEnemyKeys = []
 
 
                     battleTeammatesAmount = character_data["battleTeammates_amount"]
@@ -199,16 +201,16 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         battleTeammatesAmount = random.randint(1,battleTeammatesAmount)
 
                     for i in range(0,battleTeammatesAmount):
-                        randomNameIndex = random.randint(0, len(availableBattleAllyNames) - 1)
-                        battleEnemyNames.append(availableBattleAllyNames[randomNameIndex])
+                        randomKeyIndex = random.randint(0, len(availableBattleAllyKeys) - 1)
+                        battleEnemyKeys.append(availableBattleAllyKeys[randomKeyIndex])
 
                     #Se toma el nombre de un enemigo del equipo que aparecera en batalla para mostrar su Sprite en el nivel.
                     #Notese que se usa la lista final para favorecer la aparicion
                     #de los Sprites de los enemigos mas abundantes en el equipo.
-                    randomSpriteIndex = random.randint(0, len(battleEnemyNames) - 1)
+                    randomSpriteIndex = random.randint(0, len(battleEnemyKeys) - 1)
 
                     #Se crea el enemigo en el nivel.
-                    character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyNames[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyNames,character_data["speed"],character_data["detectionRadius"])
+                    character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"])
 
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
@@ -216,21 +218,21 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
 
                     # Carga  en la lista los nombres de los posibles aliados que pueden aparecer en la batalla.
                     # En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
-                    availableBattleAllyNames = []
-                    for battleCharacter_name in character_data["battleTeammate_names"]:
-                        if battleCharacter_name not in battleCharacter_dictionary:
-                            print(battleCharacter_name + " no se encuentra en el diccionario de personajes de batalla.")
+                    availableBattleAllyKeys = []
+                    for battleCharacter_key in character_data["battleTeammate_keys"]:
+                        if battleCharacter_key not in battleCharacter_dictionary:
+                            print(battleCharacter_key + " no se encuentra en el diccionario de personajes de batalla.")
                             continue
-                        elif battleCharacter_name in allyNamesSpawned:
-                            print(battleCharacter_name + " Ya está en la lista.")
+                        elif battleCharacter_key in spawnedAlliesKeys:
+                            print(battleCharacter_key + " Ya está en la lista.")
                             continue
-                        availableBattleAllyNames.append(battleCharacter_name)
+                        availableBattleAllyKeys.append(battleCharacter_key)
 
-                    if(len(availableBattleAllyNames) > 0):
-                        randomIndex = random.randint(0, len(availableBattleAllyNames) - 1)
+                    if(len(availableBattleAllyKeys) > 0):
+                        randomIndex = random.randint(0, len(availableBattleAllyKeys) - 1)
 
-                        battleKey = availableBattleAllyNames[randomIndex]
-                        allyNamesSpawned.append(battleKey)
+                        battleKey = availableBattleAllyKeys[randomIndex]
+                        spawnedAlliesKeys.append(battleKey)
 
                         requirementItemName = character_data["requirementItemName"]
                         dialogueNoItem = character_data["dialogueNoItem"]

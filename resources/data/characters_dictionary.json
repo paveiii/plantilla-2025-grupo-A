@@ -19,12 +19,12 @@
   },
     "WorldEnemyTest":
     {
-      "battleTeammate_names": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 4, "random_amount": false ,
+      "battleTeammate_keys": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 2, "detectionRadius" : 500
     },
     "WorldAllyTest":
     {
-      "battleTeammate_names": ["TestCharacter1","TestCharacter2","TestCharacter3","TestCharacter4"],
+      "battleTeammate_keys": ["TestCharacter1","TestCharacter2","TestCharacter3","TestCharacter4"],
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemName" : ""

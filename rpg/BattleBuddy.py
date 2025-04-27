@@ -31,8 +31,6 @@ class BattleBuddy(arcade.Sprite):
 
         self.restoredStamina = restoredStamina #Por turno.
 
-        #Esta variable es para que la IA la use para determinar que clase de personaje es.
-        #Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
         self.displayName = displayName
         self.displayDescription = displayDescription
 
@@ -41,7 +39,7 @@ class BattleBuddy(arcade.Sprite):
     def changeHealth(self, amount:float):
         self.currentHealth += amount
     def changeStamina(self, amount:float):
-        self.currentHealth += amount
+        self.currentStamina += amount
     #Funcion para ganar Stamina, llamada durante la batalla.
     def recoverStamina(self):
         self.currentStamina += self.restoredStamina

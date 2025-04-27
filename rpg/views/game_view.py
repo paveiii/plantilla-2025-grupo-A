@@ -163,6 +163,10 @@ class GameView(arcade.View):
         self.hotbar_sprite_list = None
         self.selected_item = 1
 
+        #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
+        f = open("../resources/data/worldItem_dictionary.json")
+        self.worldItem_dictionary = json.load(f)
+
         f = open("../resources/data/item_dictionary.json")
         self.item_dictionary = json.load(f)
 
@@ -180,8 +184,6 @@ class GameView(arcade.View):
         mode = "soft"
         color = arcade.csscolor.WHITE
         self.player_light = Light(x, y, radius, color, mode)
-
-        self.inventory = []
 
     def switch_map(self, map_name, start_x, start_y):
         """
@@ -309,8 +311,9 @@ class GameView(arcade.View):
                     x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
                 )
 
-            if len(self.inventory) > i:
-                item_name = self.inventory[i]["short_name"]
+            if len(self.player_sprite.inventory) > i:
+                try: item_name = self.player_sprite.inventory[i]["short_name"]
+                except: item_name = self.player_sprite.inventory[i]["name"]
             else:
                 item_name = ""
 
@@ -562,6 +565,8 @@ class GameView(arcade.View):
             self.window.show_view(self.window.views["inventory"])
         elif key == arcade.key.ESCAPE:
             self.window.show_view(self.window.views["main_menu"])
+        elif key == arcade.key.P:
+            self.window.show_view(self.window.views["in_battle"])
         elif key in constants.SEARCH:
             self.search()
         elif key == arcade.key.KEY_1:
@@ -617,19 +622,21 @@ class GameView(arcade.View):
         # Funcion para Sprites puestos en el nivel por medio de puntos.
         for sprite in sprites_in_range:
             if sprite.__class__ == WorldItem:
+                lookup_item = self.item_dictionary[sprite.itemKey]
+
                 self.message_box = MessageBox(
-                    self, f"Found: {sprite.itemKey}"
+                    self, f"Found: {lookup_item['name']}"
                 )
                 sprite.remove_from_sprite_lists()
-                lookup_item = self.item_dictionary[sprite.itemKey]
-                self.inventory.append(lookup_item)
+                self.player_sprite.inventory.append(lookup_item)
+                print(self.player_sprite.inventory)
                 continue
             else:
-                print(
-                    "The 'item key' property was not set for the sprite. Can't get any items from this."
-                )
+                print("Este Sprite no es un WorldItem sprite.")
 
-        #Funcion para Sprites puestos en el nivel a mano.
+
+        #Antigua funcion search
+        """
         for sprite in sprites_in_range:
             if "item_key" in sprite.properties:
                 self.message_box = MessageBox(
@@ -638,11 +645,13 @@ class GameView(arcade.View):
                 sprite.remove_from_sprite_lists()
                 lookup_item = self.item_dictionary[sprite.properties["item_key"]]
                 print(lookup_item)
-                self.inventory.append(lookup_item)
+                self.player_sprite.inventory.append(lookup_item)
             else:
                 print(
                     "The 'item key' property was not set for the sprite. Can't get any items from this."
                 )
+        """
+
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
@@ -681,10 +690,11 @@ class GameView(arcade.View):
             cur_map.light_layer.resize(width, height)
 
     def get_inventory(self):
-        return self.inventory
-    def inventory_add(self, object_name):
-        file = open("../resources/data/item_dictionary.json", "r")
-        items = json.load(file)
-        for item in items.values():
-            if object_name == item["short_name"]:
-                self.inventory.append(item)
+        return self.player_sprite.inventory
+    #Adaptar funcion a nuevo formato de diccionario de items.
+    #def inventory_add(self, object_name):
+    #    file = open("../resources/data/worldItem_dictionary.json", "r")
+    #    items = json.load(file)
+    #    for item in items.values():
+    #        if object_name == item["short_name"]:
+    #            self.player_sprite.inventory.append(item)
