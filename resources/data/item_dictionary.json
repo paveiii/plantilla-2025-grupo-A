@@ -1,4 +1,8 @@
 {
   "TEST1": {"sheet_name": "Test/test1.png","name": "BLACKMESA", "type": "TYPE", "amount": 0},
-  "TEST2": {"sheet_name": "Test/test2.png","name": "50BLESSINGS", "type": "TYPE", "amount": 0}
+  "TEST2": {"sheet_name": "Test/test2.png","name": "50BLESSINGS", "type": "TYPE", "amount": 0},
+  "REQ1": {"sheet_name": "Test/req1.png","name": "Sickle", "type": "REQUIREMENT"},
+  "REQ2": {"sheet_name": "Test/req2.png","name": "Key", "type": "REQUIREMENT"},
+  "REQ3": {"sheet_name": "Test/req3.png","name": "Leaf", "type": "REQUIREMENT"},
+  "REQ4": {"sheet_name": "Test/req4.png","name": "Hoodie", "type": "REQUIREMENT"}
 }
