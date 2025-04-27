@@ -305,6 +305,96 @@
                  "width":0,
                  "x":1276,
                  "y":832
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1616,
+                 "y":700
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1716,
+                 "y":688
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1820,
+                 "y":696
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1528,
+                 "y":696
+                }, 
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1444,
+                 "y":720
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -313,7 +403,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":21,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.11.2",

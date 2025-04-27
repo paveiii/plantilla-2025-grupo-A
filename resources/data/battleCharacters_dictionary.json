@@ -5,7 +5,7 @@
       "role": "ally/enemy/boss", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
-      "requirementItemName" : "",
+      "requirementItemKey": "",
       "actions" : ["ActionTemplate","Action2"]
     },
 
@@ -15,7 +15,7 @@
       "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
-      "requirementItemName" : "",
+      "requirementItemKey": "REQ1",
       "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
     },
 
@@ -23,6 +23,9 @@
     {
       "sheet_name": "Test/testBuddy1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
       "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemKey": "REQ2",
       "actions" : ["Action1","Action2", "Action5"]
     },
 
@@ -32,7 +35,7 @@
       "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
-      "requirementItemName" : "",
+      "requirementItemKey": "REQ3",
       "actions" : ["Action3", "Action4", "Action5"]
     },
 
@@ -42,7 +45,7 @@
       "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
-      "requirementItemName" : "",
+      "requirementItemKey": "REQ4",
       "actions" : ["Action1","Action2", "Action3", "Action4"]
     },
     "TestEnemy1":

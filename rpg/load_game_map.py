@@ -97,50 +97,8 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
 
-    #IMPLEMENTACION DE ITEMS EN EL MAPA: TO-DO
-    # - Implementar los items de requerimiento de aliados.
-    # Opcional: Encontrar una forma de evitar tener un Sprite invisible para cargar la capa "Searchable"
 
-    if "searchable" in my_map.object_lists:
-        item_object_list = my_map.object_lists["searchable"]
-
-        f = open("../resources/data/worldItem_dictionary.json")
-        worldItem_dictionary = json.load(f)
-
-        f = open("../resources/data/item_dictionary.json")
-        item_dictionary = json.load(f)
-
-        for item_object in item_object_list:
-            if "item_key" not in item_object.properties:
-                print(
-                    f"No 'type' field for character in map {map_name}. {item_object.properties}"
-                )
-                continue
-
-            item_data = worldItem_dictionary[item_object.properties.get("item_key")]
-            shape = item_object.shape
-            item_sprite = None
-
-            if(isinstance(shape, list) and len(shape)) == 2:
-                availableItemKeys = []
-                for item_key in item_data["item_keys"]:
-                    if item_key not in item_dictionary:
-                        print(item_key + " no se encuentra en el diccionario de Items.")
-                        continue
-                    availableItemKeys.append(item_key)
-
-                randomKeyIndex = random.randint(0, len(availableItemKeys) - 1)
-                itemKey = availableItemKeys[randomKeyIndex]
-                itemDict = item_dictionary[itemKey]
-                spriteSheet = itemDict["sheet_name"]
-
-                item_sprite = WorldItem(f":items:{spriteSheet}",itemKey)
-                item_sprite.position = shape
-            if (item_sprite != None):
-                 print(f"Adding character {item_sprite.itemKey} at {item_sprite.position}")
-                 game_map.scene.add_sprite("searchable", item_sprite)
-
-
+    spawnedAlliesKeys = []
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
         character_dictionary = json.load(f)
@@ -149,8 +107,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
         #Cargar los personajes de batalla.
         f = open("../resources/data/battleCharacters_dictionary.json")
         battleCharacter_dictionary = json.load(f)
-
-        spawnedAlliesKeys = []
 
         #f = open("../resources/data/actions_dictionary.json")
         #actions_dictionary = json.load(f)
@@ -232,13 +188,13 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         randomIndex = random.randint(0, len(availableBattleAllyKeys) - 1)
 
                         battleKey = availableBattleAllyKeys[randomIndex]
-                        spawnedAlliesKeys.append(battleKey)
 
-                        requirementItemName = character_data["requirementItemName"]
+                        requirementItemName = character_data["requirementItemKey"]
                         dialogueNoItem = character_data["dialogueNoItem"]
                         dialogueWithItem = character_data["dialogueWithItem"]
 
                         character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
+                        spawnedAlliesKeys.append(battleKey)
                     else:
                         character_sprite = None
                 else:
@@ -266,6 +222,70 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                 print(f"Adding character {character_type} at {character_sprite.position}")
                 print(character_sprite)
                 game_map.scene.add_sprite("characters", character_sprite)
+    spawnedRequirementKeys = []
+    if "searchable" in my_map.object_lists:
+        item_object_list = my_map.object_lists["searchable"]
+
+        f = open("../resources/data/worldItem_dictionary.json")
+        worldItem_dictionary = json.load(f)
+
+        f = open("../resources/data/item_dictionary.json")
+        item_dictionary = json.load(f)
+
+        for item_object in item_object_list:
+            if "item_key" not in item_object.properties:
+                print(
+                    f"No 'type' field for character in map {map_name}. {item_object.properties}"
+                )
+                continue
+
+            itemObjectKey = item_object.properties.get("item_key")
+            shape = item_object.shape
+            item_sprite = None
+
+            if(isinstance(shape, list) and len(shape)) == 2:
+                if(itemObjectKey == "AllyRequirement"):
+                    if(len(spawnedAlliesKeys) > 0):
+                        print(spawnedAlliesKeys)
+                        randomAllyIndex = random.randint(0, len(spawnedAlliesKeys) - 1)
+                        allyKeySelected = spawnedAlliesKeys.pop(randomAllyIndex)
+                        allyDict = battleCharacter_dictionary[allyKeySelected]
+                        print(allyDict)
+
+                        itemKey = allyDict["requirementItemKey"]
+                        itemDict = item_dictionary[itemKey]
+
+                        spriteSheet = itemDict["sheet_name"]
+
+                        item_sprite = WorldItem(f":items:{spriteSheet}", itemKey)
+                        item_sprite.position = shape
+
+
+                        spawnedRequirementKeys.append(itemKey)
+                else:
+                    item_data = worldItem_dictionary[itemObjectKey]
+                    availableItemKeys = []
+                    for item_key in item_data["item_keys"]:
+                        if item_key not in item_dictionary:
+                            print(item_key + " no se encuentra en el diccionario de Items.")
+                            continue
+                        availableItemKeys.append(item_key)
+
+                    randomKeyIndex = random.randint(0, len(availableItemKeys) - 1)
+                    itemKey = availableItemKeys[randomKeyIndex]
+                    itemDict = item_dictionary[itemKey]
+                    spriteSheet = itemDict["sheet_name"]
+
+                    item_sprite = WorldItem(f":items:{spriteSheet}",itemKey)
+                    item_sprite.position = shape
+            if (item_sprite != None):
+                 print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")
+                 game_map.scene.add_sprite("searchable", item_sprite)
+    #Este codigo es para asegurar de que existan tantos items de requerimiento como aliados spawneados.
+    #Actualmente lo comente debido a que los mapas del proyecto original no cuentan con los puntos de Spawn
+    #de dichos items.
+    #if len(spawnedAlliesKeys) > 0:
+    #    raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
 
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]
