@@ -9,7 +9,6 @@ from rpg.views.activate_in_battle_view import ActivateInBattleView
 
 class WorldItem(arcade.Sprite):
 
-    def __init__(self, sheet_name, itemKey, type):
+    def __init__(self, sheet_name, itemKey):
         super().__init__(sheet_name)
         self.itemKey = itemKey
-        self.type = type

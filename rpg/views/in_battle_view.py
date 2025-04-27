@@ -34,7 +34,7 @@ class InBattleView(arcade.View):
         with open("../resources/data/actions_dictionary.json", "r") as file:
             self.actions = json.load(file)
 
-        with open("../resources/data/item_dictionary.json", "r") as file:
+        with open("../resources/data/worldItem_dictionary.json", "r") as file:
             self.items = json.load(file)
 
         self.enemy_collision_list = []
@@ -65,8 +65,8 @@ class InBattleView(arcade.View):
 
         self.pointer_is_up = False
 
-        self.window.views["game"].inventory_add("Apple")
-        self.window.views["game"].inventory_add("Lesser Healing Potion")
+        #self.window.views["game"].inventory_add("Apple")
+        #self.window.views["game"].inventory_add("Lesser Healing Potion")
         self.inventory = self.window.views["game"].get_inventory()
 
         print("Inventario cargado:", self.inventory)

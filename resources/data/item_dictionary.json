@@ -1,17 +1,4 @@
 {
-  "Apple": {"short_name": "Apple",
-            "type": "food",
-            "heal_amount": 5},
-  "Dagger": {"short_name": "Dagger",
-             "type": "weapon",
-             "damage_amount": 5},
-  "Sword": {"short_name": "Sword",
-             "type": "weapon",
-             "damage_amount": 10},
-  "Lesser_Healing_Potion": {"short_name": "Lesser Healing Potion",
-              "type": "Potion",
-              "heal_amount": 10},
-  "TEST": {"sheet_name": "Test/test.png","short_name": "TESTNAME",
-              "type": "TYPE",
-              "heal_amount": 999}
+  "TEST1": {"sheet_name": "Test/test1.png","name": "BLACKMESA", "type": "TYPE", "amount": 0},
+  "TEST2": {"sheet_name": "Test/test2.png","name": "50BLESSINGS", "type": "TYPE", "amount": 0}
 }

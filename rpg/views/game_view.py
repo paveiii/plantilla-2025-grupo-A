@@ -163,6 +163,10 @@ class GameView(arcade.View):
         self.hotbar_sprite_list = None
         self.selected_item = 1
 
+        #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
+        f = open("../resources/data/worldItem_dictionary.json")
+        self.worldItem_dictionary = json.load(f)
+
         f = open("../resources/data/item_dictionary.json")
         self.item_dictionary = json.load(f)
 
@@ -308,7 +312,8 @@ class GameView(arcade.View):
                 )
 
             if len(self.player_sprite.inventory) > i:
-                item_name = self.player_sprite.inventory[i]["short_name"]
+                try: item_name = self.player_sprite.inventory[i]["short_name"]
+                except: item_name = self.player_sprite.inventory[i]["name"]
             else:
                 item_name = ""
 
@@ -617,19 +622,21 @@ class GameView(arcade.View):
         # Funcion para Sprites puestos en el nivel por medio de puntos.
         for sprite in sprites_in_range:
             if sprite.__class__ == WorldItem:
+                lookup_item = self.item_dictionary[sprite.itemKey]
+
                 self.message_box = MessageBox(
-                    self, f"Found: {sprite.itemKey}"
+                    self, f"Found: {lookup_item['name']}"
                 )
                 sprite.remove_from_sprite_lists()
-                lookup_item = self.item_dictionary[sprite.itemKey]
                 self.player_sprite.inventory.append(lookup_item)
+                print(self.player_sprite.inventory)
                 continue
             else:
-                print(
-                    "The 'item key' property was not set for the sprite. Can't get any items from this."
-                )
+                print("Este Sprite no es un WorldItem sprite.")
 
-        #Funcion para Sprites puestos en el nivel a mano.
+
+        #Antigua funcion search
+        """
         for sprite in sprites_in_range:
             if "item_key" in sprite.properties:
                 self.message_box = MessageBox(
@@ -643,6 +650,8 @@ class GameView(arcade.View):
                 print(
                     "The 'item key' property was not set for the sprite. Can't get any items from this."
                 )
+        """
+
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
@@ -682,9 +691,10 @@ class GameView(arcade.View):
 
     def get_inventory(self):
         return self.player_sprite.inventory
-    def inventory_add(self, object_name):
-        file = open("../resources/data/item_dictionary.json", "r")
-        items = json.load(file)
-        for item in items.values():
-            if object_name == item["short_name"]:
-                self.player_sprite.inventory.append(item)
+    #Adaptar funcion a nuevo formato de diccionario de items.
+    #def inventory_add(self, object_name):
+    #    file = open("../resources/data/worldItem_dictionary.json", "r")
+    #    items = json.load(file)
+    #    for item in items.values():
+    #        if object_name == item["short_name"]:
+    #            self.player_sprite.inventory.append(item)
