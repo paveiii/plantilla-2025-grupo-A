@@ -12,7 +12,7 @@ import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
 from rpg.message_box import MessageBox
-from rpg.sprites.player_sprite import PlayerSprite
+from rpg.sprites.WorldItem import WorldItem
 
 
 class DebugMenu(arcade.gui.UIBorder, arcade.gui.UIWindowLikeMixin):
@@ -487,6 +487,13 @@ class GameView(arcade.View):
             self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
             self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
+
+        # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
+        slowdown_hit = arcade.check_for_collision_with_list(self.player_sprite, self.my_map.scene["slowdown_list"])
+        for things in slowdown_hit:
+            self.player_sprite.change_y *= 0.8
+            self.player_sprite.change_x *= 0.8
+
         # Call update to move the sprite
         self.physics_engine.update()
 
@@ -531,6 +538,8 @@ class GameView(arcade.View):
         else:
             # No doors, scroll normally
             self.scroll_to_player()
+
+
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
@@ -595,6 +604,7 @@ class GameView(arcade.View):
     def search(self):
         """Search for things"""
         map_layers = self.map_list[self.cur_map_name].map_layers
+        print(map_layers)
         if "searchable" not in map_layers:
             print(f"No searchable sprites on {self.cur_map_name} map layer.")
             return
@@ -604,17 +614,34 @@ class GameView(arcade.View):
             self.player_sprite, searchable_sprites
         )
         print(f"Found {len(sprites_in_range)} searchable sprite(s) in range.")
+        # Funcion para Sprites puestos en el nivel por medio de puntos.
         for sprite in sprites_in_range:
-            if "item" in sprite.properties:
+            if sprite.__class__ == WorldItem:
                 self.message_box = MessageBox(
-                    self, f"Found: {sprite.properties['item']}"
+                    self, f"Found: {sprite.itemKey}"
                 )
                 sprite.remove_from_sprite_lists()
-                lookup_item = self.item_dictionary[sprite.properties["item"]]
+                lookup_item = self.item_dictionary[sprite.itemKey]
+                self.player_sprite.inventory.append(lookup_item)
+                continue
+            else:
+                print(
+                    "The 'item key' property was not set for the sprite. Can't get any items from this."
+                )
+
+        #Funcion para Sprites puestos en el nivel a mano.
+        for sprite in sprites_in_range:
+            if "item_key" in sprite.properties:
+                self.message_box = MessageBox(
+                    self, f"Found: {sprite.properties['item_key']}"
+                )
+                sprite.remove_from_sprite_lists()
+                lookup_item = self.item_dictionary[sprite.properties["item_key"]]
+                print(lookup_item)
                 self.player_sprite.inventory.append(lookup_item)
             else:
                 print(
-                    "The 'item' property was not set for the sprite. Can't get any items from this."
+                    "The 'item key' property was not set for the sprite. Can't get any items from this."
                 )
 
     def on_key_release(self, key, modifiers):

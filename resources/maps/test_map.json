@@ -9,7 +9,7 @@
          "encoding":"base64",
          "height":64,
          "id":1,
-         "name":"Capa de patrones 1",
+         "name":"ground",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -234,9 +234,55 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"searchable",
+         "objects":[
+                {
+                 "height":0,
+                 "id":15,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"TEST"
+                        }, 
+                        {
+                         "name":"item_type",
+                         "type":"string",
+                         "value":"Requirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1272,
+                 "y":1168
+                }, 
+                {
+                 "gid":575,
+                 "height":32,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":32,
+                 "x":2070.66666666667,
+                 "y":1005.33333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":14,
+ "nextlayerid":5,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.11.2",
@@ -245,6 +291,10 @@
         {
          "firstgid":1,
          "source":"..\/tilesets\/[A]Grass_pipo.json"
+        }, 
+        {
+         "firstgid":529,
+         "source":"..\/tilesets\/[Base]BaseChip_pipo.json"
         }],
  "tilewidth":32,
  "type":"map",

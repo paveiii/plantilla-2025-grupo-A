@@ -10,11 +10,14 @@ from os.path import isfile, join
 
 import arcade
 from arcade.experimental.lights import Light, LightLayer
-if sys.platform == "win32":
+from arcade import Sprite
+
+if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
 from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.sprites.WorldAlly import WorldAlly
+from rpg.sprites.WorldItem import WorldItem
 from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
@@ -67,10 +70,73 @@ def load_map(map_name,player):
     # Read in the tiled map
     print(f"Loading map: {map_name}")
     my_map = arcade.tilemap.load_tilemap(
-        map_name, scaling=TILE_SCALING, layer_options=layer_options
+map_name, scaling=TILE_SCALING, layer_options=layer_options
     )
 
     game_map.scene = arcade.Scene.from_tilemap(my_map)
+
+    # Get all the tiled sprite lists
+    game_map.map_layers = my_map.sprite_lists
+
+    # Define the size of the map, in tiles
+    game_map.map_size = my_map.width, my_map.height
+
+    # Set the background color
+    game_map.background_color = my_map.background_color
+
+    game_map.properties = my_map.properties
+
+    # Any layer with '_blocking' in it, will be a wall
+    game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
+    game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
+    for layer, sprite_list in game_map.map_layers.items():
+        if "_blocking" in layer:
+            game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["wall_list"].extend(sprite_list)
+        if "_slowdown" in layer:
+            game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["slowdown_list"].extend(sprite_list)
+
+    #IMPLEMENTACION DE ITEMS EN EL MAPA: TO-DO
+    # - Hacer un diccionario nuevo para almacenar toda la informacion referida a los Items del mundo.
+    # - Implementar los objetos de requerimiento de aliados.
+    # Opcional: Encontrar una forma de evitar tener un Sprite invisible para cargar la capa "Searchable"
+
+    if "searchable" in my_map.object_lists:
+        f = open("../resources/data/item_dictionary.json")
+        item_dictionary = json.load(f)
+        item_object_list = my_map.object_lists["searchable"]
+
+        for item_object in item_object_list:
+            if "item_key" not in item_object.properties:
+                print(
+                    f"No 'item_key' field for character in map {map_name}. {item_object.properties}"
+                )
+                continue
+
+            itemKey = item_object.properties["item_key"]
+            if itemKey not in item_dictionary:
+                print(
+                    f"Unable to find '{itemKey}' in characters_dictionary.json."
+                )
+                continue
+
+            item_data = item_dictionary[itemKey]
+            print(item_data)
+            shape = item_object.shape
+            worldSprite = None
+
+            if isinstance(shape, list) and len(shape) == 2:
+                # Point
+                sheetName = f":items:{item_data['sheet_name']}"
+                type = f":items:{item_data['type']}"
+
+                worldSprite = WorldItem(sheetName,itemKey,type)
+            if (worldSprite != None): worldSprite.position = shape
+            if (worldSprite != None):
+                print(f"Adding item {itemKey} at {worldSprite.position}")
+                game_map.scene.add_sprite("searchable", worldSprite)
+                print(game_map.map_layers)
 
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
@@ -105,7 +171,6 @@ def load_map(map_name,player):
             shape = character_object.shape
 
             if isinstance(shape, list) and len(shape) == 2:
-
                 # Point
                 if character_object.properties.get("movement") == "random":
                     character_sprite = RandomWalkingSprite(
@@ -234,27 +299,6 @@ def load_map(map_name,player):
         dummy_light = Light(x, y, radius, color, mode)
         game_map.light_layer.add(dummy_light)
         print("Added default light")
-
-    # Get all the tiled sprite lists
-    # Get all the tiled sprite lists
-    game_map.map_layers = my_map.sprite_lists
-
-    # Define the size of the map, in tiles
-    game_map.map_size = my_map.width, my_map.height
-
-    # Set the background color
-    game_map.background_color = my_map.background_color
-
-    game_map.properties = my_map.properties
-
-    # Any layer with '_blocking' in it, will be a wall
-    game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
-    for layer, sprite_list in game_map.map_layers.items():
-        if "_blocking" in layer:
-            game_map.scene.remove_sprite_list_by_object(sprite_list)
-
-            game_map.scene["wall_list"].extend(sprite_list)
-
     return game_map
 
 

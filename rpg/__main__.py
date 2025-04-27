@@ -22,6 +22,7 @@ class MyWindow(arcade.Window):
         arcade.resources.add_resource_handle("data", "../resources/data")
         arcade.resources.add_resource_handle("sounds", "../resources/sounds")
         arcade.resources.add_resource_handle("misc", "../resources/misc")
+        arcade.resources.add_resource_handle("items", "../resources/items")
 
 
 def main():
