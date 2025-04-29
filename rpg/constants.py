@@ -56,4 +56,4 @@ enemy_x_positions = [SCREEN_WIDTH - 430,
                      SCREEN_WIDTH - 280]
 enemy_y_positions = [490, 430, 345, 565]
 
-CHARACTER_POINTER_SPEED = 0.2
+CHARACTER_POINTER_SPEED = 0.3

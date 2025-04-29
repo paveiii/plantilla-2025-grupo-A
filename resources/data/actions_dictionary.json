@@ -7,7 +7,7 @@
     "Action1":
     {
       "name": "Attack1", "description": "deals damage", "option": "attack", "actionType":"Damage",
-      "effectName" : "", "staminaExpense" : 10, "amount" : 0, "targetQuantity" : 0
+      "effectName" : "", "staminaExpense" : 10, "amount" : 15, "targetQuantity" : 0
     },
     "Action2":
     {
@@ -18,18 +18,18 @@
     "Action3":
     {
       "name": "Attack2", "description": "deals a lot of damage", "option": "attack", "actionType":"ApplyEffect",
-      "effectName" : "EffectTemplate", "staminaExpense" : 25, "amount" : 0, "targetQuantity" : 0
+      "effectName" : "EffectTemplate", "staminaExpense" : 25, "amount" : 30, "targetQuantity" : 0
     },
 
     "Action4":
     {
       "name": "Attack3", "description": "deals area damage", "option": "attack", "actionType":"ApplyEffect",
-      "effectName" : "EffectTemplate", "staminaExpense" : 15, "amount" : 0, "targetQuantity" : 0
+      "effectName" : "EffectTemplate", "staminaExpense" : 15, "amount" : 10, "targetQuantity" : 0
     },
 
     "Action5":
     {
       "name": "Attack4", "description": "deals low damage.", "option": "attack", "actionType":"ApplyEffect",
-      "effectName" : "EffectTemplate", "staminaExpense" : 3, "amount" : 0, "targetQuantity" : 0
+      "effectName" : "EffectTemplate", "staminaExpense" : 3, "amount" : 5, "targetQuantity" : 0
     }
 }

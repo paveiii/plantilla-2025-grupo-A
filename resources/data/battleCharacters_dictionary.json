@@ -11,8 +11,8 @@
 
   "TestCharacter1":
     {
-      "sheet_name": "Test/testWalk.png","name": "1", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "sheet_name": "Test/testWalk.png","name": "TestCharacter1", "description": "", "type":"Captain",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemKey": "REQ1",
@@ -21,8 +21,11 @@
 
   "TestCharacter2":
     {
-      "sheet_name": "Test/testBuddy1.png","name": "2", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "sheet_name": "Test/testBuddy1.png","name": "TestCharacter2", "description": "", "type":"Tank",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
+      "dialogueNoItem" : "",
+      "dialogueWithItem" : "",
+      "requirementItemName" : "",
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemKey": "REQ2",
@@ -31,8 +34,8 @@
 
   "TestCharacter3":
     {
-      "sheet_name": "Test/testBuddy2.png","name": "3", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "sheet_name": "Test/testBuddy2.png","name": "TestCharacter3", "description": "", "type":"Fighter",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemKey": "REQ3",
@@ -41,8 +44,8 @@
 
   "TestCharacter4":
     {
-      "sheet_name": "Test/testBuddy3.png","name": "4", "description": "", "type":"Tank/Medic/Captain/Fighter",
-      "role": "ally", "maxHealth" : 0, "maxStamina" : 0, "restoredStamina" : 0,
+      "sheet_name": "Test/testBuddy3.png","name": "TestCharacter4", "description": "", "type":"Medic",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
       "requirementItemKey": "REQ4",

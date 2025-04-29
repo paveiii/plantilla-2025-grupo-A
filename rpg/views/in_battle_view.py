@@ -2,12 +2,11 @@ import arcade
 import arcade.gui
 import json
 
-from rpg.sprites.WorldEnemy import WorldEnemy
 from rpg.BattleEnemy import BattleEnemy
+from rpg.BattleAlly import BattleAlly
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
 from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions,
                            CHARACTER_POINTER_SPEED, enemy_x_positions, enemy_y_positions)
-from rpg.views.activate_in_battle_view import ActivateInBattleView
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -16,6 +15,8 @@ class InBattleView(arcade.View):
     def __init__(self):
         super().__init__()
         self.option = "menu"
+        self.previous_option = ""
+        self.clicked_button_name = ""
 
         self.player_sprites = arcade.SpriteList()
         self.enemy_sprites = arcade.SpriteList()
@@ -24,10 +25,11 @@ class InBattleView(arcade.View):
         self.activated = False
         self.contenedor = arcade.gui.UIBoxLayout()
 
-        self.main_buttons()
-
         #PROXIMAMENTE: CREAR METODOS QUE CARGUEN LOS INTEGRANTES DE AMBOS EQUIPOS EN BASE A INFORMACION
         #DEL JUGADOR Y DEL WORLD_ENEMY.
+
+        self.player_team = []
+        self.team_names = []
 
         with open("../resources/data/battleCharacters_dictionary.json", "r") as file:
             self.team = json.load(file)
@@ -66,8 +68,6 @@ class InBattleView(arcade.View):
 
         self.pointer_is_up = False
 
-        #self.window.views["game"].inventory_add("Apple")
-        #self.window.views["game"].inventory_add("Lesser Healing Potion")
         self.inventory = self.window.views["game"].get_inventory()
 
         self.current_selected_enemy = 0
@@ -76,6 +76,46 @@ class InBattleView(arcade.View):
         print("Inventario cargado:", self.inventory)
 
     def on_show_view(self):
+        self.inventory = self.window.views["game"].get_inventory()
+
+        self.manager.enable()
+        self.main_buttons()
+        arcade.set_background_color(arcade.color.GREEN)
+
+        # Load allies
+
+        new_ally_x = ally_x_positions.copy()
+        new_ally_y = ally_y_positions.copy()
+
+        self.team_names = self.window.views["game"].get_player_team()
+
+        for character in self.team_names:
+            ally_object = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
+                                     self.team[character]['name'],
+                                     self.team[character]['description'],
+                                     self.team[character]['type'],
+                                     self.team[character]['maxStamina'],
+                                     self.team[character]['maxHealth'],
+                                     self.team[character]['restoredStamina'],
+                                     self.team[character]['actions'],
+                                     self.team[character]['dialogueNoItem'],
+                                     self.team[character]['dialogueWithItem'],
+                                     self.team[character]['requirementItemKey'])
+
+            self.player_team.append(ally_object)
+
+        for character in self.player_team:
+            while len(new_ally_x) > 0:
+                self.setup_team(character.sheetName, new_ally_x[0], new_ally_y[0])
+                del new_ally_x[0]
+                del new_ally_y[0]
+                break
+
+        # Load enemies
+
+        new_enemy_x = enemy_x_positions.copy()
+        new_enemy_y = enemy_y_positions.copy()
+
         for enemy in self.enemy_collision_list:
             enemy_object = BattleEnemy(f":characters:{self.enemies[enemy]['sheet_name']}",
                                        self.enemies[enemy]['name'],
@@ -85,22 +125,8 @@ class InBattleView(arcade.View):
                                        self.enemies[enemy]['restoredStamina'],
                                        self.enemies[enemy]['actions'])
 
+
             self.enemy_list.append(enemy_object)
-
-        self.manager.enable()
-        arcade.set_background_color(arcade.color.GREEN)
-
-        new_ally_x = ally_x_positions.copy()
-        new_ally_y = ally_y_positions.copy()
-        for character in list(self.team.values())[1:]: # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
-            while len(new_ally_x) > 0:
-                self.setup_team(f":characters:{character['sheet_name']}", new_ally_x[0], new_ally_y[0])
-                del new_ally_x[0]
-                del new_ally_y[0]
-                break
-
-        new_enemy_x = enemy_x_positions.copy()
-        new_enemy_y = enemy_y_positions.copy()
 
         for enemy in self.enemy_list:
             while len(new_enemy_x) > 0:
@@ -112,6 +138,9 @@ class InBattleView(arcade.View):
     def on_hide_view(self):
         self.manager.clear()
         self.manager.disable()
+
+        self.player_sprites.clear()
+        self.enemy_sprites.clear()
 
     def on_draw(self):
         current_width = self.get_width()
@@ -154,30 +183,18 @@ class InBattleView(arcade.View):
         self.manager.enable()
 
     def on_update(self, delta_time: float):
-        if self.option != "select_enemy":
-            if not self.pointer_is_up:
-                self.pointer_y += CHARACTER_POINTER_SPEED
+        pointer_positions = self.get_pointer_positions()
+        if not self.pointer_is_up:
+            self.pointer_y += CHARACTER_POINTER_SPEED
 
-                if self.pointer_y >= self.y_positions[self.current_ally] + 10:
-                    self.pointer_is_up = True
+            if self.pointer_y >= pointer_positions + 10:
+                self.pointer_is_up = True
 
-            else:
-                self.pointer_y -= CHARACTER_POINTER_SPEED
-
-                if self.pointer_y <= self.y_positions[self.current_ally]:
-                    self.pointer_is_up = False
         else:
-            if not self.pointer_is_up:
-                self.pointer_y += CHARACTER_POINTER_SPEED
+            self.pointer_y -= CHARACTER_POINTER_SPEED
 
-                if self.pointer_y >= self.y_positions[self.current_selected_enemy] + 10:
-                    self.pointer_is_up = True
-
-            else:
-                self.pointer_y -= CHARACTER_POINTER_SPEED
-
-                if self.pointer_y <= self.y_positions[self.current_selected_enemy]:
-                    self.pointer_is_up = False
+            if self.pointer_y <= pointer_positions:
+                self.pointer_is_up = False
 
     def on_click_attack(self, event):
         self.option = "attack"
@@ -206,30 +223,20 @@ class InBattleView(arcade.View):
             self.player_turn = False
 
     def on_click_button(self, event):
-        print("b")
-        self.allow_inputs = False
+        print(f"button clicked: {self.clicked_button_name}")
+        self.previous_option = self.option
+
         self.manager.clear()
         self.manager.disable()
         self.action_buttons.clear()
-        self.main_buttons()
-        self.option = "menu"
 
-        # Aquí iría el código de lo que pase
-
-        if self.current_ally <= 2:
-            self.current_ally += 1
-            self.allow_inputs = True
-            self.manager.remove(self.contenedor)
-            self.stage = 1
-            self.action_buttons.clear()
-            self.main_buttons()
-            self.option = "menu"
-
+        if self.option == "attack" or self.option == "skill":
             self.select_enemy_to_attack()
-            
-        else:
-            self.current_ally = 0
-            self.player_turn = False
+            self.manager.clear()
+            self.manager.disable()
+
+        if self.option == "item":
+            self.perform_action()
 
     def setup_team(self, sheet_name, x, y):
         self.character_sprite = CharacterSprite(sheet_name)
@@ -275,38 +282,45 @@ class InBattleView(arcade.View):
 
         if self.allow_inputs:
 
-            if key == arcade.key.P and self.activated == False:
-                print("pantalla de batalla")
-                self.window.show_view(self.window.views["in_battle"])
-                self.activated = True
-
-            if key == arcade.key.P and self.activated == True:
-                print("show game view")
-                self.window.show_view(self.window.views["game"])
-
-            if key == arcade.key.ESCAPE:
-                self.stage = 1
-                self.manager.remove(self.description_widget)
-                self.action_buttons.clear()
-                self.main_buttons()
-                self.option = "menu"
-
-            if key == arcade.key.ENTER:
-                print("battle pause menu")
-                self.window.show_view(self.window.views["battle_pause"])
-
             if self.option == "select_enemy":
                 if key == arcade.key.RIGHT or key == arcade.key.D:
                     if self.current_selected_enemy < 3:
                         self.current_selected_enemy += 1
                     else:
                         self.current_selected_enemy = 0
+                    self.select_enemy_to_attack()
+
                 if key == arcade.key.LEFT or key == arcade.key.A:
                     if self.current_selected_enemy > 0:
                         self.current_selected_enemy -= 1
                     else:
                         self.current_selected_enemy = 3
-                self.select_enemy_to_attack()
+                    self.select_enemy_to_attack()
+
+                if key == arcade.key.ENTER:
+                    self.perform_action()
+
+            else:
+                if key == arcade.key.P and self.activated == False:
+                    print("pantalla de batalla")
+                    self.window.show_view(self.window.views["in_battle"])
+                    self.activated = True
+
+                if key == arcade.key.P and self.activated == True:
+                    print("show game view")
+                    self.window.show_view(self.window.views["game"])
+
+                if key == arcade.key.ESCAPE:
+                    self.stage = 1
+                    self.manager.remove(self.description_widget)
+                    self.action_buttons.clear()
+                    self.main_buttons()
+                    self.option = "menu"
+
+                if key == arcade.key.ENTER:
+                    print("battle pause menu")
+                    self.window.show_view(self.window.views["battle_pause"])
+
 
     def get_width(self):
         window_size = self.window.get_size()
@@ -317,6 +331,12 @@ class InBattleView(arcade.View):
         window_size = self.window.get_size()
         current_height = window_size[1]
         return current_height
+
+    def get_pointer_positions(self):
+        if self.option == "select_enemy":
+            return enemy_y_positions[self.current_selected_enemy]
+        else:
+            return self.y_positions[self.current_ally]
 
     def main_buttons(self):
         self.contenedor.clear()
@@ -387,12 +407,14 @@ class InBattleView(arcade.View):
 
         elif self.option == "item":
             for item in self.inventory:
-                if item["type"] != "weapon": # Para cada item compara si el tipo es distinto de weapon y si es distinto lo añade
-                    button = arcade.gui.UIFlatButton(text = item["short_name"], width = button_width, height = 30)
-                    self.contenedor.add(button.with_space_around(10))
-                    button.on_click = self.on_click_button
-                    self.action_buttons.append(button)
-                    num_buttons += 1
+                try:
+                    button = arcade.gui.UIFlatButton(text = item["name"], width = button_width, height = 30)
+                except:
+                    button = arcade.gui.UIFlatButton(text=item["short_name"], width=button_width, height=30)
+                self.contenedor.add(button.with_space_around(10))
+                button.on_click = self.on_click_button
+                self.action_buttons.append(button)
+                num_buttons += 1
 
         y_pos = 0
         if num_buttons == 4:
@@ -425,10 +447,13 @@ class InBattleView(arcade.View):
                         for action in self.actions.values():
                             if action["name"] == button.text:
                                 self.display_action_description(f'{action["description"]}\n\nStamina expense: {action["staminaExpense"]} sp')
+                                self.clicked_button_name = button.text
                     elif self.option == "item":
-                        for item in self.inventory:
-                            if item["short_name"] == button.text:
-                                self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
+                        print("Volver a hacer esta parte de código y no olvidar self.clicked_button_name")
+                    #    for item in self.inventory:
+                    #        try:
+                    #            if item["short_name"] == button.text:
+                    #                self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
 
     def display_action_description(self, text):
         if self.description_is_displayed and self.description_widget.child.text == text:
@@ -461,3 +486,41 @@ class InBattleView(arcade.View):
         self.pointer_y = enemy_y_positions[self.current_selected_enemy]
         self.manager.clear()
         self.manager.disable()
+
+    def next_ally(self):
+        if self.current_ally <= 2:
+            self.current_ally += 1
+            self.allow_inputs = True
+            self.manager.remove(self.contenedor)
+            self.stage = 1
+            self.action_buttons.clear()
+            self.main_buttons()
+            self.option = "menu"
+            self.pointer_x = self.x_positions[self.current_ally]
+            self.pointer_y = self.y_positions[self.current_ally]
+
+        else:
+            self.current_ally = 0
+            self.player_turn = False
+            self.perform_action() # Como player turn se pone a False se ejecutarán los turnos del equipo enemigo.
+
+    def perform_action(self):
+        if self.player_turn:
+            if self.previous_option == "attack" or self.previous_option == "skill":
+
+                for action in self.actions.values():
+                    if action["name"] == self.clicked_button_name:
+                        self.enemy_list[self.current_selected_enemy].changeHealth(action["amount"])
+
+                        print(f"enemy index number: {self.current_selected_enemy} -{action['amount']} health")
+                        # HACER QUE SE APLIQUEN LOS EFECTOS TAMBIÉN
+                        # CUANDO ESTÉ IMPLEMENTADA LA LISTA DE OBJETOS DE ALIADOS BAJARLES LA STAMINA
+
+                self.next_ally()
+
+            if self.previous_option == "item":
+                print("CUANDO LOS ITEMS TENGAN SU FORMA DEFINITIVA HACER ESTA PARTE DE CÓDIGO PARA APLICAR LOS EFECTOS")
+                self.next_ally()
+                        # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
+        else:
+            pass # CUADNO ESTÉ IMPLEMNTADA LA LISTA DE OBJETOS DE ALIADOS HACER QUE LOS ENEMIGOS ATAQUEN

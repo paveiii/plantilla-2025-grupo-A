@@ -185,6 +185,9 @@ class GameView(arcade.View):
         color = arcade.csscolor.WHITE
         self.player_light = Light(x, y, radius, color, mode)
 
+        self.inventory = []
+        self.player_team = ["TestCharacter1", "TestCharacter2", "TestCharacter3", "TestCharacter4"]
+
     def switch_map(self, map_name, start_x, start_y):
         """
         Switch the current map
@@ -311,9 +314,9 @@ class GameView(arcade.View):
                     x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
                 )
 
-            if len(self.player_sprite.inventory) > i:
-                try: item_name = self.player_sprite.inventory[i]["short_name"]
-                except: item_name = self.player_sprite.inventory[i]["name"]
+            if len(self.inventory) > i:
+                try: item_name = self.inventory[i]["short_name"]
+                except: item_name = self.inventory[i]["name"]
             else:
                 item_name = ""
 
@@ -628,8 +631,8 @@ class GameView(arcade.View):
                     self, f"Found: {lookup_item['name']}"
                 )
                 sprite.remove_from_sprite_lists()
-                self.player_sprite.inventory.append(lookup_item)
-                print(self.player_sprite.inventory)
+                self.inventory.append(lookup_item)
+                print(self.inventory)
                 continue
             else:
                 print("Este Sprite no es un WorldItem sprite.")
@@ -690,11 +693,19 @@ class GameView(arcade.View):
             cur_map.light_layer.resize(width, height)
 
     def get_inventory(self):
-        return self.player_sprite.inventory
-    #Adaptar funcion a nuevo formato de diccionario de items.
-    #def inventory_add(self, object_name):
-    #    file = open("../resources/data/worldItem_dictionary.json", "r")
-    #    items = json.load(file)
-    #    for item in items.values():
-    #        if object_name == item["short_name"]:
-    #            self.player_sprite.inventory.append(item)
+        return self.inventory
+
+    def inventory_add(self, object_name):
+        with open("../resources/data/item_dictionary.json", "r") as file:
+            items = json.load(file)
+        for item in items.values():
+                if object_name in items.keys():
+                    self.inventory.append(items[object_name])
+                else:
+                    with open("../resources/data/worldItem_dictionary.json", "r") as file:
+                        items = json.load(file)
+                    if object_name == item["name"]:
+                        self.inventory.append(item)
+
+    def get_player_team(self):
+        return self.player_team
