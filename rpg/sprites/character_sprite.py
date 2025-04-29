@@ -42,10 +42,6 @@ class CharacterSprite(arcade.Sprite):
     def on_update(self, delta_time):
         if not self.change_x and not self.change_y:
             return
-
-        # self.center_x += self.change_x
-        # self.center_y += self.change_y
-
         #Control de velocidad en la que se actualizan los frames de la animacion.
         if self.should_update <= 3:
             self.should_update += 1
@@ -55,7 +51,7 @@ class CharacterSprite(arcade.Sprite):
 
         direction = Direction.LEFT
         slope = self.change_y / (self.change_x + 0.0001)
-        if abs(slope) < 0.8:
+        if abs(slope) < 0.1:
             if self.change_x > 0:
                 direction = Direction.RIGHT
             else:
