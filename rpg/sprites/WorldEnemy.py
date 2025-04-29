@@ -1,4 +1,5 @@
 import math
+import random
 
 import arcade
 from arcade import SpriteCircle, check_for_collision, SpriteList
@@ -20,7 +21,7 @@ class WorldEnemy(CharacterSprite):
         self.jugador = jugador
         self.radio_deteccion = radio_deteccion
 
-        self.barrier_list = arcade.AStarBarrierList(self,wallList,32,
+        self.barrier_list = arcade.AStarBarrierList(self,wallList,64,
                                                     0,
                                                     mapSize[0]*32,
                                                     0,
@@ -39,12 +40,14 @@ class WorldEnemy(CharacterSprite):
 
 
     def perseguir_jugador(self):
-        self.path = arcade.astar_calculate_path(self.position,
-                                                self.jugador.position,
-                                                self.barrier_list,
-                                                diagonal_movement=False)
-        print(self.path)
-
+        if random.randint(1,10) == 3:
+            self.path = arcade.astar_calculate_path(self.position,
+                                                    self.jugador.position,
+                                                    self.barrier_list,
+                                                    diagonal_movement=False)
+            print(self.path)
+        #Recordatorio de mencionar en GDD al genio que hizo un video sobre enemigos con Pathfinding de Arcade.
+        #https://www.youtube.com/watch?v=nh0DHdX11oE&ab_channel=CharlieSmith
         if self.path and len(self.path) > 1:
 
             if self.center_y < self.path[1][1]:

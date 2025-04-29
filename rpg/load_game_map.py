@@ -40,7 +40,12 @@ def load_map(map_name,player):
     Load a map
     """
 
+    #DEBUG: Codigo para cargar solo un mapa especificado.
+    if(map_name != "../resources/maps/test_map.json"):
+        return None
+
     game_map = GameMap()
+
     game_map.map_layers = OrderedDict()
 
     game_map.light_layer = LightLayer(100, 100)
