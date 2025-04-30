@@ -111,6 +111,14 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
 
+    # wall_list solo con sprites con hitbox bien definida, sin errores
+    wall_list = arcade.SpriteList()
+    for wall in game_map.scene["wall_list"]:
+        if wall.get_hit_box():
+            wall_list.append(wall)
+        else:
+            print(f"[AVISO] Muro ignorado por hitbox vacía: {wall}")
+
 
     spawnedAlliesKeys = []
     if "characters" in my_map.object_lists:
@@ -183,13 +191,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     # Debug
                     print("Creando enemigo con sprite:",
                           f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}")
-                    # wall_list solo con sprites con hitbox bien definida, sin errores
-                    wall_list = arcade.SpriteList()
-                    for wall in game_map.scene["wall_list"]:
-                        if wall.get_hit_box():
-                            wall_list.append(wall)
-                        else:
-                            print(f"[AVISO] Muro ignorado por hitbox vacía: {wall}")
                     character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],wall_list,game_map.map_size)
 
                 #Spawn de aliados.
