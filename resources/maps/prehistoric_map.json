@@ -523,7 +523,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/plantilla-2025-grupo-A\/resources\/tilesets\/tiles.json"
+         "source":"..\/tilesets\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",

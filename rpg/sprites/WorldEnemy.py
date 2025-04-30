@@ -20,6 +20,13 @@ class WorldEnemy(CharacterSprite):
         self.scene = scene
         self.jugador = jugador
         self.radio_deteccion = radio_deteccion
+        print("Creando hitbox de", self.texture) # Debug
+        print("Hitbox:", self.get_hit_box()) # Debug
+        # Sprites problemáticos sin hitbox
+        for i, wall in enumerate(wallList):
+            hb = wall.get_hit_box()
+            if not hb:
+                print(f"[ERROR] Wall #{i} sin hitbox:", wall)
 
         self.barrier_list = arcade.AStarBarrierList(self,wallList,64,
                                                     0,
