@@ -23,6 +23,7 @@ from rpg.sprites.character_sprite import CharacterSprite
 from rpg.constants import TILE_SCALING
 from rpg.sprites.path_following_sprite import PathFollowingSprite
 from rpg.sprites.random_walking_sprite import RandomWalkingSprite
+from rpg import constants
 
 
 class GameMap:
@@ -41,7 +42,7 @@ def load_map(map_name,player):
     """
 
     #DEBUG: Codigo para cargar solo un mapa especificado.
-    if(map_name != "../resources/maps/test_map.json"):
+    if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
         return None
 
     game_map = GameMap()
