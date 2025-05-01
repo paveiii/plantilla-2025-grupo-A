@@ -29,6 +29,14 @@ class WorldEnemy(CharacterSprite):
                                                     mapSize[1]*32)
         self.path = None
 
+        print("Creando hitbox de", self.texture) # Debug
+        print("Hitbox:", self.get_hit_box()) # Debug
+        # Sprites problemáticos sin hitbox
+        for i, wall in enumerate(wallList):
+            hb = wall.get_hit_box()
+            if not hb:
+                print(f"[ERROR] Wall #{i} sin hitbox:", wall)
+
     def detectar_jugador(self):
         self.distanciaJugador = arcade.get_distance_between_sprites(self.jugador, self)
         if self.radio_deteccion > self.distanciaJugador >= 16:  #32 es el radio de los sprites
