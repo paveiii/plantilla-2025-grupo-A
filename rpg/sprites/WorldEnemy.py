@@ -20,15 +20,9 @@ class WorldEnemy(CharacterSprite):
         self.scene = scene
         self.jugador = jugador
         self.radio_deteccion = radio_deteccion
-        print("Creando hitbox de", self.texture) # Debug
-        print("Hitbox:", self.get_hit_box()) # Debug
-        # Sprites problemáticos sin hitbox
-        for i, wall in enumerate(wallList):
-            hb = wall.get_hit_box()
-            if not hb:
-                print(f"[ERROR] Wall #{i} sin hitbox:", wall)
+        self.distanciaJugador = -1
 
-        self.barrier_list = arcade.AStarBarrierList(self,wallList,64,
+        self.barrier_list = arcade.AStarBarrierList(self,wallList,32,
                                                     0,
                                                     mapSize[0]*32,
                                                     0,
@@ -36,53 +30,52 @@ class WorldEnemy(CharacterSprite):
         self.path = None
 
     def detectar_jugador(self):
-        distancia = arcade.get_distance_between_sprites(self.jugador, self)
-        if self.radio_deteccion > distancia >= 16:  #32 es el radio de los sprites
-            if distancia <= 34:
-                print("JUGADOR COLISIONA CON EL ENEMIGO")
-                switch_to_battle = ActivateInBattleView(self.enemigos_batalla)
+        self.distanciaJugador = arcade.get_distance_between_sprites(self.jugador, self)
+        if self.radio_deteccion > self.distanciaJugador >= 16:  #32 es el radio de los sprites
             return True
         else:
             return False
+    def chequear_colision(self):
+        if self.distanciaJugador <= 34 and self.distanciaJugador >= 0:
+            print("JUGADOR COLISIONA CON EL ENEMIGO")
+            switch_to_battle = ActivateInBattleView(self.enemigos_batalla)
 
-
-    def perseguir_jugador(self):
-        if random.randint(1,10) == 3:
-            self.path = arcade.astar_calculate_path(self.position,
+    def actualizar_path(self):
+        newPath = arcade.astar_calculate_path(self.position,
                                                     self.jugador.position,
                                                     self.barrier_list,
                                                     diagonal_movement=False)
-            print(self.path)
+        if(newPath != None):
+            self.path = newPath
+    def perseguir_jugador(self):
         #Recordatorio de mencionar en GDD al genio que hizo un video sobre enemigos con Pathfinding de Arcade.
         #https://www.youtube.com/watch?v=nh0DHdX11oE&ab_channel=CharlieSmith
-        if self.path and len(self.path) > 1:
-
-            if self.center_y < self.path[1][1]:
-                self.center_y += min(self.speed, self.path[1][1] - self.center_y)
-                self.change_y += 1
-            elif self.center_y > self.path[1][1]:
-                self.center_y -= min(self.speed, self.center_y - self.path[1][1])
-                self.change_y = -1
-
-            if self.center_x < self.path[1][0]:
-                self.center_x += min(self.speed, self.path[1][0] - self.center_x)
-                self.change_x += 1
-            elif self.center_x > self.path[1][0]:
-                self.center_x -= min(self.speed, self.center_x  - self.path[1][0])
-                self.change_x = -1
-
-
+        if (self.path == None):
+            return
+        if(len(self.path) <= 1):
+            return
+        if (self.center_x == self.path[1][0] and self.center_y == self.path[1][1]):
+            self.path.pop(0)
+        if (len(self.path) <= 1):
+            return
+        if self.center_y < self.path[1][1]:
+            self.center_y += min(self.speed, self.path[1][1] - self.center_y)
+            self.change_y += 1
+        elif self.center_y > self.path[1][1]:
+            self.center_y -= min(self.speed, self.center_y - self.path[1][1])
+            self.change_y = -1
+        if self.center_x < self.path[1][0]:
+            self.center_x += min(self.speed, self.path[1][0] - self.center_x)
+            self.change_x += 1
+        elif self.center_x > self.path[1][0]:
+            self.center_x -= min(self.speed, self.center_x  - self.path[1][0])
+            self.change_x = -1
 
     def on_update(self, delta_time):
         super().on_update(delta_time)
-
-        if self.path:
-            arcade.draw_line_strip(self.path, arcade.color.BLUE, 2)
-
-
         if self.detectar_jugador():
-            self.perseguir_jugador()
-        else:
-            self.change_x = 0
-            self.change_y = 0
+            self.chequear_colision()
+            self.actualizar_path()
+        print(self.path)
+        self.perseguir_jugador()
 
