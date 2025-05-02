@@ -6,7 +6,8 @@
     "folders": [
         "maps"
     ],
-    "objectTypesFile": "",
+    "properties": [
+    ],
     "propertyTypes": [
     ]
 }
