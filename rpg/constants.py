@@ -26,8 +26,8 @@ TOP_VIEWPORT_MARGIN = 300
 
 # What map, and what position we start at
 STARTING_MAP = "test_map"
-STARTING_X = 33 #75 para mapa edad media # Prehistoria -> 2
-STARTING_Y = 29 #35 para mapa edad media # Prehistoria -> 40
+STARTING_X = 33 #80 para mapa edad media # Prehistoria -> 2
+STARTING_Y = 29 #50 para mapa edad media # Prehistoria -> 40
 
 
 # Key mappings
