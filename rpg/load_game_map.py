@@ -42,6 +42,7 @@ def load_map(map_name,player):
     """
 
     #DEBUG: Codigo para cargar solo un mapa especificado.
+    # Quitar esto si quieres usar las puertas del mapa
     if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
         return None
 
@@ -104,13 +105,23 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
     for layer, sprite_list in game_map.map_layers.items():
         if "_blocking" in layer:
+            # Eliminar la spritelist original
             game_map.scene.remove_sprite_list_by_object(sprite_list)
-            game_map.scene["wall_list"].extend(sprite_list)
+
+            # Crear nueva lista filtrada con solo los que tienen hitbox
+            filtered = arcade.SpriteList(use_spatial_hash=True)
+            for sprite in sprite_list:
+                if sprite.get_hit_box():
+                    filtered.append(sprite)
+                else:
+                    print(f"[AVISO] Sprite ignorado por hitbox vacía en capa '{layer}': {sprite}")
+
+            # Añadir a wall_list
+            game_map.scene["wall_list"].extend(filtered)
 
         if "_slowdown" in layer:
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
-
 
     spawnedAlliesKeys = []
     if "characters" in my_map.object_lists:
@@ -180,6 +191,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     randomSpriteIndex = random.randint(0, len(battleEnemyKeys) - 1)
 
                     #Se crea el enemigo en el nivel.
+                    # Debug
+                    print("Creando enemigo con sprite:",
+                          f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}")
                     character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],game_map.scene["wall_list"],game_map.map_size)
 
                 #Spawn de aliados.
