@@ -11,7 +11,7 @@ from rpg.views.activate_in_battle_view import ActivateInBattleView
 
 class WorldEnemy(CharacterSprite):
 
-    def __init__(self, sheet_name, scene, jugador, enemigosBatallaNombres, velocidad:1, radio_deteccion:200,wallList,mapSize):
+    def __init__(self, sheet_name, scene, jugador, enemigosBatallaNombres, velocidad:1, radio_deteccion:200,barrierList):
         super().__init__(sheet_name)
         #Notese que esto es una lista de las Keys de battleCharacters_dictionary
         #para que puedan ser cargados posteriormente cuando se inicie una batalla.
@@ -22,20 +22,11 @@ class WorldEnemy(CharacterSprite):
         self.radio_deteccion = radio_deteccion
         self.distanciaJugador = -1
 
-        self.barrier_list = arcade.AStarBarrierList(self,wallList,32,
-                                                    0,
-                                                    mapSize[0]*32,
-                                                    0,
-                                                    mapSize[1]*32)
+        self.barrier_list = barrierList
         self.path = None
 
         print("Creando hitbox de", self.texture) # Debug
         print("Hitbox:", self.get_hit_box()) # Debug
-        # Sprites problemáticos sin hitbox
-        for i, wall in enumerate(wallList):
-            hb = wall.get_hit_box()
-            if not hb:
-                print(f"[ERROR] Wall #{i} sin hitbox:", wall)
 
     def detectar_jugador(self):
         self.distanciaJugador = arcade.get_distance_between_sprites(self.jugador, self)
@@ -78,6 +69,8 @@ class WorldEnemy(CharacterSprite):
         elif self.center_x > self.path[1][0]:
             self.center_x -= min(self.speed, self.center_x  - self.path[1][0])
             self.change_x = -1
+    def cambiar_barrierList(self, newBarrierList):
+        self.barrier_list = newBarrierList
 
     def on_update(self, delta_time):
         super().on_update(delta_time)

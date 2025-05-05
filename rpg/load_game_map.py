@@ -124,6 +124,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene["slowdown_list"].extend(sprite_list)
 
     spawnedAlliesKeys = []
+    mapBarrierList = None
     if "characters" in my_map.object_lists:
         f = open("../resources/data/characters_dictionary.json")
         character_dictionary = json.load(f)
@@ -194,8 +195,21 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     # Debug
                     print("Creando enemigo con sprite:",
                           f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}")
-                    character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],game_map.scene["wall_list"],game_map.map_size)
+                    character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],mapBarrierList)
 
+                    if(mapBarrierList == None):
+                        mapBarrierList = arcade.AStarBarrierList(character_sprite, game_map.scene["wall_list"], 32,
+                                            0,
+                                            game_map.map_size[0] * 32,
+                                            0,
+                                            game_map.map_size[1] * 32)
+                        character_sprite.cambiar_barrierList(mapBarrierList)
+
+                        # Sprites problemáticos sin hitbox
+                        for i, wall in enumerate(game_map.scene["wall_list"]):
+                            hb = wall.get_hit_box()
+                            if not hb:
+                                print(f"[ERROR] Wall #{i} sin hitbox:", wall)
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
                     #SPAWN DE OBJETO DE REQUERIMIENTO.
