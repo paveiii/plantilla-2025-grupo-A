@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/mapa_edad_media.json",
+    "activeFile": "maps/mapa_cyberpunk.json",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -187,10 +187,10 @@
         },
         "maps/mapa_cyberpunk.json": {
             "scale": 0.25,
-            "selectedLayer": 4,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 1680,
-                "y": 1456
+                "x": 2176,
+                "y": 2200
             }
         },
         "maps/mapa_edad_media.json": {
@@ -200,6 +200,12 @@
                 "x": 3464,
                 "y": 2872
             }
+        },
+        "maps/mapa_edad_media.json#lava_tileset_2": {
+            "scaleInDock": 1
+        },
+        "maps/mapa_edad_media.json#tileset_cueva": {
+            "scaleInDock": 1
         },
         "maps/prehistoric_map.json": {
             "scale": 0.25,
@@ -227,10 +233,10 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.5
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN Iluminada-1.png.tsx": {
-            "scaleInDock": 0.75
+            "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN.tsx": {
             "scaleInDock": 1
@@ -251,19 +257,28 @@
             "scaleInDock": 0.75
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Policia Bien.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.5
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Power Plant1.tsx": {
             "scaleInDock": 0.75
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Grande Iluminado.tsx": {
+            "scaleInDock": 1
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Grande.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Mediana Iluminado.tsx": {
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Mediana.tsx": {
             "scaleInDock": 1
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña Iluminado.tsx": {
+            "scaleInDock": 1.5
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suelo Cyberpunk.tsx": {
             "scaleInDock": 1
@@ -296,14 +311,13 @@
             "scaleInDock": 1
         }
     },
-    "last.externalTilesetPath": "C:/Users/johnn/OneDrive/Documentos/UAH/GISI/1º Curso/2º Cuatrimestre/Tecnología de videojuegos/Proyecto/Mapa Cyberpunk/Archivos.tsx",
+    "last.externalTilesetPath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx",
     "last.imagePath": "C:/Users/johnn/OneDrive/Downloads",
     "map.fixedSize": false,
     "map.height": 100,
     "map.width": 135,
     "openFiles": [
-        "maps/mapa_cyberpunk.json",
-        "maps/mapa_edad_media.json"
+        "maps/mapa_cyberpunk.json"
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
@@ -320,6 +334,7 @@
         "maps/graveyard_dungeon.json",
         "maps/farmhouse.json"
     ],
+    "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
     "tileset.lastUsedFormat": "tsx"
 }
