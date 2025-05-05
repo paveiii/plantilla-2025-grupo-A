@@ -7,6 +7,7 @@
     "expandedProjectPaths": [
         "maps"
     ],
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
     "fileStates": {
         "C:/Users/johnn/OneDrive/Documentos/UAH/GISI/1º Curso/2º Cuatrimestre/Tecnología de videojuegos/Proyecto/Mapa Cyberpunk/Archivos.tsx/Carretera BIEN.tsx": {
             "scaleInDock": 0.75
@@ -123,6 +124,68 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json": {
+            "scale": 0.1498076923076923,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 2176.12323491656,
+                "y": 2109.370988446726
+            }
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk3.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN Iluminada-1.png.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera Esquina.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Casino BIEN sin fondo.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Data Center BIEN.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Elevacion de terreno cyberpunk.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Hospital Bien.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Policia Bien.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Power Plant1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Grande Iluminado.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Mediana Iluminado.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña Iluminado.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Tienda.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Time Company No se.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx/Town Hall1.tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/johnn/OneDrive/Downloads/cyberpunk_ciudad.tmx": {
             "scale": 0.21023148148148146,
             "selectedLayer": 0,
@@ -187,10 +250,10 @@
         },
         "maps/mapa_cyberpunk.json": {
             "scale": 0.25,
-            "selectedLayer": 6,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 2176,
-                "y": 2200
+                "x": 2040,
+                "y": 3008
             }
         },
         "maps/mapa_edad_media.json": {
@@ -254,7 +317,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Hospital Bien.tsx": {
-            "scaleInDock": 0.75
+            "scaleInDock": 0.25
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Policia Bien.tsx": {
             "scaleInDock": 0.5
@@ -322,6 +385,7 @@
     "project": "rpg.tiled-project",
     "recentFiles": [
         "maps/mapa_cyberpunk.json",
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json",
         "maps/mapa_edad_media.json",
         "maps/test_map.json",
         "maps/prehistoric_map.json",
@@ -331,8 +395,7 @@
         "C:/Users/johnn/OneDrive/Documentos/UAH/GISI/1º Curso/2º Cuatrimestre/Tecnología de videojuegos/Proyecto/Mapa Cyberpunk/Tilesets Cyberpunk/Casino BIEN sin fondo peq.tsx",
         "maps/cueva.json",
         "maps/dungeon_lvl_three_maze.json",
-        "maps/graveyard_dungeon.json",
-        "maps/farmhouse.json"
+        "maps/graveyard_dungeon.json"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
