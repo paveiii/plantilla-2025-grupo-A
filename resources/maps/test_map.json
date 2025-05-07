@@ -403,14 +403,19 @@
  "orientation":"orthogonal",
  "properties":[
         {
+         "name":"isSubmap",
+         "type":"bool",
+         "value":false
+        }, 
+        {
          "name":"start_x",
          "type":"int",
-         "value":51
+         "value":33
         }, 
         {
          "name":"start_y",
          "type":"int",
-         "value":45
+         "value":29
         }],
  "renderorder":"left-down",
  "tiledversion":"1.11.2",
