@@ -10,9 +10,11 @@ from rpg.sprites.player_sprite import PlayerSprite
 from rpg.views.battle_view import BattleView
 from rpg.views.game_view import GameView
 from rpg.views.inventory_view import InventoryView
+from rpg.views.load_game_view import LoadGameView
 from rpg.views.main_menu_view import MainMenuView
 from rpg.views.in_battle_view import InBattleView
 from rpg.views.settings_view import SettingsView
+from rpg.views.menu_view import MenuView
 
 
 class LoadingView(arcade.View):
@@ -67,5 +69,7 @@ class LoadingView(arcade.View):
                 self.window.views["battle"] = BattleView()
                 self.window.views["battle"].setup()
                 self.window.views["in_battle"] = InBattleView()
+                self.window.views["menu"] = MenuView()
+                self.window.views["load_game"] = LoadGameView()
 
                 self.window.show_view(self.window.views["game"])

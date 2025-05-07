@@ -19,7 +19,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt0CEOwCAUREHS+1+ykpRDFIMhCNw2ZSb5BrWPUgAAABjuK70gS396QZb+9IIs\/ekFWav+k\/5E\/97bXz29tU7XDuoHAAAAAAAAAAAAvuUF7lARDw==",
+         "data":"eJzt2M0NwjAMhuGozQQZNSN1lGzCEcEQYLVWrQqVBgkq7PeRKjhw6Bc7f6QEAAAAAFCX4ew3OBf53\/+mjSkNOaWSv\/8+v9ZT\/7qMgydH80\/j\/HjrgZ76R88vJP\/kaB68yr83JroWyhh40JtfRa2\/N7dn1uvmuQfKj8952wt7NIdngR7N0Rmgl+TW+5B8VidngSPqcg+Q+uv3SH3QlszV8Z14TzW1j1R3IXntfyHN0bxv5n6vdS15ve\/pfqe97ym7sPO4mnGwY2Dr7y3\/lu1z2+8lyJpn1\/di6h5lvy95nefF9EGkNb+OMWoNAAAAAAAAAADwLx4GHS\/d",
          "encoding":"base64",
          "height":64,
          "id":5,
@@ -39,7 +39,7 @@
                 {
                  "height":0,
                  "id":4,
-                 "name":"",
+                 "name":"Enemy",
                  "point":true,
                  "properties":[
                         {
@@ -173,6 +173,75 @@
                  "width":0,
                  "x":1644,
                  "y":1108
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Enemy",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldEnemyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":160,
+                 "y":736
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"Enemy",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldEnemyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":1312
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"Enemy",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"WorldEnemyTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":1440
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -330,8 +399,24 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":26,
+ "nextobjectid":29,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"isSubmap",
+         "type":"bool",
+         "value":false
+        }, 
+        {
+         "name":"start_x",
+         "type":"int",
+         "value":33
+        }, 
+        {
+         "name":"start_y",
+         "type":"int",
+         "value":29
+        }],
  "renderorder":"left-down",
  "tiledversion":"1.11.2",
  "tileheight":32,
