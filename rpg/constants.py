@@ -11,7 +11,7 @@ CHARACTER_SPRITE_SIZE = 64 #Original: 32
 MAP_TILE_SIZE = 32
 
 #Ruta del Sprite del jugador en la carpeta "resources/characters"
-PLAYER_SPRITE_PATH = "Test/testWalk.png"
+PLAYER_SPRITE_PATH = "Test/testWalk2.png"
 
 
 # How fast does the player move
@@ -24,9 +24,8 @@ RIGHT_VIEWPORT_MARGIN = 300
 BOTTOM_VIEWPORT_MARGIN = 300
 TOP_VIEWPORT_MARGIN = 300
 
-# What map, and what position we start at
-STARTING_MAP = "mapa_edad_media"
-
+# Map where we start.
+STARTING_MAP = "test_map"
 
 # Key mappings
 KEY_UP = [arcade.key.UP, arcade.key.W]

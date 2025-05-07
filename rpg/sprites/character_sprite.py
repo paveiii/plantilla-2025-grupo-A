@@ -22,6 +22,12 @@ SPRITE_INFO = {
     #Direction.LEFT: [3, 4, 5],
     #Direction.RIGHT: [6, 7, 8],
     #Direction.UP: [9, 10, 11],
+    #Direction.BATTLEIDLE:
+    #Direction.ATTACK:
+    #Direction.SKILL
+    #Direction.HURT:
+    #Direction.DEAD:
+
 }
 
 
