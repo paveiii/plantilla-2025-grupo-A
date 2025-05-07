@@ -57,18 +57,21 @@ class WorldEnemy(CharacterSprite):
             self.path.pop(0)
         if (len(self.path) <= 1):
             return
+        self.change_x = 0
+        self.change_y = 0
         if self.center_y < self.path[1][1]:
             self.center_y += min(self.speed, self.path[1][1] - self.center_y)
-            self.change_y += 1
+            self.change_y = 1
         elif self.center_y > self.path[1][1]:
             self.center_y -= min(self.speed, self.center_y - self.path[1][1])
             self.change_y = -1
         if self.center_x < self.path[1][0]:
             self.center_x += min(self.speed, self.path[1][0] - self.center_x)
-            self.change_x += 1
+            self.change_x = 1
         elif self.center_x > self.path[1][0]:
             self.center_x -= min(self.speed, self.center_x  - self.path[1][0])
             self.change_x = -1
+        print(self.change_x, self.change_y)
     def cambiar_barrierList(self, newBarrierList):
         self.barrier_list = newBarrierList
 
@@ -77,6 +80,5 @@ class WorldEnemy(CharacterSprite):
         if self.detectar_jugador():
             self.chequear_colision()
             self.actualizar_path()
-        print(self.path)
         self.perseguir_jugador()
 
