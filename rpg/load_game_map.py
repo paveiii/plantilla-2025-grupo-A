@@ -100,6 +100,12 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
 
     game_map.properties = my_map.properties
 
+    try:
+        print(game_map.properties.get("start_x") ,game_map.properties.get("start_y"))
+    except:
+        print("EL MAPA NO TIENE DEFINIDA UNA POSICION INICIAL.")
+        raise
+
     # Any layer with '_blocking' in it, will be a wall
     game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
     game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
