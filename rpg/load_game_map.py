@@ -101,9 +101,17 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     game_map.properties = my_map.properties
 
     try:
-        print(game_map.properties.get("start_x") ,game_map.properties.get("start_y"))
+        #Este bool define si el mapa es un submapa, es decir, un mapa al que eres teletransportado desde otro mapa.
+        #De ser True, se ignora el proceso de verificar si existe start_x y start_y, ya que la posicion de inicio
+        #es definida en otro sitio.
+        isSubmap = game_map.properties.get("isSubmap")
     except AttributeError:
-        raise AttributeError("EL MAPA NO TIENE DEFINIDA UNA POSICION INICIAL.")
+        raise AttributeError(f"EL MAPA {map_name} NO TIENE DEFINIDA LA VARIABLE 'isSubmap'")
+    if(isSubmap == False):
+        try:
+            print(game_map.properties.get("start_x") ,game_map.properties.get("start_y"))
+        except AttributeError:
+            raise AttributeError(f"EL MAPA {map_name} NO TIENE DEFINIDA UNA POSICION INICIAL X y/o Y.")
 
     # Any layer with '_blocking' in it, will be a wall
     game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)

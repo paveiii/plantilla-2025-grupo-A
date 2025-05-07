@@ -188,7 +188,7 @@ class GameView(arcade.View):
         self.inventory = []
         self.player_team = ["TestCharacter1", "TestCharacter2", "TestCharacter3", "TestCharacter4"]
 
-    def switch_map(self, map_name):
+    def switch_map(self, map_name,start_x,start_y):
         """
         Switch the current map
         :param map_name: Name of map to switch to
@@ -206,9 +206,6 @@ class GameView(arcade.View):
             arcade.set_background_color(self.my_map.background_color)
 
         map_height = self.my_map.map_size[1]
-
-        start_x = self.my_map.properties.get("start_x")
-        start_y = self.my_map.properties.get("start_y")
 
         self.player_sprite.center_x = start_x * constants.MAP_TILE_SIZE + constants.MAP_TILE_SIZE/2 #* constants.SPRITE_SIZE + constants.SPRITE_SIZE / 2
         self.player_sprite.center_y = (map_height - start_y) * constants.MAP_TILE_SIZE - constants.MAP_TILE_SIZE/2 #* constants.SPRITE_SIZE - constants.SPRITE_SIZE / 2
@@ -235,7 +232,15 @@ class GameView(arcade.View):
 
     def setup(self):
         """Set up the game variables. Call to re-start the game."""
-        self.switch_map(constants.STARTING_MAP)
+
+        #Spawn player
+        try:
+            start_x = self.map_list[constants.STARTING_MAP].properties.get("start_x")
+            start_y = self.map_list[constants.STARTING_MAP].properties.get("start_y")
+        except KeyError:
+            raise KeyError(f"Unable to find map named '{constants.STARTING_MAP}'.")
+
+        self.switch_map(constants.STARTING_MAP,start_x,start_y)
         self.cur_map_name = constants.STARTING_MAP
 
         # Set up the hotbar
