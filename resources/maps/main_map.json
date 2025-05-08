@@ -445,6 +445,22 @@
  "nextlayerid":16,
  "nextobjectid":13,
  "orientation":"orthogonal",
+  "properties":[
+        {
+         "name":"isSubmap",
+         "type":"bool",
+         "value":false
+        },
+        {
+         "name":"start_x",
+         "type":"int",
+         "value":10
+        },
+        {
+         "name":"start_y",
+         "type":"int",
+         "value":10
+        }],
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
  "tileheight":32,
