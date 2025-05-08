@@ -17,5 +17,6 @@ class Effect():
 
     def useEffect(self):
         if(self.duration <= 0):
-            pass
-        pass
+            self.duration = 0
+        else:
+            self.duration -= 1

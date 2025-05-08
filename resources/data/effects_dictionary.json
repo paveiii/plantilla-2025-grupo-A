@@ -1,7 +1,13 @@
 {
   "EffectTemplate":
     {
-      "name": "aaaa", "description": "", "effectType":"#Damage/Heal/Multiplier",
-      "durationInTurns": 0,"amount" : 0, "statAffected" : ""
+      "name": "Effect Template", "description": "", "effectType":"#Damage/Heal/Multiplier",
+      "durationInTurns": 3,"amount" : 10, "statAffected" : ""
+    },
+
+  "TestEffect1":
+    {
+      "name": "TestEffect1", "description": "", "effectType":"Damage",
+      "durationInTurns": 3,"amount" : 10, "statAffected" : ""
     }
 }
