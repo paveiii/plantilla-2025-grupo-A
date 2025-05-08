@@ -71,7 +71,6 @@ class WorldEnemy(CharacterSprite):
         elif self.center_x > self.path[1][0]:
             self.center_x -= min(self.speed, self.center_x  - self.path[1][0])
             self.change_x = -1
-        print(self.change_x, self.change_y)
     def cambiar_barrierList(self, newBarrierList):
         self.barrier_list = newBarrierList
 

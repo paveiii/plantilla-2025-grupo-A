@@ -25,9 +25,6 @@
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
       "dialogueNoItem" : "",
       "dialogueWithItem" : "",
-      "requirementItemName" : "",
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
       "requirementItemKey": "REQ2",
       "actions" : ["Action1","Action2", "Action5"]
     },
