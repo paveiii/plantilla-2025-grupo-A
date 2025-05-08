@@ -186,7 +186,7 @@ class GameView(arcade.View):
         self.player_light = Light(x, y, radius, color, mode)
 
         self.inventory = []
-        self.player_team = ["TestCharacter1", "TestCharacter2", "TestCharacter3", "TestCharacter4"]
+
 
     def switch_map(self, map_name,start_x,start_y):
         """
@@ -644,25 +644,6 @@ class GameView(arcade.View):
             else:
                 print("Este Sprite no es un WorldItem sprite.")
 
-
-        #Antigua funcion search
-        """
-        for sprite in sprites_in_range:
-            if "item_key" in sprite.properties:
-                self.message_box = MessageBox(
-                    self, f"Found: {sprite.properties['item_key']}"
-                )
-                sprite.remove_from_sprite_lists()
-                lookup_item = self.item_dictionary[sprite.properties["item_key"]]
-                print(lookup_item)
-                self.player_sprite.inventory.append(lookup_item)
-            else:
-                print(
-                    "The 'item key' property was not set for the sprite. Can't get any items from this."
-                )
-        """
-
-
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
@@ -713,6 +694,3 @@ class GameView(arcade.View):
                         items = json.load(file)
                     if object_name == item["name"]:
                         self.inventory.append(item)
-
-    def get_player_team(self):
-        return self.player_team
