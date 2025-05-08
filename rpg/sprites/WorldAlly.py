@@ -38,10 +38,19 @@ class WorldAlly(CharacterSprite):
                     itemRequirementFound = True
                     print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
 
-                    self.jugador.player_team.append(self.aliadoBatalla)
-                    self.remove_from_sprite_lists()
-                    print(self.jugador.player_team)
+                    if(len(self.jugador.player_team) < 4):
+                        self.jugador.player_team.append(self.aliadoBatalla)
+                        self.remove_from_sprite_lists()
+                        print(self.jugador.player_team)
+                    else:
+                        print("Tu equipo está lleno, desea reemplazar por otro? Y/N. ESTA DECISION NO SE PUEDE REVERTIR")
+                        #De momento asumimos que si y reemplazamos el segundo para probar codigo.
+                        #TO-DO: Panel de decision.
 
+                        decision = 1
+                        self.jugador.player_team[decision] = self.aliadoBatalla
+                        self.remove_from_sprite_lists()
+                        print(self.jugador.player_team)
                     return
             print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
         super().on_update(delta_time)
