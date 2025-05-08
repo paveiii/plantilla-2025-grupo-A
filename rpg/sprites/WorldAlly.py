@@ -21,13 +21,18 @@ class WorldAlly(CharacterSprite):
         self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
         self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
 
-    def detectar_jugador(self):
-        distancia = arcade.get_distance_between_sprites(self.jugador, self)
-        if self.radio_deteccion > distancia >= 16:  #16 es el radio de los sprites
-            if distancia <= 18:
-                print("JUGADOR COLISIONA CON EL ENEMIGO")
+    def checkPlayer(self):
+        self.distanciaJugador = arcade.get_distance_between_sprites(self.jugador, self)
+        if self.distanciaJugador < 64:  # 32 es el radio de los sprites
             return True
         else:
             return False
     def on_update(self, delta_time):
+        if self.checkPlayer():
+            print(f"{self.aliadoBatalla}: He interactuado con el jugador.")
+            itemRequirementFound = False
+            for item in self.jugador.inventory:
+                pass
+
+
         super().on_update(delta_time)
