@@ -64,7 +64,21 @@ class CharacterSprite(arcade.Sprite):
         else:
             self.should_update = 0
             self.cur_texture_index += 1
+    def exitAnim(self):
+        if self.currentAnimation == None:
+            return
+        if self.cur_texture_index == SPRITE_INFO[self.currentAnimation][-1]:
+            self.currentAnimation = self.defaultAnim
+            self.setAnim()
+            self.animLock = False
 
+    def setAnim(self):
+        if self.currentAnimation == None:
+            return
+        if self.cur_texture_index not in SPRITE_INFO[self.currentAnimation]:
+            self.cur_texture_index = SPRITE_INFO[self.currentAnimation][0]
+
+        self.texture = self.textures[self.cur_texture_index]
     def setMoveAnim(self):
         self.currentAnimation = Anim.LEFT
         slope = self.change_y / (self.change_x + 0.0001)
@@ -81,21 +95,6 @@ class CharacterSprite(arcade.Sprite):
                 self.currentAnimation = Anim.DOWN
         self.setAnim()
         self.updateAnim()
-    def exitAnim(self):
-        if self.currentAnimation == None:
-            return
-        if self.cur_texture_index == SPRITE_INFO[self.currentAnimation][-1]:
-            self.currentAnimation = self.defaultAnim
-            self.setAnim()
-            self.animLock = False
-
-    def setAnim(self):
-        if self.currentAnimation == None:
-            return
-        if self.cur_texture_index not in SPRITE_INFO[self.currentAnimation]:
-            self.cur_texture_index = SPRITE_INFO[self.currentAnimation][0]
-
-        self.texture = self.textures[self.cur_texture_index]
     def setPulseAnim(self, newAnimation):
         self.currentAnimation = newAnimation
         self.animLock = True

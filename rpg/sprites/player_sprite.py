@@ -9,7 +9,7 @@ class PlayerSprite(CharacterSprite):
         self.sound_update = 0
         self.footstep_sound = arcade.load_sound(":sounds:footstep00.wav")
 
-        self.player_team = ["TestCharacter1", "TestCharacter2", "TestCharacter3", "TestCharacter4"]
+        self.player_team = ["TestCharacter1"]
         self.inventory = []
 
     def on_update(self, delta_time):
