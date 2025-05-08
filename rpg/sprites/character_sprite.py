@@ -55,11 +55,7 @@ class CharacterSprite(arcade.Sprite):
                 self.setMoveAnim()
 
     def debugAnim(self):
-        print("AAAAAAAAAAAAAAAAAAAAA")
-        self.currentAnimation = Anim.ATTACK
-        self.animLock = True
-        self.setAnim()
-        print(self.cur_texture_index)
+        self.setPulseAnim(Anim.ATTACK)
 
     def updateAnim(self):
         #Control de velocidad en la que se actualizan los frames de la animacion.
@@ -100,3 +96,7 @@ class CharacterSprite(arcade.Sprite):
             self.cur_texture_index = SPRITE_INFO[self.currentAnimation][0]
 
         self.texture = self.textures[self.cur_texture_index]
+    def setPulseAnim(self, newAnimation):
+        self.currentAnimation = newAnimation
+        self.animLock = True
+        self.setAnim()
