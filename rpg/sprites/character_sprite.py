@@ -8,25 +8,20 @@ import arcade
 from enum import Enum
 from rpg.constants import CHARACTER_SPRITE_SIZE
 
-Direction = Enum("Direction", "DOWN LEFT RIGHT UP")
+Anim = Enum("Animation", "DOWN LEFT RIGHT UP BATTLEIDLE ATTACK SKILL HURT DEAD")
 
 SPRITE_INFO = {
     #Frames de animacion.
-    Direction.UP: [1,2,3,4,5,7,8],
-    Direction.LEFT: [9,10,11,12,13,14,15,16,17],
-    Direction.DOWN: [19,20,21,22,23,24,25,26],
-    Direction.RIGHT: [27,28,29,30,31,32,33,34,35],
+    Anim.UP:    [1, 2, 3, 4, 5, 6,7, 8],
+    Anim.LEFT:  [9, 10, 11, 12, 13, 14, 15, 16, 17],
+    Anim.DOWN:  [19, 20, 21, 22, 23, 24, 25, 26],
+    Anim.RIGHT: [27, 28, 29, 30, 31, 32, 33, 34, 35],
 
-    #Antiguo:
-    #Direction.DOWN: [0, 1, 2],
-    #Direction.LEFT: [3, 4, 5],
-    #Direction.RIGHT: [6, 7, 8],
-    #Direction.UP: [9, 10, 11],
-    #Direction.BATTLEIDLE:
-    #Direction.ATTACK:
-    #Direction.SKILL
-    #Direction.HURT:
-    #Direction.DEAD:
+    Anim.BATTLEIDLE:[36,37],
+    Anim.ATTACK:    [45,46,47,48,49,50],
+    Anim.SKILL:     [54,55,56,57,58,59,60],
+    Anim.HURT:      [63,64],
+    Anim.DEAD:      [72,73]
 
 }
 
@@ -38,16 +33,35 @@ class CharacterSprite(arcade.Sprite):
             sheet_name,
             sprite_width=CHARACTER_SPRITE_SIZE,
             sprite_height=CHARACTER_SPRITE_SIZE,
-            columns=9, #Original: 3
-            count=36, #Original: 12
+            columns=9, #Valores 'Hardcoded', hacer constantes para esto.
+            count=81,
         )
         self.should_update = 0
         self.cur_texture_index = 0
         self.texture = self.textures[self.cur_texture_index]
 
+        self.currentAnimation = None
+        self.animLock = False
+        self.defaultAnim = Anim.BATTLEIDLE
+
     def on_update(self, delta_time):
-        if not self.change_x and not self.change_y:
-            return
+        if(self.animLock == True):
+            self.updateAnim()
+            self.setAnim()
+            self.exitAnim()
+            print(str(self.cur_texture_index))
+        else:
+            if (self.change_x or self.change_y):
+                self.setMoveAnim()
+
+    def debugAnim(self):
+        print("AAAAAAAAAAAAAAAAAAAAA")
+        self.currentAnimation = Anim.ATTACK
+        self.animLock = True
+        self.setAnim()
+        print(self.cur_texture_index)
+
+    def updateAnim(self):
         #Control de velocidad en la que se actualizan los frames de la animacion.
         if self.should_update <= 3:
             self.should_update += 1
@@ -55,21 +69,34 @@ class CharacterSprite(arcade.Sprite):
             self.should_update = 0
             self.cur_texture_index += 1
 
-        direction = Direction.LEFT
+    def setMoveAnim(self):
+        self.currentAnimation = Anim.LEFT
         slope = self.change_y / (self.change_x + 0.0001)
         if abs(slope) < 0.1:
             if self.change_x > 0:
-                direction = Direction.RIGHT
+                self.currentAnimation = Anim.RIGHT
             else:
                 # technically not necessary, but for readability
-                direction = Direction.LEFT
+                self.currentAnimation = Anim.LEFT
         else:
             if self.change_y > 0:
-                direction = Direction.UP
+                self.currentAnimation = Anim.UP
             else:
-                direction = Direction.DOWN
+                self.currentAnimation = Anim.DOWN
+        self.setAnim()
+        self.updateAnim()
+    def exitAnim(self):
+        if self.currentAnimation == None:
+            return
+        if self.cur_texture_index == SPRITE_INFO[self.currentAnimation][-1]:
+            self.currentAnimation = self.defaultAnim
+            self.setAnim()
+            self.animLock = False
 
-        if self.cur_texture_index not in SPRITE_INFO[direction]:
-            self.cur_texture_index = SPRITE_INFO[direction][0]
+    def setAnim(self):
+        if self.currentAnimation == None:
+            return
+        if self.cur_texture_index not in SPRITE_INFO[self.currentAnimation]:
+            self.cur_texture_index = SPRITE_INFO[self.currentAnimation][0]
 
         self.texture = self.textures[self.cur_texture_index]

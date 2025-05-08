@@ -21,13 +21,36 @@ class WorldAlly(CharacterSprite):
         self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
         self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
 
-    def detectar_jugador(self):
-        distancia = arcade.get_distance_between_sprites(self.jugador, self)
-        if self.radio_deteccion > distancia >= 16:  #16 es el radio de los sprites
-            if distancia <= 18:
-                print("JUGADOR COLISIONA CON EL ENEMIGO")
+    def checkPlayer(self):
+        self.distanciaJugador = arcade.get_distance_between_sprites(self.jugador, self)
+        if self.distanciaJugador < 64:  # 32 es el radio de los sprites
             return True
         else:
             return False
     def on_update(self, delta_time):
+        if self.checkPlayer():
+            print(f"{self.aliadoBatalla}: He interactuado con el jugador.")
+            itemRequirementFound = False
+            print(self.requirementItemName)
+            print(self.jugador.inventory)
+            for item in self.jugador.inventory:
+                if item.get("name") == self.requirementItemName:
+                    itemRequirementFound = True
+                    print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
+
+                    if(len(self.jugador.player_team) < 4):
+                        self.jugador.player_team.append(self.aliadoBatalla)
+                        self.remove_from_sprite_lists()
+                        print(self.jugador.player_team)
+                    else:
+                        print("Tu equipo está lleno, desea reemplazar por otro? Y/N. ESTA DECISION NO SE PUEDE REVERTIR")
+                        #De momento asumimos que si y reemplazamos el segundo para probar codigo.
+                        #TO-DO: Panel de decision.
+
+                        decision = 1
+                        self.jugador.player_team[decision] = self.aliadoBatalla
+                        self.remove_from_sprite_lists()
+                        print(self.jugador.player_team)
+                    return
+            print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
         super().on_update(delta_time)

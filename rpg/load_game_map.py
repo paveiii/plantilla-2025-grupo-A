@@ -136,6 +136,12 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
 
+    f = open("../resources/data/worldItem_dictionary.json")
+    worldItem_dictionary = json.load(f)
+
+    f = open("../resources/data/item_dictionary.json")
+    item_dictionary = json.load(f)
+
     spawnedAlliesKeys = []
     mapBarrierList = None
     if "characters" in my_map.object_lists:
@@ -243,10 +249,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         randomIndex = random.randint(0, len(availableBattleAllyKeys) - 1)
 
                         battleKey = availableBattleAllyKeys[randomIndex]
-
-                        requirementItemName = character_data["requirementItemKey"]
-                        dialogueNoItem = character_data["dialogueNoItem"]
-                        dialogueWithItem = character_data["dialogueWithItem"]
+                        requirementItemName = item_dictionary[battleCharacter_dictionary[battleKey]["requirementItemKey"]].get("name")
+                        dialogueNoItem = battleCharacter_dictionary[battleKey]["dialogueNoItem"]
+                        dialogueWithItem = battleCharacter_dictionary[battleKey]["dialogueWithItem"]
 
                         character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
                         spawnedAlliesKeys.append(battleKey)
@@ -280,12 +285,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     spawnedRequirementKeys = []
     if "searchable" in my_map.object_lists:
         item_object_list = my_map.object_lists["searchable"]
-
-        f = open("../resources/data/worldItem_dictionary.json")
-        worldItem_dictionary = json.load(f)
-
-        f = open("../resources/data/item_dictionary.json")
-        item_dictionary = json.load(f)
 
         for item_object in item_object_list:
             if "item_key" not in item_object.properties:

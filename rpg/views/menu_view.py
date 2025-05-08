@@ -85,6 +85,5 @@ class MenuView(arcade.View):
             print("quitting")
             self.window.close()
 
-def on_update(self, delta_time: float):
-        self.window.views["menu"] = MenuView()
-        self.window.views["load_game"] = g.LoadGameView()
+    def on_update(self, delta_time: float):
+        pass

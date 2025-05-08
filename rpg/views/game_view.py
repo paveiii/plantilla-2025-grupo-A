@@ -12,6 +12,7 @@ import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
 from rpg.message_box import MessageBox
+from rpg.sprites.WorldAlly import WorldAlly
 from rpg.sprites.WorldItem import WorldItem
 
 
@@ -185,9 +186,6 @@ class GameView(arcade.View):
         color = arcade.csscolor.WHITE
         self.player_light = Light(x, y, radius, color, mode)
 
-        self.inventory = []
-        self.player_team = ["TestCharacter1", "TestCharacter2", "TestCharacter3", "TestCharacter4"]
-
     def switch_map(self, map_name,start_x,start_y):
         """
         Switch the current map
@@ -319,9 +317,9 @@ class GameView(arcade.View):
                     x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
                 )
 
-            if len(self.inventory) > i:
-                try: item_name = self.inventory[i]["short_name"]
-                except: item_name = self.inventory[i]["name"]
+            if len(self.player_sprite.inventory) > i:
+                try: item_name = self.player_sprite.inventory[i]["short_name"]
+                except: item_name = self.player_sprite.inventory[i]["name"]
             else:
                 item_name = ""
 
@@ -599,6 +597,9 @@ class GameView(arcade.View):
             self.selected_item = 9
         elif key == arcade.key.KEY_0:
             self.selected_item = 10
+        #DEBUG
+        elif key == arcade.key.Z:
+            self.player_sprite.debugAnim()
         elif key == arcade.key.L:
             cur_map = self.map_list[self.cur_map_name]
             if self.player_light in cur_map.light_layer:
@@ -638,29 +639,11 @@ class GameView(arcade.View):
                     self, f"Found: {lookup_item['name']}"
                 )
                 sprite.remove_from_sprite_lists()
-                self.inventory.append(lookup_item)
-                print(self.inventory)
+                self.player_sprite.inventory.append(lookup_item)
+                print(self.player_sprite.inventory)
                 continue
             else:
                 print("Este Sprite no es un WorldItem sprite.")
-
-
-        #Antigua funcion search
-        """
-        for sprite in sprites_in_range:
-            if "item_key" in sprite.properties:
-                self.message_box = MessageBox(
-                    self, f"Found: {sprite.properties['item_key']}"
-                )
-                sprite.remove_from_sprite_lists()
-                lookup_item = self.item_dictionary[sprite.properties["item_key"]]
-                print(lookup_item)
-                self.player_sprite.inventory.append(lookup_item)
-            else:
-                print(
-                    "The 'item key' property was not set for the sprite. Can't get any items from this."
-                )
-        """
 
 
     def on_key_release(self, key, modifiers):
@@ -699,20 +682,14 @@ class GameView(arcade.View):
         if cur_map.light_layer:
             cur_map.light_layer.resize(width, height)
 
-    def get_inventory(self):
-        return self.inventory
-
     def inventory_add(self, object_name):
         with open("../resources/data/item_dictionary.json", "r") as file:
             items = json.load(file)
         for item in items.values():
                 if object_name in items.keys():
-                    self.inventory.append(items[object_name])
+                    self.player_sprite.inventory.append(items[object_name])
                 else:
                     with open("../resources/data/worldItem_dictionary.json", "r") as file:
                         items = json.load(file)
                     if object_name == item["name"]:
-                        self.inventory.append(item)
-
-    def get_player_team(self):
-        return self.player_team
+                        self.player_sprite.inventory.append(item)
