@@ -36,9 +36,12 @@ class WorldAlly(CharacterSprite):
             for item in self.jugador.inventory:
                 if item.get("name") == self.requirementItemName:
                     itemRequirementFound = True
-                    print(f"El jugador tiene el objeto de requerimiento de {self.aliadoBatalla}.")
-                    print(self.dialogueRecruit)
+                    print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
+
+                    self.jugador.player_team.append(self.aliadoBatalla)
+                    self.remove_from_sprite_lists()
+                    print(self.jugador.player_team)
+
                     return
-            print(f"El jugador NO tiene el objeto de requerimiento de {self.aliadoBatalla}.")
-            print(self.dialogueNoItem)
+            print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
         super().on_update(delta_time)

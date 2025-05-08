@@ -13,8 +13,8 @@
     {
       "sheet_name": "Test/testWalk.png","name": "TestCharacter1", "description": "", "type":"Captain",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
+      "dialogueNoItem" : "NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO",
+      "dialogueWithItem" : "OUUUU YEAH",
       "requirementItemKey": "REQ1",
       "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
     },
@@ -23,8 +23,8 @@
     {
       "sheet_name": "Test/testBuddy1.png","name": "TestCharacter2", "description": "", "type":"Tank",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
+      "dialogueNoItem" : "NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO",
+      "dialogueWithItem" : "OUUUU YEAH",
       "requirementItemKey": "REQ2",
       "actions" : ["Action1","Action2", "Action5"]
     },
@@ -33,8 +33,8 @@
     {
       "sheet_name": "Test/testBuddy2.png","name": "TestCharacter3", "description": "", "type":"Fighter",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
+      "dialogueNoItem" : "NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO",
+      "dialogueWithItem" : "OUUUU YEAH",
       "requirementItemKey": "REQ3",
       "actions" : ["Action3", "Action4", "Action5"]
     },
@@ -43,8 +43,8 @@
     {
       "sheet_name": "Test/testBuddy3.png","name": "TestCharacter4", "description": "", "type":"Medic",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
-      "dialogueNoItem" : "",
-      "dialogueWithItem" : "",
+      "dialogueNoItem" : "NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO",
+      "dialogueWithItem" : "OUUUU YEAH",
       "requirementItemKey": "REQ4",
       "actions" : ["Action1","Action2", "Action3", "Action4"]
     },

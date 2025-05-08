@@ -4,7 +4,7 @@ import json
 
 from rpg.BattleEnemy import BattleEnemy
 from rpg.BattleAlly import BattleAlly
-from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
+from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Anim
 from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions,
                            CHARACTER_POINTER_SPEED, enemy_x_positions, enemy_y_positions)
 
@@ -68,7 +68,7 @@ class InBattleView(arcade.View):
 
         self.pointer_is_up = False
 
-        self.inventory = self.window.views["game"].get_inventory()
+        self.inventory = self.window.views["game"].player_sprite.inventory
 
         self.current_selected_enemy = 0
         self.turn_ended = False
@@ -76,7 +76,7 @@ class InBattleView(arcade.View):
         print("Inventario cargado:", self.inventory)
 
     def on_show_view(self):
-        self.inventory = self.window.views["game"].get_inventory()
+        self.inventory = self.window.views["game"].player_sprite.inventory
 
         self.manager.enable()
         self.main_buttons()
@@ -87,7 +87,7 @@ class InBattleView(arcade.View):
         new_ally_x = ally_x_positions.copy()
         new_ally_y = ally_y_positions.copy()
 
-        self.team_names = self.window.views["game"].get_player_team()
+        self.team_names = self.window.views["game"].player_sprite.player_team
 
         for character in self.team_names:
             ally_object = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
@@ -253,7 +253,7 @@ class InBattleView(arcade.View):
             columns = 9,
             count = 36,
         )
-        start_index = SPRITE_INFO[Direction.RIGHT][0]
+        start_index = SPRITE_INFO[Anim.RIGHT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
 
         self.player_sprites.append(self.character_sprite)
@@ -272,7 +272,7 @@ class InBattleView(arcade.View):
             columns = 9,
             count = 36,
         )
-        start_index = SPRITE_INFO[Direction.LEFT][0]
+        start_index = SPRITE_INFO[Anim.LEFT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
 
         self.enemy_sprites.append(self.character_sprite)
