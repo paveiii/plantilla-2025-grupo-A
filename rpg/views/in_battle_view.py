@@ -553,7 +553,6 @@ class InBattleView(arcade.View):
             self.pointer_y = self.y_positions[self.current_ally]
 
         else:
-            self.pointer_x = 100000
             self.player_turn = False
             self.perform_action() # Como player turn se pone a False se ejecutarán los turnos del equipo enemigo.
 
@@ -593,7 +592,7 @@ class InBattleView(arcade.View):
                 self.next_ally()
                         # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
         else:
-
+            self.pointer_x = 100000
             for i in range(len(self.enemy_team)):
                 action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(
                     self.enemy_team[self.current_selected_enemy])
