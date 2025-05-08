@@ -4,7 +4,7 @@ import json
 
 from rpg.BattleEnemy import BattleEnemy
 from rpg.BattleAlly import BattleAlly
-from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
+from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Anim
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.Effect import Effect
 from rpg.EnemyIA import EnemyIA
@@ -309,7 +309,7 @@ class InBattleView(arcade.View):
             columns = 9,
             count = 36,
         )
-        start_index = SPRITE_INFO[Direction.RIGHT][0]
+        start_index = SPRITE_INFO[Anim.RIGHT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
 
         self.player_sprites.append(self.character_sprite)
@@ -328,7 +328,7 @@ class InBattleView(arcade.View):
             columns = 9,
             count = 36,
         )
-        start_index = SPRITE_INFO[Direction.LEFT][0]
+        start_index = SPRITE_INFO[Anim.LEFT][0]
         self.character_sprite.texture = self.character_sprite.textures[start_index]
 
         self.enemy_sprites.append(self.character_sprite)
@@ -372,10 +372,6 @@ class InBattleView(arcade.View):
                     self.action_buttons.clear()
                     self.main_buttons()
                     self.option = "menu"
-
-                if key == arcade.key.ENTER:
-                    print("battle pause menu")
-                    self.window.show_view(self.window.views["battle_pause"])
 
 
     def get_width(self):
@@ -557,6 +553,7 @@ class InBattleView(arcade.View):
             self.pointer_y = self.y_positions[self.current_ally]
 
         else:
+            self.pointer_x = 100000
             self.player_turn = False
             self.perform_action() # Como player turn se pone a False se ejecutarán los turnos del equipo enemigo.
 
@@ -596,7 +593,6 @@ class InBattleView(arcade.View):
                 self.next_ally()
                         # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
         else:
-            self.pointer_x = 100000
 
             for i in range(len(self.enemy_team)):
                 action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(

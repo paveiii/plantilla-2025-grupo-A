@@ -6,7 +6,7 @@ from arcade import Sprite
 import pyglet
 import json
 from rpg.BattleAlly import BattleAlly
-from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Direction
+from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Anim
 from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions,
                            CHARACTER_POINTER_SPEED, enemy_x_positions, enemy_y_positions)
 
