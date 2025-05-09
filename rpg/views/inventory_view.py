@@ -125,6 +125,7 @@ class InventoryView(arcade.View):
     def setup(self):
         pass
     def on_show_view(self):
+        self.y = 250
         arcade.set_background_color(arcade.color.ALMOND)
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
         self.team_names = self.window.views["game"].player_sprite.player_team
