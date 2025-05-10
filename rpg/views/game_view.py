@@ -619,6 +619,7 @@ class GameView(arcade.View):
                 for item in self.player_sprite.inventory:
                     if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer():
                         ally.remove_from_sprite_lists()
+                        self.player_sprite.inventory.remove(item)
                         self.dialogues_active = False
             self.search()
         elif key == arcade.key.KEY_1:

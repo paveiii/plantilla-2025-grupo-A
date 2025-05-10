@@ -73,7 +73,6 @@ class InventoryView(arcade.View):
                     "amount": item.get("amount", 1)
                 }
 
-        # Está en fullscreen
         start_x = 100  # posición inicial X
         start_y = self.window.height - 150  # posición inicial Y
         spacing_x = 100  # espacio horizontal entre ítems
@@ -83,6 +82,22 @@ class InventoryView(arcade.View):
         self.sprite_list = []
         self.sprite_to_item_map = []
 
+        # Dibujar cuadrícula vacía
+        total_slots = 21
+        columns = 3
+        rows = total_slots // columns
+        slot_size = 64
+
+        for i in range(total_slots):
+            row = i // columns
+            col = i % columns
+            x = start_x + col * spacing_x
+            y = start_y - row * spacing_y
+
+            # Fondo del slot
+            arcade.draw_rectangle_filled(x, y, slot_size, slot_size, arcade.color.BONE)
+            arcade.draw_rectangle_outline(x, y, slot_size, slot_size, arcade.color.DARK_BROWN, 2)
+
         for i, item in enumerate(grouped_items.values()):
             row = i // columns
             col = i % columns
@@ -90,7 +105,7 @@ class InventoryView(arcade.View):
             x = start_x + col * spacing_x
             y = start_y - row * spacing_y
 
-            sprite = arcade.Sprite(self.sprite_path + item["sheet_name"], scale=2)
+            sprite = arcade.Sprite(self.sprite_path + item["sheet_name"], scale=1.75)
             sprite.center_x = x
             sprite.center_y = y
             sprite.draw()
@@ -145,7 +160,7 @@ class InventoryView(arcade.View):
 
                 # Crear un Sprite y asignarle una textura
                 sprite = Sprite()
-                sprite.texture = textures[9]  # Usa la primera textura o la que quieras
+                sprite.texture = textures[9]
                 sprite.center_x = 1050
                 sprite.center_y = self.y
                 self.y += 100
