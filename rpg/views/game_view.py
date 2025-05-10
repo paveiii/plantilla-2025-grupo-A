@@ -8,6 +8,8 @@ from typing import Callable
 
 import arcade
 import arcade.gui
+from arcade import SpriteList
+
 import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
@@ -132,6 +134,9 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.item = False
+        self.dialogue = None
+        self.allys = arcade.SpriteList()
         arcade.set_background_color(arcade.color.AMAZON)
 
         self.setup_debug_menu()
@@ -164,9 +169,15 @@ class GameView(arcade.View):
         self.hotbar_sprite_list = None
         self.selected_item = 1
 
+        self.dialogues_active = False
+        self.allys_colliding = SpriteList()
+
         #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
         f = open("../resources/data/worldItem_dictionary.json")
         self.worldItem_dictionary = json.load(f)
+
+        f = open("../resources/data/battleCharacters_dictionary.json")
+        self.team_sprites = json.load(f)
 
         f = open("../resources/data/item_dictionary.json")
         self.item_dictionary = json.load(f)
@@ -295,39 +306,39 @@ class GameView(arcade.View):
             else self.original_movement_speed
         )
 
-    def draw_inventory(self):
-        capacity = 10
-        vertical_hotbar_location = 40
-        hotbar_height = 80
-        sprite_height = 16
-
-        field_width = self.window.width / (capacity + 1)
-
-        x = self.window.width / 2
-        y = vertical_hotbar_location
-
-        arcade.draw_rectangle_filled(
-            x, y, self.window.width, hotbar_height, arcade.color.ALMOND
-        )
-        for i in range(capacity):
-            y = vertical_hotbar_location
-            x = i * field_width + 5
-            if i == self.selected_item - 1:
-                arcade.draw_lrtb_rectangle_outline(
-                    x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
-                )
-
-            if len(self.player_sprite.inventory) > i:
-                try: item_name = self.player_sprite.inventory[i]["short_name"]
-                except: item_name = self.player_sprite.inventory[i]["name"]
-            else:
-                item_name = ""
-
-            hotkey_sprite = self.hotbar_sprite_list[i]
-            hotkey_sprite.draw_scaled(x + sprite_height / 2, y + sprite_height / 2, 2.0)
-            # Add whitespace so the item text doesn't hide behind the number pad sprite
-            text = f"     {item_name}"
-            arcade.draw_text(text, x, y, arcade.color.ALLOY_ORANGE, 16)
+    # def draw_inventory(self):
+    #     capacity = 10
+    #     vertical_hotbar_location = 40
+    #     hotbar_height = 80
+    #     sprite_height = 16
+    #
+    #     field_width = self.window.width / (capacity + 1)
+    #
+    #     x = self.window.width / 2
+    #     y = vertical_hotbar_location
+    #
+    #     arcade.draw_rectangle_filled(
+    #         x, y, self.window.width, hotbar_height, arcade.color.ALMOND
+    #     )
+    #     for i in range(capacity):
+    #         y = vertical_hotbar_location
+    #         x = i * field_width + 5
+    #         if i == self.selected_item - 1:
+    #             arcade.draw_lrtb_rectangle_outline(
+    #                 x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
+    #             )
+    #
+    #         if len(self.player_sprite.inventory) > i:
+    #             try: item_name = self.player_sprite.inventory[i]["short_name"]
+    #             except: item_name = self.player_sprite.inventory[i]["name"]
+    #         else:
+    #             item_name = ""
+    #
+    #         hotkey_sprite = self.hotbar_sprite_list[i]
+    #         hotkey_sprite.draw_scaled(x + sprite_height / 2, y + sprite_height / 2, 2.0)
+    #         # Add whitespace so the item text doesn't hide behind the number pad sprite
+    #         text = f"     {item_name}"
+    #         arcade.draw_text(text, x, y, arcade.color.ALLOY_ORANGE, 16)
 
     def on_draw(self):
         """
@@ -344,6 +355,7 @@ class GameView(arcade.View):
         # 'with' statement. Nothing is rendered to the screen yet, just the light
         # layer.
         with cur_map.light_layer:
+            self.allys.clear()
             arcade.set_background_color(cur_map.background_color)
 
             # Use the scrolling camera for sprites
@@ -366,6 +378,18 @@ class GameView(arcade.View):
             # Draw the player
             self.player_sprite_list.draw()
 
+            for characters in self.player_sprite.allys_on_map:
+                self.allys.append(characters)
+                print(characters.get_interaction_dialogue())
+
+            if self.dialogues_active:
+                for ally in self.allys:
+                    if ally.checkPlayer():
+                        self.dialogues_active = True
+                        arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                        dialogue, item_bool = ally.get_interaction_dialogue()
+                        arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
+
         if cur_map.light_layer:
             # Draw the light layer to the screen.
             # This fills the entire screen with the lit version
@@ -381,7 +405,7 @@ class GameView(arcade.View):
         self.camera_gui.use()
 
         # Draw the inventory
-        self.draw_inventory()
+        # self.draw_inventory()
 
         # Draw any message boxes
         if self.message_box:
@@ -409,10 +433,15 @@ class GameView(arcade.View):
         """
         All the logic to move, and the game logic goes here.
         """
-
+        # self.allys.clear()
         # Calculate speed based on the keys pressed
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
+
+        # print(self.player_sprite.allys_on_map)
+        # for characters in self.player_sprite.allys_on_map:
+        #     self.allys.append(characters)
+        #     print(characters.get_interaction_dialogue())
 
         MOVING_UP = (
             self.up_pressed
@@ -469,34 +498,37 @@ class GameView(arcade.View):
             and not self.up_pressed
             and not self.left_pressed
         )
+        if self.dialogues_active:
+            self.player_sprite.change_x = 0
+            self.player_sprite.change_y = 0
+        else:
+            if MOVING_UP:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED
 
-        if MOVING_UP:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED
+            if MOVING_DOWN:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED
 
-        if MOVING_DOWN:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED
+            if MOVING_LEFT:
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED
 
-        if MOVING_LEFT:
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED
+            if MOVING_RIGHT:
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED
 
-        if MOVING_RIGHT:
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED
+            if MOVING_UP_LEFT:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_UP_LEFT:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
+            if MOVING_UP_RIGHT:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_UP_RIGHT:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
+            if MOVING_DOWN_LEFT:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_DOWN_LEFT:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
-
-        if MOVING_DOWN_RIGHT:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
+            if MOVING_DOWN_RIGHT:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
 
         # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
@@ -504,6 +536,13 @@ class GameView(arcade.View):
         for things in slowdown_hit:
             self.player_sprite.change_y *= 0.8
             self.player_sprite.change_x *= 0.8
+
+        # team = SpriteList()
+        # for character in self.team_sprites:
+        #     team.append(character)
+        # self.allys_colliding = arcade.check_for_collision_with_list(self.player_sprite, team)
+        # if self.allys_colliding:
+        #     self.dialogues_active = True
 
         # Call update to move the sprite
         self.physics_engine.update()
@@ -576,6 +615,11 @@ class GameView(arcade.View):
         elif key == arcade.key.M:
             self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
+            for ally in self.allys:
+                for item in self.player_sprite.inventory:
+                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer():
+                        ally.remove_from_sprite_lists()
+                        self.dialogues_active = False
             self.search()
         elif key == arcade.key.KEY_1:
             self.selected_item = 1
@@ -619,6 +663,13 @@ class GameView(arcade.View):
 
     def search(self):
         """Search for things"""
+        for ally in self.allys:
+            if ally.checkPlayer():
+                if self.dialogues_active:
+                    self.dialogues_active = False
+                else:
+                    self.dialogues_active = True
+        self.allys_colliding.clear()
         map_layers = self.map_list[self.cur_map_name].map_layers
         print(map_layers)
         if "searchable" not in map_layers:
@@ -642,10 +693,10 @@ class GameView(arcade.View):
                 self.player_sprite.inventory.append(lookup_item)
                 print(self.player_sprite.inventory)
                 continue
-            else:
-                print("Este Sprite no es un WorldItem sprite.")
-
-
+            print(self.allys)
+        for character in self.allys:
+            # self.dialogue, self.item = character.get_interaction_dialogue()
+            print(character)
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 

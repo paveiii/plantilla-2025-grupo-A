@@ -40,7 +40,7 @@ def load_map(map_name,player):
     """
     Load a map
     """
-
+    ally_list = []
     #DEBUG: Codigo para cargar solo un mapa especificado.
     # Quitar esto si quieres usar las puertas del mapa
     if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
@@ -255,6 +255,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
 
                         character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
                         spawnedAlliesKeys.append(battleKey)
+                        player.allys_on_map.append(character_sprite)
                     else:
                         character_sprite = None
                 else:

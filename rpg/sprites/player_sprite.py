@@ -11,6 +11,7 @@ class PlayerSprite(CharacterSprite):
 
         self.player_team = ["TestCharacter1"]
         self.inventory = []
+        self.allys_on_map = arcade.SpriteList()
 
     def on_update(self, delta_time):
         super().on_update(delta_time)
