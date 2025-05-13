@@ -17,6 +17,7 @@ class WorldAlly(CharacterSprite):
         self.wall_list = None
         print(battleKey)
 
+        self.dialogueFullTeam = "EQUIPO LLENO. ¿A QUÉ ALIADO DESEA REEMPLAZAR?"
         self.dialogueNoItem = dialogueNoItem #Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
         self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
         self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
@@ -36,11 +37,10 @@ class WorldAlly(CharacterSprite):
 
         if itemRequirementFound:
             if len(self.jugador.player_team) < 4:
-                self.jugador.player_team.append(self.aliadoBatalla)
+                return self.dialogueRecruit, True
             else:
                 # Reemplazar segundo personaje por ahora (simplificado)
-                self.jugador.player_team[1] = self.aliadoBatalla
-            return self.dialogueRecruit, True
+                return self.dialogueFullTeam, True
         else:
             return self.dialogueNoItem, False
 

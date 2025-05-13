@@ -385,10 +385,10 @@ class GameView(arcade.View):
             if self.dialogues_active:
                 for ally in self.allys:
                     if ally.checkPlayer():
-                        self.dialogues_active = True
                         arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
                         dialogue, item_bool = ally.get_interaction_dialogue()
                         arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
+
 
         if cur_map.light_layer:
             # Draw the light layer to the screen.
@@ -531,6 +531,7 @@ class GameView(arcade.View):
                 self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
 
+        print(self.player_sprite.player_team)
         # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
         slowdown_hit = arcade.check_for_collision_with_list(self.player_sprite, self.my_map.scene["slowdown_list"])
         for things in slowdown_hit:
@@ -615,12 +616,16 @@ class GameView(arcade.View):
         elif key == arcade.key.M:
             self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
+            ally_colliding = None
             for ally in self.allys:
                 for item in self.player_sprite.inventory:
                     if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer():
+                        ally_colliding = ally
                         ally.remove_from_sprite_lists()
                         self.player_sprite.inventory.remove(item)
                         self.dialogues_active = False
+            if ally_colliding and ally_colliding.aliadoBatalla not in self.player_sprite.player_team:
+                self.player_sprite.player_team.append(ally_colliding.aliadoBatalla)
             self.search()
         elif key == arcade.key.KEY_1:
             self.selected_item = 1
