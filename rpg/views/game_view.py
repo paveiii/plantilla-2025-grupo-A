@@ -378,16 +378,24 @@ class GameView(arcade.View):
             # Draw the player
             self.player_sprite_list.draw()
 
+            searchable_sprites = map_layers["searchable"]
+            sprites_in_range = arcade.check_for_collision_with_list(
+                self.player_sprite, searchable_sprites
+            )
+            for sprites in sprites_in_range:
+                arcade.draw_text("Press E to grab", sprites.center_x + 20, sprites.center_y, arcade.color.BLACK)
+
             for characters in self.player_sprite.allys_on_map:
                 self.allys.append(characters)
                 print(characters.get_interaction_dialogue())
 
-            if self.dialogues_active:
                 for ally in self.allys:
                     if ally.checkPlayer():
-                        arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
-                        dialogue, item_bool = ally.get_interaction_dialogue()
-                        arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                        arcade.draw_text("Press E to interact", ally.center_x + 20, ally.center_y, arcade.color.BLACK)
+                        if self.dialogues_active:
+                            arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                            dialogue, item_bool = ally.get_interaction_dialogue()
+                            arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
 
 
         if cur_map.light_layer:
