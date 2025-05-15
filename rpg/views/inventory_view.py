@@ -13,6 +13,9 @@ from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions
 class InventoryView(arcade.View):
     def __init__(self):
         super().__init__()
+        self.characters = []
+        self.player = None
+        self.marco = None
         self.character_sprite = None
         self.team_names = None
         self.player_sprites = arcade.SpriteList()
@@ -25,6 +28,11 @@ class InventoryView(arcade.View):
         self.player_team = []
         self.player_team_sheets = arcade.SpriteList()
         self.y = 250
+        self.changed = False
+        self.captainIcon = None
+        self.medicIcon = None
+        self.fighterIcon = None
+        self.icon = None
         with open("../resources/data/battleCharacters_dictionary.json", "r") as file:
             self.team = json.load(file)
 
@@ -59,6 +67,8 @@ class InventoryView(arcade.View):
         arcade.draw_rectangle_filled(left_x, center_y, rect_width, rect_height, arcade.color.LIGHT_CORAL)
         arcade.draw_rectangle_filled(right_x, center_y, rect_width, rect_height, arcade.color.LIGHT_CORAL)
 
+
+        self.player.draw()
         # Agrupar por sheet_name
         grouped_items = {}
         for item in self.inventory:
@@ -95,8 +105,12 @@ class InventoryView(arcade.View):
             y = start_y - row * spacing_y
 
             # Fondo del slot
-            arcade.draw_rectangle_filled(x, y, slot_size, slot_size, arcade.color.BONE)
-            arcade.draw_rectangle_outline(x, y, slot_size, slot_size, arcade.color.DARK_BROWN, 2)
+            if self.marco:
+                self.marco.center_x = x
+                self.marco.center_y = y
+                self.marco.draw()
+            # arcade.draw_rectangle_filled(x, y, slot_size, slot_size, arcade.color.BONE)
+            # arcade.draw_rectangle_outline(x, y, slot_size, slot_size, arcade.color.DARK_BROWN, 2)
 
         for i, item in enumerate(grouped_items.values()):
             row = i // columns
@@ -117,33 +131,87 @@ class InventoryView(arcade.View):
             arcade.draw_text(f"x{item['amount']}", x + 12, y - 30, arcade.color.BLACK, 14)
 
         if self.selected_item:
-            text_x = self.window.width / 2 - 200
-            text_y = self.window.height - 150
-            arcade.draw_text(
-                f"Nombre: {self.selected_item['name']}",
-                text_x, text_y,
-                arcade.color.BLACK, 20
-            )
-            arcade.draw_text(
-                f"Descripción: {self.selected_item['description']}",
-                text_x, text_y - 30,
-                arcade.color.BLACK, 16,
-                multiline=True,
-                width=300
-            )
-            arcade.draw_text(
-                f"Cantidad: {self.selected_item['amount']}",
-                text_x, text_y - 60,
-                arcade.color.BLACK, 16
-            )
+            if self.selected_item in self.sprite_to_item_map:
+                text_x = self.window.width / 2 - 200
+                text_y = self.window.height - 150
+                arcade.draw_text(
+                    f"Nombre: {self.selected_item['name']}",
+                    text_x, text_y,
+                    arcade.color.BLACK, 20
+                )
+                arcade.draw_text(
+                    f"Descripción: {self.selected_item['description']}",
+                    text_x, text_y - 30,
+                    arcade.color.BLACK, 16,
+                    multiline=True,
+                    width=300
+                )
+                arcade.draw_text(
+                    f"Cantidad: {self.selected_item['amount']}",
+                    text_x, text_y - 60,
+                    arcade.color.BLACK, 16
+                )
+            if self.selected_item in self.characters:
+                text_x = self.window.width / 2 - 200
+                text_y = self.window.height - 150
+                arcade.draw_text(
+                    f"Nombre: {self.selected_item}",
+                    text_x, text_y,
+                    arcade.color.BLACK, 20
+                )
+                arcade.draw_text(
+                    f"Tipo: {self.team[self.selected_item]['type']}",
+                    text_x, text_y - 30,
+                    arcade.color.BLACK, 16,
+                    multiline=True,
+                    width=300
+                )
+                if self.icon:
+                    self.icon.center_x = text_x + 160
+                    self.icon.center_y = text_y - 20
+                    self.icon.scale = 0.5
+                    self.icon.draw()
+                acciones = ", ".join(self.team[self.selected_item]["actions"])
+                arcade.draw_text(
+                    f"Acciones: {acciones}",
+                    text_x, text_y - 60,
+                    arcade.color.BLACK, 16,
+                    multiline = True,
+                    width = 400
+                )
         self.player_team_sheets.draw()
     def setup(self):
-        pass
+        self.marco = arcade.Sprite("../resources/UIThings/marco.png", scale = 0.5)
+        sheet_name = "Test/testWalk2.png"
+
+        # Cargar las texturas desde el spritesheet
+        textures = arcade.load_spritesheet(
+            f":characters:{sheet_name}",
+            sprite_width=128,
+            sprite_height=128,
+            columns=9,
+            count=36
+        )
+
+        # Crear un Sprite y asignarle una textura
+        sprite = Sprite()
+        sprite.texture = textures[9]
+        sprite.center_x = 1200
+        sprite.center_y = 550
+        self.player = sprite
+
+        self.captainIcon = arcade.Sprite("../resources/UIThings/captainIcon.png")
+        self.medicIcon = arcade.Sprite("../resources/UIThings/medicIcon.png")
+        self.fighterIcon = arcade.Sprite("../resources/UIThings/fighterIcon.png")
+
+
     def on_show_view(self):
         self.y = 250
         arcade.set_background_color(arcade.color.ALMOND)
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
         self.team_names = self.window.views["game"].player_sprite.player_team
+        self.player_team_sheets = arcade.SpriteList()
+        self.characters = []
 
         for character in self.team_names:
             if character in self.team and 'sheet_name' in self.team[character]:
@@ -163,8 +231,12 @@ class InventoryView(arcade.View):
                 sprite.texture = textures[9]
                 sprite.center_x = 1050
                 sprite.center_y = self.y
-                self.y += 100
+                self.y += 110
+                self.characters.append(character)
                 self.player_team_sheets.append(sprite)
+
+
+
 
         # new_ally_x = [430, 180, 345, 280]
         # new_ally_y = [490, 430, 345, 565]
@@ -190,6 +262,8 @@ class InventoryView(arcade.View):
         #             del new_ally_x[0]
         #             del new_ally_y[0]
         #             break
+
+
     def on_key_press(self, symbol: int, modifiers: int):
         close_inputs = [
             arcade.key.ESCAPE,
@@ -202,6 +276,17 @@ class InventoryView(arcade.View):
         for i, sprite in enumerate(self.sprite_list):
             if sprite.collides_with_point((x, y)):
                 self.selected_item = self.sprite_to_item_map[i]
+                break
+        for i, sprite in enumerate(self.player_team_sheets):
+            if sprite.collides_with_point((x, y)):
+                self.selected_item = self.characters[i]
+                break
+    def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
+        for sprite in self.player_team_sheets:
+            sprite.scale = 1
+        for i, sprite in enumerate(self.player_team_sheets):
+            if sprite.collides_with_point((x, y)):
+                sprite.scale = 1.1
                 break
 
     # def setup_team(self, sheet_name, x, y):
@@ -226,4 +311,13 @@ class InventoryView(arcade.View):
         
     def on_update(self, delta_time: float):
         self.inventory = self.window.views["game"].player_sprite.inventory
+        for i in self.player_team_sheets:
+            print(i)
+        if self.selected_item in self.characters:
+            if self.team[self.selected_item]['type'] == "Captain":
+                self.icon = self.captainIcon
+            elif self.team[self.selected_item]['type'] == "Medic":
+                self.icon = self.medicIcon
+            elif self.team[self.selected_item]['type'] == "Fighter":
+                self.icon = self.fighterIcon
         # print(self.inventory)

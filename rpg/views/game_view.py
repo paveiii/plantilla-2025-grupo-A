@@ -134,6 +134,7 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.ally_colliding = None
         self.item = False
         self.dialogue = None
         self.allys = arcade.SpriteList()
@@ -171,6 +172,8 @@ class GameView(arcade.View):
 
         self.dialogues_active = False
         self.allys_colliding = SpriteList()
+        self.letraE = None
+        self.team_names = ""
 
         #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
         f = open("../resources/data/worldItem_dictionary.json")
@@ -382,8 +385,17 @@ class GameView(arcade.View):
             sprites_in_range = arcade.check_for_collision_with_list(
                 self.player_sprite, searchable_sprites
             )
+            sprite = None
             for sprites in sprites_in_range:
-                arcade.draw_text("Press E to grab", sprites.center_x + 20, sprites.center_y, arcade.color.BLACK)
+                sprite = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
+                sprite.center_x = sprites.center_x + 30
+                sprite.center_y = sprites.center_y
+
+            if sprite:
+                sprite.draw()
+
+            if self.letraE:
+                self.letraE.draw()
 
             for characters in self.player_sprite.allys_on_map:
                 self.allys.append(characters)
@@ -391,11 +403,12 @@ class GameView(arcade.View):
 
                 for ally in self.allys:
                     if ally.checkPlayer():
-                        arcade.draw_text("Press E to interact", ally.center_x + 20, ally.center_y, arcade.color.BLACK)
                         if self.dialogues_active:
                             arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
                             dialogue, item_bool = ally.get_interaction_dialogue()
                             arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                            if self.ally_names:
+                                arcade.draw_text(self.ally_names, self.player_sprite.center_x, self.player_sprite.center_y - 300, arcade.color.BLACK)
 
 
         if cur_map.light_layer:
@@ -441,6 +454,7 @@ class GameView(arcade.View):
         """
         All the logic to move, and the game logic goes here.
         """
+        self.letraE = None
         # self.allys.clear()
         # Calculate speed based on the keys pressed
         self.player_sprite.change_x = 0
@@ -546,6 +560,17 @@ class GameView(arcade.View):
             self.player_sprite.change_y *= 0.8
             self.player_sprite.change_x *= 0.8
 
+        self.ally_names = ""
+        for ally in self.allys:
+            if ally.checkPlayer():
+                self.letraE = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
+                self.letraE.center_x = ally.center_x + 30
+                self.letraE.center_y = ally.center_y
+                dialogue, item_bool = ally.get_interaction_dialogue()
+                if dialogue == ally.dialogueFullTeam:
+                    for names in self.player_sprite.player_team:
+                        self.ally_names += names + "-"
+
         # team = SpriteList()
         # for character in self.team_sprites:
         #     team.append(character)
@@ -624,16 +649,20 @@ class GameView(arcade.View):
         elif key == arcade.key.M:
             self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
-            ally_colliding = None
+            self.ally_colliding = None
             for ally in self.allys:
                 for item in self.player_sprite.inventory:
                     if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer():
-                        ally_colliding = ally
+                        self.ally_colliding = ally
                         ally.remove_from_sprite_lists()
                         self.player_sprite.inventory.remove(item)
                         self.dialogues_active = False
-            if ally_colliding and ally_colliding.aliadoBatalla not in self.player_sprite.player_team:
-                self.player_sprite.player_team.append(ally_colliding.aliadoBatalla)
+            if self.ally_colliding and len(self.player_sprite.player_team) < 4:
+                self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
+            else:
+                if self.ally_colliding:
+                    self.player_sprite.player_team.remove(self.player_sprite.player_team[1])
+                    self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
         elif key == arcade.key.KEY_1:
             self.selected_item = 1
