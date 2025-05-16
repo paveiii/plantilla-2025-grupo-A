@@ -8,7 +8,6 @@ from rpg.draw_bar import draw_bar
 from rpg.load_game_map import load_maps
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.views.battle_view import BattleView
-from rpg.views.dialogues_view import DialogueView
 from rpg.views.game_view import GameView
 from rpg.views.inventory_view import InventoryView
 from rpg.views.load_game_view import LoadGameView
@@ -16,7 +15,6 @@ from rpg.views.main_menu_view import MainMenuView
 from rpg.views.in_battle_view import InBattleView
 from rpg.views.settings_view import SettingsView
 from rpg.views.menu_view import MenuView
-from rpg.views.dialogues_view import DialogueView
 
 
 class LoadingView(arcade.View):
