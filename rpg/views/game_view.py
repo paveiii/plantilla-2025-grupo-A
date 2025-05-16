@@ -381,10 +381,12 @@ class GameView(arcade.View):
             # Draw the player
             self.player_sprite_list.draw()
 
-            searchable_sprites = map_layers["searchable"]
-            sprites_in_range = arcade.check_for_collision_with_list(
-                self.player_sprite, searchable_sprites
-            )
+            sprites_in_range = []
+            if "searchable" in map_layers:
+                searchable_sprites = map_layers["searchable"]
+                sprites_in_range = arcade.check_for_collision_with_list(
+                    self.player_sprite, searchable_sprites
+                )
             sprite = None
             for sprites in sprites_in_range:
                 sprite = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
