@@ -8,7 +8,7 @@ from typing import Callable
 
 import arcade
 import arcade.gui
-from arcade import SpriteList
+from arcade import SpriteList, Sprite
 
 import rpg.constants as constants
 from arcade.experimental.lights import Light
@@ -134,6 +134,8 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.selected_ally = None
+        self.y = 200
         self.ally_colliding = None
         self.item = False
         self.dialogue = None
@@ -174,13 +176,15 @@ class GameView(arcade.View):
         self.allys_colliding = SpriteList()
         self.letraE = None
         self.team_names = ""
-
+        self.player_team_sheets = arcade.SpriteList()
+        self.team_sprites = arcade.SpriteList()
+        self.x = 1000
         #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
         f = open("../resources/data/worldItem_dictionary.json")
         self.worldItem_dictionary = json.load(f)
 
         f = open("../resources/data/battleCharacters_dictionary.json")
-        self.team_sprites = json.load(f)
+        self.team = json.load(f)
 
         f = open("../resources/data/item_dictionary.json")
         self.item_dictionary = json.load(f)
@@ -395,9 +399,11 @@ class GameView(arcade.View):
 
             if sprite:
                 sprite.draw()
+                arcade.draw_text("Recoger", sprite.center_x + 10, sprite.center_y - 5, arcade.color.BLACK)
 
             if self.letraE:
                 self.letraE.draw()
+                arcade.draw_text("Reclutar", self.letraE.center_x + 10, self.letraE.center_y - 5, arcade.color.BLACK)
 
             for characters in self.player_sprite.allys_on_map:
                 self.allys.append(characters)
@@ -409,10 +415,8 @@ class GameView(arcade.View):
                             arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
                             dialogue, item_bool = ally.get_interaction_dialogue()
                             arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
-                            if self.ally_names:
-                                arcade.draw_text(self.ally_names, self.player_sprite.center_x, self.player_sprite.center_y - 300, arcade.color.BLACK)
-
-
+                            if self.player_team_sheets and dialogue == ally.dialogueFullTeam:
+                                self.player_team_sheets.draw()
         if cur_map.light_layer:
             # Draw the light layer to the screen.
             # This fills the entire screen with the lit version
@@ -433,7 +437,6 @@ class GameView(arcade.View):
         # Draw any message boxes
         if self.message_box:
             self.message_box.on_draw()
-
         # draw GUI
         self.ui_manager.draw()
 
@@ -569,10 +572,51 @@ class GameView(arcade.View):
                 self.letraE.center_x = ally.center_x + 30
                 self.letraE.center_y = ally.center_y
                 dialogue, item_bool = ally.get_interaction_dialogue()
-                if dialogue == ally.dialogueFullTeam:
-                    for names in self.player_sprite.player_team:
-                        self.ally_names += names + "-"
+                if dialogue == ally.dialogueFullTeam and self.dialogues_active:
+                    if self.selected_ally != None:
+                        self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
+                        self.player_sprite.player_team.append(ally.aliadoBatalla)
+                        self.dialogues_active = False
+                        ally.remove_from_sprite_lists()
 
+        self.team_sprites = arcade.SpriteList()
+        x = 200
+        for ally in self.player_sprite.player_team:
+            sprite = arcade.Sprite(":characters:" + self.team[ally]['sheet_name'])
+            sprite.center_x = x
+            sprite.center_y = 200
+            self.team_sprites.append(sprite)
+            x += 50
+        self.y = 250
+        arcade.set_background_color(arcade.color.ALMOND)
+        arcade.set_viewport(0, self.window.width, 0, self.window.height)
+        self.team_names = self.window.views["game"].player_sprite.player_team
+        self.player_team_sheets = arcade.SpriteList()
+        self.characters = []
+
+        self.x = self.player_sprite.center_x
+        for character in self.player_sprite.player_team:
+            if character in self.team and 'sheet_name' in self.team[character]:
+                sheet_name = self.team[character]['sheet_name']
+
+                # Cargar las texturas desde el spritesheet
+                textures = arcade.load_spritesheet(
+                    f":characters:{sheet_name}",
+                    sprite_width=64,
+                    sprite_height=64,
+                    columns=9,
+                    count=36
+                )
+
+                # Crear un Sprite y asignarle una textura
+                sprite = Sprite()
+                sprite.texture = textures[9]
+                sprite.center_x = self.x
+                sprite.center_y = self.player_sprite.center_y - 275
+                self.x += 50
+                self.characters.append(character)
+                self.player_team_sheets.append(sprite)
+        print(self.selected_ally)
         # team = SpriteList()
         # for character in self.team_sprites:
         #     team.append(character)
@@ -663,17 +707,21 @@ class GameView(arcade.View):
                 self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             else:
                 if self.ally_colliding:
-                    self.player_sprite.player_team.remove(self.player_sprite.player_team[1])
-                    self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
+                    if self.selected_ally:
+                        self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
+                        self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
+
         elif key == arcade.key.KEY_1:
-            self.selected_item = 1
+            self.selected_ally = 0
         elif key == arcade.key.KEY_2:
-            self.selected_item = 2
+            self.selected_ally = 1
         elif key == arcade.key.KEY_3:
-            self.selected_item = 3
+            self.selected_ally = 2
         elif key == arcade.key.KEY_4:
-            self.selected_item = 4
+            self.selected_ally = 3
+
+
         elif key == arcade.key.KEY_5:
             self.selected_item = 5
         elif key == arcade.key.KEY_6:
@@ -762,6 +810,9 @@ class GameView(arcade.View):
         """Called when the user presses a mouse button."""
         if button == arcade.MOUSE_BUTTON_RIGHT:
             self.player_sprite.destination_point = x, y
+        for i, sprite in enumerate(self.player_team_sheets):
+            if sprite.collides_with_point((x, y)):
+                print(123445643213453323)
 
     def on_mouse_release(self, x, y, button, key_modifiers):
         """Called when a user releases a mouse button."""

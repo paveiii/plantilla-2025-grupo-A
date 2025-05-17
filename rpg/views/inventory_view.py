@@ -13,6 +13,9 @@ from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions
 class InventoryView(arcade.View):
     def __init__(self):
         super().__init__()
+        self.hover_item = None
+        self.hover_index = None
+        self.item_list = arcade.SpriteList()
         self.characters = []
         self.player = None
         self.marco = None
@@ -33,6 +36,7 @@ class InventoryView(arcade.View):
         self.medicIcon = None
         self.fighterIcon = None
         self.icon = None
+        self.scale = 1.40
         with open("../resources/data/battleCharacters_dictionary.json", "r") as file:
             self.team = json.load(file)
 
@@ -112,18 +116,24 @@ class InventoryView(arcade.View):
             # arcade.draw_rectangle_filled(x, y, slot_size, slot_size, arcade.color.BONE)
             # arcade.draw_rectangle_outline(x, y, slot_size, slot_size, arcade.color.DARK_BROWN, 2)
 
+        self.item_list = []
+
         for i, item in enumerate(grouped_items.values()):
             row = i // columns
             col = i % columns
-
             x = start_x + col * spacing_x
             y = start_y - row * spacing_y
 
-            sprite = arcade.Sprite(self.sprite_path + item["sheet_name"], scale=1.75)
+            sprite = arcade.Sprite(self.sprite_path + item["sheet_name"], scale=1.4)
+            if self.hover_index == i:
+                sprite.scale = 1.6
+            else:
+                sprite.scale = 1.4
             sprite.center_x = x
             sprite.center_y = y
             sprite.draw()
 
+            self.item_list.append(sprite)
             self.sprite_list.append(sprite)
             self.sprite_to_item_map.append(item)
 
@@ -240,7 +250,7 @@ class InventoryView(arcade.View):
 
         # new_ally_x = [430, 180, 345, 280]
         # new_ally_y = [490, 430, 345, 565]
-        
+
         # for character in self.team_names:
         #     ally_instance = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
         #                              self.team[character]['name'],
@@ -282,13 +292,20 @@ class InventoryView(arcade.View):
                 self.selected_item = self.characters[i]
                 break
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
+        # Resetear escala de sprites de equipo
         for sprite in self.player_team_sheets:
             sprite.scale = 1
+        # Cambiar escala al hacer hover
         for i, sprite in enumerate(self.player_team_sheets):
             if sprite.collides_with_point((x, y)):
                 sprite.scale = 1.1
                 break
 
+        self.hover_index = None
+        for i, sprite in enumerate(self.item_list):
+            if sprite.collides_with_point((x, y)):
+                self.hover_index = i
+                break
     # def setup_team(self, sheet_name, x, y):
     #     self.character_sprite = CharacterSprite(sheet_name)
     #
@@ -308,11 +325,11 @@ class InventoryView(arcade.View):
     #     self.character_sprite.texture = self.character_sprite.textures[start_index]
     #
     #     self.player_sprites.append(self.character_sprite)
-        
+
     def on_update(self, delta_time: float):
         self.inventory = self.window.views["game"].player_sprite.inventory
-        for i in self.player_team_sheets:
-            print(i)
+        # for i in self.player_team_sheets:
+        #     print(i)
         if self.selected_item in self.characters:
             if self.team[self.selected_item]['type'] == "Captain":
                 self.icon = self.captainIcon
