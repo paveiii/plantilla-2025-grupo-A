@@ -685,6 +685,8 @@ class GameView(arcade.View):
                         self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
                         # Añadimos al equipo del jugador al aliado con el que estabamos dialogando
                         self.player_sprite.player_team.append(ally.aliadoBatalla)
+                        print(ally.aliadoBatalla)
+                        print(ally.aliadoBatalla.actions)
                         # Desactivamos los dialogos
                         self.dialogues_active = False
                         # quitar al aliado del mapa
@@ -699,7 +701,7 @@ class GameView(arcade.View):
         self.team_sprites = arcade.SpriteList()
         x = 200
         for ally in self.player_sprite.player_team:
-            sprite = arcade.Sprite(":characters:" + self.team[ally]['sheet_name'])
+            sprite = arcade.Sprite(ally.sheetName)
             sprite.center_x = x
             sprite.center_y = 200
             self.team_sprites.append(sprite)
@@ -885,6 +887,7 @@ class GameView(arcade.View):
         self.allys_colliding.clear()
         map_layers = self.map_list[self.cur_map_name].map_layers
         print(map_layers)
+
         if "searchable" not in map_layers:
             print(f"No searchable sprites on {self.cur_map_name} map layer.")
             return

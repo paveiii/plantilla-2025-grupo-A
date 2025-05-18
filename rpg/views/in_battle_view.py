@@ -101,35 +101,7 @@ class InBattleView(arcade.View):
         new_ally_x = ally_x_positions.copy()
         new_ally_y = ally_y_positions.copy()
 
-        self.team_names = self.window.views["game"].player_sprite.player_team
-
-        for character in self.team_names:
-            player_actions = []
-            for action in self.team[character]['actions']:
-
-                action_object = Action(self.actions[action]["name"],
-                                       self.actions[action]["description"],
-                                       self.actions[action]["actionType"],
-                                       self.actions[action]["amount"],
-                                       self.actions[action]["staminaExpense"],
-                                       self.actions[action]["targetQuantity"],
-                                       self.actions[action]["effectName"])
-
-                player_actions.append(action_object)
-
-            ally_object = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
-                                     self.team[character]['name'],
-                                     self.team[character]['description'],
-                                     self.team[character]['type'],
-                                     self.team[character]['maxStamina'],
-                                     self.team[character]['maxHealth'],
-                                     self.team[character]['restoredStamina'],
-                                     player_actions,
-                                     self.team[character]['dialogueNoItem'],
-                                     self.team[character]['dialogueWithItem'],
-                                     self.team[character]['requirementItemKey'])
-
-            self.player_team.append(ally_object)
+        self.player_team = self.window.views["game"].player_sprite.player_team
 
         self.player_team_length = len(self.player_team)
         print(f"Player team length: {self.player_team_length}")
