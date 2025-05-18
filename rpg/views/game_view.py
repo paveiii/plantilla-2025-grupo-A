@@ -9,6 +9,7 @@ from typing import Callable
 import arcade
 import arcade.gui
 from arcade import SpriteList, Sprite
+from arcade.gui import UIFlatButton
 
 import rpg.constants as constants
 from arcade.experimental.lights import Light
@@ -134,6 +135,8 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.main_buttons_widget = None
+        self.anchor_widget = None
         self.selected_ally = None
         self.y = 200
         self.ally_colliding = None
@@ -179,6 +182,38 @@ class GameView(arcade.View):
         self.player_team_sheets = arcade.SpriteList()
         self.team_sprites = arcade.SpriteList()
         self.x = 1000
+
+        # --- Required for all code that uses UI element, a UIManager to handle the UI.
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+
+        # Create a vertical BoxGroup to align buttons
+        self.v_box = arcade.gui.UIBoxLayout()
+
+        x = self.player_sprite.center_x
+        y = self.player_sprite.center_y
+        start_game_button = arcade.gui.UIFlatButton(x = x + 234, y = y, text="1", width=50)
+        self.v_box.add(start_game_button.with_space_around(bottom=20))
+        # start_game_button.on_click = self.on_click_start_game_button
+
+        load_game_button = arcade.gui.UIFlatButton(x = x, y = y, text="2", width=50)
+        self.v_box.add(load_game_button.with_space_around(bottom=20))
+        # load_game_button.on_click = self.on_click_load_game_button
+
+        exit_button = arcade.gui.UIFlatButton(x = x, y = y, text="3", width=50)
+        self.v_box.add(exit_button.with_space_around(bottom=20))
+        # exit_button.on_click = self.on_click_exit_button
+
+        exit_button = arcade.gui.UIFlatButton(x = x, y = y, text="4", width=50)
+        self.v_box.add(exit_button.with_space_around(bottom=20))
+        # exit_button.on_click = self.on_click_exit_button
+
+        self.contenedor = arcade.gui.UIBoxLayout()
+        # Flag para controlar la creacion de los botones
+        self.buttons_visible = False
+
+        self.team_buttons = []
+
         #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
         f = open("../resources/data/worldItem_dictionary.json")
         self.worldItem_dictionary = json.load(f)
@@ -416,7 +451,27 @@ class GameView(arcade.View):
                             dialogue, item_bool = ally.get_interaction_dialogue()
                             arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
                             if self.player_team_sheets and dialogue == ally.dialogueFullTeam:
-                                self.player_team_sheets.draw()
+                                # x = self.player_sprite.center_x + 200
+                                # y = self.player_sprite.center_y - 250
+                                # i = 0
+                                # j = 1
+                                # for names in self.player_sprite.player_team:
+                                #     if i == 2:
+                                #         y -= 30
+                                #         x = self.player_sprite.center_x +  200
+                                #         i = -1
+                                #     arcade.draw_rectangle_filled(x, y, 40, 20, arcade.color.LIGHT_CYAN)
+                                #     arcade.draw_text(str(j), x - 3, y - 5, arcade.color.BLACK)
+                                #     x += 50
+                                #     i += 1
+                                #     j += 1
+
+                                if not self.buttons_visible:
+                                    self.main_buttons(self.player_sprite.player_team)
+                                    self.buttons_visible = True
+        if self.dialogues_active is False:
+            self.hide_main_buttons()
+            self.buttons_visible = False
         if cur_map.light_layer:
             # Draw the light layer to the screen.
             # This fills the entire screen with the lit version
@@ -438,7 +493,7 @@ class GameView(arcade.View):
         if self.message_box:
             self.message_box.on_draw()
         # draw GUI
-        self.ui_manager.draw()
+        self.manager.draw()
 
     def scroll_to_player(self, speed=constants.CAMERA_SPEED):
         """Manage Scrolling"""
@@ -449,11 +504,63 @@ class GameView(arcade.View):
         )
         self.camera_sprites.move_to(vector, speed)
 
+    # Función que creará lo botones cuando se active el diálogo de equipo lleno
+    def main_buttons(self, lista_nombres: list):
+        self.contenedor.clear()
+        self.manager.clear()
+
+        self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+        self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+
+        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0], width=150)
+        self.fila1.add(ally1_button)
+        ally1_button.on_click = self.ally1
+
+        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1], width=150)
+        self.fila1.add(ally2_button)
+        ally2_button.on_click = self.ally2
+
+        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2], width=150)
+        self.fila2.add(ally3_button)
+        ally3_button.on_click = self.ally3
+
+        ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3], width=150)
+        self.fila2.add(ally4_button)
+        ally4_button.on_click = self.ally4
+
+        self.contenedor.add(self.fila1.with_space_around(bottom=20))
+        self.contenedor.add(self.fila2)
+
+        # Aquí guardas el widget para poder eliminarlo luego
+        self.main_buttons_widget = arcade.gui.UIAnchorWidget(
+            anchor_x="right",
+            anchor_y="bottom",
+            align_x=-10,
+            align_y=10,
+            child=self.contenedor
+        )
+        self.manager.add(self.main_buttons_widget)
+
+    def hide_main_buttons(self):
+        if self.main_buttons_widget:
+            self.manager.remove(self.main_buttons_widget)
+            self.main_buttons_widget = None
+
     def on_show_view(self):
         # Set background color
         my_map = self.map_list[self.cur_map_name]
         if my_map.background_color:
             arcade.set_background_color(my_map.background_color)
+
+    # Funciones para cada uno de los botones. Cada una selecciona a un
+    def ally1(self, event):
+        self.selected_ally = 0
+    def ally2(self, event):
+        self.selected_ally = 1
+    def ally3(self, event):
+        self.selected_ally = 2
+    def ally4(self, event):
+        self.selected_ally = 3
 
     def on_update(self, delta_time):
         """
@@ -574,10 +681,20 @@ class GameView(arcade.View):
                 dialogue, item_bool = ally.get_interaction_dialogue()
                 if dialogue == ally.dialogueFullTeam and self.dialogues_active:
                     if self.selected_ally != None:
+                        # Quitamos del equipo del jugador al aliado seleccionado
                         self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
+                        # Añadimos al equipo del jugador al aliado con el que estabamos dialogando
                         self.player_sprite.player_team.append(ally.aliadoBatalla)
+                        # Desactivamos los dialogos
                         self.dialogues_active = False
+                        # quitar al aliado del mapa
                         ally.remove_from_sprite_lists()
+                        # quitar su iem del inventario
+                        for item in self.player_sprite.inventory:
+                            if item['name'] == ally.requirementItemName:
+                                self.player_sprite.inventory.remove(item)
+
+
 
         self.team_sprites = arcade.SpriteList()
         x = 200
@@ -689,7 +806,10 @@ class GameView(arcade.View):
         elif key in constants.INVENTORY:
             self.window.show_view(self.window.views["inventory"])
         elif key == arcade.key.ESCAPE:
-            self.window.show_view(self.window.views["main_menu"])
+            if self.dialogues_active:
+                self.dialogues_active = False
+            else:
+                self.window.show_view(self.window.views["main_menu"])
         elif key == arcade.key.P:
             self.window.show_view(self.window.views["in_battle"])
         elif key == arcade.key.M:
@@ -804,7 +924,7 @@ class GameView(arcade.View):
 
     def on_mouse_motion(self, x, y, delta_x, delta_y):
         """Called whenever the mouse moves."""
-        pass
+        self.manager.on_mouse_motion(x, y, delta_x, delta_y)
 
     def on_mouse_press(self, x, y, button, key_modifiers):
         """Called when the user presses a mouse button."""
@@ -813,6 +933,8 @@ class GameView(arcade.View):
         for i, sprite in enumerate(self.player_team_sheets):
             if sprite.collides_with_point((x, y)):
                 print(123445643213453323)
+        # self.manager.on_mouse_press(x, y, button, key_modifiers)
+
 
     def on_mouse_release(self, x, y, button, key_modifiers):
         """Called when a user releases a mouse button."""
