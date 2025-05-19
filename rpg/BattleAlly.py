@@ -13,3 +13,6 @@ class BattleAlly(BattleBuddy):
         #Esta variable es para que la IA la use para determinar que clase de personaje es.
         #Por ahora propongo los siguientes tipos: Tank, Medic, Captain, Fighter
         self.type = type
+        # self.sheet_name = sheet_name
+        # self.maxHealth = maxHealth
+        # self.currentHealth = maxHealth

@@ -135,6 +135,9 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.dialogues_length = None
+        self.current_dialog = 0
+        self.dialogue_background = None
         self.main_buttons_widget = None
         self.anchor_widget = None
         self.selected_ally = None
@@ -183,6 +186,8 @@ class GameView(arcade.View):
         self.team_sprites = arcade.SpriteList()
         self.x = 1000
 
+        # Cargamos el sonido al abrir y cerrar diálogos
+        # self.pergamino_sound = arcade.load_sound("../resources/sounds/pergamino.wav")
         # --- Required for all code that uses UI element, a UIManager to handle the UI.
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
@@ -293,7 +298,9 @@ class GameView(arcade.View):
 
         self.switch_map(constants.STARTING_MAP,start_x,start_y)
         self.cur_map_name = constants.STARTING_MAP
-
+        self.dialogue_background = arcade.Sprite("../resources/UIThings/dialogoFondo.png")
+        self.dialogue_background.center_x = self.player_sprite.center_x + 450
+        self.dialogue_background.center_y = self.player_sprite.center_y - 450
         # Set up the hotbar
         self.load_hotbar_sprites()
 
@@ -447,10 +454,17 @@ class GameView(arcade.View):
                 for ally in self.allys:
                     if ally.checkPlayer():
                         if self.dialogues_active:
-                            arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                            # arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                            self.dialogue_background.center_x = self.player_sprite.center_x
+                            self.dialogue_background.center_y = self.player_sprite.center_y - 450
+                            self.dialogue_background.draw()
                             dialogue, item_bool = ally.get_interaction_dialogue()
-                            arcade.draw_text(dialogue, self.player_sprite.center_x - 600, self.player_sprite.center_y - 225, arcade.color.BLACK)
-                            if self.player_team_sheets and dialogue == ally.dialogueFullTeam:
+                            self.dialogues_length = len(dialogue)
+                            if type(dialogue) == list:
+                                arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                            else:
+                                arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                            if dialogue == ally.dialogueFullTeam:
                                 # x = self.player_sprite.center_x + 200
                                 # y = self.player_sprite.center_y - 250
                                 # i = 0
@@ -512,19 +526,19 @@ class GameView(arcade.View):
         self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
         self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
 
-        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0], width=150)
+        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0].displayName, width=150)
         self.fila1.add(ally1_button)
         ally1_button.on_click = self.ally1
 
-        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1], width=150)
+        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1].displayName, width=150)
         self.fila1.add(ally2_button)
         ally2_button.on_click = self.ally2
 
-        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2], width=150)
+        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2].displayName, width=150)
         self.fila2.add(ally3_button)
         ally3_button.on_click = self.ally3
 
-        ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3], width=150)
+        ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3].displayName, width=150)
         self.fila2.add(ally4_button)
         ally4_button.on_click = self.ally4
 
@@ -535,7 +549,7 @@ class GameView(arcade.View):
         self.main_buttons_widget = arcade.gui.UIAnchorWidget(
             anchor_x="right",
             anchor_y="bottom",
-            align_x=-10,
+            align_x=-100,
             align_y=10,
             child=self.contenedor
         )
@@ -552,7 +566,7 @@ class GameView(arcade.View):
         if my_map.background_color:
             arcade.set_background_color(my_map.background_color)
 
-    # Funciones para cada uno de los botones. Cada una selecciona a un
+    # Funciones para cada uno de los botones. Cada una selecciona a un aliado a reemplazar
     def ally1(self, event):
         self.selected_ally = 0
     def ally2(self, event):
@@ -689,6 +703,8 @@ class GameView(arcade.View):
                         print(ally.aliadoBatalla.actions)
                         # Desactivamos los dialogos
                         self.dialogues_active = False
+                        self.current_dialog = 0
+                        # arcade.play_sound(self.pergamino_sound, volume=1)
                         # quitar al aliado del mapa
                         ally.remove_from_sprite_lists()
                         # quitar su iem del inventario
@@ -810,6 +826,7 @@ class GameView(arcade.View):
         elif key == arcade.key.ESCAPE:
             if self.dialogues_active:
                 self.dialogues_active = False
+                self.current_dialog = 0
             else:
                 self.window.show_view(self.window.views["main_menu"])
         elif key == arcade.key.P:
@@ -825,6 +842,8 @@ class GameView(arcade.View):
                         ally.remove_from_sprite_lists()
                         self.player_sprite.inventory.remove(item)
                         self.dialogues_active = False
+                        self.current_dialog = 0
+                        # arcade.play_sound(self.pergamino_sound, volume=1)
             if self.ally_colliding and len(self.player_sprite.player_team) < 4:
                 self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             else:
@@ -833,29 +852,33 @@ class GameView(arcade.View):
                         self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
                         self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
+        elif key == arcade.key.SPACE:
+            if self.dialogues_active:
+                if self.current_dialog < self.dialogues_length - 1:
+                    self.current_dialog += 1
+                else:
+                    self.current_dialog = 0
 
-        elif key == arcade.key.KEY_1:
-            self.selected_ally = 0
-        elif key == arcade.key.KEY_2:
-            self.selected_ally = 1
-        elif key == arcade.key.KEY_3:
-            self.selected_ally = 2
-        elif key == arcade.key.KEY_4:
-            self.selected_ally = 3
-
-
-        elif key == arcade.key.KEY_5:
-            self.selected_item = 5
-        elif key == arcade.key.KEY_6:
-            self.selected_item = 6
-        elif key == arcade.key.KEY_7:
-            self.selected_item = 7
-        elif key == arcade.key.KEY_8:
-            self.selected_item = 8
-        elif key == arcade.key.KEY_9:
-            self.selected_item = 9
-        elif key == arcade.key.KEY_0:
-            self.selected_item = 10
+        # elif key == arcade.key.KEY_1:
+        #     self.selected_item = 0
+        # elif key == arcade.key.KEY_2:
+        #     self.selected_item = 1
+        # elif key == arcade.key.KEY_3:
+        #     self.selected_item = 2
+        # elif key == arcade.key.KEY_4:
+        #     self.selected_item = 3
+        # elif key == arcade.key.KEY_5:
+        #     self.selected_item = 5
+        # elif key == arcade.key.KEY_6:
+        #     self.selected_item = 6
+        # elif key == arcade.key.KEY_7:
+        #     self.selected_item = 7
+        # elif key == arcade.key.KEY_8:
+        #     self.selected_item = 8
+        # elif key == arcade.key.KEY_9:
+        #     self.selected_item = 9
+        # elif key == arcade.key.KEY_0:
+        #     self.selected_item = 10
         #DEBUG
         elif key == arcade.key.Z:
             self.player_sprite.debugAnim()
@@ -882,8 +905,12 @@ class GameView(arcade.View):
             if ally.checkPlayer():
                 if self.dialogues_active:
                     self.dialogues_active = False
+                    self.current_dialog = 0
+                    # arcade.play_sound(self.pergamino_sound, volume=1)
+
                 else:
                     self.dialogues_active = True
+                    # arcade.play_sound(self.pergamino_sound, volume=1)
         self.allys_colliding.clear()
         map_layers = self.map_list[self.cur_map_name].map_layers
         print(map_layers)

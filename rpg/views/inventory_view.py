@@ -72,7 +72,7 @@ class InventoryView(arcade.View):
         arcade.draw_rectangle_filled(right_x, center_y, rect_width, rect_height, arcade.color.LIGHT_CORAL)
 
 
-        self.player.draw()
+        # self.player.draw()
         # Agrupar por sheet_name
         grouped_items = {}
         for item in self.inventory:
@@ -147,7 +147,8 @@ class InventoryView(arcade.View):
                 arcade.draw_text(
                     f"Nombre: {self.selected_item['name']}",
                     text_x, text_y,
-                    arcade.color.BLACK, 20
+                    arcade.color.BLACK, 20,
+                    font_name="calibri"
                 )
                 arcade.draw_text(
                     f"Descripción: {self.selected_item['description']}",
@@ -165,12 +166,12 @@ class InventoryView(arcade.View):
                 text_x = self.window.width / 2 - 200
                 text_y = self.window.height - 150
                 arcade.draw_text(
-                    f"Nombre: {self.selected_item}",
+                    f"Nombre: {self.selected_item.displayName}",
                     text_x, text_y,
                     arcade.color.BLACK, 20
                 )
                 arcade.draw_text(
-                    f"Tipo: {self.team[self.selected_item]['type']}",
+                    f"Tipo: {self.selected_item.type}",
                     text_x, text_y - 30,
                     arcade.color.BLACK, 16,
                     multiline=True,
@@ -181,14 +182,21 @@ class InventoryView(arcade.View):
                     self.icon.center_y = text_y - 20
                     self.icon.scale = 0.5
                     self.icon.draw()
-                acciones = ", ".join(self.team[self.selected_item]["actions"])
                 arcade.draw_text(
-                    f"Acciones: {acciones}",
+                    f"Vida: {self.selected_item.currentHealth}",
                     text_x, text_y - 60,
                     arcade.color.BLACK, 16,
-                    multiline = True,
-                    width = 400
+                    multiline=True,
+                    width=300
                 )
+                # acciones = ", ".join(self.selected_item.actions)
+                # arcade.draw_text(
+                #     f"Acciones: {acciones}",
+                #     text_x, text_y - 90,
+                #     arcade.color.BLACK, 16,
+                #     multiline = True,
+                #     width = 400
+                # )
         self.player_team_sheets.draw()
     def setup(self):
         self.marco = arcade.Sprite("../resources/UIThings/marco.png", scale = 0.5)
@@ -219,31 +227,31 @@ class InventoryView(arcade.View):
         self.y = 250
         arcade.set_background_color(arcade.color.ALMOND)
         arcade.set_viewport(0, self.window.width, 0, self.window.height)
-        self.team_names = self.window.views["game"].player_sprite.player_team
+        self.team_sprites = self.window.views["game"].player_sprite.player_team
         self.player_team_sheets = arcade.SpriteList()
         self.characters = []
 
-        for character in self.team_names:
-            if character in self.team and 'sheet_name' in self.team[character]:
-                sheet_name = self.team[character]['sheet_name']
+        for character in self.team_sprites:
+            # if character in self.team and 'sheet_name' in self.team[character]:
+            sheet_name = character.sheetName
 
-                # Cargar las texturas desde el spritesheet
-                textures = arcade.load_spritesheet(
-                    f":characters:{sheet_name}",
-                    sprite_width=128,
-                    sprite_height=128,
-                    columns=9,
-                    count=36
-                )
+            # Cargar las texturas desde el spritesheet
+            textures = arcade.load_spritesheet(
+                sheet_name,
+                sprite_width=128,
+                sprite_height=128,
+                columns=9,
+                count=36
+            )
 
-                # Crear un Sprite y asignarle una textura
-                sprite = Sprite()
-                sprite.texture = textures[9]
-                sprite.center_x = 1050
-                sprite.center_y = self.y
-                self.y += 110
-                self.characters.append(character)
-                self.player_team_sheets.append(sprite)
+            # Crear un Sprite y asignarle una textura
+            sprite = Sprite()
+            sprite.texture = textures[9]
+            sprite.center_x = 1050
+            sprite.center_y = self.y
+            self.y += 110
+            self.characters.append(character)
+            self.player_team_sheets.append(sprite)
 
 
 
@@ -331,10 +339,10 @@ class InventoryView(arcade.View):
         # for i in self.player_team_sheets:
         #     print(i)
         if self.selected_item in self.characters:
-            if self.team[self.selected_item]['type'] == "Captain":
+            if self.selected_item.type == "Captain":
                 self.icon = self.captainIcon
-            elif self.team[self.selected_item]['type'] == "Medic":
+            elif self.selected_item.type == "Medic":
                 self.icon = self.medicIcon
-            elif self.team[self.selected_item]['type'] == "Fighter":
+            elif self.selected_item.type == "Fighter":
                 self.icon = self.fighterIcon
         # print(self.inventory)
