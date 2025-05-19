@@ -91,9 +91,10 @@ class InBattleView(arcade.View):
         self.enemy_AI = None
 
         self.defeated_enemies = []
-        self.remaining_enemies = [0, 1, 2, 3]
-        self.remaining_positions = [0, 1, 2, 3]
-        self.remaining_enemy_objects = []
+        self.remaining_enemies = []
+
+        self.defeated_allies = []
+        self.remaining_allies = []
 
     def on_show_view(self):
         self.player_sprites = arcade.SpriteList()
@@ -173,6 +174,16 @@ class InBattleView(arcade.View):
             self.enemy_effects_list.append([])
 
         self.enemy_AI = EnemyIA(self.enemy_team, self.player_team)
+
+        for i in range(len(self.enemy_team)):
+            self.remaining_enemies.append(i)
+
+        for i in range(len(self.player_team)):
+            self.remaining_allies.append(i)
+
+        print("AQUIIIIIIIIIIIIIIIII")
+        print(f"ally {self.remaining_allies}")
+        print(f"enemy {self.remaining_enemies}")
 
     def on_hide_view(self):
         self.manager.clear()
@@ -672,13 +683,18 @@ class InBattleView(arcade.View):
                     unique_list.remove(effect)
 
     def check_health_status(self):
+        print("NO NEGATIVO PLSSSSSS")
         print(self.player_team[0].currentHealth)
         for ally in self.player_team:
             if ally.currentHealth <= 0:
                 removed_sprite_index = self.player_team.index(ally)
-                #self.player_team.pop(removed_sprite_index)
 
-                #self.player_sprites.pop(removed_sprite_index)
+                self.player_team.pop(removed_sprite_index)
+                self.player_sprites.pop(removed_sprite_index)
+
+                popped_index = self.remaining_allies.pop(removed_sprite_index)
+
+                self.defeated_allies.append(popped_index)
 
         for enemy in self.enemy_team:
             if enemy.currentHealth <= 0:
@@ -700,7 +716,6 @@ class InBattleView(arcade.View):
 
                 print(self.remaining_enemies)
                 print(self.defeated_enemies)
-                print(self.remaining_positions)
                 print(f"removed sprite index: {removed_sprite_index}")
                 #print(f"actual removed aprite index: {actual_removed_sprite_index}")
 
