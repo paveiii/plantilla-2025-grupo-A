@@ -37,6 +37,9 @@ class GameMap:
     map_size = None
     properties = None
     background_color = arcade.color.AMAZON
+    worldEnemyList = arcade.SpriteList()
+    worldAllyList = arcade.SpriteList()
+    worldItemList = arcade.SpriteList()
 
 
 def load_map(map_name,player):
@@ -219,6 +222,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     print("Creando enemigo con sprite:",
                           f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}")
                     character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],mapBarrierList)
+                    game_map.worldEnemyList.append(character_sprite)
 
                     if(mapBarrierList == None):
                         mapBarrierList = arcade.AStarBarrierList(character_sprite, game_map.scene["wall_list"], 32,
@@ -235,7 +239,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                                 print(f"[ERROR] Wall #{i} sin hitbox:", wall)
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
-                    #SPAWN DE OBJETO DE REQUERIMIENTO.
 
                     # Carga  en la lista los nombres de los posibles aliados que pueden aparecer en la batalla.
                     # En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
@@ -266,7 +269,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                                                    actions_dictionary[action]["effectName"])
                             playerActions.append(action_object)
 
-                        battleAlly = BattleAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                        battleAlly = BattleAlly(battleKey,f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
                                                  battleCharacter_dictionary[battleKey]['name'],
                                                  battleCharacter_dictionary[battleKey]['description'],
                                                  battleCharacter_dictionary[battleKey]['type'],
@@ -283,6 +286,8 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         dialogueWithItem = battleCharacter_dictionary[battleKey]["dialogueWithItem"]
 
                         character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleAlly, requirementItemName, dialogueNoItem, dialogueWithItem)
+                        game_map.worldAllyList.append(character_sprite)
+
                         spawnedAlliesKeys.append(battleKey)
                         player.allys_on_map.append(character_sprite)
                     else:
@@ -342,6 +347,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         spriteSheet = itemDict["sheet_name"]
 
                         item_sprite = WorldItem(f":items:{spriteSheet}", itemKey)
+                        game_map.worldItemList.append(item_sprite)
                         item_sprite.position = shape
 
 
@@ -361,6 +367,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     spriteSheet = itemDict["sheet_name"]
 
                     item_sprite = WorldItem(f":items:{spriteSheet}",itemKey)
+                    game_map.worldItemList.append(item_sprite)
                     item_sprite.position = shape
             if (item_sprite != None):
                  print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")

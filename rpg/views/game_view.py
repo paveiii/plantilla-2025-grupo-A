@@ -1,7 +1,6 @@
 """
 Main game view
 """
-
 import json
 from functools import partial
 from typing import Callable
@@ -223,7 +222,6 @@ class GameView(arcade.View):
 
         self.team_buttons = []
 
-        #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
         f = open("../resources/data/worldItem_dictionary.json")
         self.worldItem_dictionary = json.load(f)
 
@@ -468,7 +466,7 @@ class GameView(arcade.View):
 
             for characters in self.player_sprite.allys_on_map:
                 self.allys.append(characters)
-                print(characters.get_interaction_dialogue())
+                #print(characters.get_interaction_dialogue())
 
                 for ally in self.allys:
                     if ally.checkPlayer():
@@ -716,7 +714,7 @@ class GameView(arcade.View):
                 self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
 
-        print(self.player_sprite.player_team)
+        #print(self.player_sprite.player_team)
         # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
         slowdown_hit = arcade.check_for_collision_with_list(self.player_sprite, self.my_map.scene["slowdown_list"])
         for things in slowdown_hit:
@@ -788,7 +786,7 @@ class GameView(arcade.View):
                 self.x += 50
                 self.characters.append(character)
                 self.player_team_sheets.append(sprite)
-        print(self.selected_ally)
+        #print(self.selected_ally)
         # team = SpriteList()
         # for character in self.team_sprites:
         #     team.append(character)
@@ -891,32 +889,16 @@ class GameView(arcade.View):
                     self.current_dialog += 1
                 else:
                     self.current_dialog = 0
+        #DEBUG -----
         elif key == arcade.key.B:
             self.dialogue_list = ["asdas", "asdadcas"]
             self.other_dialogue = True if not self.other_dialogue else False
-        # elif key == arcade.key.KEY_1:
-        #     self.selected_item = 0
-        # elif key == arcade.key.KEY_2:
-        #     self.selected_item = 1
-        # elif key == arcade.key.KEY_3:
-        #     self.selected_item = 2
-        # elif key == arcade.key.KEY_4:
-        #     self.selected_item = 3
-        # elif key == arcade.key.KEY_5:
-        #     self.selected_item = 5
-        # elif key == arcade.key.KEY_6:
-        #     self.selected_item = 6
-        # elif key == arcade.key.KEY_7:
-        #     self.selected_item = 7
-        # elif key == arcade.key.KEY_8:
-        #     self.selected_item = 8
-        # elif key == arcade.key.KEY_9:
-        #     self.selected_item = 9
-        # elif key == arcade.key.KEY_0:
-        #     self.selected_item = 10
-        #DEBUG
+
         elif key == arcade.key.Z:
             self.player_sprite.debugAnim()
+        elif key == arcade.key.X:
+            self.save_game()
+        #DEBUG -----
         elif key == arcade.key.L:
             cur_map = self.map_list[self.cur_map_name]
             if self.player_light in cur_map.light_layer:
@@ -1027,3 +1009,46 @@ class GameView(arcade.View):
                         items = json.load(file)
                     if object_name == item["name"]:
                         self.player_sprite.inventory.append(item)
+    def save_game(self):
+        print("Guardando partida")
+        #date = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
+        #with open(f"saveGame{date}.json", "w") as f:
+
+        saveDict = {}
+        saveDict["currentMapName"] = self.cur_map_name
+        saveDict["playerPosition"] = (self.player_sprite.center_x, self.player_sprite.center_y)
+
+        playerItems = []
+        for item in self.player_sprite.inventory:
+            playerItems.append([item["name"], item["amount"]])
+        saveDict["playerInventory"] = playerItems
+
+        playerAllies = []
+        for ally in self.player_sprite.player_team:
+            playerAllies.append([ally.characterKey,ally.currentHealth])
+        saveDict["playerTeam"] = playerAllies
+
+        worldAllies = []
+        for worldAlly in self.my_map.worldAllyList:
+            worldAllies.append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x,worldAlly.center_y)])
+        saveDict["worldAllies"] = worldAllies
+
+        worldEnemies = []
+        for worldEnemy in self.my_map.worldEnemyList:
+            enemyDict = {}
+            enemyDict["sheetName"] = worldEnemy.sheetName
+            enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
+            enemyDict["velocity"] = worldEnemy.speed
+            enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
+
+            worldEnemies.append(enemyDict)
+        saveDict["worldEnemies"] = worldEnemies
+
+        worldItems = []
+        for worldItem in self.my_map.worldItemList:
+            worldItems.append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
+        saveDict["worldItems"] = worldItems
+
+        with open(f"saveGame.json", "w") as f:
+            json.dump(saveDict,f, indent=4)
+        print("Terminado")

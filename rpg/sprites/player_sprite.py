@@ -56,7 +56,7 @@ class PlayerSprite(CharacterSprite):
                                    actions_dictionary[action]["effectName"])
             playerActions.append(action_object)
 
-        battleAlly = BattleAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+        battleAlly = BattleAlly( battleKey,f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
                                 battleCharacter_dictionary[battleKey]['name'],
                                 battleCharacter_dictionary[battleKey]['description'],
                                 battleCharacter_dictionary[battleKey]['type'],

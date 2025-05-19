@@ -7,7 +7,7 @@ from rpg.constants import CHARACTER_SPRITE_SIZE
 
 class BattleBuddy(arcade.Sprite):
 
-    def __init__(self, sheet_name, displayName, displayDescription, maxHealth, maxStamina, restoredStamina, actions):
+    def __init__(self, key, sheet_name, displayName, displayDescription, maxHealth, maxStamina, restoredStamina, actions):
         super().__init__()
         self.textures = arcade.load_spritesheet(
             sheet_name,
@@ -17,6 +17,7 @@ class BattleBuddy(arcade.Sprite):
             count=12,
         )
 
+        self.characterKey = key
         self.sheetName = sheet_name
 
         self.should_update = 0

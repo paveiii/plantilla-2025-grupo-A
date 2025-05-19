@@ -141,7 +141,7 @@ class InBattleView(arcade.View):
 
                 enemy_actions.append(action_object)
 
-            enemy_object = BattleEnemy(f":characters:{self.enemies[enemy]['sheet_name']}",
+            enemy_object = BattleEnemy(enemy,f":characters:{self.enemies[enemy]['sheet_name']}",
                                        self.enemies[enemy]['name'],
                                        self.enemies[enemy]['description'],
                                        self.enemies[enemy]['maxStamina'],

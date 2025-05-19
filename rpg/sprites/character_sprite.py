@@ -36,6 +36,8 @@ class CharacterSprite(arcade.Sprite):
             columns=9, #Valores 'Hardcoded', hacer constantes para esto.
             count=81,
         )
+        self.sheetName = sheet_name
+
         self.should_update = 0
         self.cur_texture_index = 0
         self.texture = self.textures[self.cur_texture_index]
