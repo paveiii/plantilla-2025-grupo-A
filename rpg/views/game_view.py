@@ -135,6 +135,8 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.dialogue_list = None
+        self.other_dialogue = None
         self.dialogues_length = None
         self.current_dialog = 0
         self.dialogue_background = None
@@ -497,8 +499,11 @@ class GameView(arcade.View):
                 ambient_color = arcade.color.WHITE
             cur_map.light_layer.draw(ambient_color=ambient_color)
 
+        if self.other_dialogue:
+            self.show_different_dialogue(self.dialogue_list)
         # Use the non-scrolled GUI camera
         self.camera_gui.use()
+
 
         # Draw the inventory
         # self.draw_inventory()
@@ -517,6 +522,17 @@ class GameView(arcade.View):
             self.player_sprite.center_y - self.window.height / 2,
         )
         self.camera_sprites.move_to(vector, speed)
+
+    def show_different_dialogue(self, dialogue):
+        print(f"coords: {self.player_sprite.center_x} {self.player_sprite.center_y}")
+        self.dialogue_background.center_x = self.player_sprite.center_x
+        self.dialogue_background.center_y = self.player_sprite.center_y - 450
+        self.dialogue_background.draw()
+
+        if type(dialogue) == list:
+            self.dialogues_length = len(dialogue)
+            print("Mostrando diálogo:", dialogue[self.current_dialog])
+            arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
 
     # Función que creará lo botones cuando se active el diálogo de equipo lleno
     def main_buttons(self, lista_nombres: list):
@@ -824,8 +840,9 @@ class GameView(arcade.View):
         elif key in constants.INVENTORY:
             self.window.show_view(self.window.views["inventory"])
         elif key == arcade.key.ESCAPE:
-            if self.dialogues_active:
+            if self.dialogues_active or self.other_dialogue:
                 self.dialogues_active = False
+                self.other_dialogue = False
                 self.current_dialog = 0
             else:
                 self.window.show_view(self.window.views["main_menu"])
@@ -853,12 +870,14 @@ class GameView(arcade.View):
                         self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
         elif key == arcade.key.SPACE:
-            if self.dialogues_active:
+            if self.dialogues_active or self.other_dialogue:
                 if self.current_dialog < self.dialogues_length - 1:
                     self.current_dialog += 1
                 else:
                     self.current_dialog = 0
-
+        elif key == arcade.key.B:
+            self.dialogue_list = ["asdas", "asdadcas"]
+            self.other_dialogue = True if not self.other_dialogue else False
         # elif key == arcade.key.KEY_1:
         #     self.selected_item = 0
         # elif key == arcade.key.KEY_2:
