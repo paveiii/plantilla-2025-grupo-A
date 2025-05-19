@@ -135,6 +135,8 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.button_clicked = False
+        self.E_pressed = None
         self.dialogue_list = None
         self.other_dialogue = None
         self.dialogues_length = None
@@ -409,14 +411,29 @@ class GameView(arcade.View):
             self.allys.clear()
             arcade.set_background_color(cur_map.background_color)
 
+            # Antes del cambio
+            # # Grab each tile layer from the map
+            # map_layers = cur_map.map_layers
+            #
+            # # Draw scene
+            # cur_map.scene.draw()
+
             # Use the scrolling camera for sprites
             self.camera_sprites.use()
-
-            # Grab each tile layer from the map
             map_layers = cur_map.map_layers
+            for layer_name, sprite_list in cur_map.scene.name_mapping.items():
+                if layer_name == "top":
+                    continue  # saltamos la capa
 
-            # Draw scene
-            cur_map.scene.draw()
+                sprite_list.draw()
+
+            # Dibujamos al jugador
+            self.player_sprite_list.draw()
+
+            # Dibujamos la capa restante
+            top = cur_map.scene.name_mapping.get("top")
+            if top:
+                top.draw()
 
             for item in map_layers.get("searchable", []):
                 arcade.Sprite(
@@ -427,7 +444,7 @@ class GameView(arcade.View):
                 ).draw()
 
             # Draw the player
-            self.player_sprite_list.draw()
+            # self.player_sprite_list.draw()
 
             sprites_in_range = []
             if "searchable" in map_layers:
@@ -584,12 +601,16 @@ class GameView(arcade.View):
 
     # Funciones para cada uno de los botones. Cada una selecciona a un aliado a reemplazar
     def ally1(self, event):
+        self.button_clicked = True
         self.selected_ally = 0
     def ally2(self, event):
+        self.button_clicked = True
         self.selected_ally = 1
     def ally3(self, event):
+        self.button_clicked = True
         self.selected_ally = 2
     def ally4(self, event):
+        self.button_clicked = True
         self.selected_ally = 3
 
     def on_update(self, delta_time):
@@ -662,7 +683,7 @@ class GameView(arcade.View):
             and not self.up_pressed
             and not self.left_pressed
         )
-        if self.dialogues_active:
+        if self.dialogues_active or self.other_dialogue:
             self.player_sprite.change_x = 0
             self.player_sprite.change_y = 0
         else:
@@ -854,7 +875,7 @@ class GameView(arcade.View):
             self.ally_colliding = None
             for ally in self.allys:
                 for item in self.player_sprite.inventory:
-                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer():
+                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer() and not self.buttons_visible:
                         self.ally_colliding = ally
                         ally.remove_from_sprite_lists()
                         self.player_sprite.inventory.remove(item)
@@ -863,11 +884,6 @@ class GameView(arcade.View):
                         # arcade.play_sound(self.pergamino_sound, volume=1)
             if self.ally_colliding and len(self.player_sprite.player_team) < 4:
                 self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
-            else:
-                if self.ally_colliding:
-                    if self.selected_ally:
-                        self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
-                        self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
         elif key == arcade.key.SPACE:
             if self.dialogues_active or self.other_dialogue:
