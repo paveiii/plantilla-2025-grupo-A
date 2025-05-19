@@ -12,7 +12,7 @@
   "TestCharacter1":
     {
       "sheet_name": "Test/testWalk.png","name": "TestCharacter1", "description": "", "type":"Captain",
-      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 500, "maxStamina" : 100, "restoredStamina" : 0,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 1", "tu primo 1"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 1", "pepe 1"],
       "requirementItemKey": "REQ1",
@@ -58,6 +58,6 @@
     {
       "sheet_name": "Test/testEnemy2.png","name": "TestEnemy2", "description": "Test2",
       "role": "enemy", "maxHealth" : 75, "maxStamina" : 75, "restoredStamina" : 5,
-      "actions" : ["Action2"]
+      "actions" : ["Action3"]
     }
 }

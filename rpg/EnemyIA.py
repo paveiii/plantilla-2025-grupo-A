@@ -49,12 +49,13 @@ class EnemyIA:
     #Funcion que se encarga de devolver al integrante del equipo del jugador con mayor prioridad de ataque.
 
     def returnHighestPriorityPlayerTeammate(self, tags):
+        print(tags)
         enemyIndex = 0
         highestPriority = 0
         for i in tags:
             if highestPriority == 1:
                 break
-            if tags[i] < highestPriority:
+            if tags[i-1] < highestPriority:
                 enemyIndex = i
 
         return self.playerTeam[enemyIndex]
