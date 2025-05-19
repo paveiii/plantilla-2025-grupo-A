@@ -13,6 +13,8 @@ from arcade.gui import UIFlatButton
 import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
+
+from rpg.load_game_map import load_map
 from rpg.message_box import MessageBox
 from rpg.sprites.WorldAlly import WorldAlly
 from rpg.sprites.WorldItem import WorldItem
@@ -258,13 +260,16 @@ class GameView(arcade.View):
         :param start_x: Grid x location to spawn at
         :param start_y: Grid y location to spawn at
         """
+
+        if(map_name not in self.map_list):
+            self.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json",self.player_sprite)
+
         self.cur_map_name = map_name
 
         try:
             self.my_map = self.map_list[self.cur_map_name]
         except KeyError:
             raise KeyError(f"Unable to find map named '{map_name}'.")
-
         if self.my_map.background_color:
             arcade.set_background_color(self.my_map.background_color)
 
@@ -626,6 +631,9 @@ class GameView(arcade.View):
         """
         All the logic to move, and the game logic goes here.
         """
+
+        print(self.map_list)
+
         self.letraE = None
         # self.allys.clear()
         # Calculate speed based on the keys pressed
