@@ -122,6 +122,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     # Any layer with '_blocking' in it, will be a wall
     game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
     game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
+    game_map.scene.add_sprite_list("grass_top", use_spatial_hash=True)
     for layer, sprite_list in game_map.map_layers.items():
         if "_blocking" in layer:
             # Eliminar la spritelist original
@@ -141,6 +142,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
         if "_slowdown" in layer:
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
+        if layer == "top":
+            # game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["grass_top"].extend(sprite_list)
 
     f = open("../resources/data/worldItem_dictionary.json")
     worldItem_dictionary = json.load(f)

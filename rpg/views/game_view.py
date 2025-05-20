@@ -134,6 +134,8 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.item_nuevo = None
+        self.old_ally_battle = None
         self.button_clicked = False
         self.E_pressed = None
         self.dialogue_list = None
@@ -191,6 +193,9 @@ class GameView(arcade.View):
 
         # Cargamos el sonido al abrir y cerrar diálogos
         # self.pergamino_sound = arcade.load_sound("../resources/sounds/pergamino.wav")
+        # Temporizador para saber cuando reproducir el sonido
+        # self.grass_sound_timer = 0
+        # self.grass_sound = arcade.load_sound("../resources/sounds/grass_sound.wav")
         # --- Required for all code that uses UI element, a UIManager to handle the UI.
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
@@ -516,6 +521,12 @@ class GameView(arcade.View):
 
         if self.other_dialogue:
             self.show_different_dialogue(self.dialogue_list)
+
+        if self.old_ally_battle:
+            self.old_ally_battle.draw()
+        if self.item_nuevo:
+            self.item_nuevo.draw()
+
         # Use the non-scrolled GUI camera
         self.camera_gui.use()
 
@@ -730,22 +741,37 @@ class GameView(arcade.View):
                 dialogue, item_bool = ally.get_interaction_dialogue()
                 if dialogue == ally.dialogueFullTeam and self.dialogues_active:
                     if self.selected_ally != None:
+                        # Guardamos el aliado a reemplazar
+                        old_ally = self.player_sprite.player_team[self.selected_ally]
                         # Quitamos del equipo del jugador al aliado seleccionado
                         self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
                         # Añadimos al equipo del jugador al aliado con el que estabamos dialogando
                         self.player_sprite.player_team.append(ally.aliadoBatalla)
-                        print(ally.aliadoBatalla)
-                        print(ally.aliadoBatalla.actions)
                         # Desactivamos los dialogos
                         self.dialogues_active = False
                         self.current_dialog = 0
                         # arcade.play_sound(self.pergamino_sound, volume=1)
+                        # Creamos otro WorldAlly con la información del battleAlly quitado del player_team
+                        self.old_ally_battle = WorldAlly(f":characters:{self.team[old_ally.displayName]['sheet_name']}", self.my_map.scene, self.player_sprite, old_ally, self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['name'],
+                                                         self.team[old_ally.displayName]["dialogueNoItem"], self.team[old_ally.displayName]["dialogueWithItem"])
+                        self.old_ally_battle.center_x = self.player_sprite.center_x
+                        self.old_ally_battle.center_y = self.player_sprite.center_y
+                        self.player_sprite.allys_on_map.append(self.old_ally_battle)
+                        self.allys.append(self.old_ally_battle)
+                        # Creamos otro item
+                        self.item_nuevo = WorldItem(f":items:{self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['sheet_name']}", self.team[old_ally.displayName]['requirementItemKey'])
+                        self.item_nuevo.center_x = self.player_sprite.center_x + 50
+                        self.item_nuevo.center_y = self.player_sprite.center_y
+                        self.my_map.scene.add_sprite("searchable", self.item_nuevo)
+                        self.my_map.worldAllyList.append(self.old_ally_battle)
+                        self.my_map.worldItemList.append(self.item_nuevo)
                         # quitar al aliado del mapa
                         ally.remove_from_sprite_lists()
-                        # quitar su iem del inventario
+                        # quitar su item del inventario
                         for item in self.player_sprite.inventory:
                             if item['name'] == ally.requirementItemName:
                                 self.player_sprite.inventory.remove(item)
+                        self.selected_ally = None
 
 
 
@@ -935,8 +961,10 @@ class GameView(arcade.View):
         if "searchable" not in map_layers:
             print(f"No searchable sprites on {self.cur_map_name} map layer.")
             return
-
         searchable_sprites = map_layers["searchable"]
+        # if self.item_nuevo and not self.added:
+        #     searchable_sprites.append(self.item_nuevo)
+        #     self.added = True
         sprites_in_range = arcade.check_for_collision_with_list(
             self.player_sprite, searchable_sprites
         )
