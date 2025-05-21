@@ -13,6 +13,8 @@ from arcade.gui import UIFlatButton
 import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
+
+from rpg.load_game_map import load_map
 from rpg.message_box import MessageBox
 from rpg.sprites.WorldAlly import WorldAlly
 from rpg.sprites.WorldItem import WorldItem
@@ -258,13 +260,16 @@ class GameView(arcade.View):
         :param start_x: Grid x location to spawn at
         :param start_y: Grid y location to spawn at
         """
+
+        if(map_name not in self.map_list):
+            self.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json",self.player_sprite)
+
         self.cur_map_name = map_name
 
         try:
             self.my_map = self.map_list[self.cur_map_name]
         except KeyError:
             raise KeyError(f"Unable to find map named '{map_name}'.")
-
         if self.my_map.background_color:
             arcade.set_background_color(self.my_map.background_color)
 
@@ -626,6 +631,7 @@ class GameView(arcade.View):
         """
         All the logic to move, and the game logic goes here.
         """
+
         self.letraE = None
         # self.allys.clear()
         # Calculate speed based on the keys pressed
@@ -1046,6 +1052,7 @@ class GameView(arcade.View):
         saveDict["currentMapName"] = self.cur_map_name
         saveDict["playerPosition"] = (self.player_sprite.center_x, self.player_sprite.center_y)
 
+        #Informacion individual del jugador.
         playerItems = []
         for item in self.player_sprite.inventory:
             playerItems.append([item["name"], item["amount"]])
@@ -1056,26 +1063,30 @@ class GameView(arcade.View):
             playerAllies.append([ally.characterKey,ally.currentHealth])
         saveDict["playerTeam"] = playerAllies
 
-        worldAllies = []
-        for worldAlly in self.my_map.worldAllyList:
-            worldAllies.append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x,worldAlly.center_y)])
-        saveDict["worldAllies"] = worldAllies
+        #Informacion de los mapas.
+        saveDict["maps"] = {}
+        for mapName in self.map_list:
+            print(mapName)
+            print(self.map_list[mapName])
+            saveDict["maps"][mapName] = {}
 
-        worldEnemies = []
-        for worldEnemy in self.my_map.worldEnemyList:
-            enemyDict = {}
-            enemyDict["sheetName"] = worldEnemy.sheetName
-            enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
-            enemyDict["velocity"] = worldEnemy.speed
-            enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
+            saveDict["maps"][mapName]["worldAllies"] = []
+            for worldAlly in self.map_list[mapName].worldAllyList:
+                saveDict["maps"][mapName]["worldAllies"].append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x, worldAlly.center_y)])
 
-            worldEnemies.append(enemyDict)
-        saveDict["worldEnemies"] = worldEnemies
+            saveDict["maps"][mapName]["worldEnemies"] = []
+            for worldEnemy in self.map_list[mapName].worldEnemyList:
+                enemyDict = {}
+                enemyDict["sheetName"] = worldEnemy.sheetName
+                enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
+                enemyDict["velocity"] = worldEnemy.speed
+                enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
 
-        worldItems = []
-        for worldItem in self.my_map.worldItemList:
-            worldItems.append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
-        saveDict["worldItems"] = worldItems
+                saveDict["maps"][mapName]["worldEnemies"].append(enemyDict)
+
+            saveDict["maps"][mapName]["worldItems"] = []
+            for worldItem in self.map_list[mapName].worldItemList:
+                saveDict["maps"][mapName]["worldItems"].append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
 
         with open(f"saveGame.json", "w") as f:
             json.dump(saveDict,f, indent=4)

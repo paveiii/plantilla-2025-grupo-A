@@ -49,8 +49,8 @@ def load_map(map_name,player):
     ally_list = []
     #DEBUG: Codigo para cargar solo un mapa especificado.
     # Quitar esto si quieres usar las puertas del mapa
-    if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
-        return None
+    #if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
+    #    return None
 
     game_map = GameMap()
 

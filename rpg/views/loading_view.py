@@ -6,6 +6,7 @@ import arcade
 from rpg import constants
 from rpg.draw_bar import draw_bar
 from rpg.load_game_map import load_maps
+from rpg.load_game_map import load_map
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.views.battle_view import BattleView
 from rpg.views.game_view import GameView
@@ -22,7 +23,7 @@ class LoadingView(arcade.View):
         super().__init__()
         self.started = False
         self.progress = 0
-        self.map_list = None
+        self.map_list = {}
         arcade.set_background_color(arcade.color.ALMOND)
         self.player_sprite = PlayerSprite(":characters:" + constants.PLAYER_SPRITE_PATH)
 
@@ -57,7 +58,9 @@ class LoadingView(arcade.View):
     def on_update(self, delta_time: float):
         # Dictionary to hold all our maps
         if self.started:
-            done, self.progress, self.map_list = load_maps(self.player_sprite)
+            #TESTESTESTESTESTEST
+            self.map_list[constants.STARTING_MAP] = load_map(f"../resources/maps/{constants.STARTING_MAP}.json",self.player_sprite)
+            done = True
             if done:
                 self.window.views["game"] = GameView(self.map_list, self.player_sprite)
                 self.window.views["game"].setup()
