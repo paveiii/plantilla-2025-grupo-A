@@ -12,7 +12,7 @@
   "TestCharacter1":
     {
       "sheet_name": "Test/testWalk.png","name": "TestCharacter1", "description": "", "type":"Captain",
-      "role": "ally", "maxHealth" : 500, "maxStamina" : 100, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 10, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 1", "tu primo 1"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 1", "pepe 1"],
       "requirementItemKey": "REQ1",
@@ -22,7 +22,7 @@
   "TestCharacter2":
     {
       "sheet_name": "Test/testBuddy1.png","name": "TestCharacter2", "description": "", "type":"Tank",
-      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 2", "tu primo 2"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 2", "pepe 2"],
       "requirementItemKey": "REQ2",
@@ -32,7 +32,7 @@
   "TestCharacter3":
     {
       "sheet_name": "Test/testBuddy2.png","name": "TestCharacter3", "description": "", "type":"Fighter",
-      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 3", "tu primo 3"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 3", "pepe 3"],
       "requirementItemKey": "REQ3",
@@ -42,7 +42,7 @@
   "TestCharacter4":
     {
       "sheet_name": "Test/testBuddy3.png","name": "TestCharacter4", "description": "", "type":"Medic",
-      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 0,
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 4", "tu primo 4"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 4", "pepe 4"],
       "requirementItemKey": "REQ4",
