@@ -632,8 +632,6 @@ class GameView(arcade.View):
         All the logic to move, and the game logic goes here.
         """
 
-        print(self.map_list)
-
         self.letraE = None
         # self.allys.clear()
         # Calculate speed based on the keys pressed
@@ -1054,6 +1052,7 @@ class GameView(arcade.View):
         saveDict["currentMapName"] = self.cur_map_name
         saveDict["playerPosition"] = (self.player_sprite.center_x, self.player_sprite.center_y)
 
+        #Informacion individual del jugador.
         playerItems = []
         for item in self.player_sprite.inventory:
             playerItems.append([item["name"], item["amount"]])
@@ -1064,26 +1063,30 @@ class GameView(arcade.View):
             playerAllies.append([ally.characterKey,ally.currentHealth])
         saveDict["playerTeam"] = playerAllies
 
-        worldAllies = []
-        for worldAlly in self.my_map.worldAllyList:
-            worldAllies.append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x,worldAlly.center_y)])
-        saveDict["worldAllies"] = worldAllies
+        #Informacion de los mapas.
+        saveDict["maps"] = {}
+        for mapName in self.map_list:
+            print(mapName)
+            print(self.map_list[mapName])
+            saveDict["maps"][mapName] = {}
 
-        worldEnemies = []
-        for worldEnemy in self.my_map.worldEnemyList:
-            enemyDict = {}
-            enemyDict["sheetName"] = worldEnemy.sheetName
-            enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
-            enemyDict["velocity"] = worldEnemy.speed
-            enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
+            saveDict["maps"][mapName]["worldAllies"] = []
+            for worldAlly in self.map_list[mapName].worldAllyList:
+                saveDict["maps"][mapName]["worldAllies"].append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x, worldAlly.center_y)])
 
-            worldEnemies.append(enemyDict)
-        saveDict["worldEnemies"] = worldEnemies
+            saveDict["maps"][mapName]["worldEnemies"] = []
+            for worldEnemy in self.map_list[mapName].worldEnemyList:
+                enemyDict = {}
+                enemyDict["sheetName"] = worldEnemy.sheetName
+                enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
+                enemyDict["velocity"] = worldEnemy.speed
+                enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
 
-        worldItems = []
-        for worldItem in self.my_map.worldItemList:
-            worldItems.append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
-        saveDict["worldItems"] = worldItems
+                saveDict["maps"][mapName]["worldEnemies"].append(enemyDict)
+
+            saveDict["maps"][mapName]["worldItems"] = []
+            for worldItem in self.map_list[mapName].worldItemList:
+                saveDict["maps"][mapName]["worldItems"].append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
 
         with open(f"saveGame.json", "w") as f:
             json.dump(saveDict,f, indent=4)
