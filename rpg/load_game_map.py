@@ -595,6 +595,10 @@ def loadMapFromSave(player, saveFile, map_name):
             print(worldAlly)
             #WorldAlly tiene la posicion donde aparecer.
             character_sprite.position = worldAlly[battleKey]
+
+            print(f"Adding character ally at {character_sprite.position}")
+            print(character_sprite)
+            game_map.scene.add_sprite("characters", character_sprite)
     if "worldEnemies" in saveFile["maps"][map_name]:
         for worldEnemy in saveFile["maps"][map_name]["worldEnemies"]:
             # Se crea el enemigo en el nivel.
@@ -606,6 +610,10 @@ def loadMapFromSave(player, saveFile, map_name):
                 worldEnemy["detectionRadius"], mapBarrierList)
             game_map.worldEnemyList.append(character_sprite)
             character_sprite.position = worldEnemy["position"]
+
+            print(f"Adding character enemy at {character_sprite.position}")
+            print(character_sprite)
+            game_map.scene.add_sprite("characters", character_sprite)
 
             if (mapBarrierList == None):
                 mapBarrierList = arcade.AStarBarrierList(character_sprite, game_map.scene["wall_list"], 32,
@@ -634,7 +642,6 @@ def loadMapFromSave(player, saveFile, map_name):
             item_sprite.position = worldItem[itemKey]
             print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")
             game_map.scene.add_sprite("searchable", item_sprite)
-
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]
 
@@ -677,12 +684,65 @@ def loadMapsFromSavefile(player, savefilePath):
         saveFile = json.load(f)
     print(saveFile)
 
-    loadedMaps = []
+    loadedMaps = {}
     for mapName in saveFile["maps"]:
-        print(mapName)
-        loadedMaps.append(loadMapFromSave(player, saveFile, mapName))
+        loadedMaps[mapName] = (loadMapFromSave(player, saveFile, mapName))
 
-    return loadedMaps
+    f = open("../resources/data/item_dictionary.json")
+    item_dictionary = json.load(f)
+
+    f = open("../resources/data/battleCharacters_dictionary.json")
+    battleCharacter_dictionary = json.load(f)
+
+    f = open("../resources/data/actions_dictionary.json")
+    actions_dictionary = json.load(f)
+
+    currentMapData = [saveFile["currentMapName"],saveFile["playerPosition"]]
+
+    player.player_team = []
+    for ally in saveFile["playerTeam"]:
+        battleKey = list(ally.keys())[0]
+
+        allyActions = []
+        for action in battleCharacter_dictionary[battleKey]['actions']:
+            action_object = Action(actions_dictionary[action]["name"],
+                                   actions_dictionary[action]["description"],
+                                   actions_dictionary[action]["actionType"],
+                                   actions_dictionary[action]["amount"],
+                                   actions_dictionary[action]["staminaExpense"],
+                                   actions_dictionary[action]["targetQuantity"],
+                                   actions_dictionary[action]["effectName"])
+            allyActions.append(action_object)
+
+        battleAlly = BattleAlly(battleKey,
+                                f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                battleCharacter_dictionary[battleKey]['name'],
+                                battleCharacter_dictionary[battleKey]['description'],
+                                battleCharacter_dictionary[battleKey]['type'],
+                                battleCharacter_dictionary[battleKey]['maxStamina'],
+                                battleCharacter_dictionary[battleKey]['maxHealth'],
+                                battleCharacter_dictionary[battleKey]['restoredStamina'],
+                                allyActions,
+                                battleCharacter_dictionary[battleKey]['dialogueNoItem'],
+                                battleCharacter_dictionary[battleKey]['dialogueWithItem'],
+                                battleCharacter_dictionary[battleKey]['requirementItemKey'])
+        player.player_team.append(battleAlly)
+
+    savedPlayerInventory = []
+    for item in saveFile["playerInventory"]:
+        itemName = list(item.keys())[0]
+        itemToInventory = None
+        for itemKey in item_dictionary:
+            if item_dictionary[itemKey]["name"] == itemName:
+                itemToInventory = item_dictionary[itemKey]
+                break
+
+        itemToInventory["amount"] = item[itemName]
+        savedPlayerInventory.append(itemToInventory)
+
+    player.inventory = savedPlayerInventory
+
+    return loadedMaps, currentMapData
 
 load_maps.map_file_names = None
 load_maps.map_list = None

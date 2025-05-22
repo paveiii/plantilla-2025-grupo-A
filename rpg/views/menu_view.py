@@ -14,7 +14,7 @@ class MenuView(arcade.View):
         # Create a vertical BoxGroup to align buttons
         self.v_box = arcade.gui.UIBoxLayout()
 
-        self.window.views["loading_view"] = l.LoadingView()
+        self.window.views["loading_view"] = l.LoadingView(None)
         self.window.views["load_game"] = g.LoadGameView()
 
         start_game_button = arcade.gui.UIFlatButton(text="Start", width=200)

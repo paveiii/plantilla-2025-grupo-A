@@ -20,13 +20,15 @@ from rpg.views.menu_view import MenuView
 
 
 class LoadingView(arcade.View):
-    def __init__(self):
+    def __init__(self, savefile):
         super().__init__()
         self.started = False
         self.progress = 0
         self.map_list = {}
         arcade.set_background_color(arcade.color.ALMOND)
         self.player_sprite = PlayerSprite(":characters:" + constants.PLAYER_SPRITE_PATH)
+
+        self.savefile = savefile
 
     def on_draw(self):
         arcade.start_render()
@@ -60,22 +62,26 @@ class LoadingView(arcade.View):
         # Dictionary to hold all our maps
         if self.started:
             #DEBUG
-            loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
+            #loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
 
-            self.map_list[constants.STARTING_MAP] = load_map(f"../resources/maps/{constants.STARTING_MAP}.json",self.player_sprite)
-            done = True
-            if done:
-                self.window.views["game"] = GameView(self.map_list, self.player_sprite)
-                self.window.views["game"].setup()
-                self.window.views["inventory"] = InventoryView()
-                self.window.views["inventory"].setup()
-                self.window.views["main_menu"] = MainMenuView()
-                self.window.views["settings"] = SettingsView()
-                self.window.views["settings"].setup()
-                self.window.views["battle"] = BattleView()
-                self.window.views["battle"].setup()
-                self.window.views["in_battle"] = InBattleView()
-                self.window.views["menu"] = MenuView()
-                self.window.views["load_game"] = LoadGameView()
+            currentMapData = None
 
-                self.window.show_view(self.window.views["game"])
+            if(self.savefile != None):
+                self.map_list[constants.STARTING_MAP] = load_map(f"../resources/maps/{constants.STARTING_MAP}.json",self.player_sprite)
+            else:
+                self.map_list, currentMapData = loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
+
+            self.window.views["game"] = GameView(self.map_list, self.player_sprite, currentMapData)
+            self.window.views["game"].setup()
+            self.window.views["inventory"] = InventoryView()
+            self.window.views["inventory"].setup()
+            self.window.views["main_menu"] = MainMenuView()
+            self.window.views["settings"] = SettingsView()
+            self.window.views["settings"].setup()
+            self.window.views["battle"] = BattleView()
+            self.window.views["battle"].setup()
+            self.window.views["in_battle"] = InBattleView()
+            self.window.views["menu"] = MenuView()
+            self.window.views["load_game"] = LoadGameView()
+
+            self.window.show_view(self.window.views["game"])

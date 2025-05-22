@@ -133,8 +133,12 @@ class GameView(arcade.View):
     Main application class.
     """
 
-    def __init__(self, map_list, player):
+    def __init__(self, map_list, player, saveFileData):
         super().__init__()
+
+        self.saveFile = None
+        if (saveFileData != None):
+            self.saveFile = saveFileData
 
         self.item_nuevo = None
         self.old_ally_battle = None
@@ -302,14 +306,29 @@ class GameView(arcade.View):
         """Set up the game variables. Call to re-start the game."""
 
         #Spawn player
-        try:
-            start_x = self.map_list[constants.STARTING_MAP].properties.get("start_x")
-            start_y = self.map_list[constants.STARTING_MAP].properties.get("start_y")
-        except KeyError:
-            raise KeyError(f"Unable to find map named '{constants.STARTING_MAP}'.")
+        print(self.map_list)
 
-        self.switch_map(constants.STARTING_MAP,start_x,start_y)
-        self.cur_map_name = constants.STARTING_MAP
+        if(self.saveFile != None):
+            print(self.saveFile)
+            start_x = self.saveFile[1][0]
+            start_y = self.saveFile[1][1]
+            print(start_x, start_y)
+        else:
+            try:
+                start_x = self.map_list[constants.STARTING_MAP].properties.get("start_x")
+                start_y = self.map_list[constants.STARTING_MAP].properties.get("start_y")
+            except KeyError:
+                    raise KeyError(f"Unable to find map named '{constants.STARTING_MAP}'.")
+
+
+        if(self.saveFile != None):
+            self.switch_map(self.saveFile[0], start_x, start_y)
+            self.cur_map_name = self.saveFile[0]
+        else:
+            self.switch_map(constants.STARTING_MAP, start_x, start_y)
+            self.cur_map_name = constants.STARTING_MAP
+
+
         self.dialogue_background = arcade.Sprite("../resources/UIThings/dialogoFondo.png")
         self.dialogue_background.center_x = self.player_sprite.center_x + 450
         self.dialogue_background.center_y = self.player_sprite.center_y - 450
@@ -366,40 +385,6 @@ class GameView(arcade.View):
             if status
             else self.original_movement_speed
         )
-
-    # def draw_inventory(self):
-    #     capacity = 10
-    #     vertical_hotbar_location = 40
-    #     hotbar_height = 80
-    #     sprite_height = 16
-    #
-    #     field_width = self.window.width / (capacity + 1)
-    #
-    #     x = self.window.width / 2
-    #     y = vertical_hotbar_location
-    #
-    #     arcade.draw_rectangle_filled(
-    #         x, y, self.window.width, hotbar_height, arcade.color.ALMOND
-    #     )
-    #     for i in range(capacity):
-    #         y = vertical_hotbar_location
-    #         x = i * field_width + 5
-    #         if i == self.selected_item - 1:
-    #             arcade.draw_lrtb_rectangle_outline(
-    #                 x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
-    #             )
-    #
-    #         if len(self.player_sprite.inventory) > i:
-    #             try: item_name = self.player_sprite.inventory[i]["short_name"]
-    #             except: item_name = self.player_sprite.inventory[i]["name"]
-    #         else:
-    #             item_name = ""
-    #
-    #         hotkey_sprite = self.hotbar_sprite_list[i]
-    #         hotkey_sprite.draw_scaled(x + sprite_height / 2, y + sprite_height / 2, 2.0)
-    #         # Add whitespace so the item text doesn't hide behind the number pad sprite
-    #         text = f"     {item_name}"
-    #         arcade.draw_text(text, x, y, arcade.color.ALLOY_ORANGE, 16)
 
     def on_draw(self):
         """
@@ -871,8 +856,6 @@ class GameView(arcade.View):
             # No doors, scroll normally
             self.scroll_to_player()
 
-
-
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
 
@@ -1051,17 +1034,24 @@ class GameView(arcade.View):
 
         saveDict = {}
         saveDict["currentMapName"] = self.cur_map_name
-        saveDict["playerPosition"] = (self.player_sprite.center_x, self.player_sprite.center_y)
+
+        map_height = self.my_map.map_size[1]
+        print(self.player_sprite.center_y)
+        print(map_height)
+        x_relativePosition= self.player_sprite.center_x / constants.MAP_TILE_SIZE #* constants.SPRITE_SIZE + constants.SPRITE_SIZE / 2
+        y_relativePosition = map_height - ((map_height + self.player_sprite.center_y) / (constants.MAP_TILE_SIZE)) + 2 #* constants.SPRITE_SIZE - constants.SPRITE_SIZE / 2
+
+        saveDict["playerPosition"] = (x_relativePosition, y_relativePosition)
 
         #Informacion individual del jugador.
         playerItems = []
         for item in self.player_sprite.inventory:
-            playerItems.append([item["name"], item["amount"]])
+            playerItems.append({item["name"] : item["amount"]})
         saveDict["playerInventory"] = playerItems
 
         playerAllies = []
         for ally in self.player_sprite.player_team:
-            playerAllies.append([ally.characterKey,ally.currentHealth])
+            playerAllies.append({ally.characterKey : ally.currentHealth})
         saveDict["playerTeam"] = playerAllies
 
         #Informacion de los mapas.
