@@ -29,7 +29,11 @@ from rpg.sprites.random_walking_sprite import RandomWalkingSprite
 from rpg import constants
 
 
-class GameMap:
+class GameMap():
+    def __init__(self):
+        self.worldEnemyList = arcade.SpriteList()
+        self.worldAllyList = arcade.SpriteList()
+        self.worldItemList = arcade.SpriteList()
     name = None
     scene = None
     map_layers = None
@@ -37,9 +41,7 @@ class GameMap:
     map_size = None
     properties = None
     background_color = arcade.color.AMAZON
-    worldEnemyList = arcade.SpriteList()
-    worldAllyList = arcade.SpriteList()
-    worldItemList = arcade.SpriteList()
+
 
 
 def load_map(map_name,player):

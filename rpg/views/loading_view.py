@@ -66,10 +66,10 @@ class LoadingView(arcade.View):
 
             currentMapData = None
 
-            if(self.savefile != None):
+            if(self.savefile == None):
                 self.map_list[constants.STARTING_MAP] = load_map(f"../resources/maps/{constants.STARTING_MAP}.json",self.player_sprite)
             else:
-                self.map_list, currentMapData = loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
+                self.map_list, currentMapData = loadMapsFromSavefile(self.player_sprite, self.savefile)
 
             self.window.views["game"] = GameView(self.map_list, self.player_sprite, currentMapData)
             self.window.views["game"].setup()

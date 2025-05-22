@@ -1036,8 +1036,6 @@ class GameView(arcade.View):
         saveDict["currentMapName"] = self.cur_map_name
 
         map_height = self.my_map.map_size[1]
-        print(self.player_sprite.center_y)
-        print(map_height)
         x_relativePosition= self.player_sprite.center_x / constants.MAP_TILE_SIZE #* constants.SPRITE_SIZE + constants.SPRITE_SIZE / 2
         y_relativePosition = map_height - ((map_height + self.player_sprite.center_y) / (constants.MAP_TILE_SIZE)) + 2 #* constants.SPRITE_SIZE - constants.SPRITE_SIZE / 2
 
@@ -1056,17 +1054,18 @@ class GameView(arcade.View):
 
         #Informacion de los mapas.
         saveDict["maps"] = {}
-        for mapName in self.map_list:
-            print(mapName)
-            print(self.map_list[mapName])
-            saveDict["maps"][mapName] = {}
+        print(self.map_list)
+        for mapKey in list(self.map_list.keys()):
+            saveDict["maps"][mapKey] = {}
 
-            saveDict["maps"][mapName]["worldAllies"] = []
-            for worldAlly in self.map_list[mapName].worldAllyList:
-                saveDict["maps"][mapName]["worldAllies"].append({worldAlly.aliadoBatalla.characterKey : (worldAlly.center_x, worldAlly.center_y)})
+            saveDict["maps"][mapKey]["worldAllies"] = []
+            for worldAlly in self.map_list[mapKey].worldAllyList:
+                print(mapKey)
+                print(worldAlly.aliadoBatalla.characterKey)
+                saveDict["maps"][mapKey]["worldAllies"].append({worldAlly.aliadoBatalla.characterKey : (worldAlly.center_x, worldAlly.center_y)})
 
-            saveDict["maps"][mapName]["worldEnemies"] = []
-            for worldEnemy in self.map_list[mapName].worldEnemyList:
+            saveDict["maps"][mapKey]["worldEnemies"] = []
+            for worldEnemy in self.map_list[mapKey].worldEnemyList:
                 enemyDict = {}
                 enemyDict["sheetName"] = worldEnemy.sheetName
                 enemyDict["position"] = worldEnemy.position
@@ -1074,11 +1073,11 @@ class GameView(arcade.View):
                 enemyDict["speed"] = worldEnemy.speed
                 enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
 
-                saveDict["maps"][mapName]["worldEnemies"].append(enemyDict)
+                saveDict["maps"][mapKey]["worldEnemies"].append(enemyDict)
 
-            saveDict["maps"][mapName]["worldItems"] = []
-            for worldItem in self.map_list[mapName].worldItemList:
-                saveDict["maps"][mapName]["worldItems"].append({worldItem.itemKey : (worldItem.center_x, worldItem.center_y)})
+            saveDict["maps"][mapKey]["worldItems"] = []
+            for worldItem in self.map_list[mapKey].worldItemList:
+                saveDict["maps"][mapKey]["worldItems"].append({worldItem.itemKey : (worldItem.center_x, worldItem.center_y)})
         with open(f"saveGame.json", "w") as f:
             json.dump(saveDict,f, indent=4)
         print("Terminado")
