@@ -172,7 +172,7 @@
                         {
                          "name":"start_x",
                          "type":"float",
-                         "value":29.5
+                         "value":34.5
                         }, 
                         {
                          "name":"start_y",
@@ -200,7 +200,7 @@
                         {
                          "name":"start_x",
                          "type":"float",
-                         "value":29.5
+                         "value":34.5
                         }, 
                         {
                          "name":"start_y",
@@ -232,12 +232,12 @@
         {
          "name":"start_x",
          "type":"int",
-         "value":29
+         "value":10
         }, 
         {
          "name":"start_y",
          "type":"int",
-         "value":57
+         "value":10
         }],
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
