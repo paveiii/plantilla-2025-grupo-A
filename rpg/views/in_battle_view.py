@@ -1,4 +1,5 @@
 import time
+from functools import wraps
 
 import arcade
 import arcade.gui
@@ -74,8 +75,9 @@ class InBattleView(arcade.View):
         self.x_positions = ally_x_positions.copy()
         self.y_positions = ally_y_positions.copy()
 
+        self.pointer_height_offset = 0
         self.pointer_x = self.x_positions[self.current_ally]
-        self.pointer_y = self.y_positions[self.current_ally]
+        self.pointer_y = self.y_positions[self.current_ally] + self.pointer_height_offset
 
         self.pointer_is_up = False
 
@@ -103,6 +105,11 @@ class InBattleView(arcade.View):
 
         self.player_attacks = 0
 
+        self.ally_health_bars = []
+        self.ally_sta_bars = []
+
+        self.bar_width = 0
+
     def on_show_view(self):
         self.player_sprites = arcade.SpriteList()
         self.enemy_sprites = arcade.SpriteList()
@@ -111,7 +118,7 @@ class InBattleView(arcade.View):
 
         self.manager.enable()
         self.main_buttons()
-        arcade.set_background_color(arcade.color.GREEN)
+        arcade.set_background_color(arcade.color.ASH_GREY)
 
         # Load allies
 
@@ -190,6 +197,14 @@ class InBattleView(arcade.View):
             self.remaining_allies.append(i)
             self.ally_rotation.append(i)
 
+        for ally in self.player_team:
+            health_width = ally.currentHealth * 100 / ally.maxHealth
+            self.ally_health_bars.append(health_width)
+
+        for ally in self.player_team:
+            sta_width = ally.currentStamina * 100 / ally.maxStamina
+            self.ally_sta_bars.append(sta_width)
+
         print("AQUIIIIIIIIIIIIIIIII")
         print(f"ally {self.remaining_allies}")
         print(f"enemy {self.remaining_enemies}")
@@ -202,6 +217,8 @@ class InBattleView(arcade.View):
         self.enemy_sprites.clear()
 
     def on_draw(self):
+        arcade.start_render()
+
         current_width = self.get_width()
         border_width = 10
 
@@ -235,6 +252,70 @@ class InBattleView(arcade.View):
                                     y3=self.pointer_y + 90,
                                     color=arcade.color.WHITE)
 
+        # Barras de vida y de stamina
+
+        health_height_dif = 80
+        sta_height_dif = 100
+        self.bar_width = 100
+        bar_height = 10
+
+        for index in self.remaining_allies:
+            center_x = self.x_positions[index]
+            h_center_y = self.y_positions[index] - health_height_dif
+            s_center_y = self.y_positions[index] - sta_height_dif
+            n_center_y = h_center_y + 20
+            name_x_offset = 58
+
+            remaining_list_index = self.remaining_allies.index(index)
+
+            # Nombre
+            arcade.draw_text(text=self.player_team[remaining_list_index].displayName,
+                             start_x=center_x - name_x_offset,
+                             start_y=n_center_y,
+                             color=arcade.color.WHITE,
+                             align="center",
+                             width=1)
+
+            # Vida
+            arcade.draw_rectangle_filled(center_x,
+                                         h_center_y,
+                                         self.bar_width + 5,
+                                         bar_height + 5,
+                                         arcade.color.WHITE)
+
+            arcade.draw_rectangle_filled(center_x,
+                                         h_center_y,
+                                         self.bar_width,
+                                         bar_height,
+                                         arcade.color.BLACK)
+
+            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                               center_x - self.bar_width / 2 + self.ally_health_bars[index],
+                                               h_center_y + 5,
+                                               h_center_y - 5,
+                                               arcade.color.GREEN)
+
+            # Stamina
+            arcade.draw_rectangle_filled(center_x,
+                                         s_center_y,
+                                         self.bar_width + 5,
+                                         bar_height + 5,
+                                         arcade.color.WHITE)
+
+            arcade.draw_rectangle_filled(center_x,
+                                         s_center_y,
+                                         self.bar_width,
+                                         bar_height,
+                                         arcade.color.BLACK)
+
+            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                               center_x - self.bar_width / 2 + self.ally_sta_bars[index],
+                                               s_center_y + 5,
+                                               s_center_y - 5,
+                                               arcade.color.AZURE)
+
+
+
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
@@ -254,6 +335,24 @@ class InBattleView(arcade.View):
 
             if self.pointer_y <= pointer_positions:
                 self.pointer_is_up = False
+
+        self.ally_health_bars.clear()
+        for ally in self.player_team:
+            health_width = ally.currentHealth * self.bar_width / ally.maxHealth
+            self.ally_health_bars.append(health_width)
+
+        self.ally_sta_bars.clear()
+        for ally in self.player_team:
+            sta_width = ally.currentStamina * self.bar_width / ally.maxStamina
+            self.ally_sta_bars.append(sta_width)
+
+        print(self.ally_health_bars)
+
+    def get_pointer_positions(self):
+        if self.option == "select_enemy":
+            return enemy_y_positions[self.current_selected_enemy]
+        else:
+            return self.y_positions[self.current_ally] + self.pointer_height_offset
 
     def on_click_attack(self, event):
         self.option = "attack"
@@ -280,8 +379,6 @@ class InBattleView(arcade.View):
             print("ESTE PERSONAJE YA TIENE LA STAMINA AL MÁXIMO")
             self.main_buttons()
         else:
-            self.next_ally()
-
             self.player_team[self.current_ally_index].changeStamina(self.player_team[self.current_ally_index].restoredStamina * 2)
 
             print(f"aliado {self.player_team[self.current_ally_index].displayName} gana"
@@ -289,6 +386,8 @@ class InBattleView(arcade.View):
 
             if self.player_team[self.current_ally_index].currentStamina > self.player_team[self.current_ally_index].maxStamina:
                 self.player_team[self.current_ally_index].currentStamina = self.player_team[self.current_ally_index].maxStamina
+
+            self.next_ally()
 
     def on_click_button(self, event):
         print(f"button clicked: {self.clicked_button_name}")
@@ -417,12 +516,6 @@ class InBattleView(arcade.View):
         window_size = self.window.get_size()
         current_height = window_size[1]
         return current_height
-
-    def get_pointer_positions(self):
-        if self.option == "select_enemy":
-            return enemy_y_positions[self.current_selected_enemy]
-        else:
-            return self.y_positions[self.current_ally]
 
     def main_buttons(self):
         self.contenedor.clear()
@@ -779,4 +872,5 @@ class InBattleView(arcade.View):
             self.next_ally()
 
     def battle_end(self):
+        time.sleep(5)
         self.window.show_view(self.window.views["menu"])
