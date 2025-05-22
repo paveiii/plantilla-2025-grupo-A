@@ -1,16 +1,20 @@
 """
 Main game view
 """
-
 import json
 from functools import partial
 from typing import Callable
 
 import arcade
 import arcade.gui
+from arcade import SpriteList, Sprite
+from arcade.gui import UIFlatButton
+
 import rpg.constants as constants
 from arcade.experimental.lights import Light
 from pyglet.math import Vec2
+
+from rpg.load_game_map import load_map
 from rpg.message_box import MessageBox
 from rpg.sprites.WorldAlly import WorldAlly
 from rpg.sprites.WorldItem import WorldItem
@@ -132,6 +136,23 @@ class GameView(arcade.View):
     def __init__(self, map_list, player):
         super().__init__()
 
+        self.item_nuevo = None
+        self.old_ally_battle = None
+        self.button_clicked = False
+        self.E_pressed = None
+        self.dialogue_list = None
+        self.other_dialogue = None
+        self.dialogues_length = None
+        self.current_dialog = 0
+        self.dialogue_background = None
+        self.main_buttons_widget = None
+        self.anchor_widget = None
+        self.selected_ally = None
+        self.y = 200
+        self.ally_colliding = None
+        self.item = False
+        self.dialogue = None
+        self.allys = arcade.SpriteList()
         arcade.set_background_color(arcade.color.AMAZON)
 
         self.setup_debug_menu()
@@ -164,9 +185,55 @@ class GameView(arcade.View):
         self.hotbar_sprite_list = None
         self.selected_item = 1
 
-        #Quitar este diccionario apenas quitemos los mapas y demas datos originales del proyecto.
+        self.dialogues_active = False
+        self.allys_colliding = SpriteList()
+        self.letraE = None
+        self.team_names = ""
+        self.player_team_sheets = arcade.SpriteList()
+        self.team_sprites = arcade.SpriteList()
+        self.x = 1000
+
+        # Cargamos el sonido al abrir y cerrar diálogos
+        # self.pergamino_sound = arcade.load_sound("../resources/sounds/pergamino.wav")
+        # Temporizador para saber cuando reproducir el sonido
+        # self.grass_sound_timer = 0
+        # self.grass_sound = arcade.load_sound("../resources/sounds/grass_sound.wav")
+        # --- Required for all code that uses UI element, a UIManager to handle the UI.
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
+
+        # Create a vertical BoxGroup to align buttons
+        self.v_box = arcade.gui.UIBoxLayout()
+
+        x = self.player_sprite.center_x
+        y = self.player_sprite.center_y
+        start_game_button = arcade.gui.UIFlatButton(x = x + 234, y = y, text="1", width=50)
+        self.v_box.add(start_game_button.with_space_around(bottom=20))
+        # start_game_button.on_click = self.on_click_start_game_button
+
+        load_game_button = arcade.gui.UIFlatButton(x = x, y = y, text="2", width=50)
+        self.v_box.add(load_game_button.with_space_around(bottom=20))
+        # load_game_button.on_click = self.on_click_load_game_button
+
+        exit_button = arcade.gui.UIFlatButton(x = x, y = y, text="3", width=50)
+        self.v_box.add(exit_button.with_space_around(bottom=20))
+        # exit_button.on_click = self.on_click_exit_button
+
+        exit_button = arcade.gui.UIFlatButton(x = x, y = y, text="4", width=50)
+        self.v_box.add(exit_button.with_space_around(bottom=20))
+        # exit_button.on_click = self.on_click_exit_button
+
+        self.contenedor = arcade.gui.UIBoxLayout()
+        # Flag para controlar la creacion de los botones
+        self.buttons_visible = False
+
+        self.team_buttons = []
+
         f = open("../resources/data/worldItem_dictionary.json")
         self.worldItem_dictionary = json.load(f)
+
+        f = open("../resources/data/battleCharacters_dictionary.json")
+        self.team = json.load(f)
 
         f = open("../resources/data/item_dictionary.json")
         self.item_dictionary = json.load(f)
@@ -193,13 +260,16 @@ class GameView(arcade.View):
         :param start_x: Grid x location to spawn at
         :param start_y: Grid y location to spawn at
         """
+
+        if(map_name not in self.map_list):
+            self.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json",self.player_sprite)
+
         self.cur_map_name = map_name
 
         try:
             self.my_map = self.map_list[self.cur_map_name]
         except KeyError:
             raise KeyError(f"Unable to find map named '{map_name}'.")
-
         if self.my_map.background_color:
             arcade.set_background_color(self.my_map.background_color)
 
@@ -240,7 +310,9 @@ class GameView(arcade.View):
 
         self.switch_map(constants.STARTING_MAP,start_x,start_y)
         self.cur_map_name = constants.STARTING_MAP
-
+        self.dialogue_background = arcade.Sprite("../resources/UIThings/dialogoFondo.png")
+        self.dialogue_background.center_x = self.player_sprite.center_x + 450
+        self.dialogue_background.center_y = self.player_sprite.center_y - 450
         # Set up the hotbar
         self.load_hotbar_sprites()
 
@@ -295,39 +367,39 @@ class GameView(arcade.View):
             else self.original_movement_speed
         )
 
-    def draw_inventory(self):
-        capacity = 10
-        vertical_hotbar_location = 40
-        hotbar_height = 80
-        sprite_height = 16
-
-        field_width = self.window.width / (capacity + 1)
-
-        x = self.window.width / 2
-        y = vertical_hotbar_location
-
-        arcade.draw_rectangle_filled(
-            x, y, self.window.width, hotbar_height, arcade.color.ALMOND
-        )
-        for i in range(capacity):
-            y = vertical_hotbar_location
-            x = i * field_width + 5
-            if i == self.selected_item - 1:
-                arcade.draw_lrtb_rectangle_outline(
-                    x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
-                )
-
-            if len(self.player_sprite.inventory) > i:
-                try: item_name = self.player_sprite.inventory[i]["short_name"]
-                except: item_name = self.player_sprite.inventory[i]["name"]
-            else:
-                item_name = ""
-
-            hotkey_sprite = self.hotbar_sprite_list[i]
-            hotkey_sprite.draw_scaled(x + sprite_height / 2, y + sprite_height / 2, 2.0)
-            # Add whitespace so the item text doesn't hide behind the number pad sprite
-            text = f"     {item_name}"
-            arcade.draw_text(text, x, y, arcade.color.ALLOY_ORANGE, 16)
+    # def draw_inventory(self):
+    #     capacity = 10
+    #     vertical_hotbar_location = 40
+    #     hotbar_height = 80
+    #     sprite_height = 16
+    #
+    #     field_width = self.window.width / (capacity + 1)
+    #
+    #     x = self.window.width / 2
+    #     y = vertical_hotbar_location
+    #
+    #     arcade.draw_rectangle_filled(
+    #         x, y, self.window.width, hotbar_height, arcade.color.ALMOND
+    #     )
+    #     for i in range(capacity):
+    #         y = vertical_hotbar_location
+    #         x = i * field_width + 5
+    #         if i == self.selected_item - 1:
+    #             arcade.draw_lrtb_rectangle_outline(
+    #                 x - 6, x + field_width - 15, y + 25, y - 10, arcade.color.BLACK, 2
+    #             )
+    #
+    #         if len(self.player_sprite.inventory) > i:
+    #             try: item_name = self.player_sprite.inventory[i]["short_name"]
+    #             except: item_name = self.player_sprite.inventory[i]["name"]
+    #         else:
+    #             item_name = ""
+    #
+    #         hotkey_sprite = self.hotbar_sprite_list[i]
+    #         hotkey_sprite.draw_scaled(x + sprite_height / 2, y + sprite_height / 2, 2.0)
+    #         # Add whitespace so the item text doesn't hide behind the number pad sprite
+    #         text = f"     {item_name}"
+    #         arcade.draw_text(text, x, y, arcade.color.ALLOY_ORANGE, 16)
 
     def on_draw(self):
         """
@@ -344,16 +416,32 @@ class GameView(arcade.View):
         # 'with' statement. Nothing is rendered to the screen yet, just the light
         # layer.
         with cur_map.light_layer:
+            self.allys.clear()
             arcade.set_background_color(cur_map.background_color)
+
+            # Antes del cambio
+            # # Grab each tile layer from the map
+            # map_layers = cur_map.map_layers
+            #
+            # # Draw scene
+            # cur_map.scene.draw()
 
             # Use the scrolling camera for sprites
             self.camera_sprites.use()
-
-            # Grab each tile layer from the map
             map_layers = cur_map.map_layers
+            for layer_name, sprite_list in cur_map.scene.name_mapping.items():
+                if layer_name == "top":
+                    continue  # saltamos la capa
 
-            # Draw scene
-            cur_map.scene.draw()
+                sprite_list.draw()
+
+            # Dibujamos al jugador
+            self.player_sprite_list.draw()
+
+            # Dibujamos la capa restante
+            top = cur_map.scene.name_mapping.get("top")
+            if top:
+                top.draw()
 
             for item in map_layers.get("searchable", []):
                 arcade.Sprite(
@@ -364,8 +452,67 @@ class GameView(arcade.View):
                 ).draw()
 
             # Draw the player
-            self.player_sprite_list.draw()
+            # self.player_sprite_list.draw()
 
+            sprites_in_range = []
+            if "searchable" in map_layers:
+                searchable_sprites = map_layers["searchable"]
+                sprites_in_range = arcade.check_for_collision_with_list(
+                    self.player_sprite, searchable_sprites
+                )
+            sprite = None
+            for sprites in sprites_in_range:
+                sprite = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
+                sprite.center_x = sprites.center_x + 30
+                sprite.center_y = sprites.center_y
+
+            if sprite:
+                sprite.draw()
+                arcade.draw_text("Recoger", sprite.center_x + 10, sprite.center_y - 5, arcade.color.BLACK)
+
+            if self.letraE:
+                self.letraE.draw()
+                arcade.draw_text("Reclutar", self.letraE.center_x + 10, self.letraE.center_y - 5, arcade.color.BLACK)
+
+            for characters in self.player_sprite.allys_on_map:
+                self.allys.append(characters)
+                #print(characters.get_interaction_dialogue())
+
+                for ally in self.allys:
+                    if ally.checkPlayer():
+                        if self.dialogues_active:
+                            # arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                            self.dialogue_background.center_x = self.player_sprite.center_x
+                            self.dialogue_background.center_y = self.player_sprite.center_y - 450
+                            self.dialogue_background.draw()
+                            dialogue, item_bool = ally.get_interaction_dialogue()
+                            self.dialogues_length = len(dialogue)
+                            if type(dialogue) == list:
+                                arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                            else:
+                                arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                            if dialogue == ally.dialogueFullTeam:
+                                # x = self.player_sprite.center_x + 200
+                                # y = self.player_sprite.center_y - 250
+                                # i = 0
+                                # j = 1
+                                # for names in self.player_sprite.player_team:
+                                #     if i == 2:
+                                #         y -= 30
+                                #         x = self.player_sprite.center_x +  200
+                                #         i = -1
+                                #     arcade.draw_rectangle_filled(x, y, 40, 20, arcade.color.LIGHT_CYAN)
+                                #     arcade.draw_text(str(j), x - 3, y - 5, arcade.color.BLACK)
+                                #     x += 50
+                                #     i += 1
+                                #     j += 1
+
+                                if not self.buttons_visible:
+                                    self.main_buttons(self.player_sprite.player_team)
+                                    self.buttons_visible = True
+        if self.dialogues_active is False:
+            self.hide_main_buttons()
+            self.buttons_visible = False
         if cur_map.light_layer:
             # Draw the light layer to the screen.
             # This fills the entire screen with the lit version
@@ -377,18 +524,26 @@ class GameView(arcade.View):
                 ambient_color = arcade.color.WHITE
             cur_map.light_layer.draw(ambient_color=ambient_color)
 
+        if self.other_dialogue:
+            self.show_different_dialogue(self.dialogue_list)
+
+        if self.old_ally_battle:
+            self.old_ally_battle.draw()
+        if self.item_nuevo:
+            self.item_nuevo.draw()
+
         # Use the non-scrolled GUI camera
         self.camera_gui.use()
 
+
         # Draw the inventory
-        self.draw_inventory()
+        # self.draw_inventory()
 
         # Draw any message boxes
         if self.message_box:
             self.message_box.on_draw()
-
         # draw GUI
-        self.ui_manager.draw()
+        self.manager.draw()
 
     def scroll_to_player(self, speed=constants.CAMERA_SPEED):
         """Manage Scrolling"""
@@ -399,20 +554,94 @@ class GameView(arcade.View):
         )
         self.camera_sprites.move_to(vector, speed)
 
+    def show_different_dialogue(self, dialogue):
+        print(f"coords: {self.player_sprite.center_x} {self.player_sprite.center_y}")
+        self.dialogue_background.center_x = self.player_sprite.center_x
+        self.dialogue_background.center_y = self.player_sprite.center_y - 450
+        self.dialogue_background.draw()
+
+        if type(dialogue) == list:
+            self.dialogues_length = len(dialogue)
+            print("Mostrando diálogo:", dialogue[self.current_dialog])
+            arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+
+    # Función que creará lo botones cuando se active el diálogo de equipo lleno
+    def main_buttons(self, lista_nombres: list):
+        self.contenedor.clear()
+        self.manager.clear()
+
+        self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+        self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+
+        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0].displayName, width=150)
+        self.fila1.add(ally1_button)
+        ally1_button.on_click = self.ally1
+
+        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1].displayName, width=150)
+        self.fila1.add(ally2_button)
+        ally2_button.on_click = self.ally2
+
+        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2].displayName, width=150)
+        self.fila2.add(ally3_button)
+        ally3_button.on_click = self.ally3
+
+        ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3].displayName, width=150)
+        self.fila2.add(ally4_button)
+        ally4_button.on_click = self.ally4
+
+        self.contenedor.add(self.fila1.with_space_around(bottom=20))
+        self.contenedor.add(self.fila2)
+
+        # Aquí guardas el widget para poder eliminarlo luego
+        self.main_buttons_widget = arcade.gui.UIAnchorWidget(
+            anchor_x="right",
+            anchor_y="bottom",
+            align_x=-100,
+            align_y=10,
+            child=self.contenedor
+        )
+        self.manager.add(self.main_buttons_widget)
+
+    def hide_main_buttons(self):
+        if self.main_buttons_widget:
+            self.manager.remove(self.main_buttons_widget)
+            self.main_buttons_widget = None
+
     def on_show_view(self):
         # Set background color
         my_map = self.map_list[self.cur_map_name]
         if my_map.background_color:
             arcade.set_background_color(my_map.background_color)
 
+    # Funciones para cada uno de los botones. Cada una selecciona a un aliado a reemplazar
+    def ally1(self, event):
+        self.button_clicked = True
+        self.selected_ally = 0
+    def ally2(self, event):
+        self.button_clicked = True
+        self.selected_ally = 1
+    def ally3(self, event):
+        self.button_clicked = True
+        self.selected_ally = 2
+    def ally4(self, event):
+        self.button_clicked = True
+        self.selected_ally = 3
+
     def on_update(self, delta_time):
         """
         All the logic to move, and the game logic goes here.
         """
 
+        self.letraE = None
+        # self.allys.clear()
         # Calculate speed based on the keys pressed
         self.player_sprite.change_x = 0
         self.player_sprite.change_y = 0
+
+        # print(self.player_sprite.allys_on_map)
+        # for characters in self.player_sprite.allys_on_map:
+        #     self.allys.append(characters)
+        #     print(characters.get_interaction_dialogue())
 
         MOVING_UP = (
             self.up_pressed
@@ -469,41 +698,133 @@ class GameView(arcade.View):
             and not self.up_pressed
             and not self.left_pressed
         )
+        if self.dialogues_active or self.other_dialogue:
+            self.player_sprite.change_x = 0
+            self.player_sprite.change_y = 0
+        else:
+            if MOVING_UP:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED
 
-        if MOVING_UP:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED
+            if MOVING_DOWN:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED
 
-        if MOVING_DOWN:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED
+            if MOVING_LEFT:
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED
 
-        if MOVING_LEFT:
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED
+            if MOVING_RIGHT:
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED
 
-        if MOVING_RIGHT:
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED
+            if MOVING_UP_LEFT:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_UP_LEFT:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
+            if MOVING_UP_RIGHT:
+                self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_UP_RIGHT:
-            self.player_sprite.change_y = constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
+            if MOVING_DOWN_LEFT:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
 
-        if MOVING_DOWN_LEFT:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = -constants.MOVEMENT_SPEED / 1.5
-
-        if MOVING_DOWN_RIGHT:
-            self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
-            self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
+            if MOVING_DOWN_RIGHT:
+                self.player_sprite.change_y = -constants.MOVEMENT_SPEED / 1.5
+                self.player_sprite.change_x = constants.MOVEMENT_SPEED / 1.5
 
 
+        #print(self.player_sprite.player_team)
         # Si hay slowdown_list en la scene, la velocidad del jugador se reduce al pasar por encima
         slowdown_hit = arcade.check_for_collision_with_list(self.player_sprite, self.my_map.scene["slowdown_list"])
         for things in slowdown_hit:
             self.player_sprite.change_y *= 0.8
             self.player_sprite.change_x *= 0.8
+
+        self.ally_names = ""
+        for ally in self.allys:
+            if ally.checkPlayer():
+                self.letraE = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
+                self.letraE.center_x = ally.center_x + 30
+                self.letraE.center_y = ally.center_y
+                dialogue, item_bool = ally.get_interaction_dialogue()
+                if dialogue == ally.dialogueFullTeam and self.dialogues_active:
+                    if self.selected_ally != None:
+                        # Guardamos el aliado a reemplazar
+                        old_ally = self.player_sprite.player_team[self.selected_ally]
+                        # Quitamos del equipo del jugador al aliado seleccionado
+                        self.player_sprite.player_team.remove(self.player_sprite.player_team[self.selected_ally])
+                        # Añadimos al equipo del jugador al aliado con el que estabamos dialogando
+                        self.player_sprite.player_team.append(ally.aliadoBatalla)
+                        # Desactivamos los dialogos
+                        self.dialogues_active = False
+                        self.current_dialog = 0
+                        # arcade.play_sound(self.pergamino_sound, volume=1)
+                        # Creamos otro WorldAlly con la información del battleAlly quitado del player_team
+                        self.old_ally_battle = WorldAlly(f":characters:{self.team[old_ally.displayName]['sheet_name']}", self.my_map.scene, self.player_sprite, old_ally, self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['name'],
+                                                         self.team[old_ally.displayName]["dialogueNoItem"], self.team[old_ally.displayName]["dialogueWithItem"])
+                        self.old_ally_battle.center_x = self.player_sprite.center_x
+                        self.old_ally_battle.center_y = self.player_sprite.center_y
+                        self.player_sprite.allys_on_map.append(self.old_ally_battle)
+                        self.allys.append(self.old_ally_battle)
+                        # Creamos otro item
+                        self.item_nuevo = WorldItem(f":items:{self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['sheet_name']}", self.team[old_ally.displayName]['requirementItemKey'])
+                        self.item_nuevo.center_x = self.player_sprite.center_x + 50
+                        self.item_nuevo.center_y = self.player_sprite.center_y
+                        self.my_map.scene.add_sprite("searchable", self.item_nuevo)
+                        self.my_map.worldAllyList.append(self.old_ally_battle)
+                        self.my_map.worldItemList.append(self.item_nuevo)
+                        # quitar al aliado del mapa
+                        ally.remove_from_sprite_lists()
+                        # quitar su item del inventario
+                        for item in self.player_sprite.inventory:
+                            if item['name'] == ally.requirementItemName:
+                                self.player_sprite.inventory.remove(item)
+                        self.selected_ally = None
+
+
+
+        self.team_sprites = arcade.SpriteList()
+        x = 200
+        for ally in self.player_sprite.player_team:
+            sprite = arcade.Sprite(ally.sheetName)
+            sprite.center_x = x
+            sprite.center_y = 200
+            self.team_sprites.append(sprite)
+            x += 50
+        self.y = 250
+        arcade.set_background_color(arcade.color.ALMOND)
+        arcade.set_viewport(0, self.window.width, 0, self.window.height)
+        self.team_names = self.window.views["game"].player_sprite.player_team
+        self.player_team_sheets = arcade.SpriteList()
+        self.characters = []
+
+        self.x = self.player_sprite.center_x
+        for character in self.player_sprite.player_team:
+            if character in self.team and 'sheet_name' in self.team[character]:
+                sheet_name = self.team[character]['sheet_name']
+
+                # Cargar las texturas desde el spritesheet
+                textures = arcade.load_spritesheet(
+                    f":characters:{sheet_name}",
+                    sprite_width=64,
+                    sprite_height=64,
+                    columns=9,
+                    count=36
+                )
+
+                # Crear un Sprite y asignarle una textura
+                sprite = Sprite()
+                sprite.texture = textures[9]
+                sprite.center_x = self.x
+                sprite.center_y = self.player_sprite.center_y - 275
+                self.x += 50
+                self.characters.append(character)
+                self.player_team_sheets.append(sprite)
+        #print(self.selected_ally)
+        # team = SpriteList()
+        # for character in self.team_sprites:
+        #     team.append(character)
+        # self.allys_colliding = arcade.check_for_collision_with_list(self.player_sprite, team)
+        # if self.allys_colliding:
+        #     self.dialogues_active = True
 
         # Call update to move the sprite
         self.physics_engine.update()
@@ -570,36 +891,46 @@ class GameView(arcade.View):
         elif key in constants.INVENTORY:
             self.window.show_view(self.window.views["inventory"])
         elif key == arcade.key.ESCAPE:
-            self.window.show_view(self.window.views["main_menu"])
+            if self.dialogues_active or self.other_dialogue:
+                self.dialogues_active = False
+                self.other_dialogue = False
+                self.current_dialog = 0
+            else:
+                self.window.show_view(self.window.views["main_menu"])
         elif key == arcade.key.P:
             self.window.show_view(self.window.views["in_battle"])
         elif key == arcade.key.M:
             self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
+            self.ally_colliding = None
+            for ally in self.allys:
+                for item in self.player_sprite.inventory:
+                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer() and not self.buttons_visible:
+                        self.ally_colliding = ally
+                        ally.remove_from_sprite_lists()
+                        self.player_sprite.inventory.remove(item)
+                        self.dialogues_active = False
+                        self.current_dialog = 0
+                        # arcade.play_sound(self.pergamino_sound, volume=1)
+            if self.ally_colliding and len(self.player_sprite.player_team) < 4:
+                self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
             self.search()
-        elif key == arcade.key.KEY_1:
-            self.selected_item = 1
-        elif key == arcade.key.KEY_2:
-            self.selected_item = 2
-        elif key == arcade.key.KEY_3:
-            self.selected_item = 3
-        elif key == arcade.key.KEY_4:
-            self.selected_item = 4
-        elif key == arcade.key.KEY_5:
-            self.selected_item = 5
-        elif key == arcade.key.KEY_6:
-            self.selected_item = 6
-        elif key == arcade.key.KEY_7:
-            self.selected_item = 7
-        elif key == arcade.key.KEY_8:
-            self.selected_item = 8
-        elif key == arcade.key.KEY_9:
-            self.selected_item = 9
-        elif key == arcade.key.KEY_0:
-            self.selected_item = 10
-        #DEBUG
+        elif key == arcade.key.SPACE:
+            if self.dialogues_active or self.other_dialogue:
+                if self.current_dialog < self.dialogues_length - 1:
+                    self.current_dialog += 1
+                else:
+                    self.current_dialog = 0
+        #DEBUG -----
+        elif key == arcade.key.B:
+            self.dialogue_list = ["asdas", "asdadcas"]
+            self.other_dialogue = True if not self.other_dialogue else False
+
         elif key == arcade.key.Z:
             self.player_sprite.debugAnim()
+        elif key == arcade.key.X:
+            self.save_game()
+        #DEBUG -----
         elif key == arcade.key.L:
             cur_map = self.map_list[self.cur_map_name]
             if self.player_light in cur_map.light_layer:
@@ -619,13 +950,27 @@ class GameView(arcade.View):
 
     def search(self):
         """Search for things"""
+        for ally in self.allys:
+            if ally.checkPlayer():
+                if self.dialogues_active:
+                    self.dialogues_active = False
+                    self.current_dialog = 0
+                    # arcade.play_sound(self.pergamino_sound, volume=1)
+
+                else:
+                    self.dialogues_active = True
+                    # arcade.play_sound(self.pergamino_sound, volume=1)
+        self.allys_colliding.clear()
         map_layers = self.map_list[self.cur_map_name].map_layers
         print(map_layers)
+
         if "searchable" not in map_layers:
             print(f"No searchable sprites on {self.cur_map_name} map layer.")
             return
-
         searchable_sprites = map_layers["searchable"]
+        # if self.item_nuevo and not self.added:
+        #     searchable_sprites.append(self.item_nuevo)
+        #     self.added = True
         sprites_in_range = arcade.check_for_collision_with_list(
             self.player_sprite, searchable_sprites
         )
@@ -642,10 +987,10 @@ class GameView(arcade.View):
                 self.player_sprite.inventory.append(lookup_item)
                 print(self.player_sprite.inventory)
                 continue
-            else:
-                print("Este Sprite no es un WorldItem sprite.")
-
-
+            print(self.allys)
+        for character in self.allys:
+            # self.dialogue, self.item = character.get_interaction_dialogue()
+            print(character)
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
 
@@ -660,12 +1005,17 @@ class GameView(arcade.View):
 
     def on_mouse_motion(self, x, y, delta_x, delta_y):
         """Called whenever the mouse moves."""
-        pass
+        self.manager.on_mouse_motion(x, y, delta_x, delta_y)
 
     def on_mouse_press(self, x, y, button, key_modifiers):
         """Called when the user presses a mouse button."""
         if button == arcade.MOUSE_BUTTON_RIGHT:
             self.player_sprite.destination_point = x, y
+        for i, sprite in enumerate(self.player_team_sheets):
+            if sprite.collides_with_point((x, y)):
+                print(123445643213453323)
+        # self.manager.on_mouse_press(x, y, button, key_modifiers)
+
 
     def on_mouse_release(self, x, y, button, key_modifiers):
         """Called when a user releases a mouse button."""
@@ -693,3 +1043,51 @@ class GameView(arcade.View):
                         items = json.load(file)
                     if object_name == item["name"]:
                         self.player_sprite.inventory.append(item)
+    def save_game(self):
+        print("Guardando partida")
+        #date = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
+        #with open(f"saveGame{date}.json", "w") as f:
+
+        saveDict = {}
+        saveDict["currentMapName"] = self.cur_map_name
+        saveDict["playerPosition"] = (self.player_sprite.center_x, self.player_sprite.center_y)
+
+        #Informacion individual del jugador.
+        playerItems = []
+        for item in self.player_sprite.inventory:
+            playerItems.append([item["name"], item["amount"]])
+        saveDict["playerInventory"] = playerItems
+
+        playerAllies = []
+        for ally in self.player_sprite.player_team:
+            playerAllies.append([ally.characterKey,ally.currentHealth])
+        saveDict["playerTeam"] = playerAllies
+
+        #Informacion de los mapas.
+        saveDict["maps"] = {}
+        for mapName in self.map_list:
+            print(mapName)
+            print(self.map_list[mapName])
+            saveDict["maps"][mapName] = {}
+
+            saveDict["maps"][mapName]["worldAllies"] = []
+            for worldAlly in self.map_list[mapName].worldAllyList:
+                saveDict["maps"][mapName]["worldAllies"].append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x, worldAlly.center_y)])
+
+            saveDict["maps"][mapName]["worldEnemies"] = []
+            for worldEnemy in self.map_list[mapName].worldEnemyList:
+                enemyDict = {}
+                enemyDict["sheetName"] = worldEnemy.sheetName
+                enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
+                enemyDict["velocity"] = worldEnemy.speed
+                enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
+
+                saveDict["maps"][mapName]["worldEnemies"].append(enemyDict)
+
+            saveDict["maps"][mapName]["worldItems"] = []
+            for worldItem in self.map_list[mapName].worldItemList:
+                saveDict["maps"][mapName]["worldItems"].append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
+
+        with open(f"saveGame.json", "w") as f:
+            json.dump(saveDict,f, indent=4)
+        print("Terminado")

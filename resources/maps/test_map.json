@@ -251,6 +251,45 @@
         }, 
         {
          "draworder":"topdown",
+         "id":6,
+         "name":"doors",
+         "objects":[
+                {
+                 "gid":840,
+                 "height":32,
+                 "id":32,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"test_map_2"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":30
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":35
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1344,
+                 "y":1312
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "name":"searchable",
          "objects":[
@@ -398,8 +437,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":29,
+ "nextlayerid":7,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "properties":[
         {

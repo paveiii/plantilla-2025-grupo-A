@@ -17,6 +17,7 @@ class WorldAlly(CharacterSprite):
         self.wall_list = None
         print(battleKey)
 
+        self.dialogueFullTeam = "EQUIPO LLENO. ¿A QUÉ ALIADO DESEA REEMPLAZAR?"
         self.dialogueNoItem = dialogueNoItem #Dialogo cuando el jugador no tiene el item necesitado para reclutar al personaje.
         self.dialogueRecruit = dialogueWithItem #Dialogo cuando el jugador tiene el item necesitado para reclutar al personaje.
         self.requirementItemName = requirementItemName #Nombre del objeto necesitado para reclutar al personaje.
@@ -27,30 +28,21 @@ class WorldAlly(CharacterSprite):
             return True
         else:
             return False
+
+    def get_interaction_dialogue(self):
+        if not self.checkPlayer():
+            return None  # No hay interacción
+
+        itemRequirementFound = any(item.get("name") == self.requirementItemName for item in self.jugador.inventory)
+
+        if itemRequirementFound:
+            if len(self.jugador.player_team) < 4:
+                return self.dialogueRecruit, True
+            else:
+                # Reemplazar segundo personaje por ahora (simplificado)
+                return self.dialogueFullTeam, True
+        else:
+            return self.dialogueNoItem, False
+
     def on_update(self, delta_time):
-        if self.checkPlayer():
-            print(f"{self.aliadoBatalla}: He interactuado con el jugador.")
-            itemRequirementFound = False
-            print(self.requirementItemName)
-            print(self.jugador.inventory)
-            for item in self.jugador.inventory:
-                if item.get("name") == self.requirementItemName:
-                    itemRequirementFound = True
-                    print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
-
-                    if(len(self.jugador.player_team) < 4):
-                        self.jugador.player_team.append(self.aliadoBatalla)
-                        self.remove_from_sprite_lists()
-                        print(self.jugador.player_team)
-                    else:
-                        print("Tu equipo está lleno, desea reemplazar por otro? Y/N. ESTA DECISION NO SE PUEDE REVERTIR")
-                        #De momento asumimos que si y reemplazamos el segundo para probar codigo.
-                        #TO-DO: Panel de decision.
-
-                        decision = 1
-                        self.jugador.player_team[decision] = self.aliadoBatalla
-                        self.remove_from_sprite_lists()
-                        print(self.jugador.player_team)
-                    return
-            print(f"{self.aliadoBatalla}:{self.dialogueRecruit}")
         super().on_update(delta_time)

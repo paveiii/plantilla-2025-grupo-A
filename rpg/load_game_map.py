@@ -13,6 +13,9 @@ from arcade import tilemap
 from arcade.experimental.lights import Light, LightLayer
 from arcade import Sprite
 
+from rpg.Action import Action
+from rpg.BattleAlly import BattleAlly
+
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
 
@@ -34,17 +37,20 @@ class GameMap:
     map_size = None
     properties = None
     background_color = arcade.color.AMAZON
+    worldEnemyList = arcade.SpriteList()
+    worldAllyList = arcade.SpriteList()
+    worldItemList = arcade.SpriteList()
 
 
 def load_map(map_name,player):
     """
     Load a map
     """
-
+    ally_list = []
     #DEBUG: Codigo para cargar solo un mapa especificado.
     # Quitar esto si quieres usar las puertas del mapa
-    if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
-        return None
+    #if(map_name != f"../resources/maps/{constants.STARTING_MAP}.json"):
+    #    return None
 
     game_map = GameMap()
 
@@ -116,6 +122,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     # Any layer with '_blocking' in it, will be a wall
     game_map.scene.add_sprite_list("wall_list", use_spatial_hash=True)
     game_map.scene.add_sprite_list("slowdown_list", use_spatial_hash=True)
+    game_map.scene.add_sprite_list("grass_top", use_spatial_hash=True)
     for layer, sprite_list in game_map.map_layers.items():
         if "_blocking" in layer:
             # Eliminar la spritelist original
@@ -135,6 +142,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
         if "_slowdown" in layer:
             game_map.scene.remove_sprite_list_by_object(sprite_list)
             game_map.scene["slowdown_list"].extend(sprite_list)
+        if layer == "top":
+            # game_map.scene.remove_sprite_list_by_object(sprite_list)
+            game_map.scene["grass_top"].extend(sprite_list)
 
     f = open("../resources/data/worldItem_dictionary.json")
     worldItem_dictionary = json.load(f)
@@ -153,8 +163,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
         f = open("../resources/data/battleCharacters_dictionary.json")
         battleCharacter_dictionary = json.load(f)
 
-        #f = open("../resources/data/actions_dictionary.json")
-        #actions_dictionary = json.load(f)
+        #Puse este código hace como un mes y ahora lo necesito ouuu yeah
+        f = open("../resources/data/actions_dictionary.json")
+        actions_dictionary = json.load(f)
 
         for character_object in character_object_list:
             if "type" not in character_object.properties:
@@ -215,6 +226,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     print("Creando enemigo con sprite:",
                           f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}")
                     character_sprite = WorldEnemy(f":characters:{battleCharacter_dictionary[battleEnemyKeys[randomSpriteIndex]]['sheet_name']}", game_map.scene,player, battleEnemyKeys,character_data["speed"],character_data["detectionRadius"],mapBarrierList)
+                    game_map.worldEnemyList.append(character_sprite)
 
                     if(mapBarrierList == None):
                         mapBarrierList = arcade.AStarBarrierList(character_sprite, game_map.scene["wall_list"], 32,
@@ -231,7 +243,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                                 print(f"[ERROR] Wall #{i} sin hitbox:", wall)
                 #Spawn de aliados.
                 elif character_object.properties.get("movement") == "ally":
-                    #SPAWN DE OBJETO DE REQUERIMIENTO.
 
                     # Carga  en la lista los nombres de los posibles aliados que pueden aparecer en la batalla.
                     # En caso de que un nombre no este en el diccionario de personajes de batalla, se ignora.
@@ -248,13 +259,41 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     if(len(availableBattleAllyKeys) > 0):
                         randomIndex = random.randint(0, len(availableBattleAllyKeys) - 1)
 
+                        #REFACTORIZAR
                         battleKey = availableBattleAllyKeys[randomIndex]
+
+                        playerActions = []
+                        for action in battleCharacter_dictionary[battleKey]['actions']:
+                            action_object = Action(actions_dictionary[action]["name"],
+                                                   actions_dictionary[action]["description"],
+                                                   actions_dictionary[action]["actionType"],
+                                                   actions_dictionary[action]["amount"],
+                                                   actions_dictionary[action]["staminaExpense"],
+                                                   actions_dictionary[action]["targetQuantity"],
+                                                   actions_dictionary[action]["effectName"])
+                            playerActions.append(action_object)
+
+                        battleAlly = BattleAlly(battleKey,f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                                 battleCharacter_dictionary[battleKey]['name'],
+                                                 battleCharacter_dictionary[battleKey]['description'],
+                                                 battleCharacter_dictionary[battleKey]['type'],
+                                                 battleCharacter_dictionary[battleKey]['maxStamina'],
+                                                 battleCharacter_dictionary[battleKey]['maxHealth'],
+                                                 battleCharacter_dictionary[battleKey]['restoredStamina'],
+                                                 playerActions,
+                                                 battleCharacter_dictionary[battleKey]['dialogueNoItem'],
+                                                 battleCharacter_dictionary[battleKey]['dialogueWithItem'],
+                                                 battleCharacter_dictionary[battleKey]['requirementItemKey'])
+
                         requirementItemName = item_dictionary[battleCharacter_dictionary[battleKey]["requirementItemKey"]].get("name")
                         dialogueNoItem = battleCharacter_dictionary[battleKey]["dialogueNoItem"]
                         dialogueWithItem = battleCharacter_dictionary[battleKey]["dialogueWithItem"]
 
-                        character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleKey, requirementItemName, dialogueNoItem, dialogueWithItem)
+                        character_sprite = WorldAlly(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene, player, battleAlly, requirementItemName, dialogueNoItem, dialogueWithItem)
+                        game_map.worldAllyList.append(character_sprite)
+
                         spawnedAlliesKeys.append(battleKey)
+                        player.allys_on_map.append(character_sprite)
                     else:
                         character_sprite = None
                 else:
@@ -312,6 +351,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         spriteSheet = itemDict["sheet_name"]
 
                         item_sprite = WorldItem(f":items:{spriteSheet}", itemKey)
+                        game_map.worldItemList.append(item_sprite)
                         item_sprite.position = shape
 
 
@@ -331,6 +371,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     spriteSheet = itemDict["sheet_name"]
 
                     item_sprite = WorldItem(f":items:{spriteSheet}",itemKey)
+                    game_map.worldItemList.append(item_sprite)
                     item_sprite.position = shape
             if (item_sprite != None):
                  print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")

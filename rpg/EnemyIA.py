@@ -33,7 +33,7 @@ class EnemyIA:
         for playerTeammate in self.playerTeam:
             #Numero 1000 es arbitrario, habra que cambiarlo para cuando
             #creamos las estadisticas finales.
-            if playerTeammate.currentHealth < 1000:
+            if playerTeammate.currentHealth < 10:
                 tags.append(1)
                 continue
             if playerTeammate.type == "Medic" or playerTeammate.type == "Captain":
@@ -49,12 +49,14 @@ class EnemyIA:
     #Funcion que se encarga de devolver al integrante del equipo del jugador con mayor prioridad de ataque.
 
     def returnHighestPriorityPlayerTeammate(self, tags):
+        print(tags)
         enemyIndex = 0
         highestPriority = 0
         for i in tags:
+            i_value = i
             if highestPriority == 1:
                 break
-            if tags[i] < highestPriority:
+            if i != 0 and tags[len(self.playerTeam)-1] < highestPriority:
                 enemyIndex = i
 
         return self.playerTeam[enemyIndex]

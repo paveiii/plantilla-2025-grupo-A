@@ -1,3 +1,5 @@
+import time
+
 import arcade
 import arcade.gui
 import json
@@ -11,7 +13,6 @@ from rpg.EnemyIA import EnemyIA
 from rpg.Action import Action
 from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions, ally_y_positions,
                            CHARACTER_POINTER_SPEED, enemy_x_positions, enemy_y_positions)
-import time
 
 # Para probar
 from rpg.views.game_view import GameView
@@ -56,6 +57,7 @@ class InBattleView(arcade.View):
             self.effects = json.load(file)
 
         self.current_ally = 0
+        self.current_ally_index = 0
 
         self.allow_inputs = True
         self.player_turn = True
@@ -89,7 +91,22 @@ class InBattleView(arcade.View):
 
         self.enemy_AI = None
 
+        self.defeated_enemies = []
+        self.remaining_enemies = []
+
+        self.defeated_allies = []
+        self.remaining_allies = []
+        self.ally_rotation = []
+
+        self.round = 1
+        self.r_done = False
+
+        self.player_attacks = 0
+
     def on_show_view(self):
+        self.player_sprites = arcade.SpriteList()
+        self.enemy_sprites = arcade.SpriteList()
+
         self.inventory = self.window.views["game"].player_sprite.inventory
 
         self.manager.enable()
@@ -101,35 +118,7 @@ class InBattleView(arcade.View):
         new_ally_x = ally_x_positions.copy()
         new_ally_y = ally_y_positions.copy()
 
-        self.team_names = self.window.views["game"].player_sprite.player_team
-
-        for character in self.team_names:
-            player_actions = []
-            for action in self.team[character]['actions']:
-
-                action_object = Action(self.actions[action]["name"],
-                                       self.actions[action]["description"],
-                                       self.actions[action]["actionType"],
-                                       self.actions[action]["amount"],
-                                       self.actions[action]["staminaExpense"],
-                                       self.actions[action]["targetQuantity"],
-                                       self.actions[action]["effectName"])
-
-                player_actions.append(action_object)
-
-            ally_object = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
-                                     self.team[character]['name'],
-                                     self.team[character]['description'],
-                                     self.team[character]['type'],
-                                     self.team[character]['maxStamina'],
-                                     self.team[character]['maxHealth'],
-                                     self.team[character]['restoredStamina'],
-                                     player_actions,
-                                     self.team[character]['dialogueNoItem'],
-                                     self.team[character]['dialogueWithItem'],
-                                     self.team[character]['requirementItemKey'])
-
-            self.player_team.append(ally_object)
+        self.player_team = self.window.views["game"].player_sprite.player_team
 
         self.player_team_length = len(self.player_team)
         print(f"Player team length: {self.player_team_length}")
@@ -160,7 +149,7 @@ class InBattleView(arcade.View):
 
                 enemy_actions.append(action_object)
 
-            enemy_object = BattleEnemy(f":characters:{self.enemies[enemy]['sheet_name']}",
+            enemy_object = BattleEnemy(enemy,f":characters:{self.enemies[enemy]['sheet_name']}",
                                        self.enemies[enemy]['name'],
                                        self.enemies[enemy]['description'],
                                        self.enemies[enemy]['maxStamina'],
@@ -170,6 +159,11 @@ class InBattleView(arcade.View):
 
 
             self.enemy_team.append(enemy_object)
+
+        self.remaining_enemy_objects = self.enemy_team.copy()
+
+        self.initial_enemy_team_length = len(self.enemy_team)
+        self.initial_player_team_length = len(self.player_team)
 
         for enemy in self.enemy_team:
             while len(new_enemy_x) > 0:
@@ -189,14 +183,23 @@ class InBattleView(arcade.View):
 
         self.enemy_AI = EnemyIA(self.enemy_team, self.player_team)
 
+        for i in range(len(self.enemy_team)):
+            self.remaining_enemies.append(i)
+
+        for i in range(len(self.player_team)):
+            self.remaining_allies.append(i)
+            self.ally_rotation.append(i)
+
+        print("AQUIIIIIIIIIIIIIIIII")
+        print(f"ally {self.remaining_allies}")
+        print(f"enemy {self.remaining_enemies}")
+
     def on_hide_view(self):
         self.manager.clear()
         self.manager.disable()
 
         self.player_sprites.clear()
         self.enemy_sprites.clear()
-
-        self.player_team.clear()
 
     def on_draw(self):
         current_width = self.get_width()
@@ -269,14 +272,23 @@ class InBattleView(arcade.View):
 
     def on_click_rest(self, event):
         self.option = "rest"
-        if self.current_ally <= 2:
-            self.current_ally += 1
 
-            self.pointer_x = self.x_positions[self.current_ally]
-            self.pointer_y = self.y_positions[self.current_ally]
+        print(f"current {self.player_team[self.current_ally_index].currentStamina}")
+        print(f"max {self.player_team[self.current_ally_index].maxStamina}")
+
+        if self.player_team[self.current_ally_index].currentStamina == self.player_team[self.current_ally_index].maxStamina:
+            print("ESTE PERSONAJE YA TIENE LA STAMINA AL MÁXIMO")
+            self.main_buttons()
         else:
-            self.current_ally = 0
-            self.player_turn = False
+            self.next_ally()
+
+            self.player_team[self.current_ally_index].changeStamina(self.player_team[self.current_ally_index].restoredStamina * 2)
+
+            print(f"aliado {self.player_team[self.current_ally_index].displayName} gana"
+                  f" {self.player_team[self.current_ally_index].restoredStamina * 2} de stamina")
+
+            if self.player_team[self.current_ally_index].currentStamina > self.player_team[self.current_ally_index].maxStamina:
+                self.player_team[self.current_ally_index].currentStamina = self.player_team[self.current_ally_index].maxStamina
 
     def on_click_button(self, event):
         print(f"button clicked: {self.clicked_button_name}")
@@ -287,9 +299,19 @@ class InBattleView(arcade.View):
         self.action_buttons.clear()
 
         if self.option == "attack" or self.option == "skill":
-            self.select_enemy_to_attack()
-            self.manager.clear()
-            self.manager.disable()
+            for action in self.actions.values():
+                if action["name"] == self.clicked_button_name:
+                    print(f"stamina gastada {action['staminaExpense']}")
+                    if self.player_team[self.current_ally_index].currentStamina >= action["staminaExpense"]:
+                        self.manager.clear()
+                        self.manager.disable()
+                        self.select_enemy_to_attack()
+
+                    else:
+                        print("NO TIENES SUFICIENTE STAMINA")
+                        print(f"STAMINA ACTUAL {self.player_team[self.current_ally_index].currentStamina}")
+                        self.main_buttons()
+
 
         if self.option == "item":
             self.perform_action()
@@ -333,24 +355,36 @@ class InBattleView(arcade.View):
 
         self.enemy_sprites.append(self.character_sprite)
 
-
     def on_key_press(self, key, _modifiers):
-
         if self.allow_inputs:
 
             if self.option == "select_enemy":
                 if key == arcade.key.RIGHT or key == arcade.key.D:
-                    if self.current_selected_enemy < 3:
-                        self.current_selected_enemy += 1
-                    else:
-                        self.current_selected_enemy = 0
+                    while True:
+                        if self.current_selected_enemy < self.initial_enemy_team_length - 1:
+                            self.current_selected_enemy += 1
+
+                        else:
+                            self.current_selected_enemy = 0
+
+                            if self.current_selected_enemy in self.defeated_enemies:
+                                self.current_selected_enemy += 1
+                        if self.current_selected_enemy in self.remaining_enemies:
+                            break
                     self.select_enemy_to_attack()
 
                 if key == arcade.key.LEFT or key == arcade.key.A:
-                    if self.current_selected_enemy > 0:
-                        self.current_selected_enemy -= 1
-                    else:
-                        self.current_selected_enemy = 3
+                    while True:
+                        if self.current_selected_enemy > 0:
+                            self.current_selected_enemy -= 1
+
+                        else:
+                            self.current_selected_enemy = self.initial_enemy_team_length - 1
+
+                            if self.current_selected_enemy in self.defeated_enemies:
+                                self.current_selected_enemy -= 1
+                        if self.current_selected_enemy in self.remaining_enemies:
+                            break
                     self.select_enemy_to_attack()
 
                 if key == arcade.key.ENTER:
@@ -534,40 +568,63 @@ class InBattleView(arcade.View):
         self.description_is_displayed = True
 
     def select_enemy_to_attack(self):
+        print(self.current_selected_enemy)
         self.option = "select_enemy"
-        self.pointer_x = enemy_x_positions[self.current_selected_enemy]
-        self.pointer_y = enemy_y_positions[self.current_selected_enemy]
-        self.manager.clear()
-        self.manager.disable()
+        while True:
+            if self.current_selected_enemy in self.remaining_enemies:
+                self.pointer_x = enemy_x_positions[self.current_selected_enemy]
+                self.pointer_y = enemy_y_positions[self.current_selected_enemy]
+                break
+            else:
+                self.current_selected_enemy = self.remaining_enemies[0]
 
     def next_ally(self):
-        if self.current_ally <= self.player_team_length - 2: # -1 Porque la listas empiezan en 0 y -1 más para que cuando el úlitmo aliado termine el cursor de batalla no se vaya al primero
-            self.current_ally += 1
+        self.player_attacks += 1
+
+        self.ally_rotation.append(self.ally_rotation.pop(0))
+
+        if (self.ally_rotation != self.remaining_allies and len(self.player_team) > 1) or (
+                len(self.player_team) == 1 and self.player_attacks == 0):
+            if self.r_done:
+                self.ally_rotation = self.remaining_allies.copy()
+                self.r_done = False
+
+            # Obtener el índice válido en remaining_allies
+            self.current_ally = self.ally_rotation[0]
+            self.current_ally_index = self.remaining_allies.index(self.current_ally)
+
+            # Actualizar posiciones del cursor usando current_ally_index
+            self.pointer_x = self.x_positions[self.current_ally]  # Usar índice en x_positions actualizado
+            self.pointer_y = self.y_positions[self.current_ally]
+
+            print(f"ALIADO ACTUAL: {self.current_ally} (Índice válido: {self.current_ally_index})")
+
             self.allow_inputs = True
-            self.manager.remove(self.contenedor)
             self.stage = 1
             self.action_buttons.clear()
             self.main_buttons()
             self.option = "menu"
-            self.pointer_x = self.x_positions[self.current_ally]
-            self.pointer_y = self.y_positions[self.current_ally]
 
-        else:
+        elif self.player_attacks == len(self.player_team):
+            print("ACABADO TURNO JUGADOR")
             self.player_turn = False
-            self.perform_action() # Como player turn se pone a False se ejecutarán los turnos del equipo enemigo.
-
-            self.current_ally = 0
-            self.pointer_x = self.x_positions[self.current_ally]
+            self.perform_action()
+            self.player_attacks = 0
 
     def perform_action(self):
+
         if self.player_turn:
+            print("TURNO JUGADOR")
             if self.previous_option == "attack" or self.previous_option == "skill":
 
                 for action in self.actions.values():
                     if action["name"] == self.clicked_button_name:
-                        self.enemy_team[self.current_selected_enemy].changeHealth(action["amount"])
+                        target = self.remaining_enemies.index(self.current_selected_enemy)
+                        self.enemy_team[target].changeHealth(-(action["amount"]))
 
                         print(f"enemy index number: {self.current_selected_enemy} -{action['amount']} health")
+                        for enemy in self.enemy_team:
+                            print(f"ATTACKED ENEMY HEALTH: {enemy.currentHealth}")
 
                         if action["effectName"] != "":
                             applied_effect_name = self.effects[action["effectName"]]
@@ -582,23 +639,144 @@ class InBattleView(arcade.View):
 
 
 
-                        self.player_team[self.current_ally].currentStamina -= action["staminaExpense"]
-                        print(self.player_team[self.current_ally].currentStamina)
+                        self.player_team[self.current_ally_index].currentStamina -= action["staminaExpense"]
+                        print(self.player_team[self.current_ally_index].currentStamina)
 
-                self.next_ally()
+                self.pointer_x = self.x_positions[self.current_ally]
+                self.pointer_y = self.y_positions[self.current_ally]
+
+                self.check_health_status()
 
             if self.previous_option == "item":
                 print("CUANDO LOS ITEMS TENGAN SU FORMA DEFINITIVA HACER ESTA PARTE DE CÓDIGO PARA APLICAR LOS EFECTOS")
                 self.next_ally()
                         # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
         else:
-            self.pointer_x = 100000
-            for i in range(len(self.enemy_team)):
-                action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(
-                    self.enemy_team[self.current_selected_enemy])
+            print("TURNO ENEMIGO")
+            for enemy in self.enemy_team:
+                action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(enemy)
+                # Aplica daño
+                idx_ally = self.player_team.index(ally_target)
+                self.player_team[idx_ally].changeHealth(-action_to_execute.amount)
+                print(f"{ally_target.displayName} recibe {action_to_execute.amount} de daño")
 
-                ally_target_index = self.player_team.index(ally_target)
+            self.round_end()
 
-                self.player_team[ally_target_index].changeHealth(-(action_to_execute.amount))
+    def round_end(self):
+        self.r_done = True
 
-                print(f"{self.player_team[ally_target_index].displayName} - {action_to_execute.amount} de vida")
+        self.player_turn = True
+        self.check_health_status()
+
+        self.round += 1
+
+        # Reseteo del cursor
+        self.pointer_x = self.x_positions[self.current_ally]
+        self.pointer_y = self.y_positions[self.current_ally]
+
+        # Para que aparezca el menu
+        self.main_buttons()
+        self.option = "menu"
+
+        # Para aplicar los efectos
+        # En aliados
+
+        for unique_list in self.ally_effects_list:
+            for effect in unique_list:
+                try:
+                    effect.duration -= 1
+                    if effect.duration > 0:
+                        target_ally_index = self.ally_effects_list.index(unique_list)
+                        if effect.effectType == "Damage":
+                            self.player_team[target_ally_index].changeHealth(-(effect.amount))
+                        elif effect.effectType == "Heal":
+                            self.player_team[target_ally_index].changeHealth(effect.amount)
+                        #elif effect.effectType == "Multiplier":
+                            #
+                    else:
+                        unique_list.remove(effect)
+                except:
+                    pass
+
+        # En enemigos
+
+        for unique_list in self.enemy_effects_list:
+            for effect in unique_list:
+                try:
+                    effect.duration -= 1
+                    if effect.duration > 0:
+                        target_enemy_index = self.enemy_effects_list.index(unique_list)
+                        if effect.effectType == "Damage":
+                            self.enemy_team[target_enemy_index].changeHealth(-(effect.amount))
+                            print(f"{self.enemy_team[target_enemy_index]} -{effect.amount} health")
+                            print(self.enemy_team[target_enemy_index].currentHealth)
+                        elif effect.effectType == "Heal":
+                            self.enemy_team[target_enemy_index].changeHealth(effect.amount)
+                            print(f"{effect} ended")
+                    else:
+                        unique_list.remove(effect)
+                except:
+                    pass
+
+    def check_health_status(self):
+        print("NO NEGATIVO PLSSSSSS")
+        print(self.player_team[0].currentHealth)
+        for ally in self.player_team:
+            if ally.currentHealth <= 0:
+                removed_sprite_index = self.player_team.index(ally)
+
+                self.player_team.pop(removed_sprite_index)
+                self.player_sprites.pop(removed_sprite_index)
+
+                popped_index = self.remaining_allies.pop(removed_sprite_index)
+                self.ally_rotation = self.remaining_allies.copy()
+
+                print(f"CUANDO MUERE REMAINING ES {self.remaining_allies}")
+                print(f"CUANDO MUERE ROTATION ES {self.remaining_allies}")
+
+                self.defeated_allies.append(popped_index)
+
+                print(f"ELIMINADO {popped_index}")
+
+        for enemy in self.enemy_team:
+            if enemy.currentHealth <= 0:
+                removed_sprite_index = self.enemy_team.index(enemy)
+                #actual_removed_sprite_index = self.remaining_enemies.index(removed_sprite_index)
+
+                self.enemy_team.pop(removed_sprite_index)
+                self.enemy_sprites.pop(removed_sprite_index)
+
+                #popped_index_index = self.remaining_positions.index(actual_removed_sprite_index)
+                popped_index = self.remaining_enemies.pop(removed_sprite_index)
+
+                #self.remaining_positions.pop(removed_sprite_index)
+                #self.remaining_positions.insert(removed_sprite_index, None)
+
+                self.defeated_enemies.append(popped_index)
+
+                #self.remaining_enemy_objects.pop()
+
+                print(self.remaining_enemies)
+                print(self.defeated_enemies)
+                print(f"removed sprite index: {removed_sprite_index}")
+                #print(f"actual removed aprite index: {actual_removed_sprite_index}")
+
+        if self.player_team:  # Si aún hay aliados vivos
+            # Reasignar current_ally al primer aliado disponible
+            self.current_ally = self.remaining_allies[0] if self.remaining_allies else 0
+            self.current_ally_index = 0  # Índice en remaining_allies
+            self.pointer_x = self.x_positions[self.current_ally]
+            self.pointer_y = self.y_positions[self.current_ally]
+
+        if not self.player_team or not self.enemy_team:
+            self.battle_end()
+
+        # Para que vuelva al turno del jugador y aparezca el menu
+        if self.player_turn:
+            self.player_turn = True
+            self.main_buttons()
+            self.option = "menu"
+            self.next_ally()
+
+    def battle_end(self):
+        self.window.show_view(self.window.views["menu"])
