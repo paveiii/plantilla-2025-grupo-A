@@ -72,10 +72,22 @@ class InBattleView(arcade.View):
 
         self.inventory = []
 
+        self.current_width = self.get_width()
+        self.width_scaling_factor = self.current_width / 1280
+
+        self.current_height = self.get_height()
+        self.height_scaling_factor = self.current_height / 720
+
         self.x_positions = ally_x_positions.copy()
         self.y_positions = ally_y_positions.copy()
 
-        self.pointer_height_offset = 0
+        self.enemy_x_positions = enemy_x_positions.copy()
+        self.enemy_y_positions = enemy_y_positions.copy()
+
+        for i in range(len(self.x_positions)):
+            self.x_positions[i] *= self.width_scaling_factor
+
+        self.pointer_height_offset = 30
         self.pointer_x = self.x_positions[self.current_ally]
         self.pointer_y = self.y_positions[self.current_ally] + self.pointer_height_offset
 
@@ -109,6 +121,9 @@ class InBattleView(arcade.View):
         self.ally_sta_bars = []
 
         self.bar_width = 0
+
+        self.initial_player_team_indexes = []
+        self.initial_enemy_team_indexes = []
 
     def on_show_view(self):
         self.player_sprites = arcade.SpriteList()
@@ -172,6 +187,15 @@ class InBattleView(arcade.View):
         self.initial_enemy_team_length = len(self.enemy_team)
         self.initial_player_team_length = len(self.player_team)
 
+        for i in range(len(self.player_team)):
+            self.initial_player_team_indexes.append(i)
+
+        for i in range(len(self.enemy_team)):
+            self.initial_enemy_team_indexes.append(i)
+
+        print(self.initial_enemy_team_indexes)
+        print(self.initial_player_team_indexes)
+
         for enemy in self.enemy_team:
             while len(new_enemy_x) > 0:
                 self.setup_enemies(enemy.sheetName, new_enemy_x[0], new_enemy_y[0])
@@ -217,12 +241,29 @@ class InBattleView(arcade.View):
         self.enemy_sprites.clear()
 
     def on_draw(self):
-        arcade.start_render()
+        arcade.start_render() # Para que cada vez que se pinte un frame se limpie el de antes
 
         current_width = self.get_width()
         border_width = 10
 
-        self.clear()
+        # Actualizar posiciones de los aliados en cada momento para poder reescalarlos
+        for i in range(len(self.player_sprites)):
+            self.player_sprites[i].center_x = self.x_positions[i]
+
+        for i in range(len(self.player_sprites)):
+            self.player_sprites[i].center_y = self.y_positions[i]
+
+        # Actualizar posiciones de los enemigos para lo mismo
+        for i in range(len(self.enemy_sprites)):
+            if i in self.remaining_enemies:
+                pos_inx = self.remaining_enemies.index(i)
+                self.enemy_sprites[pos_inx].center_x = self.enemy_x_positions[i]
+
+        for i in range(len(self.enemy_sprites)):
+            if i in self.remaining_enemies:
+                pos_inx = self.remaining_enemies.index(i)
+                self.enemy_sprites[pos_inx].center_y = self.enemy_y_positions[i]
+
         arcade.draw_rectangle_filled(center_x = current_width / 2,
                                      center_y = 100,
                                      width = current_width,
@@ -254,17 +295,19 @@ class InBattleView(arcade.View):
 
         # Barras de vida y de stamina
 
-        health_height_dif = 80
-        sta_height_dif = 100
+        health_height_dif = 50
+        sta_height_dif = 60
         self.bar_width = 100
-        bar_height = 10
+        bar_height = 5
 
         for index in self.remaining_allies:
             center_x = self.x_positions[index]
             h_center_y = self.y_positions[index] - health_height_dif
             s_center_y = self.y_positions[index] - sta_height_dif
-            n_center_y = h_center_y + 20
+            n_center_y = h_center_y + 120
             name_x_offset = 58
+
+            y_fix = bar_height / 2
 
             remaining_list_index = self.remaining_allies.index(index)
 
@@ -291,8 +334,8 @@ class InBattleView(arcade.View):
 
             arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
                                                center_x - self.bar_width / 2 + self.ally_health_bars[index],
-                                               h_center_y + 5,
-                                               h_center_y - 5,
+                                               h_center_y + y_fix,
+                                               h_center_y - y_fix,
                                                arcade.color.GREEN)
 
             # Stamina
@@ -310,8 +353,8 @@ class InBattleView(arcade.View):
 
             arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
                                                center_x - self.bar_width / 2 + self.ally_sta_bars[index],
-                                               s_center_y + 5,
-                                               s_center_y - 5,
+                                               s_center_y + y_fix,
+                                               s_center_y - y_fix,
                                                arcade.color.AZURE)
 
 
@@ -324,16 +367,24 @@ class InBattleView(arcade.View):
 
     def on_update(self, delta_time: float):
         pointer_positions = self.get_pointer_positions()
+
+        if self.option != "select_enemy":
+            self.pointer_x = self.x_positions[self.current_ally]
+        else:
+            self.pointer_x = self.enemy_x_positions[self.current_selected_enemy]
+
         if not self.pointer_is_up:
             self.pointer_y += CHARACTER_POINTER_SPEED
 
             if self.pointer_y >= pointer_positions + 10:
+                self.pointer_y = pointer_positions + 10
                 self.pointer_is_up = True
 
         else:
             self.pointer_y -= CHARACTER_POINTER_SPEED
 
             if self.pointer_y <= pointer_positions:
+                self.pointer_y = pointer_positions
                 self.pointer_is_up = False
 
         self.ally_health_bars.clear()
@@ -346,11 +397,33 @@ class InBattleView(arcade.View):
             sta_width = ally.currentStamina * self.bar_width / ally.maxStamina
             self.ally_sta_bars.append(sta_width)
 
-        print(self.ally_health_bars)
+        self.current_width = self.get_width()
+        self.width_scaling_factor = self.current_width / 1280
+
+        self.current_height = self.get_height()
+        self.height_scaling_factor = self.current_height / 720
+
+        self.x_positions = ally_x_positions.copy()
+        self.y_positions = ally_y_positions.copy()
+
+        self.enemy_x_positions = enemy_x_positions.copy()
+        self.enemy_y_positions = enemy_y_positions.copy()
+
+        for i in range(len(self.x_positions)):
+            self.x_positions[i] *= self.width_scaling_factor
+
+        for i in range(len(self.y_positions)):
+            self.y_positions[i] *= self.height_scaling_factor
+
+        for i in range(len(self.enemy_x_positions)):
+            self.enemy_x_positions[i] *= self.width_scaling_factor
+
+        for i in range(len(self.enemy_y_positions)):
+            self.enemy_y_positions[i] *= self.height_scaling_factor
 
     def get_pointer_positions(self):
         if self.option == "select_enemy":
-            return enemy_y_positions[self.current_selected_enemy]
+            return self.enemy_y_positions[self.current_selected_enemy]
         else:
             return self.y_positions[self.current_ally] + self.pointer_height_offset
 
@@ -665,8 +738,8 @@ class InBattleView(arcade.View):
         self.option = "select_enemy"
         while True:
             if self.current_selected_enemy in self.remaining_enemies:
-                self.pointer_x = enemy_x_positions[self.current_selected_enemy]
-                self.pointer_y = enemy_y_positions[self.current_selected_enemy]
+                self.pointer_x = self.enemy_x_positions[self.current_selected_enemy]
+                self.pointer_y = self.enemy_y_positions[self.current_selected_enemy]
                 break
             else:
                 self.current_selected_enemy = self.remaining_enemies[0]

@@ -43,8 +43,13 @@ MESSAGE_BOX_MARGIN = 30
 CAMERA_SPEED = 0.1
 
 # Characters battle positions (in order)
-ally_x_positions = [430, 280, 180, 345]
+ally_x_positions = [460, 300, 160, 345]
+ally_y_positions = [490, 575, 430, 315]
+
+
+"""ally_x_positions = [430, 280, 180, 345]
 ally_y_positions = [490, 565, 430, 345]
+De momento dejarlo así ya lo quitaré"""
 
 # Enemies battle positions
 enemy_x_positions = [SCREEN_WIDTH - 430,
