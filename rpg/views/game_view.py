@@ -1045,6 +1045,7 @@ class GameView(arcade.View):
                         self.player_sprite.inventory.append(item)
     def save_game(self):
         print("Guardando partida")
+        #USAR EVENTUALMENTE PARA GUARDAR SAVEFILES DISTINTOS
         #date = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
         #with open(f"saveGame{date}.json", "w") as f:
 
@@ -1072,22 +1073,22 @@ class GameView(arcade.View):
 
             saveDict["maps"][mapName]["worldAllies"] = []
             for worldAlly in self.map_list[mapName].worldAllyList:
-                saveDict["maps"][mapName]["worldAllies"].append([worldAlly.aliadoBatalla.characterKey, (worldAlly.center_x, worldAlly.center_y)])
+                saveDict["maps"][mapName]["worldAllies"].append({worldAlly.aliadoBatalla.characterKey : (worldAlly.center_x, worldAlly.center_y)})
 
             saveDict["maps"][mapName]["worldEnemies"] = []
             for worldEnemy in self.map_list[mapName].worldEnemyList:
                 enemyDict = {}
                 enemyDict["sheetName"] = worldEnemy.sheetName
+                enemyDict["position"] = worldEnemy.position
                 enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
-                enemyDict["velocity"] = worldEnemy.speed
+                enemyDict["speed"] = worldEnemy.speed
                 enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
 
                 saveDict["maps"][mapName]["worldEnemies"].append(enemyDict)
 
             saveDict["maps"][mapName]["worldItems"] = []
             for worldItem in self.map_list[mapName].worldItemList:
-                saveDict["maps"][mapName]["worldItems"].append([worldItem.itemKey, (worldItem.center_x, worldItem.center_y)])
-
+                saveDict["maps"][mapName]["worldItems"].append({worldItem.itemKey : (worldItem.center_x, worldItem.center_y)})
         with open(f"saveGame.json", "w") as f:
             json.dump(saveDict,f, indent=4)
         print("Terminado")

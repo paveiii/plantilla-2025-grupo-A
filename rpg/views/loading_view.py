@@ -6,6 +6,7 @@ import arcade
 from rpg import constants
 from rpg.draw_bar import draw_bar
 from rpg.load_game_map import load_maps
+from rpg.load_game_map import loadMapsFromSavefile
 from rpg.load_game_map import load_map
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.views.battle_view import BattleView
@@ -58,7 +59,9 @@ class LoadingView(arcade.View):
     def on_update(self, delta_time: float):
         # Dictionary to hold all our maps
         if self.started:
-            #TESTESTESTESTESTEST
+            #DEBUG
+            loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
+
             self.map_list[constants.STARTING_MAP] = load_map(f"../resources/maps/{constants.STARTING_MAP}.json",self.player_sprite)
             done = True
             if done:
