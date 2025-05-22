@@ -156,7 +156,6 @@ class GameView(arcade.View):
         self.ally_colliding = None
         self.item = False
         self.dialogue = None
-        self.allys = arcade.SpriteList()
         arcade.set_background_color(arcade.color.AMAZON)
 
         self.setup_debug_menu()
@@ -401,7 +400,6 @@ class GameView(arcade.View):
         # 'with' statement. Nothing is rendered to the screen yet, just the light
         # layer.
         with cur_map.light_layer:
-            self.allys.clear()
             arcade.set_background_color(cur_map.background_color)
 
             # Antes del cambio
@@ -459,24 +457,20 @@ class GameView(arcade.View):
                 self.letraE.draw()
                 arcade.draw_text("Reclutar", self.letraE.center_x + 10, self.letraE.center_y - 5, arcade.color.BLACK)
 
-            for characters in self.player_sprite.allys_on_map:
-                self.allys.append(characters)
-                #print(characters.get_interaction_dialogue())
-
-                for ally in self.allys:
-                    if ally.checkPlayer():
-                        if self.dialogues_active:
-                            # arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
-                            self.dialogue_background.center_x = self.player_sprite.center_x
-                            self.dialogue_background.center_y = self.player_sprite.center_y - 450
-                            self.dialogue_background.draw()
-                            dialogue, item_bool = ally.get_interaction_dialogue()
-                            self.dialogues_length = len(dialogue)
-                            if type(dialogue) == list:
+            for ally in self.map_list[self.cur_map_name].worldAllyList:
+                if ally.checkPlayer():
+                    if self.dialogues_active:
+                        # arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
+                        self.dialogue_background.center_x = self.player_sprite.center_x
+                        self.dialogue_background.center_y = self.player_sprite.center_y - 450
+                        self.dialogue_background.draw()
+                        dialogue, item_bool = ally.get_interaction_dialogue()
+                        self.dialogues_length = len(dialogue)
+                        if type(dialogue) == list:
                                 arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
-                            else:
+                        else:
                                 arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
-                            if dialogue == ally.dialogueFullTeam:
+                        if dialogue == ally.dialogueFullTeam:
                                 # x = self.player_sprite.center_x + 200
                                 # y = self.player_sprite.center_y - 250
                                 # i = 0
@@ -512,14 +506,8 @@ class GameView(arcade.View):
         if self.other_dialogue:
             self.show_different_dialogue(self.dialogue_list)
 
-        if self.old_ally_battle:
-            self.old_ally_battle.draw()
-        if self.item_nuevo:
-            self.item_nuevo.draw()
-
         # Use the non-scrolled GUI camera
         self.camera_gui.use()
-
 
         # Draw the inventory
         # self.draw_inventory()
@@ -724,7 +712,7 @@ class GameView(arcade.View):
             self.player_sprite.change_x *= 0.8
 
         self.ally_names = ""
-        for ally in self.allys:
+        for ally in self.map_list[self.cur_map_name].worldAllyList:
             if ally.checkPlayer():
                 self.letraE = arcade.Sprite("../resources/UIThings/letraE.png", scale = 1.5)
                 self.letraE.center_x = ally.center_x + 30
@@ -747,13 +735,12 @@ class GameView(arcade.View):
                                                          self.team[old_ally.displayName]["dialogueNoItem"], self.team[old_ally.displayName]["dialogueWithItem"])
                         self.old_ally_battle.center_x = self.player_sprite.center_x
                         self.old_ally_battle.center_y = self.player_sprite.center_y
-                        self.player_sprite.allys_on_map.append(self.old_ally_battle)
-                        self.allys.append(self.old_ally_battle)
                         # Creamos otro item
                         self.item_nuevo = WorldItem(f":items:{self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['sheet_name']}", self.team[old_ally.displayName]['requirementItemKey'])
                         self.item_nuevo.center_x = self.player_sprite.center_x + 50
                         self.item_nuevo.center_y = self.player_sprite.center_y
                         self.my_map.scene.add_sprite("searchable", self.item_nuevo)
+                        self.my_map.scene.add_sprite("characters", self.old_ally_battle)
                         self.my_map.worldAllyList.append(self.old_ally_battle)
                         self.my_map.worldItemList.append(self.item_nuevo)
                         # quitar al aliado del mapa
@@ -886,7 +873,7 @@ class GameView(arcade.View):
             self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
             self.ally_colliding = None
-            for ally in self.allys:
+            for ally in self.map_list[self.cur_map_name].worldAllyList:
                 for item in self.player_sprite.inventory:
                     if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer() and not self.buttons_visible:
                         self.ally_colliding = ally
@@ -933,7 +920,7 @@ class GameView(arcade.View):
 
     def search(self):
         """Search for things"""
-        for ally in self.allys:
+        for ally in self.map_list[self.cur_map_name].worldAllyList:
             if ally.checkPlayer():
                 if self.dialogues_active:
                     self.dialogues_active = False
@@ -970,8 +957,8 @@ class GameView(arcade.View):
                 self.player_sprite.inventory.append(lookup_item)
                 print(self.player_sprite.inventory)
                 continue
-            print(self.allys)
-        for character in self.allys:
+            print(self.map_list[self.cur_map_name].worldAllyList)
+        for character in self.map_list[self.cur_map_name].worldAllyList:
             # self.dialogue, self.item = character.get_interaction_dialogue()
             print(character)
     def on_key_release(self, key, modifiers):

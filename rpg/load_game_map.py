@@ -291,7 +291,6 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         game_map.worldAllyList.append(character_sprite)
 
                         spawnedAlliesKeys.append(battleKey)
-                        player.allys_on_map.append(character_sprite)
                     else:
                         character_sprite = None
                 else:
