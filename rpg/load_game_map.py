@@ -592,7 +592,6 @@ def loadMapFromSave(player, saveFile, map_name):
                 player, battleAlly, requirementItemName, dialogueNoItem, dialogueWithItem)
             game_map.worldAllyList.append(character_sprite)
 
-            player.allys_on_map.append(character_sprite)
             print(worldAlly)
             #WorldAlly tiene la posicion donde aparecer.
             character_sprite.position = worldAlly[battleKey]
