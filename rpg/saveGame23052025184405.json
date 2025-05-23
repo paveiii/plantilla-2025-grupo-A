@@ -1,0 +1,149 @@
+{
+    "currentMapName": "test_map",
+    "playerPosition": [
+        51.58333333333319,
+        29.173125
+    ],
+    "playerInventory": [],
+    "playerTeam": [
+        {
+            "TestCharacter1": 300
+        }
+    ],
+    "maps": {
+        "test_map": {
+            "worldAllies": [
+                {
+                    "TestCharacter3": [
+                        1536.0,
+                        1052.0
+                    ]
+                },
+                {
+                    "TestCharacter1": [
+                        1540.0,
+                        820.0
+                    ]
+                },
+                {
+                    "TestCharacter2": [
+                        1752.0,
+                        1056.0
+                    ]
+                },
+                {
+                    "TestCharacter4": [
+                        1764.0,
+                        816.0
+                    ]
+                }
+            ],
+            "worldEnemies": [
+                {
+                    "sheetName": ":characters:Test/testEnemy1.png",
+                    "position": [
+                        160.0,
+                        1440.0
+                    ],
+                    "battleEnemies": [
+                        "TestEnemy1",
+                        "TestEnemy2",
+                        "TestEnemy1",
+                        "TestEnemy2"
+                    ],
+                    "speed": 2,
+                    "detectionRadius": 500
+                },
+                {
+                    "sheetName": ":characters:Test/testEnemy1.png",
+                    "position": [
+                        160.0,
+                        1312.0
+                    ],
+                    "battleEnemies": [
+                        "TestEnemy1",
+                        "TestEnemy1",
+                        "TestEnemy1",
+                        "TestEnemy1"
+                    ],
+                    "speed": 2,
+                    "detectionRadius": 500
+                },
+                {
+                    "sheetName": ":characters:Test/testEnemy1.png",
+                    "position": [
+                        416.0,
+                        736.0
+                    ],
+                    "battleEnemies": [
+                        "TestEnemy2",
+                        "TestEnemy2",
+                        "TestEnemy1",
+                        "TestEnemy1"
+                    ],
+                    "speed": 2,
+                    "detectionRadius": 500
+                },
+                {
+                    "sheetName": ":characters:Test/testEnemy1.png",
+                    "position": [
+                        416.0,
+                        608.0
+                    ],
+                    "battleEnemies": [
+                        "TestEnemy2",
+                        "TestEnemy1",
+                        "TestEnemy1",
+                        "TestEnemy1"
+                    ],
+                    "speed": 2,
+                    "detectionRadius": 500
+                }
+            ],
+            "worldItems": [
+                {
+                    "TEST2": [
+                        1248.0,
+                        816.0
+                    ]
+                },
+                {
+                    "TEST2": [
+                        1252.0,
+                        980.0
+                    ]
+                },
+                {
+                    "TEST1": [
+                        1252.0,
+                        1152.0
+                    ]
+                },
+                {
+                    "REQ4": [
+                        1696.0,
+                        1312.0
+                    ]
+                },
+                {
+                    "REQ1": [
+                        1824.0,
+                        1312.0
+                    ]
+                },
+                {
+                    "REQ3": [
+                        1568.0,
+                        1312.0
+                    ]
+                },
+                {
+                    "REQ2": [
+                        1440.0,
+                        1312.0
+                    ]
+                }
+            ]
+        }
+    }
+}
