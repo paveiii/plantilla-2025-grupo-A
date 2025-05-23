@@ -4,25 +4,14 @@ import arcade
 
 from rpg.Action import Action
 from rpg.constants import CHARACTER_SPRITE_SIZE
+from rpg.sprites.character_sprite import CharacterSprite, Anim
 
-class BattleBuddy(arcade.Sprite):
+class BattleBuddy(CharacterSprite):
 
     def __init__(self, key, sheet_name, displayName, displayDescription, maxHealth, maxStamina, restoredStamina, actions):
-        super().__init__()
-        self.textures = arcade.load_spritesheet(
-            sheet_name,
-            sprite_width=CHARACTER_SPRITE_SIZE,
-            sprite_height=CHARACTER_SPRITE_SIZE,
-            columns=3,
-            count=12,
-        )
+        super().__init__(sheet_name)
 
         self.characterKey = key
-        self.sheetName = sheet_name
-
-        self.should_update = 0
-        self.cur_texture_index = 0
-        self.texture = self.textures[self.cur_texture_index]
 
         self.maxStamina = maxStamina
         self.maxHealth = maxHealth
@@ -36,6 +25,11 @@ class BattleBuddy(arcade.Sprite):
         self.displayDescription = displayDescription
 
         self.actions = actions
+
+        self.texture = self.textures[0]
+        self.defaultAnim = Anim.BATTLEIDLE
+        self.currentAnimation = self.defaultAnim
+        self.setAnim()
 
     def changeHealth(self, amount:float):
         self.currentHealth += amount
