@@ -5,9 +5,38 @@
       "durationInTurns": 3,"amount" : 10, "statAffected" : ""
     },
 
-  "TestEffect1":
+    "TestEffect1":
     {
       "name": "TestEffect1", "description": "", "effectType":"Damage",
       "durationInTurns": 3,"amount" : 10, "statAffected" : ""
+    },
+
+    "Bleeding":
+    {
+      "name": "Bleeding Effect", "description": "", "effectType":"Damage",
+      "durationInTurns": 3,"amount" : 20, "statAffected" : "health"
+    },
+
+    "Poison":
+    {
+      "name": "Poison Effect", "description": "", "effectType":"Damage",
+      "durationInTurns": 5,"amount" : 10, "statAffected" : "health"
+    },
+
+    "Small Healing":
+    {
+      "name": "Small Healing Effect", "description": "", "effectType":"Heal",
+      "durationInTurns": 5,"amount" : 10, "statAffected" : "health"
+    },
+
+    "Big Healing":
+    {
+      "name": "Big Healing Effect", "description": "", "effectType":"Heal",
+      "durationInTurns": 5,"amount" : 25, "statAffected" : "health"
+    },
+    "More Stamina":
+    {
+      "name": "More Stamina Effect", "description": "", "effectType":"Heal",
+      "durationInTurns": 3,"amount" : 15, "statAffected" : "stamina"
     }
 }
