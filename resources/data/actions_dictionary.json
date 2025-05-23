@@ -1,7 +1,7 @@
 {
   "ActionTemplate":
     {
-      "name": "", "description": "", "option": "attack/skill", "actionType":"Damage/Heal/ApplyEffect/Revive",
+      "name": "", "description": "", "option": "attack/skill", "actionType":"Damage/Heal/ApplyEffectAlly/ApplyEffectEnemy/Revive",
       "effectName" : "EffectTemplate", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
     },
     "Action1":

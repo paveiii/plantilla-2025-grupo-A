@@ -14,7 +14,6 @@ class MenuView(arcade.View):
         # Create a vertical BoxGroup to align buttons
         self.v_box = arcade.gui.UIBoxLayout()
 
-        self.window.views["loading_view"] = l.LoadingView(None)
         self.window.views["load_game"] = g.LoadGameView()
 
         start_game_button = arcade.gui.UIFlatButton(text="Start", width=200)
@@ -60,6 +59,7 @@ class MenuView(arcade.View):
     # call back methods for buttons:
     def on_click_start_game_button(self, event):
         print("starting game")
+        self.window.views["loading_view"] = l.LoadingView(None)
         self.window.show_view(self.window.views["loading_view"])
 
     def on_click_exit_button(self, event):
@@ -74,11 +74,6 @@ class MenuView(arcade.View):
     # def on_click_settings(self, event):
     #     print("show settings view")
     #     self.window.show_view(self.window.views["settings"])
-
-    # def on_click_new_game(self, event):
-    #     print("restart game")
-    #     self.window.views["game"].setup()
-    #     self.window.show_view(self.window.views["game"])
 
     def on_key_press(self, key, _modifiers):
         if key == arcade.key.ESCAPE:

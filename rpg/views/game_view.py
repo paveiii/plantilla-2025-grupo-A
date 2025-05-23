@@ -1,13 +1,14 @@
 """
 Main game view
 """
+import datetime
 import json
 from functools import partial
 from typing import Callable
 
 import arcade
 import arcade.gui
-from arcade import SpriteList, Sprite
+from arcade import SpriteList, Sprite, get_image
 from arcade.gui import UIFlatButton
 
 import rpg.constants as constants
@@ -1016,8 +1017,7 @@ class GameView(arcade.View):
     def save_game(self):
         print("Guardando partida")
         #USAR EVENTUALMENTE PARA GUARDAR SAVEFILES DISTINTOS
-        #date = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
-        #with open(f"saveGame{date}.json", "w") as f:
+        date = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
 
         saveDict = {}
         saveDict["currentMapName"] = self.cur_map_name
@@ -1065,6 +1065,7 @@ class GameView(arcade.View):
             saveDict["maps"][mapKey]["worldItems"] = []
             for worldItem in self.map_list[mapKey].worldItemList:
                 saveDict["maps"][mapKey]["worldItems"].append({worldItem.itemKey : (worldItem.center_x, worldItem.center_y)})
-        with open(f"saveGame.json", "w") as f:
+        with open(f"saveGame{date}.json", "w") as f:
             json.dump(saveDict,f, indent=4)
+
         print("Terminado")

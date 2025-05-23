@@ -1,12 +1,20 @@
+import json
+import os
+from os.path import isfile, join
+
+import rpg.views.loading_view as l
+
 import arcade
 import arcade.gui
 
+# from rpg.views import LoadingView
 from rpg.views.menu_view import MenuView
 
 
 class LoadGameView(arcade.View):
     def __init__(self):
         super().__init__()
+        self.contenedor = arcade.gui.UIBoxLayout()
         arcade.set_background_color(arcade.color.ALMOND)
 
         # --- Required for all code that uses UI element, a UIManager to handle the UI.
@@ -14,16 +22,6 @@ class LoadGameView(arcade.View):
 
         # Create a vertical BoxGroup to align buttons
         self.v_box = arcade.gui.UIBoxLayout()
-
-        for i in range(12):
-            newButton = SaveFileButton(text=str(i), width=500, height=45)
-            self.v_box.add(newButton)
-
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="center_x", anchor_y="center_y", align_y=-50, child=self.v_box
-            )
-        )
 
     def on_draw(self):
         arcade.start_render()
@@ -41,7 +39,32 @@ class LoadGameView(arcade.View):
         )
 
     def setup(self):
-        pass
+        saveFilePath = "../rpg"
+        savefiles = []
+
+        for f in os.listdir(saveFilePath):
+            if isfile(join(saveFilePath, f)) and f.endswith(".json"):
+                savefiles.append(f)
+
+        botones_por_fila = 3
+        fila = arcade.gui.UIBoxLayout(vertical=False, space_between=10)
+        for i in range(len(savefiles)):
+            newSaveButton = SaveFileButton(savefiles[i], self)
+            fila.add(newSaveButton)
+
+            #Añadir la fila cuando se completa o estamos en el último botón
+            if (i + 1) % botones_por_fila == 0 or i == len(savefiles) - 1:
+                self.contenedor.add(fila.with_space_around(bottom=20))
+                fila = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
+        self.contenedor.add(fila.with_space_around(bottom=20))
+        # Agregar los widgets a la vista
+        widgets = arcade.gui.UIAnchorWidget(
+                anchor_x="center",
+                anchor_y="center",
+                align_y=0,
+                child=self.contenedor
+            )
+        self.manager.add(widgets)
 
     def on_show_view(self):
         self.manager.enable()
@@ -61,6 +84,14 @@ class LoadGameView(arcade.View):
         self.window.views["menu"] = MenuView()
 
 class SaveFileButton(arcade.gui.UIFlatButton):
+    def __init__(self, savefile, view):
+        self.savefile = savefile
+        self.loadView = view
+
+        displayText = savefile[:-5]
+        super().__init__(text=displayText, width=400, height=45)
+
 
     def on_click(self, event: arcade.gui.UIOnClickEvent):
-        print(self.text)
+        self.loadView.window.views["loading_view"] = l.LoadingView(self.savefile)
+        self.loadView.window.show_view(self.loadView.window.views["loading_view"])
