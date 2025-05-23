@@ -61,9 +61,6 @@ class LoadingView(arcade.View):
     def on_update(self, delta_time: float):
         # Dictionary to hold all our maps
         if self.started:
-            #DEBUG
-            #loadMapsFromSavefile(self.player_sprite, "../rpg/saveGame.json")
-
             currentMapData = None
 
             if(self.savefile == None):

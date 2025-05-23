@@ -232,55 +232,15 @@ class InventoryView(arcade.View):
         self.characters = []
 
         for character in self.team_sprites:
-            # if character in self.team and 'sheet_name' in self.team[character]:
-            sheet_name = character.sheetName
-
-            # Cargar las texturas desde el spritesheet
-            textures = arcade.load_spritesheet(
-                sheet_name,
-                sprite_width=128,
-                sprite_height=128,
-                columns=9,
-                count=36
-            )
-
             # Crear un Sprite y asignarle una textura
-            sprite = Sprite()
-            sprite.texture = textures[9]
+            sprite = character
+            sprite.texture = character.textures[9]
             sprite.center_x = 1050
             sprite.center_y = self.y
+            sprite.scale = 2
             self.y += 110
             self.characters.append(character)
             self.player_team_sheets.append(sprite)
-
-
-
-
-        # new_ally_x = [430, 180, 345, 280]
-        # new_ally_y = [490, 430, 345, 565]
-
-        # for character in self.team_names:
-        #     ally_instance = BattleAlly(f":characters:{self.team[character]['sheet_name']}",
-        #                              self.team[character]['name'],
-        #                              self.team[character]['description'],
-        #                              self.team[character]['type'],
-        #                              self.team[character]['maxStamina'],
-        #                              self.team[character]['maxHealth'],
-        #                              self.team[character]['restoredStamina'],
-        #                              self.team[character]['actions'],
-        #                              self.team[character]['dialogueNoItem'],
-        #                              self.team[character]['dialogueWithItem'],
-        #                              self.team[character]['requirementItemKey'])
-        #
-        #     self.player_team.append(ally_instance)
-        #
-        #     for character in self.player_team:
-        #         while len(new_ally_x) > 0:
-        #             self.setup_team(character.sheetName, new_ally_x[0], new_ally_y[0])
-        #             del new_ally_x[0]
-        #             del new_ally_y[0]
-        #             break
-
 
     def on_key_press(self, symbol: int, modifiers: int):
         close_inputs = [
@@ -302,11 +262,11 @@ class InventoryView(arcade.View):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         # Resetear escala de sprites de equipo
         for sprite in self.player_team_sheets:
-            sprite.scale = 1
+            sprite.scale = 2
         # Cambiar escala al hacer hover
         for i, sprite in enumerate(self.player_team_sheets):
             if sprite.collides_with_point((x, y)):
-                sprite.scale = 1.1
+                sprite.scale = 2.1
                 break
 
         self.hover_index = None
@@ -336,8 +296,7 @@ class InventoryView(arcade.View):
 
     def on_update(self, delta_time: float):
         self.inventory = self.window.views["game"].player_sprite.inventory
-        # for i in self.player_team_sheets:
-        #     print(i)
+
         if self.selected_item in self.characters:
             if self.selected_item.type == "Captain":
                 self.icon = self.captainIcon
