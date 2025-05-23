@@ -75,11 +75,6 @@ class MenuView(arcade.View):
     #     print("show settings view")
     #     self.window.show_view(self.window.views["settings"])
 
-    # def on_click_new_game(self, event):
-    #     print("restart game")
-    #     self.window.views["game"].setup()
-    #     self.window.show_view(self.window.views["game"])
-
     def on_key_press(self, key, _modifiers):
         if key == arcade.key.ESCAPE:
             print("quitting")

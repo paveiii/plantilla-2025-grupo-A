@@ -23,17 +23,13 @@ class MainMenuView(arcade.View):
         self.v_box.add(resume_button.with_space_around(bottom=20))
         resume_button.on_click = self.on_click_resume
 
-        settings_button = arcade.gui.UIFlatButton(text="Settings", width=200)
+        """settings_button = arcade.gui.UIFlatButton(text="Settings", width=200)
         self.v_box.add(settings_button.with_space_around(bottom=20))
-        settings_button.on_click = self.on_click_settings
+        settings_button.on_click = self.on_click_settings"""
 
-        battle_button = arcade.gui.UIFlatButton(text="Battle Screen", width=200)
-        self.v_box.add(battle_button.with_space_around(bottom=20))
-        battle_button.on_click = self.on_click_battle
-
-        new_game_button = arcade.gui.UIFlatButton(text="New Game", width=200)
-        self.v_box.add(new_game_button.with_space_around(bottom=20))
-        new_game_button.on_click = self.on_click_new_game
+        quit_to_menu_button = arcade.gui.UIFlatButton(text="Quit to Main Menu", width=200)
+        self.v_box.add(quit_to_menu_button.with_space_around(bottom=20))
+        quit_to_menu_button.on_click = self.on_click_quit_to_menu
 
         quit_button = arcade.gui.UIFlatButton(text="Quit", width=200)
         self.v_box.add(quit_button.with_space_around(bottom=20))
@@ -66,19 +62,13 @@ class MainMenuView(arcade.View):
         print("show game view")
         self.window.show_view(self.window.views["game"])
 
-    def on_click_settings(self, event):
+    """def on_click_settings(self, event):
         print("show settings view")
-        self.window.show_view(self.window.views["settings"])
+        self.window.show_view(self.window.views["settings"])"""
 
-    def on_click_battle(self, event):
-        print("battle screen")
-        self.window.views["battle"].setup()
-        self.window.show_view(self.window.views["battle"])
-
-    def on_click_new_game(self, event):
-        print("restart game")
-        self.window.views["game"].setup()
-        self.window.show_view(self.window.views["game"])
+    def on_click_quit_to_menu(self, event):
+        print("quitting to menu")
+        self.window.show_view(self.window.views["menu"])
 
     def on_click_quit(self, event):
         print("quitting")
