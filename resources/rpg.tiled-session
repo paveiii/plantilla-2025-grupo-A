@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/mapa_cyberpunk.json",
+    "activeFile": "maps/time_company_interior.json",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -217,11 +217,16 @@
             }
         },
         "maps/farmhouse - copia.json": {
+            "expandedObjectLayers": [
+                7,
+                8,
+                10
+            ],
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 256,
-                "y": 255.5
+                "x": 76,
+                "y": 420
             }
         },
         "maps/farmhouse.json": {
@@ -257,11 +262,14 @@
             }
         },
         "maps/mapa_cyberpunk.json": {
-            "scale": 0.5,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                13
+            ],
+            "scale": 0.25,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 1988,
-                "y": 616
+                "x": 2324,
+                "y": 1756
             }
         },
         "maps/mapa_edad_media.json": {
@@ -294,6 +302,19 @@
                 "y": 1022.8533034714446
             }
         },
+        "maps/time_company_interior.json": {
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 56,
+                "y": 373
+            }
+        },
+        "sample_map/Animacion portal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk.tsx": {
             "scaleInDock": 1.5
         },
@@ -303,7 +324,17 @@
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk3.tsx": {
             "scaleInDock": 1
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion portal.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
@@ -317,7 +348,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Casino BIEN sin fondo.tsx": {
-            "scaleInDock": 0.75
+            "scaleInDock": 2
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Ceda el paso.tsx": {
             "scaleInDock": 1
@@ -338,7 +369,8 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Data Center BIEN.tsx": {
-            "scaleInDock": 0.25
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Elevacion de terreno cyberpunk.tsx": {
             "scaleInDock": 4
@@ -368,13 +400,36 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Policia Bien.tsx": {
-            "scaleInDock": 0.5
+            "scaleInDock": 3
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (1).tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (2).tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (3).tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (4).tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (5).tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (6).tsx": {
+            "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Poste electrico.tsx": {
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Power Plant1.tsx": {
-            "scaleInDock": 0.75
+            "scaleInDock": 0.5
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Puerta Chula (1).tsx": {
+            "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Grande Iluminado.tsx": {
             "scaleInDock": 1
@@ -414,6 +469,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Tienda.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.33,
             "scaleInEditor": 1
         },
@@ -430,6 +486,7 @@
             "scaleInDock": 1
         },
         "tilesets/[Base]BaseChip_pipo.json": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/lava_tileset.json": {
@@ -442,30 +499,32 @@
             "scaleInDock": 1
         }
     },
+    "frame.defaultDuration": 200,
     "last.externalTilesetPath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx",
     "last.imagePath": "C:/Users/johnn/OneDrive/Downloads",
     "map.fixedSize": false,
     "map.height": 100,
     "map.width": 135,
     "openFiles": [
-        "maps/mapa_cyberpunk.json"
+        "maps/time_company_interior.json"
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
+        "maps/time_company_interior.json",
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx",
         "maps/mapa_cyberpunk.json",
+        "sample_map/Animacion portal.tsx",
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (1).tsx",
         "maps/farmhouse - copia.json",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Tienda.tsx",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña Iluminado.tsx",
         "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json",
         "maps/mapa_edad_media.json",
-        "maps/test_map.json",
-        "maps/prehistoric_map.json",
-        "maps/graveyard_dungeon_second_level.json",
-        "maps/main_map.json",
-        "C:/Users/johnn/OneDrive/Documentos/UAH/GISI/1º Curso/2º Cuatrimestre/Tecnología de videojuegos/Proyecto/Mapa Cyberpunk/Archivos.tsx/Suburbio Casa Mediana.tsx"
+        "maps/test_map.json"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 0
 }
