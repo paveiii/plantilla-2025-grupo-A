@@ -465,10 +465,12 @@ class GameView(arcade.View):
                         self.dialogue_background.center_x = self.player_sprite.center_x
                         self.dialogue_background.center_y = self.player_sprite.center_y - 450
                         self.dialogue_background.draw()
+                        if not self.buttons_visible:
+                            arcade.draw_text("E para pasar los diálogos", self.player_sprite.center_x + 300, self.player_sprite.center_y - 350, arcade.color.BLACK, bold=True)
                         dialogue, item_bool = ally.get_interaction_dialogue()
                         self.dialogues_length = len(dialogue)
                         if type(dialogue) == list:
-                                arcade.draw_text(dialogue[self.current_dialog], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                                arcade.draw_text(dialogue[self.current_dialog - 1], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
                         else:
                                 arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
                         if dialogue == ally.dialogueFullTeam:
@@ -533,6 +535,8 @@ class GameView(arcade.View):
         self.dialogue_background.center_x = self.player_sprite.center_x
         self.dialogue_background.center_y = self.player_sprite.center_y - 450
         self.dialogue_background.draw()
+        arcade.draw_text("E para pasar los diálogos", self.player_sprite.center_x + 300,
+                         self.player_sprite.center_y - 350, arcade.color.BLACK, bold=True)
 
         if type(dialogue) == list:
             self.dialogues_length = len(dialogue)
@@ -876,7 +880,7 @@ class GameView(arcade.View):
             self.ally_colliding = None
             for ally in self.map_list[self.cur_map_name].worldAllyList:
                 for item in self.player_sprite.inventory:
-                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer() and not self.buttons_visible:
+                    if self.dialogues_active and ally.requirementItemName == item['name'] and ally.checkPlayer() and not self.buttons_visible and self.current_dialog == self.dialogues_length:
                         self.ally_colliding = ally
                         ally.remove_from_sprite_lists()
                         self.player_sprite.inventory.remove(item)
@@ -885,16 +889,19 @@ class GameView(arcade.View):
                         # arcade.play_sound(self.pergamino_sound, volume=1)
             if self.ally_colliding and len(self.player_sprite.player_team) < 4:
                 self.player_sprite.player_team.append(self.ally_colliding.aliadoBatalla)
-            self.search()
-        elif key == arcade.key.SPACE:
-            if self.dialogues_active or self.other_dialogue:
-                if self.current_dialog < self.dialogues_length - 1:
-                    self.current_dialog += 1
-                else:
+            if self.buttons_visible:
+                self.dialogues_active = False
+            if self.other_dialogue:
+                if self.current_dialog == self.dialogues_length - 1:
                     self.current_dialog = 0
+                    self.other_dialogue = False
+                else:
+                    self.other_dialogue = True
+                    self.current_dialog += 1
+            self.search()
         #DEBUG -----
         elif key == arcade.key.B:
-            self.dialogue_list = ["asdas", "asdadcas"]
+            self.dialogue_list = ["dial1", "dial2", "dial3", "dial4"]
             self.other_dialogue = True if not self.other_dialogue else False
 
         elif key == arcade.key.Z:
@@ -923,13 +930,15 @@ class GameView(arcade.View):
         """Search for things"""
         for ally in self.map_list[self.cur_map_name].worldAllyList:
             if ally.checkPlayer():
-                if self.dialogues_active:
+                if self.dialogues_active and self.current_dialog == self.dialogues_length:
                     self.dialogues_active = False
                     self.current_dialog = 0
                     # arcade.play_sound(self.pergamino_sound, volume=1)
 
                 else:
                     self.dialogues_active = True
+                    self.current_dialog += 1
+
                     # arcade.play_sound(self.pergamino_sound, volume=1)
         self.allys_colliding.clear()
         map_layers = self.map_list[self.cur_map_name].map_layers
