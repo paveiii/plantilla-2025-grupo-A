@@ -1,13 +1,5 @@
 { "backgroundcolor":"#5f8702",
  "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"cueva.json"
-        }
-    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -369,52 +361,80 @@
         {
          "draworder":"topdown",
          "id":7,
-         "name":"items",
+         "name":"searchable",
          "objects":[
                 {
                  "height":0,
                  "id":65,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":468.667,
                  "y":39.3333
+                }, 
+                {
+                 "gid":2049,
+                 "height":32,
+                 "id":69,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":-782.666666666667,
+                 "y":273.575757575758
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"item_key",
+                 "type":"string",
+                 "value":"AllyRequirement"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":69,
+ "nextobjectid":70,
  "orientation":"orthogonal",
-  "properties":[
+ "properties":[
         {
          "name":"isSubmap",
          "type":"bool",
          "value":false
-        },
+        }, 
         {
          "name":"start_x",
          "type":"int",
          "value":7
-        },
+        }, 
         {
          "name":"start_y",
          "type":"int",
          "value":19
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {
          "firstgid":1,
          "source":"..\/tilesets\/tilesCueva.json"
+        }, 
+        {
+         "firstgid":2049,
+         "source":"..\/..\/..\/..\/samples\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",

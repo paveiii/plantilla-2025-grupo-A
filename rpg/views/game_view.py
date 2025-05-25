@@ -470,7 +470,7 @@ class GameView(arcade.View):
                         dialogue, item_bool = ally.get_interaction_dialogue()
                         self.dialogues_length = len(dialogue)
                         if type(dialogue) == list:
-                                arcade.draw_text(dialogue[self.current_dialog - 1], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                                arcade.draw_text(dialogue[self.current_dialog - 1], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK, font_size=15, width=self.window.width - 150, align="left", multiline=True)
                         else:
                                 arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
                         if dialogue == ally.dialogueFullTeam:
