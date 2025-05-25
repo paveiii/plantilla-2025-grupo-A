@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/time_company_interior.json",
+    "activeFile": "",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -257,7 +257,7 @@
             "scale": 0.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 823,
+                "x": 822,
                 "y": 856
             }
         },
@@ -286,6 +286,14 @@
         "maps/mapa_edad_media.json#tileset_cueva": {
             "scaleInDock": 1
         },
+        "maps/power_plant_interior.json": {
+            "scale": 1,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 291.5,
+                "y": 379
+            }
+        },
         "maps/prehistoric_map.json": {
             "scale": 0.25,
             "selectedLayer": 0,
@@ -306,8 +314,8 @@
             "scale": 1,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 56,
-                "y": 373
+                "x": 134.5,
+                "y": 344
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -338,6 +346,15 @@
             "scaleInDock": 0.5,
             "scaleInEditor": 1
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Cables 1.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Cables 2.tsx": {
+            "scaleInDock": 1
+        },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Cables 3.tsx": {
+            "scaleInDock": 1
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN Iluminada-1.png.tsx": {
             "scaleInDock": 1
         },
@@ -357,7 +374,7 @@
             "scaleInDock": 2
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/DEC2 - Varios.tsx": {
-            "scaleInDock": 1.5
+            "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/DEC3 - Varios.tsx": {
             "scaleInDock": 1
@@ -399,6 +416,9 @@
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Mercado X-Tech.tsx": {
             "scaleInDock": 1
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Orbe Energia.tsx": {
+            "scaleInDock": 1
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Policia Bien.tsx": {
             "scaleInDock": 3
         },
@@ -426,7 +446,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Power Plant1.tsx": {
-            "scaleInDock": 0.5
+            "scaleInDock": 0.75
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Puerta Chula (1).tsx": {
             "scaleInDock": 1
@@ -506,11 +526,12 @@
     "map.height": 100,
     "map.width": 135,
     "openFiles": [
-        "maps/time_company_interior.json"
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
+        "maps/power_plant_interior.json",
         "maps/time_company_interior.json",
+        "maps/main_map.json",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx",
         "maps/mapa_cyberpunk.json",
         "sample_map/Animacion portal.tsx",
@@ -519,9 +540,7 @@
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Tienda.tsx",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña Iluminado.tsx",
-        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json",
-        "maps/mapa_edad_media.json",
-        "maps/test_map.json"
+        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
