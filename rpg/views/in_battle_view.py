@@ -7,6 +7,7 @@ import json
 
 from rpg.BattleEnemy import BattleEnemy
 from rpg.BattleAlly import BattleAlly
+from rpg.BattleBuddy import *
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Anim
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.Effect import Effect
@@ -128,6 +129,22 @@ class InBattleView(arcade.View):
         self.initial_player_team_indexes = []
         self.initial_enemy_team_indexes = []
 
+        self.elapsed_time = 0
+        self.interval = 0.3
+
+        self.attack_time = 0
+        self.attack_duration = 0.8
+        self.skill_duration = 0.8
+
+        self.waiting_for_action = False
+
+        self.time = 0
+
+        self.dead_allies = []
+        self.initial_team = []
+
+        self.hurt = False
+
     def on_show_view(self):
         self.player_sprites = arcade.SpriteList()
         self.enemy_sprites = arcade.SpriteList()
@@ -144,13 +161,14 @@ class InBattleView(arcade.View):
         new_ally_y = ally_y_positions.copy()
 
         self.player_team = self.window.views["game"].player_sprite.player_team
+        self.initial_team = self.player_team.copy()
 
         self.player_team_length = len(self.player_team)
         print(f"Player team length: {self.player_team_length}")
 
         for character in self.player_team:
             while len(new_ally_x) > 0:
-                self.setup_team(character.sheetName, new_ally_x[0], new_ally_y[0])
+                self.setup_team(character, new_ally_x[0], new_ally_y[0])
                 del new_ally_x[0]
                 del new_ally_y[0]
                 break
@@ -201,7 +219,7 @@ class InBattleView(arcade.View):
 
         for enemy in self.enemy_team:
             while len(new_enemy_x) > 0:
-                self.setup_enemies(enemy.sheetName, new_enemy_x[0], new_enemy_y[0])
+                self.setup_enemies(enemy, new_enemy_x[0], new_enemy_y[0])
                 del new_enemy_x[0]
                 del new_enemy_y[0]
                 break
@@ -306,8 +324,8 @@ class InBattleView(arcade.View):
 
         # Barras de vida y de stamina de aliados
 
-        health_height_dif = 50
-        sta_height_dif = 60
+        health_height_dif = 80
+        sta_height_dif = 90
         self.bar_width = 100
         bar_height = 5
 
@@ -315,7 +333,7 @@ class InBattleView(arcade.View):
             center_x = self.x_positions[index]
             h_center_y = self.y_positions[index] - health_height_dif
             s_center_y = self.y_positions[index] - sta_height_dif
-            n_center_y = h_center_y + 120
+            n_center_y = h_center_y + 150
             name_x_offset = 67
 
             y_fix = bar_height / 2
@@ -380,7 +398,10 @@ class InBattleView(arcade.View):
             center_x = self.enemy_x_positions[index]
             h_center_y = self.enemy_y_positions[index] - health_height_dif
             s_center_y = self.enemy_y_positions[index] - sta_height_dif
+            enemy_h_center_y = self.enemy_y_positions[index] - health_height_dif
+            enemy_s_center_y = self.enemy_y_positions[index] - sta_height_dif
             n_center_y = h_center_y + 120
+            enemy_n_center_y = h_center_y + 150
             name_x_offset = 67
 
             y_fix = bar_height / 2
@@ -393,7 +414,7 @@ class InBattleView(arcade.View):
             self.draw_text_with_outline(
                 text=self.enemy_team[remaining_list_index].displayName,
                 x=center_x,
-                y=n_center_y,
+                y=enemy_n_center_y,
                 text_color=arcade.color.PERSIAN_RED,
                 outline_color=arcade.color.BLACK,
                 font_size=14,
@@ -438,6 +459,7 @@ class InBattleView(arcade.View):
                                                s_center_y + y_fix,
                                                s_center_y - y_fix,
                                                arcade.color.MIDNIGHT_BLUE)
+
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
@@ -520,6 +542,40 @@ class InBattleView(arcade.View):
         for i in range(len(self.enemy_y_positions)):
             self.enemy_y_positions[i] *= self.height_scaling_factor
 
+        self.player_sprites.on_update(delta_time)
+        self.enemy_sprites.on_update(delta_time)
+
+        self.elapsed_time += delta_time
+        self.attack_time += delta_time
+
+
+        if self.elapsed_time >= self.interval:
+            for player in self.player_team:
+                player.setPulseAnim(Anim.BATTLEIDLE)
+
+            self.elapsed_time = 0
+
+        if self.waiting_for_action:
+            self.attack_time += delta_time
+
+            if self.previous_option == "attack":
+                self.time = self.attack_duration
+            elif self.previous_option == "skill":
+                self.time = self.skill_duration
+
+            if self.attack_time >= self.time:
+                if not self.hurt:
+                    self.enemy_team[self.remaining_enemies.index(self.current_selected_enemy)].setPulseAnim(Anim.HURT)
+                    self.hurt = True
+
+                if self.attack_time >= 2 * self.time:
+                    self.waiting_for_action = False
+                    self.attack_time = 0
+                    self.hurt = False
+                    self.perform_action()
+
+
+
     def get_pointer_positions(self):
         if self.option == "select_enemy":
             return self.enemy_y_positions[self.current_selected_enemy] + self.pointer_height_offset
@@ -587,8 +643,8 @@ class InBattleView(arcade.View):
         if self.option == "item":
             self.perform_action()
 
-    def setup_team(self, sheet_name, x, y):
-        self.character_sprite = CharacterSprite(sheet_name)
+    def setup_team(self, ally, x, y):
+        self.character_sprite = ally
 
         self.character_sprite.center_x = x
         self.character_sprite.center_y = y
@@ -596,33 +652,31 @@ class InBattleView(arcade.View):
         self.character_sprite.scale = 2
 
         self.character_sprite.textures = arcade.load_spritesheet(
-            sheet_name,
+            ally.sheetName,
             sprite_width = CHARACTER_SPRITE_SIZE,
             sprite_height = CHARACTER_SPRITE_SIZE,
             columns = 9,
-            count = 36,
+            count = 73,
         )
-        start_index = SPRITE_INFO[Anim.RIGHT][0]
-        self.character_sprite.texture = self.character_sprite.textures[start_index]
+
+        self.character_sprite.setPulseAnim(Anim.BATTLEIDLE)
 
         self.player_sprites.append(self.character_sprite)
 
-    def setup_enemies(self, sheet_name, x, y):
-        self.character_sprite = CharacterSprite(sheet_name)
+    def setup_enemies(self, enemy, x, y):
+        self.character_sprite = enemy
         self.character_sprite.scale = 2
 
         self. character_sprite.center_x = x
         self.character_sprite.center_y = y
 
         self.character_sprite.textures = arcade.load_spritesheet(
-            sheet_name,
+            enemy.sheetName,
             sprite_width = CHARACTER_SPRITE_SIZE,
             sprite_height= CHARACTER_SPRITE_SIZE,
             columns = 9,
-            count = 36,
+            count = 73
         )
-        start_index = SPRITE_INFO[Anim.LEFT][0]
-        self.character_sprite.texture = self.character_sprite.textures[start_index]
 
         self.enemy_sprites.append(self.character_sprite)
 
@@ -659,7 +713,15 @@ class InBattleView(arcade.View):
                     self.select_enemy_to_attack()
 
                 if key == arcade.key.ENTER:
-                    self.perform_action()
+                    if self.previous_option == "attack":
+                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.ATTACK)
+                    elif self.previous_option == "skill":
+                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.SKILL)
+
+                    #self.player_team[self.current_ally].setPulseAnim(Anim.ATTACK)
+                    self.attack_time = 0
+                    self.waiting_for_action = True
+                    self.allow_inputs = False
 
             else:
                 if key == arcade.key.ESCAPE:
@@ -918,6 +980,10 @@ class InBattleView(arcade.View):
                 print(f"{enemy.displayName} gasta {action_to_execute.staminaExpense} de stamina")
                 print(f"{ally_target.displayName} recibe {action_to_execute.amount} de daño")
 
+                self.check_health_status()
+
+                if not self.player_team:
+                    return
 
             self.round_end()
 
@@ -987,6 +1053,8 @@ class InBattleView(arcade.View):
             if ally.currentStamina > ally.maxStamina:
                 ally.currentStamina = ally.maxStamina
 
+        self.allow_inputs = True
+
     def check_health_status(self):
         print("NO NEGATIVO PLSSSSSS")
         print(self.player_team[0].currentHealth)
@@ -995,7 +1063,7 @@ class InBattleView(arcade.View):
             if ally.currentHealth <= 0:
                 removed_sprite_index = self.player_team.index(ally)
 
-                self.player_team.pop(removed_sprite_index)
+                self.dead_allies.append(self.player_team.pop(removed_sprite_index))
                 self.player_sprites.pop(removed_sprite_index)
 
                 popped_index = self.remaining_allies.pop(removed_sprite_index)
@@ -1039,7 +1107,7 @@ class InBattleView(arcade.View):
             self.pointer_y = self.y_positions[self.current_ally]
 
         if not self.player_team or not self.enemy_team:
-            self.battle_end()
+            self.game_over()
             return
 
         # Para que vuelva al turno del jugador y aparezca el menu
@@ -1049,5 +1117,17 @@ class InBattleView(arcade.View):
             self.option = "menu"
             self.next_ally()
 
-    def battle_end(self):
+    def game_over(self):
         self.window.show_view(self.window.views["menu"])
+
+    def game_win(self):
+        for ally in self.dead_allies:
+            ally.changeHealth(10)
+            self.player_team.append(self.dead_allies.pop(ally))
+
+        battle_end_list = [None, None, None, None]
+        for ally in self.player_team:
+            ally_init_index = self.initial_team.index(ally)
+
+            battle_end_list.remove(ally_init_index)
+            battle_end_list.insert(ally, ally_init_index)
