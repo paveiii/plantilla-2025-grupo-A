@@ -130,8 +130,8 @@ class InBattleView(arcade.View):
         self.interval = 0.3
 
         self.attack_time = 0
-        self.attack_duration = 3
-        self.skill_duration = 3
+        self.attack_duration = 1
+        self.skill_duration = 1
 
         self.waiting_for_action = False
 
@@ -545,12 +545,12 @@ class InBattleView(arcade.View):
         self.elapsed_time += delta_time
         self.attack_time += delta_time
 
+        if self.player_team[self.remaining_allies.index(self.current_ally)].currentAnimation == Anim.BATTLEIDLE:
+            if self.elapsed_time >= self.interval:
+                for player in self.player_team:
+                    player.setPulseAnim(Anim.BATTLEIDLE)
 
-        if self.elapsed_time >= self.interval:
-            for player in self.player_team:
-                player.setPulseAnim(Anim.BATTLEIDLE)
-
-            self.elapsed_time = 0
+                self.elapsed_time = 0
 
         if self.waiting_for_action:
             if self.previous_option == "attack":
@@ -995,8 +995,6 @@ class InBattleView(arcade.View):
                             self.player_team[target_ally_index].changeHealth(-(effect.amount))
                         elif effect.effectType == "Heal":
                             self.player_team[target_ally_index].changeHealth(effect.amount)
-                        #elif effect.effectType == "Multiplier":
-                            #
                     else:
                         unique_list.remove(effect)
                 except:
