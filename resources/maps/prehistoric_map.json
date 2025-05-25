@@ -27,7 +27,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztm1tOwzAQRQfBd3fWRfFcAdAAP\/nlUWAJhdWAWARMaSpGwU5sJ7Yn8f04apVIlX2uPbbbdElESwAAALPhekG0Yipms6D6keFrde52uXKqoA1DYN\/0xKyZN\/bO7+uVg\/9L5rjhJGP7KwUOh7DZeaf3HTXnUFcO\/rX0W0s7QpH1x+eeln5raUcosv743Lunv\/rT5gr+nZH1x+eeFidT9z91J\/AP\/9qA\/3n7l2ePBwX91UZs\/xjz8K8Z+If\/kuk6G49xRob\/4QxxCP\/D2c6R0DkA\/+MQ6hH+4X8OwD\/8lwz852V\/TvDdB8H\/uPj6hH\/4nxPwn5Yz5lzw0bxewH805G9WX8ytgTv4j4Z0dgP\/8F8Y0tkz89LwKd6\/wn8S\/0Ndwr8duc5KbM+JhLjcnptzPvOuGezl4b9k4H9a\/k3PSqT8\/8DcWGfIEIwL\/MN\/ycD\/fw6O4D+3\/1QZwL\/df4oM4L\/bf+wc2mcCnAfM\/lGP0vr\/PsyTAfzbx\/8eipgD\/Pf7jzkX4J9+x7cc6ylzgH\/38R8jg7WC\/udGejWtw9QxL3K3fQ501ZzU9ahETJ7J4L8vi9z9mCptr+0a5DIHkEE4vmuvzMeUTe7+TI2Q\/Q\/mw\/j+TTXfdR\/Udz13HzUTOrZtedi+S0IOfv591l2Xz8BcMPMDyL446w==",
+         "data":"eJztm1tOwzAQRQfBd3fDMromxHMFQAP85JdHgSUUVgNiETClqToEJ\/EjtifJ\/ThqmkiVfa49sdt0TkRzAAAAo+F6RrRgCmY1o\/KR4XNl7nbZcqqgDSGwb3pilswbe+fjcmHh\/5I5rjjJ2P5CgcMQVhvv9L6h5BzKwsK\/ln5raYcvsv64XNPSby3t8EXWH5dr97SrP3Wu4N8aWX9crmlxMnT\/Q3cC\/\/CvDfgft3+593hQ0F9txPaPMQ\/\/moF\/+J8ybXvjPvbI8B9OiEP4D2c9R3znAPz3g69H+If\/MQD\/8D9l4D8v232C6zoI\/vvF1Sf8w\/+YgP+0nDHngo\/q9QL+oyF\/s\/pibg3cwX80pLMb+If\/iSGdPTMvFZ\/i+BX+k\/gPdQn\/O44O\/76X91lJ03MiPi7X++acz7xrBmt5+J8y8D8s\/6ZnJVL+f2BsLDNkCPoF\/uF\/ysD\/f\/YO4D+3\/1QZwH+z\/xQZwH+7\/9g51PcE2A+Y\/aMepfX\/vZ8nA\/hvHv9bKGIO8N\/tP+ZcgH\/6Hd9yrKfMAf7tx3+MDJYK+p8b6dV0H6aWeZG77WOgreakrkdTxOSZDP67ssjdj6FS91qvQTZzABn443rvlfmYssndn6Hhs\/7BfOjfv6nm266Dus7n7qNmfMd2Ux5N3yUhBzf\/Lvddm8\/AXDDzA6XgOVI=",
          "encoding":"base64",
          "height":64,
          "id":2,
@@ -442,13 +442,13 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2480.91,
-                 "y":983.7
+                 "x":2880,
+                 "y":1952
                 }, 
                 {
                  "height":0,
-                 "id":85,
-                 "name":"ALLY2",
+                 "id":119,
+                 "name":"ALLY1",
                  "point":true,
                  "properties":[
                         {
@@ -459,37 +459,152 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Characters_Level1"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2132,
-                 "y":114
+                 "x":1472,
+                 "y":928
                 }, 
                 {
                  "height":0,
-                 "id":86,
-                 "name":"ALLY3",
+                 "id":120,
+                 "name":"ENEMY",
                  "point":true,
                  "properties":[
                         {
                          "name":"movement",
                          "type":"string",
-                         "value":"ally"
+                         "value":"enemy"
                         }, 
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Level1_World"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2414,
-                 "y":1032
+                 "x":542,
+                 "y":688
+                }, 
+                {
+                 "height":0,
+                 "id":127,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1952,
+                 "y":800
+                }, 
+                {
+                 "height":0,
+                 "id":129,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2336,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":130,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1634,
+                 "y":292
+                }, 
+                {
+                 "height":0,
+                 "id":133,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3006,
+                 "y":838
+                }, 
+                {
+                 "height":0,
+                 "id":134,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2606,
+                 "y":1332
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -533,7 +648,7 @@
                 {
                  "height":0,
                  "id":106,
-                 "name":"",
+                 "name":"ITEM REQUIREMENT 1",
                  "point":true,
                  "properties":[
                         {
@@ -545,44 +660,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":202.666666666667,
-                 "y":481.333333333333
-                }, 
-                {
-                 "height":0,
-                 "id":107,
-                 "name":"",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"item_key",
-                         "type":"string",
-                         "value":"AllyRequirement"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1655,
-                 "y":1753
-                }, 
-                {
-                 "height":0,
-                 "id":109,
-                 "name":"",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"item_key",
-                         "type":"string",
-                         "value":"AllyRequirement"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":2946,
-                 "y":233
+                 "x":320,
+                 "y":224
                 }, 
                 {
                  "gid":6721,
@@ -595,6 +674,132 @@
                  "width":32,
                  "x":-1225.09090909091,
                  "y":940.242424242424
+                }, 
+                {
+                 "height":0,
+                 "id":121,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":648,
+                 "y":2034
+                }, 
+                {
+                 "height":0,
+                 "id":122,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":544
+                }, 
+                {
+                 "height":0,
+                 "id":123,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1664,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":124,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":125,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1696,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":131,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1728,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":132,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3030,
+                 "y":374
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -603,7 +808,7 @@
          "y":0
         }],
  "nextlayerid":25,
- "nextobjectid":118,
+ "nextobjectid":135,
  "orientation":"orthogonal",
  "properties":[
         {
