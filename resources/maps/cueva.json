@@ -434,7 +434,7 @@
         }, 
         {
          "firstgid":2049,
-         "source":"..\/..\/..\/..\/samples\/tiles.json"
+         "source":"..\/tilesets\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",
