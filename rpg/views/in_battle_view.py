@@ -33,9 +33,6 @@ class InBattleView(arcade.View):
         self.activated = False
         self.contenedor = arcade.gui.UIBoxLayout()
 
-        #PROXIMAMENTE: CREAR METODOS QUE CARGUEN LOS INTEGRANTES DE AMBOS EQUIPOS EN BASE A INFORMACION
-        #DEL JUGADOR Y DEL WORLD_ENEMY.
-
         self.player_team = []
         self.player_team_length = 0
         self.team_names = []
@@ -133,8 +130,8 @@ class InBattleView(arcade.View):
         self.interval = 0.3
 
         self.attack_time = 0
-        self.attack_duration = 0.8
-        self.skill_duration = 0.8
+        self.attack_duration = 3
+        self.skill_duration = 3
 
         self.waiting_for_action = False
 
@@ -556,13 +553,12 @@ class InBattleView(arcade.View):
             self.elapsed_time = 0
 
         if self.waiting_for_action:
-            self.attack_time += delta_time
-
             if self.previous_option == "attack":
                 self.time = self.attack_duration
             elif self.previous_option == "skill":
                 self.time = self.skill_duration
 
+            self.attack_time += delta_time
             if self.attack_time >= self.time:
                 if not self.hurt:
                     self.enemy_team[self.remaining_enemies.index(self.current_selected_enemy)].setPulseAnim(Anim.HURT)
@@ -644,41 +640,24 @@ class InBattleView(arcade.View):
             self.perform_action()
 
     def setup_team(self, ally, x, y):
-        self.character_sprite = ally
+        character_sprite = ally
+        character_sprite.center_x = x
+        character_sprite.center_y = y
 
-        self.character_sprite.center_x = x
-        self.character_sprite.center_y = y
+        character_sprite.scale = 2
 
-        self.character_sprite.scale = 2
+        character_sprite.setPulseAnim(Anim.BATTLEIDLE)
 
-        self.character_sprite.textures = arcade.load_spritesheet(
-            ally.sheetName,
-            sprite_width = CHARACTER_SPRITE_SIZE,
-            sprite_height = CHARACTER_SPRITE_SIZE,
-            columns = 9,
-            count = 73,
-        )
-
-        self.character_sprite.setPulseAnim(Anim.BATTLEIDLE)
-
-        self.player_sprites.append(self.character_sprite)
+        self.player_sprites.append(character_sprite)
 
     def setup_enemies(self, enemy, x, y):
-        self.character_sprite = enemy
-        self.character_sprite.scale = 2
+        character_sprite = enemy
+        character_sprite.scale = 2
 
-        self. character_sprite.center_x = x
-        self.character_sprite.center_y = y
+        character_sprite.center_x = x
+        character_sprite.center_y = y
 
-        self.character_sprite.textures = arcade.load_spritesheet(
-            enemy.sheetName,
-            sprite_width = CHARACTER_SPRITE_SIZE,
-            sprite_height= CHARACTER_SPRITE_SIZE,
-            columns = 9,
-            count = 73
-        )
-
-        self.enemy_sprites.append(self.character_sprite)
+        self.enemy_sprites.append(character_sprite)
 
     def on_key_press(self, key, _modifiers):
         if self.allow_inputs:
