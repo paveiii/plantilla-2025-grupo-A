@@ -12,7 +12,7 @@
   "TestCharacter1":
     {
       "sheet_name": "Aliados/Protagonista.png","name": "TestCharacter1", "description": "", "type":"Captain",
-      "role": "ally", "maxHealth" : 10, "maxStamina" : 100, "restoredStamina" : 15,
+      "role": "ally", "maxHealth" : 50, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 1", "tu primo 1"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 1", "pepe 1"],
       "requirementItemKey": "REQ1",

@@ -33,6 +33,8 @@ class BattleBuddy(CharacterSprite):
 
     def changeHealth(self, amount:float):
         self.currentHealth += amount
+    def setHealth(self, amount:float):
+        self.currentHealth = amount
     def changeStamina(self, amount:float):
         self.currentStamina += amount
     #Funcion para ganar Stamina, llamada durante la batalla.
