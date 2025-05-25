@@ -33,7 +33,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzjYWRI4GFkOEAmXsAD0e9AJgbrZyATjOofHvqBuAELXoCmVgGbGmrop9T9o\/pH9eOQh2N8+pHVoeEENya4OmzyuMTh2J0JvzwAvXc3hQ==",
+         "data":"eJzjYWRI4GFkOEAmXsAD0e9AJgbrZyATjOofHvqBuAELXoCmVgGbGmrop9T9o\/pH9eOQh2N8+pHVoeGEy4xwddjkcYnD8RUC8gADiDid",
          "encoding":"base64",
          "height":24,
          "id":2,
@@ -107,7 +107,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":12,
+ "nextlayerid":13,
  "nextobjectid":13,
  "orientation":"orthogonal",
  "properties":[
@@ -171,10 +171,6 @@
         {
          "firstgid":573,
          "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Elevacion de terreno cyberpunk.tsx"
-        }, 
-        {
-         "firstgid":582,
-         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Puerta Chula (1).tsx"
         }],
  "tilewidth":32,
  "type":"map",

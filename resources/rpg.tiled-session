@@ -265,11 +265,11 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 0.25,
+            "scale": 4,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 2324,
-                "y": 1756
+                "x": 1910.375,
+                "y": 2709.25
             }
         },
         "maps/mapa_edad_media.json": {
@@ -290,8 +290,8 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 291.5,
-                "y": 379
+                "x": 330.5,
+                "y": 239
             }
         },
         "maps/prehistoric_map.json": {
@@ -312,10 +312,10 @@
         },
         "maps/time_company_interior.json": {
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 134.5,
-                "y": 344
+                "x": 13.5,
+                "y": 348
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -390,6 +390,7 @@
             "scaleInDock": 0.33
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Elevacion de terreno cyberpunk.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 4
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Farola Cyberpunk.tsx": {
@@ -431,6 +432,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (3).tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (4).tsx": {
@@ -521,7 +523,7 @@
     },
     "frame.defaultDuration": 200,
     "last.externalTilesetPath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx",
-    "last.imagePath": "C:/Users/johnn/OneDrive/Downloads",
+    "last.imagePath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk",
     "map.fixedSize": false,
     "map.height": 100,
     "map.width": 135,
@@ -529,11 +531,11 @@
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
-        "maps/power_plant_interior.json",
-        "maps/time_company_interior.json",
-        "maps/main_map.json",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx",
         "maps/mapa_cyberpunk.json",
+        "maps/time_company_interior.json",
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx",
+        "maps/power_plant_interior.json",
+        "maps/main_map.json",
         "sample_map/Animacion portal.tsx",
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (1).tsx",
         "maps/farmhouse - copia.json",
@@ -545,5 +547,5 @@
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
     "tileset.lastUsedFormat": "tsx",
-    "tileset.type": 0
+    "tileset.type": 1
 }
