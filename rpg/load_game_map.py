@@ -15,6 +15,8 @@ from arcade import Sprite
 
 from rpg.Action import Action
 from rpg.BattleAlly import BattleAlly
+from rpg.BattleEnemy import BattleEnemy
+from rpg.sprites.WorldBoss import WorldBoss
 
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
@@ -189,6 +191,16 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 #Spawn de enemigos.
+                elif character_object.properties.get("movement") == "boss":
+                    battleKey = character_object.properties.get("type")
+
+                    character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene,player, [battleKey])
+                    character_sprite.position = character_object.shape
+                    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                    print(character_sprite.position)
+
+
+
                 elif character_object.properties.get("movement") == "enemy":
 
                     #Carga en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
@@ -553,6 +565,17 @@ def loadMapFromSave(player, saveFile, map_name):
 
     f = open("../resources/data/actions_dictionary.json")
     actions_dictionary = json.load(f)
+
+    for character_object in my_map.object_lists["characters"]:
+        if character_object.properties.get("movement") == "boss":
+            battleKey = character_object.properties.get("type")
+
+            character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                         game_map.scene, player, [battleKey])
+            character_sprite.position = character_object.shape
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+            print(character_sprite.position)
+
 
     if "worldAllies" in saveFile["maps"][map_name]:
         for worldAlly in saveFile["maps"][map_name]["worldAllies"]:
