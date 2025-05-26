@@ -438,12 +438,23 @@
                  "id":70,
                  "name":"BOSS",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"boss"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Boss1"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2880,
-                 "y":1952
+                 "x":934,
+                 "y":1672
                 }, 
                 {
                  "height":0,
