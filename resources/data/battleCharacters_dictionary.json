@@ -12,7 +12,7 @@
   "TestCharacter1":
     {
       "sheet_name": "Aliados/Protagonista.png","name": "TestCharacter1", "description": "", "type":"Captain",
-      "role": "ally", "maxHealth" : 50, "maxStamina" : 100, "restoredStamina" : 15,
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 1", "tu primo 1"],
       "dialogueWithItem" : ["OUUUU YEAH", "que grande 1", "pepe 1"],
       "requirementItemKey": "REQ1",
@@ -66,13 +66,19 @@
     "TestEnemy2":
     {
       "sheet_name": "Enemigos/Vaquero.png","name": "TestEnemy2", "description": "Test2",
-      "role": "enemy", "maxHealth" : 75, "maxStamina" : 75, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
+    "TestEnemy3":
+    {
+      "sheet_name": "Enemigos/Cyborg.png","name": "TestEnemy3", "description": "Test3",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Boss1":
     {
       "sheet_name": "Boss/BossFinalPrimeraFase.png","name": "Boss Phase 1", "description": "",
-      "role": "enemy", "maxHealth" : 300, "maxStamina" : 100, "restoredStamina" : 25,
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 200, "restoredStamina" : 25,
       "actions" : ["Action3"]
     },
       "Boss2":

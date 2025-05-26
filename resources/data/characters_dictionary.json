@@ -19,7 +19,7 @@
   },
     "WorldEnemyTest":
     {
-      "battleTeammate_keys": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 4, "random_amount": false ,
+      "battleTeammate_keys": ["TestEnemy1","TestEnemy2","TestEnemy3"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 2, "detectionRadius" : 500
     },
     "Level1_World":
@@ -44,17 +44,20 @@
     {
       "battleTeammate_keys": ["Boss3"]
     },
-
+    "WorldAllyTest":
+    {
+      "battleTeammate_keys": ["TestCharacter2","TestCharacter3","TestCharacter4","TestCharacter5"]
+    },
     "Characters_Level1":
     {
-      "battleTeammate_keys": ["TestCharacter2"]
+      "battleTeammate_keys": ["TestCharacter3"]
     },
       "Characters_Level2":
     {
-      "battleTeammate_keys": ["TestCharacter3","TestCharacter4"]
+      "battleTeammate_keys": ["TestCharacter2","TestCharacter5"]
     },
       "Characters_Level3":
     {
-      "battleTeammate_keys": ["TestCharacter5"]
+      "battleTeammate_keys": ["TestCharacter4"]
     }
 }

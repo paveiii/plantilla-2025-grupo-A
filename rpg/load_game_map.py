@@ -570,30 +570,11 @@ def loadMapFromSave(player, saveFile, map_name):
         if character_object.properties.get("movement") == "boss":
             battleKey = character_object.properties.get("type")
 
-            bossActions = []
-            for action in battleCharacter_dictionary[battleKey]['actions']:
-                action_object = Action(actions_dictionary[action]["name"],
-                                   actions_dictionary[action]["description"],
-                                   actions_dictionary[action]["actionType"],
-                                   actions_dictionary[action]["amount"],
-                                   actions_dictionary[action]["staminaExpense"],
-                                   actions_dictionary[action]["targetQuantity"],
-                                   actions_dictionary[action]["effectName"])
-                bossActions.append(action_object)
-
-            battleBoss = BattleEnemy(battleKey,
-                                 f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
-                                 battleCharacter_dictionary[battleKey]['name'],
-                                 battleCharacter_dictionary[battleKey]['description'],
-                                 battleCharacter_dictionary[battleKey]['type'],
-                                 battleCharacter_dictionary[battleKey]['maxStamina'],
-                                 battleCharacter_dictionary[battleKey]['maxHealth'],
-                                 battleCharacter_dictionary[battleKey]['restoredStamina'],
-                                 bossActions)
-
             character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
-                                     game_map.scene, player, battleBoss)
+                                         game_map.scene, player, [battleKey])
             character_sprite.position = character_object.shape
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+            print(character_sprite.position)
 
 
     if "worldAllies" in saveFile["maps"][map_name]:
