@@ -672,7 +672,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level2Items"
                         }],
                  "rotation":0,
                  "type":"",

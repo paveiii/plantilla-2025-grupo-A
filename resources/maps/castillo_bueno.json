@@ -256,6 +256,12 @@
                  "y":1224.40677966102
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"item_key",
+                 "type":"string",
+                 "value":"Level2Items"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
