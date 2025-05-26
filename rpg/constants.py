@@ -11,11 +11,11 @@ CHARACTER_SPRITE_SIZE = 64 #Original: 32
 MAP_TILE_SIZE = 32
 
 #Ruta del Sprite del jugador en la carpeta "resources/characters"
-PLAYER_SPRITE_PATH = "Test/testWalk2.png"
+PLAYER_SPRITE_PATH = "Aliados/Protagonista.png"
 
 
 # How fast does the player move
-MOVEMENT_SPEED = 8
+MOVEMENT_SPEED = 6
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
@@ -25,7 +25,7 @@ BOTTOM_VIEWPORT_MARGIN = 300
 TOP_VIEWPORT_MARGIN = 300
 
 # Map where we start.
-STARTING_MAP = "test_map"
+STARTING_MAP = "prehistoric_map"
 
 # Key mappings
 KEY_UP = [arcade.key.UP, arcade.key.W]

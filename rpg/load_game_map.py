@@ -15,6 +15,8 @@ from arcade import Sprite
 
 from rpg.Action import Action
 from rpg.BattleAlly import BattleAlly
+from rpg.BattleEnemy import BattleEnemy
+from rpg.sprites.WorldBoss import WorldBoss
 
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
@@ -189,6 +191,16 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 #Spawn de enemigos.
+                elif character_object.properties.get("movement") == "boss":
+                    battleKey = character_object.properties.get("type")
+
+                    character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene,player, [battleKey])
+                    character_sprite.position = character_object.shape
+                    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                    print(character_sprite.position)
+
+
+
                 elif character_object.properties.get("movement") == "enemy":
 
                     #Carga en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
@@ -553,6 +565,36 @@ def loadMapFromSave(player, saveFile, map_name):
 
     f = open("../resources/data/actions_dictionary.json")
     actions_dictionary = json.load(f)
+
+    for character_object in my_map.object_lists["characters"]:
+        if character_object.properties.get("movement") == "boss":
+            battleKey = character_object.properties.get("type")
+
+            bossActions = []
+            for action in battleCharacter_dictionary[battleKey]['actions']:
+                action_object = Action(actions_dictionary[action]["name"],
+                                   actions_dictionary[action]["description"],
+                                   actions_dictionary[action]["actionType"],
+                                   actions_dictionary[action]["amount"],
+                                   actions_dictionary[action]["staminaExpense"],
+                                   actions_dictionary[action]["targetQuantity"],
+                                   actions_dictionary[action]["effectName"])
+                bossActions.append(action_object)
+
+            battleBoss = BattleEnemy(battleKey,
+                                 f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                 battleCharacter_dictionary[battleKey]['name'],
+                                 battleCharacter_dictionary[battleKey]['description'],
+                                 battleCharacter_dictionary[battleKey]['type'],
+                                 battleCharacter_dictionary[battleKey]['maxStamina'],
+                                 battleCharacter_dictionary[battleKey]['maxHealth'],
+                                 battleCharacter_dictionary[battleKey]['restoredStamina'],
+                                 bossActions)
+
+            character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                     game_map.scene, player, battleBoss)
+            character_sprite.position = character_object.shape
+
 
     if "worldAllies" in saveFile["maps"][map_name]:
         for worldAlly in saveFile["maps"][map_name]["worldAllies"]:
