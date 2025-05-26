@@ -33,7 +33,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzjYWRI4GFkOEAmXsAD0e9AJgbrZyATjOofHvqBuAELXoCmVgGbGmrop9T9o\/pH9eOQh2N8+pHVoeGEy4xwddjkcYnD8RUC8gADiDid",
+         "data":"eJzjYWRI4GFkOEAmXsAD0e9AJgbrZyATjOofHvqBuAELXoCmVgGbGmrop9T9o\/pH9VOiH4gZcOCEy4xwddjkcYnD8RUC8gDrHDh2",
          "encoding":"base64",
          "height":24,
          "id":2,
@@ -77,7 +77,91 @@
          "draworder":"topdown",
          "id":7,
          "name":"doors",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":267,
+                 "height":32,
+                 "id":13,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_cyberpunk"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"float",
+                         "value":20.5
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":40
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":704
+                }, 
+                {
+                 "gid":267,
+                 "height":32,
+                 "id":15,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_cyberpunk"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"float",
+                         "value":20.5
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":40
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":256,
+                 "y":704
+                }, 
+                {
+                 "gid":267,
+                 "height":32,
+                 "id":14,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_cyberpunk"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"float",
+                         "value":20.5
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":40
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":704
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -108,7 +192,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":13,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -174,6 +258,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":16
 }
