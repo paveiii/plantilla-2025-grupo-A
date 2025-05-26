@@ -175,8 +175,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":448,
-                 "y":32
+                 "x":439,
+                 "y":49
                 }, 
                 {
                  "height":0,
@@ -305,7 +305,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level1Items"
                         }],
                  "rotation":0,
                  "type":"",
@@ -323,7 +323,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level1Items"
                         }],
                  "rotation":0,
                  "type":"",
@@ -341,7 +341,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level1Items"
                         }],
                  "rotation":0,
                  "type":"",
