@@ -79,7 +79,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 1055, 0, 0, 0, 0, 862, 0, 1055, 0, 0, 862, 0, 0, 0, 0, 1055, 0, 0,
+            0, 0, 1055, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0,
             0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -503,9 +503,56 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"searchable",
+         "objects":[
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":239.911111111111,
+                 "y":435.044444444444
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"WorldItemTest"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":399.984027777778,
+                 "y":435.148611111111
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":17,
+ "nextlayerid":9,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "properties":[
         {
