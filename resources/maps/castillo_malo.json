@@ -491,6 +491,17 @@
                  "id":1,
                  "name":"perro malo",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"boss"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Boss2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -544,6 +555,18 @@
                  "width":0,
                  "x":399.984027777778,
                  "y":435.148611111111
+                }, 
+                {
+                 "gid":4286,
+                 "height":32,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":878,
+                 "y":2164
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -552,7 +575,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":19,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -581,6 +604,10 @@
         {
          "firstgid":4249,
          "source":"..\/tilesets\/lava_tileset.json"
+        }, 
+        {
+         "firstgid":4258,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Carretera BIEN Iluminada-1.png.tsx"
         }],
  "tilewidth":32,
  "type":"map",

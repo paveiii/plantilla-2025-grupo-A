@@ -242,6 +242,18 @@
                  "width":0,
                  "x":47.9130434782609,
                  "y":82.695652173913
+                }, 
+                {
+                 "gid":4277,
+                 "height":32,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":761.762711864407,
+                 "y":1224.40677966102
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -250,7 +262,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":6,
+ "nextobjectid":7,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -275,6 +287,10 @@
         {
          "firstgid":1,
          "source":"..\/tilesets\/[Base]BaseChip_pipo.json"
+        }, 
+        {
+         "firstgid":4249,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Carretera BIEN Iluminada-1.png.tsx"
         }],
  "tilewidth":32,
  "type":"map",
