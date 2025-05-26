@@ -314,18 +314,18 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 0.33,
+            "scale": 1,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 2289.393939393939,
-                "y": 1527.272727272727
+                "x": 1625.5,
+                "y": 619
             }
         },
         "maps/mapa_edad_media.json": {
             "scale": 0.125,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 3940,
+                "x": 2644,
                 "y": 2592
             }
         },
@@ -345,7 +345,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 330.5,
+                "x": 168.5,
                 "y": 239
             }
         },
@@ -353,15 +353,15 @@
             "scale": 0.33,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 1510.606060606061,
-                "y": 678.7878787878788
+                "x": 1446.969696969697,
+                "y": 975.7575757575758
             }
         },
         "maps/submapa.json": {
             "scale": 0.9302083333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 480.00000000000006,
+                "x": 479.9999999999999,
                 "y": 479.46248600223964
             }
         },
@@ -383,7 +383,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 13.5,
+                "x": 149.5,
                 "y": 348
             }
         },
@@ -404,6 +404,7 @@
             "scaleInDock": 1.5
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk2.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk3.tsx": {
@@ -594,6 +595,9 @@
         "tilesets/tiles.json": {
             "scaleInDock": 1
         },
+        "tilesets/tiles1.json": {
+            "scaleInDock": 1
+        },
         "tilesets/tilesCueva.json": {
             "scaleInDock": 1
         }
@@ -608,9 +612,9 @@
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
+        "maps/submapa.json",
         "sin nombre.tmx",
         "maps/test_map.json",
-        "maps/submapa.json",
         "maps/cueva.json",
         "maps/cueva_final.json",
         "maps/interior_arbol.json",
