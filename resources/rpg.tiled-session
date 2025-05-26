@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "maps/submapa alcantarillado.tmx",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -357,6 +357,14 @@
                 "y": 975.7575757575758
             }
         },
+        "maps/submapa alcantarillado.tmx": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -1.875,
+                "y": 81.75
+            }
+        },
         "maps/submapa.json": {
             "scale": 0.9302083333333333,
             "selectedLayer": 0,
@@ -381,7 +389,7 @@
         },
         "maps/time_company_interior.json": {
             "scale": 1,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 149.5,
                 "y": 348
@@ -605,25 +613,36 @@
     "frame.defaultDuration": 200,
     "last.externalTilesetPath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx",
     "last.imagePath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk",
-    "map.fixedSize": false,
-    "map.height": 100,
-    "map.width": 135,
+    "map.fixedSize": true,
+    "map.height": 5,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 1,
     "openFiles": [
+        "maps/prehistoric_map.json",
+        "maps/mapa_edad_media.json",
+        "maps/casa_mago.json",
+        "maps/castillo_bueno.json",
+        "maps/castillo_malo.json",
+        "maps/cueva_final.json",
+        "maps/mapa_cyberpunk.json",
+        "maps/time_company_interior.json",
+        "maps/power_plant_interior.json",
+        "maps/submapa alcantarillado.tmx"
     ],
     "project": "rpg.tiled-project",
     "recentFiles": [
-        "maps/submapa.json",
-        "sin nombre.tmx",
-        "maps/test_map.json",
-        "maps/cueva.json",
+        "maps/prehistoric_map.json",
+        "maps/mapa_edad_media.json",
+        "maps/casa_mago.json",
+        "maps/castillo_bueno.json",
+        "maps/castillo_malo.json",
         "maps/cueva_final.json",
-        "maps/interior_arbol.json",
-        "maps/graveyard_dungeon.json",
-        "maps/farmhouse.json",
-        "maps/dungeon_lvl_three_maze.json",
         "maps/mapa_cyberpunk.json",
         "maps/time_company_interior.json",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx"
+        "maps/power_plant_interior.json",
+        "maps/submapa alcantarillado.tmx",
+        "maps/submapa.json",
+        "sin nombre.tmx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",

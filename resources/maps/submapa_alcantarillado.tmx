@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.11" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="1" height="5" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../tilesets/Tilesets Cyberpunk/Archivos.tsx/DEC2 - Varios.tsx"/>
+ <tileset firstgid="29" source="../tilesets/Tilesets Cyberpunk/Archivos.tsx/Mercado Ilegal Chino.tsx"/>
+ <tileset firstgid="69" source="../tilesets/Tilesets Cyberpunk/Archivos.tsx/DEC5 - Varios.tsx"/>
+ <layer id="1" name="Suelo" width="1" height="5">
+  <data encoding="csv">
+56,
+56,
+56,
+56,
+20
+</data>
+ </layer>
+ <layer id="2" name="Objeto" width="1" height="5">
+  <data encoding="csv">
+87,
+0,
+0,
+0,
+0
+</data>
+ </layer>
+</map>
