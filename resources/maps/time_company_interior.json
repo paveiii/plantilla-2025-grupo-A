@@ -61,7 +61,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJxjYBgFgxWYMw20C0bBKBgaYAUjZfrXUah\/qAIAd94Bkg==",
+         "data":"eJxjYBgFuAAjEwMDExAzM5GnnwWojxWI2cjUzw7UxwHEnGTqHwWjYKSAFYyU6V9Hof6hCgCcUgGY",
          "encoding":"base64",
          "height":24,
          "id":5,
@@ -196,9 +196,9 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"ambient_color",
-         "type":"color",
-         "value":"#ff797979"
+         "name":"isSubmap",
+         "type":"bool",
+         "value":true
         }],
  "renderorder":"left-up",
  "tiledversion":"1.11.2",
@@ -258,6 +258,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":16
 }

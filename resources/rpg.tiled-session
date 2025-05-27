@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/submapa alcantarillado.tmx",
+    "activeFile": "maps/mapa_cyberpunk.json",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -207,15 +207,15 @@
             "scale": 1.550347222222222,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 415.7133258678612,
-                "y": 287.67749160134383
+                "x": 416.35834266517367,
+                "y": 288.3225083986562
             }
         },
         "maps/castillo_bueno.json": {
             "scale": 1.3953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 304.2329227323629,
+                "x": 303.51623740201563,
                 "y": 319.64165733482645
             }
         },
@@ -236,8 +236,11 @@
             }
         },
         "maps/cueva_final.json": {
+            "expandedObjectLayers": [
+                2
+            ],
             "scale": 1.3953125,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 319.99999999999994,
                 "y": 319.64165733482645
@@ -314,19 +317,19 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 1,
-            "selectedLayer": 6,
+            "scale": 0.25,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1625.5,
-                "y": 619
+                "x": 2566,
+                "y": 1784
             }
         },
         "maps/mapa_edad_media.json": {
             "scale": 0.125,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 2644,
-                "y": 2592
+                "x": 3700,
+                "y": 2656
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
@@ -343,18 +346,18 @@
         },
         "maps/power_plant_interior.json": {
             "scale": 1,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 168.5,
-                "y": 239
+                "x": 167.5,
+                "y": 377
             }
         },
         "maps/prehistoric_map.json": {
             "scale": 0.33,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 1446.969696969697,
-                "y": 975.7575757575758
+                "x": 1537.8787878787878,
+                "y": 1021.2121212121212
             }
         },
         "maps/submapa alcantarillado.tmx": {
@@ -389,10 +392,10 @@
         },
         "maps/time_company_interior.json": {
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 149.5,
-                "y": 348
+                "x": 255.5,
+                "y": 384
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -528,6 +531,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (6).tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Poste electrico.tsx": {
@@ -587,6 +591,9 @@
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Town Hall1.tsx": {
             "scaleInDock": 0.5
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Valla cyberpunk.tsx": {
+            "scaleInDock": 2
+        },
         "tilesets/[A]Grass_pipo.json": {
             "scaleInDock": 1
         },
@@ -626,10 +633,10 @@
         "maps/cueva_final.json",
         "maps/mapa_cyberpunk.json",
         "maps/time_company_interior.json",
-        "maps/power_plant_interior.json",
-        "maps/submapa alcantarillado.tmx"
+        "maps/power_plant_interior.json"
     ],
     "project": "rpg.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "maps/prehistoric_map.json",
         "maps/mapa_edad_media.json",
@@ -637,9 +644,9 @@
         "maps/castillo_bueno.json",
         "maps/castillo_malo.json",
         "maps/cueva_final.json",
-        "maps/mapa_cyberpunk.json",
-        "maps/time_company_interior.json",
         "maps/power_plant_interior.json",
+        "maps/time_company_interior.json",
+        "maps/mapa_cyberpunk.json",
         "maps/submapa alcantarillado.tmx",
         "maps/submapa.json",
         "sin nombre.tmx"
@@ -647,5 +654,5 @@
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",
     "tileset.lastUsedFormat": "tsx",
-    "tileset.type": 1
+    "tileset.type": 0
 }
