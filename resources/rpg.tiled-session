@@ -207,24 +207,24 @@
             "scale": 1.550347222222222,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 416.35834266517367,
-                "y": 288.3225083986562
+                "x": 416.03583426651744,
+                "y": 288.00000000000006
             }
         },
         "maps/castillo_bueno.json": {
             "scale": 1.3953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 303.51623740201563,
-                "y": 319.64165733482645
+                "x": 303.87458006718924,
+                "y": 320
             }
         },
         "maps/castillo_malo.json": {
             "scale": 1.3953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.99999999999994,
-                "y": 319.64165733482645
+                "x": 320.35834266517355,
+                "y": 320
             }
         },
         "maps/cueva.json": {
@@ -317,19 +317,19 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 0.25,
-            "selectedLayer": 2,
+            "scale": 0.125,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 2566,
-                "y": 1784
+                "x": 2732,
+                "y": 2120
             }
         },
         "maps/mapa_edad_media.json": {
             "scale": 0.125,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 3700,
-                "y": 2656
+                "x": 3704,
+                "y": 2660
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
@@ -348,16 +348,16 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 167.5,
-                "y": 377
+                "x": 320,
+                "y": 320.5
             }
         },
         "maps/prehistoric_map.json": {
             "scale": 0.33,
             "selectedLayer": 14,
             "viewCenter": {
-                "x": 1537.8787878787878,
-                "y": 1021.2121212121212
+                "x": 1536.3636363636365,
+                "y": 1022.7272727272727
             }
         },
         "maps/submapa alcantarillado.tmx": {
@@ -394,8 +394,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 255.5,
-                "y": 384
+                "x": 256,
+                "y": 384.5
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -445,6 +445,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN Iluminada-1.png.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN.tsx": {
