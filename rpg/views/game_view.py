@@ -414,11 +414,14 @@ class GameView(arcade.View):
             self.camera_sprites.use()
             map_layers = cur_map.map_layers
             for layer_name, sprite_list in cur_map.scene.name_mapping.items():
-                if layer_name == "top":
+                if layer_name == "top" or layer_name == "shadows_top":
                     continue  # saltamos la capa
 
                 sprite_list.draw()
 
+            shadows_top = cur_map.scene.name_mapping.get("shadows_top")
+            if shadows_top:
+                shadows_top.draw()
             # Dibujamos al jugador
             self.player_sprite_list.draw()
 
@@ -426,6 +429,8 @@ class GameView(arcade.View):
             top = cur_map.scene.name_mapping.get("top")
             if top:
                 top.draw()
+
+
 
             for item in map_layers.get("searchable", []):
                 arcade.Sprite(
