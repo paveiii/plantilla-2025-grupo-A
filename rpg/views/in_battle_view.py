@@ -686,10 +686,6 @@ class InBattleView(arcade.View):
             if len(self.player_team) == 1:
                 self.player_turn = True
 
-        print(f"{self.player_attacks} == {len(self.player_team)}")
-        if self.player_attacks == len(self.player_team):
-            print("AHORA DEBERÍA ENTRAR")
-
     def get_pointer_positions(self):
         if self.option == "select_enemy":
             return self.enemy_y_positions[self.current_selected_enemy] + self.pointer_height_offset
@@ -1070,10 +1066,12 @@ class InBattleView(arcade.View):
     def next_ally(self):
         self.player_attacks += 1
 
+        self.main_buttons()
+
         self.ally_rotation.append(self.ally_rotation.pop(0))
 
         if (self.ally_rotation != self.remaining_allies and len(self.player_team) > 1) or (
-                len(self.player_team) == 1 and self.player_attacks == 0):
+                len(self.player_team) == 1 and self.player_attacks <= 1):
             if self.r_done:
                 self.ally_rotation = self.remaining_allies.copy()
                 self.r_done = False
@@ -1091,7 +1089,7 @@ class InBattleView(arcade.View):
             self.allow_inputs = True
             self.stage = 1
             self.action_buttons.clear()
-            self.main_buttons()
+
             self.option = "menu"
 
         elif self.player_attacks >= len(self.player_team):
@@ -1130,6 +1128,10 @@ class InBattleView(arcade.View):
 
                         self.player_team[self.current_ally_index].currentStamina -= action["staminaExpense"]
                         print(self.player_team[self.current_ally_index].currentStamina)
+
+                if len(self.player_team) == 1:
+                    self.main_buttons()
+                    self.option = "menu"
 
                 self.pointer_x = self.x_positions[self.current_ally]
                 self.pointer_y = self.y_positions[self.current_ally]
