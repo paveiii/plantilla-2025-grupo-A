@@ -37,7 +37,7 @@ class WorldEnemy(CharacterSprite):
     def chequear_colision(self):
         if self.distanciaJugador <= 34 and self.distanciaJugador >= 0:
             print("JUGADOR COLISIONA CON EL ENEMIGO")
-            switch_to_battle = ActivateInBattleView(self.enemigos_batalla)
+            switch_to_battle = ActivateInBattleView(self)
 
     def actualizar_path(self):
         newPath = arcade.astar_calculate_path(self.position,
