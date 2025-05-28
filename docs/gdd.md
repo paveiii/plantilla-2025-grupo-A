@@ -37,36 +37,34 @@ La inspiración para cada personaje ha sido la imitación de varios arquetipos d
 
 **ENEMIGOS**
 
-Los enemigos diseñados para perseguir al personaje que no se acerque prudencialmente, y cuando este toca a un aliado comienza la batalla. Los enemigos nunca atacan solos, siempre lo hacen en grupo, y cada integrante emplea su propia barra de habilidad que se recarga con cada turno. Esta se emplea para tomar decisiones sobre cómo actuar. Su modus operandi es atacar según el criterio de: rival mas débil, seguido de los medico o lideres, personajes con mucha vida y por ultimo otros.\
-Para el boss final se tienen varios ataques normales para acabar combinándolos hasta llegar a un ataque especial.
+Los enemigos están diseñados para perseguir al personaje y al colisionar con estos, comienza una batalla. Los enemigos nunca atacan solos, siempre lo hacen en grupo, y cada integrante emplea su propia barra de "Stamina" que se recarga con cada turno. Esta se emplea para tomar decisiones sobre cómo actuar. Su modus operandi es atacar según el criterio de: rival mas débil, seguido de los medico o lideres, personajes con mucha vida y por último al protagonista. De no tener un criterio claro, ataca al azar. Para el jefe final, este usará varios ataques normales hasta cargar un ataque especial, dicho ataque especial puede reiniciarse haciendo suficiente daño en un solo turno.
 
 **MECÁNICAS**
 
-*   Un sistema que permite la elección de cómo actuar en caso de batalla: ataque a un solo enemigo, ataque a varios enemigos, curar a un aliado o a varios, revivir a un aliado.
+*   Sistema de batalla en una ventana separada: Donde ocurre la batalla por turnos contra el equipo de enemigos que nos hayamos encontrado. Permite la elección de cómo actuar por aliado: ataque a un solo enemigo, ataque a varios enemigos, curar a un aliado o a varios y revivir a un aliado. Tras el turno del jugador, los enemigos actuaran acorde lo que indique la IA del equipo enemigo.
 *   Guardado de partida manual y automático.
-*   El boss final experimentará una evolución que implica tanto ataques como la caracterización, hasta su forma final.
-*   El reclutamiento de aliados tendrá una capacidad de hasta tres miembros, con los cuales se puede interaccionar como otorgándoles objetos.
-*   Cajas de diálogos predeterminados y opciones para hablar con otros personajes con el fin de reclutarlos.
+*   Por cada nivel, el jefe final tomará una forma final, evolucionando su apariencia y ataques hasta alcanzar su fase final. Aumenta la dificultad por cada nivel.
+*   El equipo del jugador tendrá la capacidad de añadir hasta tres miembros, con los cuales se puede interaccionar como otorgándoles objetos.
+*   Cajas de diálogos predeterminados
+*   Opciones para hablar con otros personajes con el fin de reclutarlos: En lugar de usar un objeto de reclutamiento, se podrá optar por reclutar a un personaje por medio opciones de dialogo que el jugador eligirá, cada una tiene una posibilidad de terminar reclutando al personaje de forma exitosa.
 *   Aprendizaje de habilidades nuevas.
-*   Selección en el menú principal de skin.
-*   Ataques combinados y ultimates.
-*   Logros
-*   Tienda de objetos y vestimentas
-*   Traductor universal comerciable.
-
-**FÍSICAS**
-
-*   Correr rápido
-*   Knockback
+*   Selección en el menú principal de "skin": Permitirá que el personaje del jugador tenga una apariencia distinta a la predeterminada.
+*   Ataques combinados: Ataques donde dos o más aliados combinan fuerzas para dar paso a un ataque mucho más poderoso.
+*   Ataques "ultimates": Ataques más fuertes que se cargan tras un tiempo.
+*   Logros: Emblemas que los jugadores podrán desbloquear cuando realicen ciertas acciones en el juego.
+*   Tienda de objetos y vestimentas: En los diferentes mapas habrán tiendas en las que el jugador podrá comprar y vender objetos utilizando una moneda del juego. Se podrá vender objetos como el "Traductor Universal" que usa el protagonista para comunicarse con los otros personajes reclutables, de hacer esto se recibiría una enorme suma de dinero, pero el jugador sería incapaz de reclutar a otros personajes.
+*   Habilidad de correr a alta velocidad (Sprint)
+*   Knockback: Ciertos enemigos pueden empujar al jugador en varias direcciones haciendo daño en el proceso.
 
 **SECUENCIA DE NIVELES**
 
-*   Tres niveles con una de las fases del boss final como última batalla.
-*   Ambientación de acuerdo con cada línea temporal: medieval, futurista y prehistórico.
-*   Items y NPC´s ocultos.
+*   Tres niveles, cada nivel terminará con una batalla contra el jefe.
+*   La ambientación de cada nivel estará acorde con cada línea temporal: Medieval, Futurista y Prehistórico.
+*   Habrán items distribuidos alrededor del mapa que ayudarán al jugador durante las batallas.
+*   NPC´s ocultos.
 *   Diseño abierto y diferentes caminos. 
 
-**ESTÉTICA DEL VIDEOJUEGO**
+**ESTÉTICA**
 
 *   Diversos personajes con escenarios únicos y diseños acordes a las épocas que representan.
 *   Pixel-Art (64X&64).
