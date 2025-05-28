@@ -593,6 +593,11 @@ class GameView(arcade.View):
             self.main_buttons_widget = None
 
     def on_show_view(self):
+        self.left_pressed = False
+        self.right_pressed = False
+        self.up_pressed = False
+        self.down_pressed = False
+
         # Set background color
         my_map = self.map_list[self.cur_map_name]
         if my_map.background_color:
