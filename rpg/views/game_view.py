@@ -496,7 +496,7 @@ class GameView(arcade.View):
                                 #     j += 1
 
                                 if not self.buttons_visible:
-                                    self.main_buttons(self.player_sprite.player_team)
+                                    self.main_buttons(self.player_sprite.player_team[1:])
                                     self.buttons_visible = True
         if self.dialogues_active is False:
             self.hide_main_buttons()
@@ -569,9 +569,9 @@ class GameView(arcade.View):
         self.fila2.add(ally3_button)
         ally3_button.on_click = self.ally3
 
-        ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3].displayName, width=150)
-        self.fila2.add(ally4_button)
-        ally4_button.on_click = self.ally4
+        # ally4_button = arcade.gui.UIFlatButton(text=lista_nombres[3].displayName, width=150)
+        # self.fila2.add(ally4_button)
+        # ally4_button.on_click = self.ally4
 
         self.contenedor.add(self.fila1.with_space_around(bottom=20))
         self.contenedor.add(self.fila2)
@@ -600,16 +600,16 @@ class GameView(arcade.View):
     # Funciones para cada uno de los botones. Cada una selecciona a un aliado a reemplazar
     def ally1(self, event):
         self.button_clicked = True
-        self.selected_ally = 0
+        self.selected_ally = 1
     def ally2(self, event):
         self.button_clicked = True
-        self.selected_ally = 1
+        self.selected_ally = 2
     def ally3(self, event):
         self.button_clicked = True
-        self.selected_ally = 2
-    def ally4(self, event):
-        self.button_clicked = True
         self.selected_ally = 3
+    # def ally4(self, event):
+    #     self.button_clicked = True
+    #     self.selected_ally = 3
 
     def on_update(self, delta_time):
         """
@@ -740,27 +740,36 @@ class GameView(arcade.View):
                         # Desactivamos los dialogos
                         self.dialogues_active = False
                         self.current_dialog = 0
+                        sheet_name = old_ally.sheetName
                         # arcade.play_sound(self.pergamino_sound, volume=1)
                         # Creamos otro WorldAlly con la información del battleAlly quitado del player_team
-                        self.old_ally_battle = WorldAlly(f":characters:{self.team[old_ally.displayName]['sheet_name']}", self.my_map.scene, self.player_sprite, old_ally, self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['name'],
-                                                         self.team[old_ally.displayName]["dialogueNoItem"], self.team[old_ally.displayName]["dialogueWithItem"])
-                        self.old_ally_battle.center_x = self.player_sprite.center_x
-                        self.old_ally_battle.center_y = self.player_sprite.center_y
-                        # Creamos otro item
-                        self.item_nuevo = WorldItem(f":items:{self.item_dictionary[self.team[old_ally.displayName]['requirementItemKey']]['sheet_name']}", self.team[old_ally.displayName]['requirementItemKey'])
-                        self.item_nuevo.center_x = self.player_sprite.center_x + 50
-                        self.item_nuevo.center_y = self.player_sprite.center_y
-                        self.my_map.scene.add_sprite("searchable", self.item_nuevo)
-                        self.my_map.scene.add_sprite("characters", self.old_ally_battle)
-                        self.my_map.worldAllyList.append(self.old_ally_battle)
-                        self.my_map.worldItemList.append(self.item_nuevo)
-                        # quitar al aliado del mapa
-                        ally.remove_from_sprite_lists()
-                        # quitar su item del inventario
-                        for item in self.player_sprite.inventory:
-                            if item['name'] == ally.requirementItemName:
-                                self.player_sprite.inventory.remove(item)
-                        self.selected_ally = None
+                        print(sheet_name)
+                        key = ""
+                        for i in self.team:
+                            if self.team[i]['sheet_name'] in sheet_name:
+                                key = i
+                                requirementItem = self.team[i]['requirementItemKey']
+                                requirementItemName = self.item
+                        if key != "" and old_ally:
+                            self.old_ally_battle = WorldAlly(sheet_name, self.my_map.scene, self.player_sprite, old_ally, self.item_dictionary[self.team[key]['requirementItemKey']]['name'],
+                                                             self.team[key]["dialogueNoItem"], self.team[key]["dialogueWithItem"])
+                            self.old_ally_battle.center_x = self.player_sprite.center_x
+                            self.old_ally_battle.center_y = self.player_sprite.center_y
+                            # Creamos otro item
+                            self.item_nuevo = WorldItem(f":items:{self.item_dictionary[self.team[key]['requirementItemKey']]['sheet_name']}", self.team[key]['requirementItemKey'])
+                            self.item_nuevo.center_x = self.player_sprite.center_x + 50
+                            self.item_nuevo.center_y = self.player_sprite.center_y
+                            self.my_map.scene.add_sprite("searchable", self.item_nuevo)
+                            self.my_map.scene.add_sprite("characters", self.old_ally_battle)
+                            self.my_map.worldAllyList.append(self.old_ally_battle)
+                            self.my_map.worldItemList.append(self.item_nuevo)
+                            # quitar al aliado del mapa
+                            ally.remove_from_sprite_lists()
+                            # quitar su item del inventario
+                            for item in self.player_sprite.inventory:
+                                if item['name'] == ally.requirementItemName:
+                                    self.player_sprite.inventory.remove(item)
+                            self.selected_ally = None
 
 
 
