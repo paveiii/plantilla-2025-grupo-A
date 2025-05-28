@@ -3,6 +3,16 @@ Python Arcade Community RPG
 
 An open-source RPG
 """
+import builtins
+
+original_import = builtins.__import__
+
+def blocking_import(name, globals=None, locals=None, fromlist=(), level=0):
+    if "newton" in name.lower() or "cradle" in name.lower():
+        raise ImportError(f"[BLOQUEADO] Intento de importar módulo prohibido: {name}")
+    return original_import(name, globals, locals, fromlist, level)
+
+builtins.__import__ = blocking_import
 
 import arcade
 
