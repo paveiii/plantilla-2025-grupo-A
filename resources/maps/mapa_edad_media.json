@@ -2887,7 +2887,7 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Characters_Level2.2"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2910,7 +2910,7 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"Characters_Level2"
+                         "value":"Characters_Level2.1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -3345,7 +3345,7 @@
          "y":0
         }],
  "nextlayerid":19,
- "nextobjectid":99,
+ "nextobjectid":101,
  "orientation":"orthogonal",
  "properties":[
         {

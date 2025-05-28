@@ -97,6 +97,36 @@
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
+    "Level3_Enemy_1":
+    {
+      "sheet_name": "Test/Borracho.png","name": "Enemigo", "description": "borracho",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
+    "Level3_Enemy_2":
+    {
+      "sheet_name": "Test/David Martinez.png","name": "Enemigo", "description": "David Martinez",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
+    "Level3_Enemy_3":
+    {
+      "sheet_name": "Test/Esqueleto.png","name": "Enemigo", "description": "Esqueleto",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
+    "Level3_Enemy_4":
+    {
+      "sheet_name": "Test/Ludao.png","name": "Enemigo", "description": "Ludao",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
+    "Level3_Enemy_5":
+    {
+      "sheet_name": "Test/Prisionero.png","name": "Enemigo", "description": "Prisionero",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
+      "actions" : ["Action3"]
+    },
     "Boss1":
     {
       "sheet_name": "Boss/BossFinalPrimeraFase.png","name": "Boss Phase 1", "description": "",

@@ -859,6 +859,17 @@
                  "id":24,
                  "name":"David Martinez",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"EnemyDavidMartinez"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -871,6 +882,17 @@
                  "id":29,
                  "name":"Borracho",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"EnemyBorracho"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -883,6 +905,17 @@
                  "id":30,
                  "name":"Esqueleto",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"EnemyEsqueleto"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -895,6 +928,17 @@
                  "id":37,
                  "name":"Prisionero",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"EnemyPrisionero"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -930,6 +974,17 @@
                  "id":47,
                  "name":"Ludao",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"EnemyLudao"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1407,6 +1462,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":136
 }
