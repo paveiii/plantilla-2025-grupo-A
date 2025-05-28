@@ -33,7 +33,7 @@ La esencia del juego son las batallas que hay que librar para salir con vida tra
 Cada uno está dotado de su propia barra de vida y capacidad de ataque, que pude alcanzar hasta un maximo de tres.\
 Los personajes cuentan con sus propios ataques, porcentaje de vitalidad y daño.\
 Existen varias opciones con las que seguir una estrategia a la hora de enfrentarse a algún enemigo. Dependiento de quien ataque y quien es atacado, el daño es mayor, la vida se regenera más rápido, la recuperación de la habilidad de ataque es inmediata dependiendo de si se emplea o no, valoraciones de daño en caso de ser atacado  etc. Teniendo siempre presente que las estadísticas se mantienen después de cada confrontación.\
-La inspiración para cada personaje ha sido la imitación de varios arquetipos de diferentes épocas y tiempos, intentando implementar lo que se espera ficcionalmente de ellos: un guerrero que cuente con una vida moderada y alto porcentaje de daño; mago que tenga ataques con efecto; asesino con mucha resistencia; capitán con efectos grupales y ataques moderados; o un médico que tenga altas capacidades curativas para su equipo.\
+La inspiración para cada personaje ha sido la imitación de varios arquetipos de diferentes épocas y tiempos, intentando implementar lo que se espera ficcionalmente de ellos: un guerrero que cuente con una vida moderada y alto porcentaje de daño; mago que tenga ataques con efecto; asesino con mucha resistencia; capitán con efectos grupales y ataques moderados; o un médico que tenga altas capacidades curativas para su equipo.
 
 **ENEMIGOS**
 
@@ -42,21 +42,34 @@ Para el boss final se tienen varios ataques normales para acabar combinándolos 
 
 **MECÁNICAS**
 
-*      Un sistema que permite la eleccion de cómo actuar en caso de batalla: ataque a un solo enemigo, ataque a varios enemigos, curar a un aliado o a varios, revivir a un aliado.
-*      Guardado de partida manual y automático.
-*      El boss final experimentará una evolución que implica tanto ataques como la caracterización, hasta su forma final.
-*      El reclutamiento de aliados tendrá una capacidad de hasta tres miembros, con los cuales se puede interaccionar como otorgandoles objetos.
-*      Cajas de diálogos predeterminados y opciones para hablar con otros personajes con el fin de reclutarlos.
-*      Aprendizaje de habilidades nuevas.
-*      Selección en el menú principal de skin.
-*      Ataques combinados y ultimates.
-*      Logros
-*      Tienda de objetos y vestimentas
-*      Traductor universal comerciable.
+*   Un sistema que permite la elección de cómo actuar en caso de batalla: ataque a un solo enemigo, ataque a varios enemigos, curar a un aliado o a varios, revivir a un aliado.
+*   Guardado de partida manual y automático.
+*   El boss final experimentará una evolución que implica tanto ataques como la caracterización, hasta su forma final.
+*   El reclutamiento de aliados tendrá una capacidad de hasta tres miembros, con los cuales se puede interaccionar como otorgándoles objetos.
+*   Cajas de diálogos predeterminados y opciones para hablar con otros personajes con el fin de reclutarlos.
+*   Aprendizaje de habilidades nuevas.
+*   Selección en el menú principal de skin.
+*   Ataques combinados y ultimates.
+*   Logros
+*   Tienda de objetos y vestimentas
+*   Traductor universal comerciable.
 
 **FÍSICAS**
 
-*      Correr rápido
+*   Correr rápido
+*   Knockback
+
+**SECUENCIA DE NIVELES**
+
+*   Tres niveles con una de las fases del boss final como última batalla.
+*   Ambientación de acuerdo con cada línea temporal: medieval, futurista y prehistórico.
+*   Items y NPC´s ocultos.
+*   Diseño abierto y diferentes caminos. 
+
+**ESTÉTICA DEL VIDEOJUEGO**
+
+*   Diversos personajes con escenarios únicos y diseños acordes a las épocas que representan.
+*   Pixel-Art (64X&64).
 
 
 
