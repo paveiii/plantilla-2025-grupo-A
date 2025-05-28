@@ -1029,6 +1029,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":19.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1057,6 +1062,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":19.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1085,6 +1095,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":19.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1113,6 +1128,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1141,6 +1161,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1169,6 +1194,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":2
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1197,6 +1227,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":3
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1368,6 +1403,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":136
 }

@@ -232,6 +232,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -247,11 +252,6 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"isSubmap",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
                          "name":"map_name",
                          "type":"string",
                          "value":"prehistoric_map"
@@ -265,6 +265,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":4
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",

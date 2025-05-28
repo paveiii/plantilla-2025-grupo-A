@@ -224,6 +224,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -252,6 +257,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -280,6 +290,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -308,6 +323,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":18
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -336,6 +356,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -364,6 +389,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -392,6 +422,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -420,6 +455,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":11
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -817,6 +857,39 @@
                  "width":0,
                  "x":3030,
                  "y":374
+                }, 
+                {
+                 "gid":13969,
+                 "height":96,
+                 "id":135,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_edad_media"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":2912,
+                 "y":1952
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -825,7 +898,7 @@
          "y":0
         }],
  "nextlayerid":26,
- "nextobjectid":135,
+ "nextobjectid":136,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -844,7 +917,7 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
@@ -858,6 +931,10 @@
         {
          "firstgid":13441,
          "source":"..\/tilesets\/[A]Grass_pipo.json"
+        }, 
+        {
+         "firstgid":13969,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
         }],
  "tilewidth":32,
  "type":"map",

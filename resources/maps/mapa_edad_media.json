@@ -742,6 +742,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -770,6 +775,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -798,6 +808,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -826,6 +841,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -854,6 +874,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":6.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -882,6 +907,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":6.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -910,6 +940,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":8.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -938,6 +973,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":8.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -966,6 +1006,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":14.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -994,6 +1039,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":14.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1022,6 +1072,11 @@
                          "name":"start_y",
                          "type":"float",
                          "value":14.5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1050,6 +1105,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":14
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1078,6 +1138,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":14
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1106,6 +1171,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":3
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1134,6 +1204,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":27
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1162,6 +1237,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":27
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1190,6 +1270,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1218,6 +1303,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -1246,6 +1336,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",

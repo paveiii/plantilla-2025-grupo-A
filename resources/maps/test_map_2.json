@@ -99,6 +99,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":40
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -127,6 +132,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":40
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
