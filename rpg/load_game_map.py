@@ -385,11 +385,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             if (item_sprite != None):
                  print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")
                  game_map.scene.add_sprite("searchable", item_sprite)
-    #Este codigo es para asegurar de que existan tantos items de requerimiento como aliados spawneados.
-    #Actualmente lo comente debido a que los mapas del proyecto original no cuentan con los puntos de Spawn
-    #de dichos items.
-    #if len(spawnedAlliesKeys) > 0:
-    #    raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
+
+    if len(spawnedAlliesKeys) > 0:
+        raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
 
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]

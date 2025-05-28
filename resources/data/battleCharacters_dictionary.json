@@ -11,17 +11,17 @@
 
   "TestCharacter1":
     {
-      "sheet_name": "Aliados/Protagonista.png","name": "TestCharacter1", "description": "", "type":"Captain",
+      "sheet_name": "Aliados/Protagonista.png","name": "Protagonista", "description": "", "type":"Captain",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 15,
-      "dialogueNoItem" : ["NO TIENES EL ITEM. ESTA EN OTRO SITIO. BUSCALO", "tu prima 1", "tu primo 1"],
-      "dialogueWithItem" : ["OUUUU YEAH", "que grande 1", "pepe 1"],
-      "requirementItemKey": "REQ1",
+      "dialogueNoItem" : [],
+      "dialogueWithItem" : [],
+      "requirementItemKey": "",
       "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
     },
 
   "TestCharacter2":
     {
-      "sheet_name": "Aliados/EdadMedia/Elenya_de_Rohan.png","name": "TestCharacter2", "description": "", "type":"Tank",
+      "sheet_name": "Aliados/EdadMedia/Elenya_de_Rohan.png","name": "Elenya de Rohan", "description": "", "type":"Tank",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["Veo en tus ojos el brillo de quien busca aliados... pero yo no lucho por cualquiera. Mis espadas se desenvainan por causas justas... y por quienes demuestran compromiso.",
                           "¿Una batalla, dices? Todos vienen con palabras urgentes y promesas vacias. Yo escucho hechos, no discursos. ",
@@ -30,13 +30,13 @@
       "dialogueWithItem" : ["Asi que no solo hablabas en serio… lo has traido. El Emblema. ",
                             "Muy bien, luchare a tu lado. Desde este dia, cuentas con Elenya de Rohan.",
                             "¡ELENYA DE ROHAN SE HA UNIDO A TU EQUIPO!"],
-      "requirementItemKey": "REQ2",
+      "requirementItemKey": "REQ1",
       "actions" : ["Action1","Action2", "Action5"]
     },
 
   "TestCharacter3":
     {
-      "sheet_name": "Aliados/Prehistoria/Akaris,el_Colmillo del_Sol.png","name": "TestCharacter3", "description": "", "type":"Fighter",
+      "sheet_name": "Aliados/Prehistoria/Akaris,el_Colmillo del_Sol.png","name": "Akaris, el Colmillo del Sol", "description": "", "type":"Fighter",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["¿Quien osa interrumpir mi descanso? Nadie es tan ingenuo como para molestar a Akaris, el Colmillo del Sol sin una buena razón",
                             "Asi que di lo que quieres, ser petulante.",
@@ -46,13 +46,13 @@
       "dialogueWithItem" : ["Bienaventurado seas viajero, tienes la fuerza necesaria para librar a esta tierra de su calvario.",
                             "Yo, Akaris, el Colmillo del Sol, juro seguirte hasta el final de la batalla.",
                             "¡AKARIS, EL COLMILLO DEL SOL, SE HA UNIDO A TU EQUIPO!"],
-      "requirementItemKey": "REQ3",
+      "requirementItemKey": "REQ2",
       "actions" : ["Action3", "Action4", "Action5"]
     },
 
   "TestCharacter4":
     {
-      "sheet_name": "Aliados/Cyberpunk/Sigma-8.png","name": "TestCharacter4", "description": "", "type":"Medic",
+      "sheet_name": "Aliados/Cyberpunk/Sigma-8.png","name": "Sigma-8", "description": "", "type":"Medic",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["Escaneo completado. Identidad: desconocida. Intencion: colaboracion tactica. Solicitud: reclutamiento.",
                           "Mi protocolo de asistencia avanzada se encuentra en estado inactivo. Razon: falta de modulo de criterio de compatibilidad.",
@@ -61,12 +61,12 @@
       "dialogueWithItem" : ["Objeto recibido. Data Core vZ-4 verificado. Integridad: 100%. Compatibilidad: confirmada.",
                             "Protocolo de asistencia activado. Sigma-8 operativo. Ahora soy parte de tu unidad, listo para recibir órdenes.",
                             "¡SIGMA-8 SE HA UNIDO A TU EQUIPO!"],
-      "requirementItemKey": "REQ4",
+      "requirementItemKey": "REQ3",
       "actions" : ["Action1","Action2", "Action3", "Action4"]
     },
     "TestCharacter5":
     {
-      "sheet_name": "Aliados/EdadMedia/Tharion_el_Sereno.png","name": "TestCharacter5", "description": "", "type":"Medic",
+      "sheet_name": "Aliados/EdadMedia/Tharion_el_Sereno.png","name": "Tharion el Sereno", "description": "", "type":"Medic",
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["Saludos, viajero. Veo cansancio en tu alma... y determinacion en tus pasos.",
                           "¿Qué buscas de un viejo como yo? Curar heridas es sencillo. Sostener la esperanza, eso es más difícil. Pero en tiempos oscuros, toda luz es necesaria.",
