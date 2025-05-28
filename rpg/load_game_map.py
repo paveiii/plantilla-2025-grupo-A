@@ -15,6 +15,8 @@ from arcade import Sprite
 
 from rpg.Action import Action
 from rpg.BattleAlly import BattleAlly
+from rpg.BattleEnemy import BattleEnemy
+from rpg.sprites.WorldBoss import WorldBoss
 
 if sys.platform == "win32" or sys.platform == "win64":
     from pyglet.gl.wglext_arb import wglWaitForSbcOML
@@ -189,6 +191,16 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                         f":characters:{character_data['images']}", game_map.scene
                     )
                 #Spawn de enemigos.
+                elif character_object.properties.get("movement") == "boss":
+                    battleKey = character_object.properties.get("type")
+
+                    character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene,player, [battleKey])
+                    character_sprite.position = character_object.shape
+                    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+                    print(character_sprite.position)
+
+
+
                 elif character_object.properties.get("movement") == "enemy":
 
                     #Carga en la lista los nombres de los posibles enemigos que pueden aparecer en la batalla.
@@ -373,11 +385,9 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
             if (item_sprite != None):
                  print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")
                  game_map.scene.add_sprite("searchable", item_sprite)
-    #Este codigo es para asegurar de que existan tantos items de requerimiento como aliados spawneados.
-    #Actualmente lo comente debido a que los mapas del proyecto original no cuentan con los puntos de Spawn
-    #de dichos items.
-    #if len(spawnedAlliesKeys) > 0:
-    #    raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
+
+    if len(spawnedAlliesKeys) > 0:
+        raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
 
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]
@@ -553,6 +563,17 @@ def loadMapFromSave(player, saveFile, map_name):
 
     f = open("../resources/data/actions_dictionary.json")
     actions_dictionary = json.load(f)
+
+    for character_object in my_map.object_lists["characters"]:
+        if character_object.properties.get("movement") == "boss":
+            battleKey = character_object.properties.get("type")
+
+            character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                         game_map.scene, player, [battleKey])
+            character_sprite.position = character_object.shape
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+            print(character_sprite.position)
+
 
     if "worldAllies" in saveFile["maps"][map_name]:
         for worldAlly in saveFile["maps"][map_name]["worldAllies"]:

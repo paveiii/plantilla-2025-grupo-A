@@ -1,5 +1,13 @@
 { "columns":21,
- "image":"tiles.png",
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"..\/tilesets\/tiles.json"
+        }
+    },
+ "image":"..\/tilesets\/tiles.png",
  "imageheight":10240,
  "imagewidth":700,
  "margin":0,

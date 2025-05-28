@@ -257,7 +257,7 @@ class GameView(arcade.View):
         color = arcade.csscolor.WHITE
         self.player_light = Light(x, y, radius, color, mode)
 
-    def switch_map(self, map_name,start_x,start_y):
+    def switch_map(self, map_name,start_x,start_y, wipePreviousMaps):
         """
         Switch the current map
         :param map_name: Name of map to switch to
@@ -266,6 +266,7 @@ class GameView(arcade.View):
         """
 
         if(map_name not in self.map_list):
+            if(wipePreviousMaps): self.map_list.clear()
             self.map_list[map_name] = load_map(f"../resources/maps/{map_name}.json",self.player_sprite)
 
         self.cur_map_name = map_name
@@ -322,10 +323,10 @@ class GameView(arcade.View):
 
 
         if(self.saveFile != None):
-            self.switch_map(self.saveFile[0], start_x, start_y)
+            self.switch_map(self.saveFile[0], start_x, start_y, False)
             self.cur_map_name = self.saveFile[0]
         else:
-            self.switch_map(constants.STARTING_MAP, start_x, start_y)
+            self.switch_map(constants.STARTING_MAP, start_x, start_y, False)
             self.cur_map_name = constants.STARTING_MAP
 
 
@@ -414,11 +415,14 @@ class GameView(arcade.View):
             self.camera_sprites.use()
             map_layers = cur_map.map_layers
             for layer_name, sprite_list in cur_map.scene.name_mapping.items():
-                if layer_name == "top":
+                if layer_name == "top" or layer_name == "shadows_top":
                     continue  # saltamos la capa
 
                 sprite_list.draw()
 
+            shadows_top = cur_map.scene.name_mapping.get("shadows_top")
+            if shadows_top:
+                shadows_top.draw()
             # Dibujamos al jugador
             self.player_sprite_list.draw()
 
@@ -426,6 +430,8 @@ class GameView(arcade.View):
             top = cur_map.scene.name_mapping.get("top")
             if top:
                 top.draw()
+
+
 
             for item in map_layers.get("searchable", []):
                 arcade.Sprite(
@@ -470,7 +476,7 @@ class GameView(arcade.View):
                         dialogue, item_bool = ally.get_interaction_dialogue()
                         self.dialogues_length = len(dialogue)
                         if type(dialogue) == list:
-                                arcade.draw_text(dialogue[self.current_dialog - 1], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
+                                arcade.draw_text(dialogue[self.current_dialog - 1], self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK, font_size=15, width=self.window.width - 150, align="left", multiline=True)
                         else:
                                 arcade.draw_text(dialogue, self.player_sprite.center_x - 550, self.player_sprite.center_y - 225, arcade.color.BLACK)
                         if dialogue == ally.dialogueFullTeam:
@@ -834,13 +840,14 @@ class GameView(arcade.View):
                     map_name = doors_hit[0].properties["map_name"]
                     start_x = doors_hit[0].properties["start_x"]
                     start_y = doors_hit[0].properties["start_y"]
+                    wipe = doors_hit[0].properties["wipePreviousMaps"]
                 except KeyError:
                     raise KeyError(
-                        "Door objects must have 'map_name', 'start_x', and 'start_y' properties defined."
+                        "Door objects must have 'map_name', 'start_x', 'start_y' and 'wipePreviousMaps' properties defined."
                     )
 
                 # Swap to the new map
-                self.switch_map(map_name, start_x, start_y)
+                self.switch_map(map_name, start_x, start_y, wipe)
             else:
                 # We didn't hit a door, scroll normally
                 self.scroll_to_player()

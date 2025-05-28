@@ -274,6 +274,11 @@
                          "name":"start_y",
                          "type":"int",
                          "value":35
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -281,6 +286,39 @@
                  "width":32,
                  "x":1344,
                  "y":1312
+                }, 
+                {
+                 "gid":4777,
+                 "height":96,
+                 "id":33,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"time_company_interior"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":8
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":1504,
+                 "y":1440
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -438,7 +476,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":33,
+ "nextobjectid":34,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -467,6 +505,10 @@
         {
          "firstgid":529,
          "source":"..\/tilesets\/[Base]BaseChip_pipo.json"
+        }, 
+        {
+         "firstgid":4777,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
         }],
  "tilewidth":32,
  "type":"map",

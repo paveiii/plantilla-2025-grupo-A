@@ -51,7 +51,6 @@ class CharacterSprite(arcade.Sprite):
             self.updateAnim()
             self.setAnim()
             self.exitAnim()
-            print(str(self.cur_texture_index))
         else:
             if (self.change_x or self.change_y):
                 self.setMoveAnim()

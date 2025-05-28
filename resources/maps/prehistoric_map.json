@@ -19,7 +19,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztm1tOwzAQRQfBd3fWRfFcAdAAP\/nlUWAJhdWAWARMaSpGwU5sJ7Yn8f04apVIlX2uPbbbdElESwAAALPhekG0Yipms6D6keFrde52uXKqoA1DYN\/0xKyZN\/bO7+uVg\/9L5rjhJGP7KwUOh7DZeaf3HTXnUFcO\/rX0W0s7QpH1x+eeln5raUcosv743Lunv\/rT5gr+nZH1x+eeFidT9z91J\/AP\/9qA\/3n7l2ePBwX91UZs\/xjz8K8Z+If\/kuk6G49xRob\/4QxxCP\/D2c6R0DkA\/+MQ6hH+4X8OwD\/8lwz852V\/TvDdB8H\/uPj6hH\/4nxPwn5Yz5lzw0bxewH805G9WX8ytgTv4j4Z0dgP\/8F8Y0tkz89LwKd6\/wn8S\/0Ndwr8duc5KbM+JhLjcnptzPvOuGezl4b9k4H9a\/k3PSqT8\/8DcWGfIEIwL\/MN\/ycD\/fw6O4D+3\/1QZwL\/df4oM4L\/bf+wc2mcCnAfM\/lGP0vr\/PsyTAfzbx\/8eipgD\/Pf7jzkX4J9+x7cc6ylzgH\/38R8jg7WC\/udGejWtw9QxL3K3fQ501ZzU9ahETJ7J4L8vi9z9mCptr+0a5DIHkEE4vmuvzMeUTe7+TI2Q\/Q\/mw\/j+TTXfdR\/Udz13HzUTOrZtedi+S0IOfv591l2Xz8BcMPMDyL446w==",
+         "data":"eJztm1tOwzAQRQfBd3fDMromxHMFQAP85JdHgSUUVgNiETClqToEJ\/EjtifJ\/ThqmkiVfa49sdt0TkRzAAAAo+F6RrRgCmY1o\/KR4XNl7nbZcqqgDSGwb3pilswbe+fjcmHh\/5I5rjjJ2P5CgcMQVhvv9L6h5BzKwsK\/ln5raYcvsv64XNPSby3t8EXWH5dr97SrP3Wu4N8aWX9crmlxMnT\/Q3cC\/\/CvDfgft3+593hQ0F9txPaPMQ\/\/moF\/+J8ybXvjPvbI8B9OiEP4D2c9R3znAPz3g69H+If\/MQD\/8D9l4D8v232C6zoI\/vvF1Sf8w\/+YgP+0nDHngo\/q9QL+oyF\/s\/pibg3cwX80pLMb+If\/iSGdPTMvFZ\/i+BX+k\/gPdQn\/O44O\/76X91lJ03MiPi7X++acz7xrBmt5+J8y8D8s\/6ZnJVL+f2BsLDNkCPoF\/uF\/ysD\/f\/YO4D+3\/1QZwH+z\/xQZwH+7\/9g51PcE2A+Y\/aMepfX\/vZ8nA\/hvHv9bKGIO8N\/tP+ZcgH\/6Hd9yrKfMAf7tx3+MDJYK+p8b6dV0H6aWeZG77WOgreakrkdTxOSZDP67ssjdj6FS91qvQTZzABn443rvlfmYssndn6Hhs\/7BfOjfv6nm266Dus7n7qNmfMd2Ux5N3yUhBzf\/Lvddm8\/AXDDzA6XgOVI=",
          "encoding":"base64",
          "height":64,
          "id":2,
@@ -28,213 +28,6 @@
          "type":"tilelayer",
          "visible":true,
          "width":96,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "id":15,
-         "name":"doors",
-         "objects":[
-                {
-                 "gid":3959,
-                 "height":32,
-                 "id":7,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":87
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":16
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2784,
-                 "y":480
-                }, 
-                {
-                 "gid":3959,
-                 "height":32,
-                 "id":8,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":88
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":15
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":2816,
-                 "y":480
-                }, 
-                {
-                 "gid":4035,
-                 "height":32,
-                 "id":36,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"cueva"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":6
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":15
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":224,
-                 "y":64
-                }, 
-                {
-                 "gid":4035,
-                 "height":32,
-                 "id":59,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"cueva"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":17
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":18
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":1216,
-                 "y":64
-                }, 
-                {
-                 "gid":4076,
-                 "height":32,
-                 "id":81,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"cueva"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":7
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":19
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":192,
-                 "y":128
-                }, 
-                {
-                 "gid":4077,
-                 "height":32,
-                 "id":82,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"cueva"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":7
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":19
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":224,
-                 "y":128
-                }, 
-                {
-                 "gid":4078,
-                 "height":32,
-                 "id":83,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"cueva"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":7
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":19
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":256,
-                 "y":128
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -296,35 +89,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt1tFtgzAUBVD\/saZXaTME\/WSUpw5BZsgWLQ2kxjUt\/QlRdI70RAgWgmv7iZQAAAAAAO7j3KWY6ujneCZLpnXV11+7lC7Xysc97XOoMo3L+vj1+\/R5LDJfFfu0+sWcaW7kOpTnsXHtTf67jEV+pzmzrfVcrf+h2gureXip9gVt48+ecuvfjXXdGhc7xgxHv+ejGr+zzkV2uZFjNPrRakysz5f9kY9+x0fX\/95rWvMQS95lny\/vM\/1\/nou\/FdndMt2Yl1jWdjSyfe+uxf+11mtf9PZpXvr5myd849xNPS\/6CgAAAAAAAAAAAAAAAAAAsOUDgdG+mA==",
-         "encoding":"base64",
-         "height":64,
-         "id":13,
-         "name":"decoration_slowdown",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":96,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "compression":"zlib",
-         "data":"eJzt3E0KgzAQgFEXtfc\/XKHX6aIEJDWhNcpMyXvgppEin05\/QFwWAAAAAABm9Vyjj4DCubjGY31vNb379prV6619ylpvH\/r22n3TtLVeXmu9h3n4tG00er331rUf98vnjN7MzPUfR3sAAAAAAADg32zvd7ndo49mbvrH0j+W\/rHq+yN9L+Sgfyz3x+dhFmLpH0v\/WH4X5eFc5KF\/LLOQh\/7jRv5vmYVxZ3XT\/5izupmFY65opX+sjLMw6\/M3MvTP8PyTF76CQWs=",
-         "encoding":"base64",
-         "height":64,
-         "id":12,
-         "name":"shadows",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":96,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "compression":"zlib",
-         "data":"eJzt2zlOw0AUxnEXwQ1LUkENddogyrAdgbXkACCxXQCkSIgjcCoqbpCKOzAWMR4P8RKP3szY\/v+kJ8dZlOjzy\/MkUaIIwDJfw34+t2l7y\/crcO87oPzrGmvHaVOrPa02jIKMovx3jUIU7QjMl6L8942CjAOtJovr0u26VpCh55+YaLeRvzz6347EOQFh+xzkt1hd089qSebzQX4LN5ZlzzHI3K81e9zN8LeqFGU\/72n+T0beM22\/6bGoQvaZ9zi7bOY9E8o\/kWbehezNHtY9x\/n9EzUjTgvmhE3eY9awtVyp7K9rft8qNX\/a7jGuvo+tJHvJ+dNGZXPGVpPZf6veR3ct\/O0iRE16\/UVl\/0r+f8xzbZkHlfebg7Vm39WZWcx6v8geqMd2zfPBe80Kax4AAPzi+x+\/WAsBAABAAut8v1jnAwAAAEBYpqMoOlR1pOp49H8fMqaLrM9Unau6UHW5ZB8y0vzpf7fMfOl\/t8x86X+36H+\/6H8\/is639L8bRetN+l+enn1b+r\/sP\/9tUpV3qP2\/yn\/+Q1aVd6j93xVt7f+uoP\/9su3\/H9sag4s=",
+         "data":"eJztnL1OAkEQxymQxg+k0VprY2wwNlppZ6WVlHa2frVgRWJ8BJ8KG9+AynfwNkgYVu72e2dmmV8yOfAQzO+\/O7d3Zxj2WgIRhpIFKb67i8e5s4Gfjc3eTr7PsvU8aXjdKEJWPxb+v3qzosIRyGkb1CGoLa18aHIfG1OWlPxD6vwfaMWdGP73E\/SXOv+nWtmixnzOcW8L1fF\/Bqr\/97P5dhOUC6n9U+vnIUD\/ij7Y5+vfhtCMVvmnOO9MpBj\/tnD0pZPimMCZEjI1MWkvb1H+Buaefc\/VlPNpe3mbE+7eQ1jlHiMDqjxu+P3efXdWJurcT9fU\/4vmewye+2ZhAts9pf7z0Vk81n2PE\/lXzJ2HuKfiUR\/DkNdO\/T6dlL4Fd1L1H+48O4xpX5R703y4Pv5fVEjRm5r6TCiuvX+Ve2oZcMKl9ze5p+4\/5TVPl2PtU+X73XOtydl\/bmx6lk2vh3D2T\/GafynuY9yLpw5V9y5QOW\/zIdT\/Z+JzijfGbk1Q7j06WDmknFuc\/OciZy8T\/7isu3u4vsJYx667f2zEPy6c\/FP9H8YQOPkvEfGPh6w968nR50r0b7uGjOH3vHqPi4D3KdG\/IvXYnXu\/qepW\/GdfE0HvIXOgFP91jCzWq6H3F0LmQOn+qcPVPcX7jT5w9l9CBlz9l4L4x0OOvbiU7J\/DNdKS\/SswMxjsNu83uS\/BP2XEPy7iHw9xj4v4x0X842LjX3JIh4t\/ySE+Pv4lh3iE+Jccwonhn0IOl91W64rQd6w+nNi9rhT\/d5X7ASH\/kKbrP6X454r4x0X84xLb\/y8Rejke",
          "encoding":"base64",
          "height":64,
          "id":3,
@@ -338,11 +103,11 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt2EFuwjAQBdBcoJAzQO9\/EaTSO5TeAbpidh2kOrXjmiz6njTSKIsshsy3xTQBAAAAAAAAAAAAAAAAAAAA\/91p\/10831vM\/Rz1bv6b+Ii5X6I+zX8T15j7LerL\/DfxMk\/TLmo\/P54FzoXnyPlf6hkn53+ptwvj5Pwv9XZhnJz\/pd4daZya\/HdHGqcm\/0t3JPq15n\/u\/Rb9WvM\/987lfq35n3t31H6t+Z97d9R+pW+7Rimj7EK9v\/rPwS6sU8qcVnZhnZ78qXmnXVj22\/0zP1vzTruw7BAzOka9zj\/3+dkadmHZHXAHw2s=",
+         "data":"eJzt2NFRgzAcx\/E89Oxzd\/FVh9AFmEFdQPugToAP6rGAO2QKOkO3MChoiAECjYSQ7+cu1\/bKefT3T\/7ECAEAAAAAQNpuNkLcqnG3CX0naXpUuT+p8Uz+Qbyq3N\/UeCd\/zOSwFbIaoe9jTZpMzWF+\/7AV4vg9snB3uw5GpvLYfv16v1evWuatATe2flFnmllyLfTPsuO7F\/J3Umr57evMuuazMf8LYy206nBvrAvYlX97yk\/\/tsxr23XS4Zoi9O9cqvI360zLLrPkKC39qHWNbH9u1kc29d7Ozzz+0AXL+3uNrQ7SkndrVP3\/UI9TpVAHrQayeXZ21EU2c1t2182bFLJv2OZrrvX2qi55vefpy15\/lk\/lI\/ehs7dYzubMulTvPwbyn7oGfM73obO3mM\/mhrJfwp5z6Owt5rO5nmf2YvJfu74a8P\/vPPqeA2OktM\/xqSt\/zMOW\/9Tec+oaiGU\/6Vvuue9PrYPrfjLVOv031\/1kzPv+NYh53491Yx+KlDH\/3V3shLjc+flb5D7elcr+2lP+OmrhzucawHi+1gBzfhmoAwCkh96PVDH3wyB3AEtALwqD3JE61gBSxLwHAABAbD4BDYMegg==",
          "encoding":"base64",
          "height":64,
-         "id":21,
-         "name":"top",
+         "id":13,
+         "name":"decoration_slowdown",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -352,7 +117,21 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt07EJACAQA8CM4Azq\/jMqfC1YaXMHgfQhCQAAAAAAAAAAAAAAAAAAAAAAAAAAALzTWzJ2Zjt3\/rIFFF+A4gv3FsSNA5c=",
+         "data":"eJzt2lGuAiEMhWEfHPe\/Jtdg4naMMRMNA6UwbYnwf4kvjvdmcoCKdC4XAAAAAAAAAMCqntvoO8COsYhF3vO5M6bdauvhsR1fsNGSffo+2rXUfmnOl\/KnDtmR5jjzv480\/9N5Tv62emtP7n342jPWrol33af228hl\/jse8CXVnVz+zHtbuYz57RWnlDH5x5Dyhz\/yH6tUZ8jfjlTLNWc+7Pf9pL+92PvHad37w1atLsEXZ55+NHWE+T8W+Y9H\/mNJ52\/o05IfPa9YpR5X7zM\/v39zvdne6+xyz1qdmf\/k38b6u5f89aRzT\/L359H3KtUyxuUosu9I\/keRfffV9rTSmXLufL91\/3OmH8Na+CiNifdcJX+fvY\/W6vlrzqR3Hj3fFfdFLX3dx6ar7xY9+VXHona9tkY81gX5f69bnAX13NcKa0Hbj8ztT1NezwTNmv+ZfrDmevrZXrOuBU1+Ft8Pb1a5\/Uv+2rn5b\/nPthZq5261c6Ho\/L3\/pwdNDbd4RZthLVjlPiJ\/HL0Aay70zg==",
+         "encoding":"base64",
+         "height":64,
+         "id":12,
+         "name":"shadows",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "compression":"zlib",
+         "data":"eJzt2UEOgyAQAECewKkPqP1Qrf9\/iyZevNRIggstMwkJRxPZZXdJCQAAAAAAAIBfMD9afwHE+TjvQGOLPAQEUusD0fRcsHuLBQZ0rD3dBwD\/7Zjn1T0AY\/LeBUQyZ+iLHqAP3oEZhboTAHUPo9ILx5Jr+lK7D3jmlKZtvfL3Pefungf5F2X0ynX1NO8UC+7kKCXnvkWMiIXrVkhnDcg=",
          "encoding":"base64",
          "height":64,
          "id":22,
@@ -366,7 +145,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztm0luFEEQRXPFopfuowB3AN\/BcArgDuA70MaMZs2MgS1mtIE1k0euAAu+pUaqjoqMzqyMqnIX\/0lfLZVatvX9K6IyojuEdpkshbAG3YDWl1r+ZVO2RyHsjOqvQ+Mm\/LwF3YbuRLx9gOsPoUfQ447834fXB6P669B4Aj+fQs+g5xFvt3D9DfQWeteR\/7\/h9Z9R\/XVovIefH6CP0HbE26+4\/g36Dv2ovEfWpdPjEM5AZ8fd\/O1D4Cd824X2oH3D27vQPWgDuj99n6xL5+D7eWhZ8b+PHrIIxHyR3m5CL6CX0Kvp+2RdWoHvF6CLiv999JBFIOaL9HYH+gR9hr5M3xerSxp99JBFIOaL9PYAOoSOoF8N\/Mv5X\/1P5PjiUcPZB+povVXzyaOGsw\/U0Xqr5pNHDWcfqKP1Vs0njxrOPlBH661d+MTzmo3WA1LmRalY5zWi94CUeVEq1nmN6D0gZV6Uw+tTYVL+U4aJ1gNi86KmbNH\/bDzPUMy\/TcrcswTm3yZl7lkC829TOvecB\/NvI89m3vMz5j8P7\/kZ859HtfZ73AvMfx7V2u9xLzD\/zfF4DrLyL+8v7m5m+XcvXBqHcBm60mCOU82\/9FfeX9zd6Bm8Ct+vQasN\/K\/mX\/or7y\/ubvQMXofvE2itMP\/SX3nO4O6m7lHpPqCaf\/o7H+lR6T6Azz9leO8DSB7e+wBCTjo8B\/WL9gxacgYjeWjnoJIz2Dw8P\/MyBLTn9JIzWBWttnl+5mUIaDth67qFfP7XahufcWfRdsLW9WNiPVvOP7XaxmfcWbSdsHX9mOj3bIT\/nEHMJ\/ZdGOs7MrHZJfdf5aScB2K55vynnJK9CPNfjlZbUs\/IzH85Wm1JvSeY\/3ZI\/ZwK898OqZ9TYf7bx9qbM\/++aLMy60zF\/Ptizcq0+RDz74s1K9PmQ8y\/L9asTP2eN\/3vDG0+xPy3j7W\/Yv59yd1f0X9fcvdXrD++5O6vmH9fcvdXzH+\/MP+EEEIWlb9vhyWt",
+         "data":"eJztm0lPG0EQhfuUg4\/490F+GhCWBHJOSMJ6xRD2nBP25S\/AgYfkw7i7utw9XePBk\/dJT5ZGI1t6rq7qrppxrlkWZpxbhD5BSzMN\/9iQ055zZ73ws2ssw88VaBX6HPH2G65\/hzagHxPy\/w5e3\/fCz67xE37+gjahrYi3A1w\/gA6h3xPy\/xlev\/TCz65xBD+PoRPoNOLtX1z\/B11CV5V72shLXeMavt1At9Cd4u0XaA1ah74O78vJS\/yvZGK++N5uQzvQLrQ3vM\/PS7N95+agj\/3wd9qoIdNAzBff2zPoHLqA\/gzvi+UliTZqyDQQ88X39h56gB6hpxr+5fxX\/xM5vljkcNaBEKm2Sj5Z5HDWgRCptko+WeRw1oEQqbZKPlnkcNaBEKm20qf2kWpASr+I2CDVgJR+USraeY3INSClX5TD\/ge3UP4t3USqAbF+UV0G9D8byzMU41+ntO85Dsa\/TkrfswTGv05p33McjH8d\/2xm3T9j\/Odh3T9j\/OdRzf0Wa4Hxn0c191usBcZ\/fSz2QVr8++uLs5tRqmuhLtX49\/311xdnN83uf3x\/\/fXF2Y0cg\/N9\/C\/QYo0+ZjX+fX\/9cwZnEqFHpfOAavzT3\/H4HpXOA7j\/KcN6HkDysJ4HEPLe4TmoXXgOapdJn4P4zMso0j695AxWRcptls+8dAFpJqxd1\/D3\/1Ju4x53FGkmrF1\/I1az\/f6nlNu4xx1Fmglr19+Ivmfj+c8exHhi78Jo78jEajbnX+WknAdicc3+Tzkl5wHGfzlSbkk9IzP+y5FyS+qaYPw3Q+pzKoz\/Zkh9ToXx3zxav4jxb4vUK9POVIx\/W7RemdQfYvzbovXKpP4Q498WrVcmvudN\/yeG1B9i\/DePNr9i\/NuSO7+i\/7bkzq+Yf2zJnV8x\/m3JnV8x\/tuF8U8IIWRaeQWWrBvk",
          "encoding":"base64",
          "height":64,
          "id":10,
@@ -380,7 +159,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJztnEmQFEUUhvOAAzEM09B9ET2oB0EP6kFAmRk9qAeZgZkBQ286bGqEXgVcI7wKuJ5dQFnc13BfBwUVV1DBNcQNVHCN8AQafhl0xWTkvMzO6qruqu6pP+KLXiarquvvN+9Vvqzo0bJS2+BNiPRoSanH4HF4Ap4sHX1\/VBirtYHXG+F+eKA8\/nWkB3n+EDwMj5TlfbqOHelZxj0Hz8ML1W2mdyk1A8pdY+N2dSq1u3PsUat\/ilIDsBAWwSAMTVGZag\/nsBc+N3wa5Zy3Vc\/7LR63l9xjtWxPJI+0XuX5a\/A6vFGW9ykde35FqR7ohZ2Mew\/ehw+q25yM77NgtuH\/fjw\/0Dn2qDWC10thGSyHFbAyY\/8Pcg6H4DfDpz2c896qB1\/w+GXJPVbL9kTySGs3zz+BT+GzsrxP6diD+D4Ew\/At4\/bBd\/B9dZsefO+FPsP\/w3h+pHPsUesavF4Fq2ENXAvXNcD\/Dj7zzEAkHbTe\/4PX8zj3s+DsyvjxtieSR1oHeP4z\/AK\/lsfvJzr2oerxfy8dPfYKjrkSLodNbLcZtsBWxz5cugWv18I6WA+3wm0O\/8u8XzH+NmmaUsdMCzvOJIevSTTAuS+ERYL\/WqG+2LVBqgk+vciYl+BleCWm\/5Eu7lbqkm7332fh+2w4BU6FY\/F9JhyXof9L8X1ZxV1bJV+ksXZtkGqCTx8y5iP4GHbV6f9VeH+1x\/9ePO+Dc+BcOA3fT4czMvQ\/ku1flF8kX6Q6bNcGqSb49ANjfoSfYL9n\/BX4dqWQW6LY9\/0PDLPdYlgCF8F5+H4+XJAD\/121VfJFGmvXhpCaIMmXt67HsxvgRrjJ+g6i2K\/1P5BEjfTfVVtDx0o5yby+DJUvb92O53fAnXBXBteXjfRfK27NNCXlJPP6MlS+vLUJzzfDFtiawP9OrmenQldX7bGmjg+41vRdf9aSK\/ak2La\/KyknmdeXoao3b8XRCfh+IpwU0\/9GyxV7Umzb35WZk87E7zkwN9D3JNf+9WgOvs+FeTnz3xV7Umz78sSF+L4A+gP9T+PaP44W4Hs\/DOTM\/0h23ZTqrS9PXMp2l8FIoP9pXPunocNcNx2Bf+G\/bvfrkPFJZNZNM5fYecKuC6sYsxrWxMj3WqHX\/o3WdOrmDChDpeR+HTI+icy6aeYSO0\/YdWEtY9bB+pj+F3LLzCV2nrDrwn26jwEbK\/6+Xi2926E2pH4ibSA7T\/jmbLX6ej7tLPxPrKivt7yI\/6bK1UeNoyL+\/fJ57FqjjKMi\/v3yeezqo8ZREf9++TyO00d1qYh\/v0yPG9G7KeI\/XI3o3RTxHy57TpZkDSFSaPw3u2+aR9lzsrjr7pJ0\/IesOTS7b5qm7oZ74N6U9xt33V2Sjv+QNYe89E3r0VPwNDyT8n7TWL\/S8R+y5pCXvmk92gFvwztZfxBBOv7jrjm0mr6Cr+GblPaXRt2dSPoT\/oK\/U9pfGnW3UP2yc3OS\/n+h+LJzc5L+f6HkStL\/LxQm1\/yzmJc2R675ZzPnpRP5u3bNP+uZl4beq2v3JVq1B9Gfwj5c88965qXmPUdR\/1OKbbsv0ao9iJGsP4Al856jqP8pxbbdl2jlHkQj5FobjrMuH8W\/FNtprK+1s1xrw\/b7vn5FFP9FbMeXa23Yft\/uV5j3mRbrX\/XLlR\/s9+1+hXmfabH+m55cecbuV5j3mRbxn55C+qJ2bc57\/A9OrU1eFLIeadfmvMZ\/iO958z9kzWrc73zk0P+8+uuTaw3AntfatTlv8d9qvkdyrQHU6tnkKf5b1Xst1xpArZ5NXuK\/lb03ZV\/f1JrX5iH+28V7Ld\/96lJfKA\/x3y7ea\/nuVxd\/yyZj\/9vFe7On4+pZSt9NlvHfLt5rSb9DYPcjpH5RVv63U87Xkn6HIKQfkVX+aSfvXbL7EdIaY9bx386y+xHiGmPhf9MkzcX2daibs\/gsE9F\/aS72Twb+56n2zp+sVA\/0Qt\/krD9N45W33uYgng\/BMCyGJW32HbRK775dFGfdJC3\/\/wenZiXm",
+         "data":"eJzVnFlsVUUYx08ibUkpFG8pEX1Qo1AgUfqgRmj1QQ2JIGsDD0VooSwVXKEKCCQ+aITEBXhUlpbVBVTAXUGKyuYKCrhG3EAFAU180qj\/4d5Jh6+znjNn4Z\/8c+8tc8899zff+Wbmm3NpzwXBLvhd+N+ivDeVB8Fm+AX4Rfil8vzf2yVtmVvxug1eA6\/NdX7N9QyePws\/Bz+fkx9T9dncr6Ddq\/Br8OuF9\/QsC4IL4VxZ\/jXTgdIgOFja8cg0rGsQDIdvg0fAI+FRXc89vs5Mq7vh+8Ft8Jpu+b\/Zvp96aHGw8zC+wxH4C4FTO77zrvL88\/fw+H7hudh2cVFHe8qEvubajuc74HfgnbnOx9R9Ntd+tPsA\/hD+qPCevuDeD64q62h3DMyPl3Y8MjWAdSM8GZ4CN8FTuwapCX3QegLf4ST8u8DpML7zkcL3\/hKPXxWey9oyUSYyRkwH8fwz+HP4UE5+TNVnc32Hdkfh7+EfCu8ZAu41cK3A\/28w\/6e045GpBazvhx+A58Lz4Pkx8C\/GOfexNPqgkb7\/BPnOp8tpi3NFmcgYMR3H81\/gX+HfcvJjsc8+Wfi8U+X5z26qQJzC0+B1eN96eAO8UXEMlZY4sM6hbYXQvkv3ICjqbvfeLgZeomT8w8iWCx0b6Jhg0hto8yb8Fvy2I3+ucT2CYHwP9b\/3A\/cquD88AL4I3PvAF6fIvxGxN7lCPbbKuMja0rFBNibo9DHafAJ\/Ch8IyX8m2M\/S8K8B81r4BvhG+CpwvxoelIH4p\/x4fpFxkY3DdGyQjQk6\/Yg2P8E\/w8c07aeD2wxJvuGxr7sGRuN9Y+CxcB18E7jfDN+SAf6qsVXGRdaWjg02Y4JMurz1IJgtgBfCi0gf8Ng3XQNRFCd\/1dhq25bmJHEe6yJd3noSzJfCy+DlKcwv4x5\/XcdMUaq1gat0eWsdmK+HN8AbI\/AvxXy2G1xWZm4r6hLFXFOUbv5pkir2ZOMt7Suak1j8i\/NLW4XNWy66FNwvgy935G8rtv4Kw18Ve7LYpn0l5iTX3BNl7h9G14D7tfB1GeOvij3ZeKvqqzB538fc30W3gvsweHjG+KskG291eWIi8s0kuMEy7\/iY+2dNPvlz0TyhWrO5ynbuH7d6Yty8EM7BFeXq1zbto\/BXjZs0T\/ia82RJE3rmLWpcb7dj+Mw\/Yi6heYKOC6tZHQNuc5jvyLSvOGj1ce4u4typXbSpMgg2V\/rP\/1w0T7is2Vy0PwX+TIz3UwPPtYvawX5XjPxdxOt6U0JcC2nEPxNlT\/kfGmR3nDT5+xiT04p\/Ff9T4H4aPmPJv646nvkPl46xjzE5jfjnvJ8umOcipgvAswtcVG13rOaY+esYq+qoLkoj\/lX8m5DPp1a6HSvu\/KNj7GNMTjP+70Dszqw2j7+z0Sdz4BZJ38TNX2QcR+0mjfiPOvcRleT4G0ftJun453N9yt8191TguulVnSx\/uiaLsofAZRv\/vq49kb247vrPcr5DlSR\/uiZz3XeXicW\/zZ6Dr2uP8q9XrHtX4FpYCa+CV5PrQuwrG\/4r4JXwqvCnLZXrvrtMLP5t9hx81E1p7tHx3wLmW+Ft8MuavGTDfwu8Fd4W7rSV8rF\/xeLfZs8hat1UrPPY8N8N5nvgvfA+wv\/hkqD1Hri+5Cx7I\/\/d8B54r\/tpxy4W\/657Dq6SrXV5X6j46\/QIuN8LT7Dk\/zX8DfxtqLPvLB\/jbpJijPlai8a+K\/\/taL8Dvg\/sb7fkfwb+A\/4z9Dcg56AYd8PehxK3RP71Qv7R8detuR4F99nwREv+vuVj3E1SjDFf63L+9Y7xz+f7TIvBfQ48KSX+qtycxfgXx11Z7IfJ\/0vAvQVuSIk\/VZT6f9yie1yUv22dXyXG38uJGqRafyZ9P4+LVLUGMfbD1DxFJcVftf5M8n4e17624a+S7T5MUvxV68847+ehdQmXvuZ1HT5uuuZ+230Ym\/w\/TH8IK6nWn1HXpbz+KYttWpdw6Ws67tYrrgOT6PiQK0Gfwr3gyhI7\/g3mj0lU4j1HvP4pi21al3Dpa1mdU7YOVtX+VfP\/KjDvDw+AB1ryj0uqvWGbfXk+V+XxL4vtKPtrOt50LRZFafJX7Q3Tv8vqFS1FefP493lfIs\/9LHfExX984T65NPmr9obp33X7BHHsf5nyje2+r82eTJr8VfmB\/l1Xr4hj\/1fF3Sb36\/ZdRPH4Z49pr3+5VHVRWq8Q7zONI\/5d+NP1l+2+C1cW6g9cNvuRdGyOM\/5lecg099ftu1AVYj8z\/G3qonRsjiv+OWNZzSfqPSeissSfzSlNe1ad\/p8Pz\/wpaxn\/sHVPmbLEn4nWoOm6lo7NvuOfs67T1Bx08865OP958HzLWnrW+FOZajZxxX8z4T8Lr++E74LvrlbzfwzcH4efMPBP4\/4rnVR7AKaaTVzxb4p9Ff82cF8Dr7WMf3a8LPDnovMb07rWFP9X4D1Xwn3hfnCVYW0cdt6vUp2i\/in2Z5b46+5Xl9WFTPF\/PdoNhofANXCtRW1Cx52Pu6b6Pv99VzPhL3IXfgPWaD6rZKS7X136f9kY+I9Au5HwKHg0PCZk\/Iv7AEym+j7\/fRfNXaKF34A1mskkJ1XNUtY3pvifgnZN8FR4Gjw9Yv4R5502e78q9qw2VMg9mRh\/ZaL1CFm9yOf4a2LP18Nh9txV\/RD3779sJft\/CGzqEb7mn7bjruvvfKko\/7h\/\/xVFtB4h22P0Ff9ibd8075neOwhmwM2Ov3UXldX5jyha95TuMabAfwG4L4QXReDPdGhQtvlTydZiR4uDh3wcm7MV91VUXgruy+Dllvx118v5xF+2FvvLI3\/RdZp+cJXseuFj+ISI\/AeXYG0D18C1JWGPkh2J9R9f\/On1Iq7dovIfCeaj4NHwGHjsed4HPmsPKolrt6j8o2ho8dnP3smcxufLZDsH9en\/ATcTNZk=",
          "encoding":"base64",
          "height":64,
          "id":9,
@@ -393,84 +172,340 @@
          "y":0
         }, 
         {
+         "compression":"zlib",
+         "data":"eJztm0lOxDAQRX0B0pF6wbAEVowtMcMCGlgww4LxIMAdgJshAXcA7sAs\/g4j4WB37FTH\/k\/6UnUURenfcblcTitFSDELTaUWoaWm9J2kyR5834cOEvZ\/Ft99DpoP5MEUrjsNzSTscRHb8GUH2g3kzwauuwlt0X9CCEkG1peysL4kKcKaX5YyNT9\/O9l5U3K99p4p9QF9Ql+Z+bPN+WXQ502X5\/Ec51xAlwk\/u75xeR6vcM41dEP\/xQnd1yPFhO7rEUL8M9JSarQlfRfpsgzvV+i\/GIfw\/oj+E0IIqSnsBcnCXhAh3Q3XurJwrStLzGtd9v9lYf+fEEKIDXxXVxa+q5s2XAvLwrWwLDGvhW2I7b3n28aP6kBs\/1O9g+\/30ENN\/I+NR\/j+BD3TfyO9yPd9UD804Dn3v8D3V+iN\/hsZg+fj0AQ06dn\/nlypDGrkv+eCus0LIWnD81VoDVr37L+e\/01xaLp9D+AYnp9Ap9CZZ\/\/1\/G+KQ4+FlPcA9PxvilkjhUPP\/6aYNVI4bPI\/a6Rw2OR\/U41EyuOa\/\/XY128RW0\/HBdf8r8e+5uXYejouuOZ\/Pa6yRg2N1L6Ka\/7X45hqVKl9FdOzbYMpR9VxLEjtq\/jqOcQ0FqrElHNciWksVEmZ\/GNzTY6FYv6rP\/VjnVyTY6GYQXg0BA3nf8f6sU7gWCjmGyyMCJ0=",
+         "encoding":"base64",
+         "height":64,
+         "id":21,
+         "name":"top",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "compression":"zlib",
+         "data":"eJzt3EEOgjAQQNFuXPdSegg9NwdSY4yEAIUKDMp7CRvZ\/akWEjAlAAAAAACA\/9ScXgfzlJqNdX2fq21vZv0NpjTtnj\/nlC7589nUuRy9\/1O7Qe16vz7a3\/J33wfKdN0fM4nl9yae\/nGs\/1hz25vVsvTfD\/dc26tZ\/2YAANuy98Zx7RNHewDgKFz3xNE+jvaxtI+lfyz9AeD32L9j1Lx\/w3KmPkOn\/7A1+7TfMWPY2mtU\/zL9Y2kEAMvq\/h+BvXYbfd3HjjXdAVwdVxY=",
+         "encoding":"base64",
+         "height":64,
+         "id":25,
+         "name":"shadows_top",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":96,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":15,
+         "name":"doors",
+         "objects":[
+                {
+                 "gid":3959,
+                 "height":32,
+                 "id":7,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"prehistoric_map"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":87
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2784,
+                 "y":480
+                }, 
+                {
+                 "gid":3959,
+                 "height":32,
+                 "id":8,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"prehistoric_map"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":88
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":17
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":2816,
+                 "y":480
+                }, 
+                {
+                 "gid":4035,
+                 "height":32,
+                 "id":36,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"cueva"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":64
+                }, 
+                {
+                 "gid":4035,
+                 "height":32,
+                 "id":59,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"cueva"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":17
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":18
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1216,
+                 "y":64
+                }, 
+                {
+                 "gid":4076,
+                 "height":32,
+                 "id":81,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"cueva"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":192,
+                 "y":128
+                }, 
+                {
+                 "gid":4077,
+                 "height":32,
+                 "id":82,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"cueva"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":128
+                }, 
+                {
+                 "gid":4078,
+                 "height":32,
+                 "id":83,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"cueva"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":16
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":256,
+                 "y":128
+                }, 
+                {
+                 "gid":13695,
+                 "height":32,
+                 "id":117,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"prehistoric_map"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":88
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":11
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64.6666666666665,
+                 "x":2784,
+                 "y":512
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "draworder":"topdown",
          "id":17,
          "name":"characters",
          "objects":[
                 {
                  "height":0,
-                 "id":65,
-                 "name":"ENEMY1",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"movement",
-                         "type":"string",
-                         "value":"enemy"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"WorldEnemyTest"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":239,
-                 "y":145
-                }, 
-                {
-                 "height":0,
-                 "id":68,
-                 "name":"ENEMY2",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":239,
-                 "y":13
-                }, 
-                {
-                 "height":0,
-                 "id":69,
-                 "name":"ENEMY3",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"movement",
-                         "type":"string",
-                         "value":"enemy"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"WorldEnemyTest"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1865,
-                 "y":1081
-                }, 
-                {
-                 "height":0,
                  "id":70,
                  "name":"BOSS",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"boss"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Boss1"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2890.91,
-                 "y":1869.7
+                 "x":2816,
+                 "y":1888
                 }, 
                 {
                  "height":0,
-                 "id":85,
-                 "name":"ALLY2",
+                 "id":119,
+                 "name":"ALLY1",
                  "point":true,
                  "properties":[
                         {
@@ -481,37 +516,152 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Characters_Level1"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2132,
-                 "y":114
+                 "x":1568,
+                 "y":1024
                 }, 
                 {
                  "height":0,
-                 "id":86,
-                 "name":"ALLY3",
+                 "id":120,
+                 "name":"ENEMY",
                  "point":true,
                  "properties":[
                         {
                          "name":"movement",
                          "type":"string",
-                         "value":"ally"
+                         "value":"enemy"
                         }, 
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Level1_World"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2556,
-                 "y":1554
+                 "x":542,
+                 "y":688
+                }, 
+                {
+                 "height":0,
+                 "id":127,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1920,
+                 "y":768
+                }, 
+                {
+                 "height":0,
+                 "id":129,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2336,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":130,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1634,
+                 "y":292
+                }, 
+                {
+                 "height":0,
+                 "id":133,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3006,
+                 "y":838
+                }, 
+                {
+                 "height":0,
+                 "id":134,
+                 "name":"ENEMY",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"enemy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Level1_World"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2606,
+                 "y":1332
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -525,16 +675,221 @@
          "name":"allies",
          "objects":[
                 {
+                 "height":17.25,
+                 "id":90,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "pixelsize":10,
+                     "text":"YOU",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":23.890625,
+                 "x":2661.4296875,
+                 "y":485.25
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":23,
+         "name":"searchable",
+         "objects":[
+                {
                  "height":0,
-                 "id":72,
-                 "name":"ALLY1",
+                 "id":106,
+                 "name":"ITEM REQUIREMENT 1",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":304,
-                 "y":54
+                 "x":2400,
+                 "y":128
+                }, 
+                {
+                 "gid":6721,
+                 "height":32,
+                 "id":110,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":-1225.09090909091,
+                 "y":940.242424242424
+                }, 
+                {
+                 "height":0,
+                 "id":121,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":648,
+                 "y":2034
+                }, 
+                {
+                 "height":0,
+                 "id":122,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":256,
+                 "y":544
+                }, 
+                {
+                 "height":0,
+                 "id":123,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1664,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":124,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "id":125,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1696,
+                 "y":128
+                }, 
+                {
+                 "height":0,
+                 "id":131,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1728,
+                 "y":192
+                }, 
+                {
+                 "height":0,
+                 "id":132,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3030,
+                 "y":374
+                }, 
+                {
+                 "gid":13969,
+                 "height":96,
+                 "id":135,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_edad_media"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":2912,
+                 "y":1952
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -542,8 +897,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":23,
- "nextobjectid":90,
+ "nextlayerid":26,
+ "nextobjectid":136,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -562,12 +917,24 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
          "firstgid":1,
          "source":"..\/tilesets\/tiles.json"
+        }, 
+        {
+         "firstgid":6721,
+         "source":"..\/tilesets\/tiles1.json"
+        }, 
+        {
+         "firstgid":13441,
+         "source":"..\/tilesets\/[A]Grass_pipo.json"
+        }, 
+        {
+         "firstgid":13969,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
         }],
  "tilewidth":32,
  "type":"map",

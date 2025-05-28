@@ -7,6 +7,7 @@ import json
 
 from rpg.BattleEnemy import BattleEnemy
 from rpg.BattleAlly import BattleAlly
+from rpg.BattleBuddy import *
 from rpg.sprites.character_sprite import CharacterSprite, SPRITE_INFO, Anim
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.Effect import Effect
@@ -31,9 +32,6 @@ class InBattleView(arcade.View):
         self.manager = arcade.gui.UIManager()
         self.activated = False
         self.contenedor = arcade.gui.UIBoxLayout()
-
-        #PROXIMAMENTE: CREAR METODOS QUE CARGUEN LOS INTEGRANTES DE AMBOS EQUIPOS EN BASE A INFORMACION
-        #DEL JUGADOR Y DEL WORLD_ENEMY.
 
         self.player_team = []
         self.player_team_length = 0
@@ -128,9 +126,64 @@ class InBattleView(arcade.View):
         self.initial_player_team_indexes = []
         self.initial_enemy_team_indexes = []
 
+        self.elapsed_time = 0
+        self.enemy_elapsed_time = 0
+        self.interval = 0.3
+        self.enemy_interval = 0.3
+
+        self.attack_time = 0
+        self.attack_duration = 1
+        self.skill_duration = 1
+
+        self.waiting_for_action = False
+
+        self.time = 0
+
+        self.dead_allies = []
+        self.initial_team = []
+
+        self.hurt = False
+
+        self.enemy_attacking = None
+        self.enemy_waiting_for_action = False
+        self.enemy_action_performed = None
+        self.enemy_turn_index = 0
+        self.enemy_attack_time = 0
+
+        self.attack_anim_done = False
+        self.hurt_anim_done = False
+
     def on_show_view(self):
+        self.activated = True
+        self.option = "menu"
+        self.previous_option = ""
+        self.clicked_button_name = ""
+        self.player_turn = True
+
         self.player_sprites = arcade.SpriteList()
         self.enemy_sprites = arcade.SpriteList()
+
+        self.enemy_team.clear()
+        self.player_team.clear()
+        self.remaining_enemies.clear()
+        self.remaining_allies.clear()
+        self.defeated_enemies.clear()
+        self.defeated_allies.clear()
+        self.ally_rotation.clear()
+        self.ally_effects_list.clear()
+        self.enemy_effects_list.clear()
+        self.action_buttons.clear()
+
+        self.player_attacks = 0
+        self.stage = 1
+        self.round = 1
+        self.r_done = False
+        self.waiting_for_action = False
+        self.allow_inputs = True
+        self.clicked_button_name = ""
+        self.hurt = False
+        self.current_selected_enemy = 0
+        self.current_ally = 0
 
         self.inventory = self.window.views["game"].player_sprite.inventory
 
@@ -144,13 +197,14 @@ class InBattleView(arcade.View):
         new_ally_y = ally_y_positions.copy()
 
         self.player_team = self.window.views["game"].player_sprite.player_team
+        self.initial_team = self.player_team.copy()
 
         self.player_team_length = len(self.player_team)
         print(f"Player team length: {self.player_team_length}")
 
         for character in self.player_team:
             while len(new_ally_x) > 0:
-                self.setup_team(character.sheetName, new_ally_x[0], new_ally_y[0])
+                self.setup_team(character, new_ally_x[0], new_ally_y[0])
                 del new_ally_x[0]
                 del new_ally_y[0]
                 break
@@ -185,6 +239,8 @@ class InBattleView(arcade.View):
 
             self.enemy_team.append(enemy_object)
 
+        self.enemy_attacking = self.enemy_team[0]
+
         self.remaining_enemy_objects = self.enemy_team.copy()
 
         self.initial_enemy_team_length = len(self.enemy_team)
@@ -201,7 +257,7 @@ class InBattleView(arcade.View):
 
         for enemy in self.enemy_team:
             while len(new_enemy_x) > 0:
-                self.setup_enemies(enemy.sheetName, new_enemy_x[0], new_enemy_y[0])
+                self.setup_enemies(enemy, new_enemy_x[0], new_enemy_y[0])
                 del new_enemy_x[0]
                 del new_enemy_y[0]
                 break
@@ -240,11 +296,15 @@ class InBattleView(arcade.View):
             sta_width = enemy.currentStamina * 100 / enemy.maxStamina
             self.enemy_sta_bars.append(sta_width)
 
+        self.pointer_x = self.x_positions[self.current_ally]
+        self.pointer_y = self.y_positions[self.current_ally] + self.pointer_height_offset
+
         print("AQUIIIIIIIIIIIIIIIII")
         print(f"ally {self.remaining_allies}")
         print(f"enemy {self.remaining_enemies}")
 
     def on_hide_view(self):
+        self.activated = False
         self.manager.clear()
         self.manager.disable()
 
@@ -306,138 +366,147 @@ class InBattleView(arcade.View):
 
         # Barras de vida y de stamina de aliados
 
-        health_height_dif = 50
-        sta_height_dif = 60
+        health_height_dif = 80
+        sta_height_dif = 90
         self.bar_width = 100
         bar_height = 5
 
-        for index in self.remaining_allies:
-            center_x = self.x_positions[index]
-            h_center_y = self.y_positions[index] - health_height_dif
-            s_center_y = self.y_positions[index] - sta_height_dif
-            n_center_y = h_center_y + 120
-            name_x_offset = 67
+        if self.bar_width > 0:
 
-            y_fix = bar_height / 2
+            for index in self.remaining_allies:
+                center_x = self.x_positions[index]
+                h_center_y = self.y_positions[index] - health_height_dif
+                s_center_y = self.y_positions[index] - sta_height_dif
+                n_center_y = h_center_y + 150
+                name_x_offset = 67
 
-            bar_pos = self.remaining_allies.index(index)
+                y_fix = bar_height / 2
 
-            remaining_list_index = self.remaining_allies.index(index)
+                bar_pos = self.remaining_allies.index(index)
 
-            # Nombre
-            self.draw_text_with_outline(
-                text=self.player_team[remaining_list_index].displayName,
-                x=center_x,
-                y=n_center_y,
-                text_color=arcade.color.WHITE,
-                outline_color=arcade.color.BLACK,
-                font_size=14,
-                border=1,
-                anchor_x="center"
-            )
+                remaining_list_index = self.remaining_allies.index(index)
 
-            # Vida
-            arcade.draw_rectangle_filled(center_x,
-                                         h_center_y,
-                                         self.bar_width + 5,
-                                         bar_height + 5,
-                                         arcade.color.WHITE)
+                # Nombre
+                self.draw_text_with_outline(
+                    text=self.player_team[remaining_list_index].displayName,
+                    x=center_x,
+                    y=n_center_y,
+                    text_color=arcade.color.WHITE,
+                    outline_color=arcade.color.BLACK,
+                    font_size=14,
+                    border=1,
+                    anchor_x="center"
+                )
 
-            arcade.draw_rectangle_filled(center_x,
-                                         h_center_y,
-                                         self.bar_width,
-                                         bar_height,
-                                         arcade.color.BLACK)
+                # Vida
+                arcade.draw_rectangle_filled(center_x,
+                                             h_center_y,
+                                             self.bar_width + 5,
+                                             bar_height + 5,
+                                             arcade.color.WHITE)
 
-            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
-                                               center_x - self.bar_width / 2 + self.ally_health_bars[bar_pos],
-                                               h_center_y + y_fix,
-                                               h_center_y - y_fix,
-                                               arcade.color.GREEN)
+                arcade.draw_rectangle_filled(center_x,
+                                             h_center_y,
+                                             self.bar_width,
+                                             bar_height,
+                                             arcade.color.BLACK)
 
-            # Stamina
-            arcade.draw_rectangle_filled(center_x,
-                                         s_center_y,
-                                         self.bar_width + 5,
-                                         bar_height + 5,
-                                         arcade.color.WHITE)
+                arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                                   center_x - self.bar_width / 2 + self.ally_health_bars[bar_pos],
+                                                   h_center_y + y_fix,
+                                                   h_center_y - y_fix,
+                                                   arcade.color.GREEN)
 
-            arcade.draw_rectangle_filled(center_x,
-                                         s_center_y,
-                                         self.bar_width,
-                                         bar_height,
-                                         arcade.color.BLACK)
+                # Stamina
+                arcade.draw_rectangle_filled(center_x,
+                                             s_center_y,
+                                             self.bar_width + 5,
+                                             bar_height + 5,
+                                             arcade.color.WHITE)
 
-            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
-                                               center_x - self.bar_width / 2 + self.ally_sta_bars[bar_pos],
-                                               s_center_y + y_fix,
-                                               s_center_y - y_fix,
-                                               arcade.color.AZURE)
+                arcade.draw_rectangle_filled(center_x,
+                                             s_center_y,
+                                             self.bar_width,
+                                             bar_height,
+                                             arcade.color.BLACK)
 
-        # Barras de vida y stamina de los enemigos
+                arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                                   center_x - self.bar_width / 2 + self.ally_sta_bars[bar_pos],
+                                                   s_center_y + y_fix,
+                                                   s_center_y - y_fix,
+                                                   arcade.color.AZURE)
 
-        for index in self.remaining_enemies:
-            center_x = self.enemy_x_positions[index]
-            h_center_y = self.enemy_y_positions[index] - health_height_dif
-            s_center_y = self.enemy_y_positions[index] - sta_height_dif
-            n_center_y = h_center_y + 120
-            name_x_offset = 67
+            # Barras de vida y stamina de los enemigos
 
-            y_fix = bar_height / 2
+            for index in self.remaining_enemies:
+                center_x = self.enemy_x_positions[index]
+                h_center_y = self.enemy_y_positions[index] - health_height_dif
+                s_center_y = self.enemy_y_positions[index] - sta_height_dif
+                enemy_h_center_y = self.enemy_y_positions[index] - health_height_dif
+                enemy_s_center_y = self.enemy_y_positions[index] - sta_height_dif
+                n_center_y = h_center_y + 120
+                enemy_n_center_y = h_center_y + 150
+                name_x_offset = 67
 
-            bar_pos = self.remaining_enemies.index(index)
+                y_fix = bar_height / 2
 
-            remaining_list_index = self.remaining_enemies.index(index)
+                bar_pos = self.remaining_enemies.index(index)
 
-            # Nombre
-            self.draw_text_with_outline(
-                text=self.enemy_team[remaining_list_index].displayName,
-                x=center_x,
-                y=n_center_y,
-                text_color=arcade.color.PERSIAN_RED,
-                outline_color=arcade.color.BLACK,
-                font_size=14,
-                border=1,
-                anchor_x="center"
-            )
+                remaining_list_index = self.remaining_enemies.index(index)
 
-            # Vida
-            arcade.draw_rectangle_filled(center_x,
-                                         h_center_y,
-                                         self.bar_width + 5,
-                                         bar_height + 5,
-                                         arcade.color.WHITE)
+                # Nombre
+                self.draw_text_with_outline(
+                    text=self.enemy_team[remaining_list_index].displayName,
+                    x=center_x,
+                    y=enemy_n_center_y,
+                    text_color=arcade.color.PERSIAN_RED,
+                    outline_color=arcade.color.BLACK,
+                    font_size=14,
+                    border=1,
+                    anchor_x="center"
+                )
 
-            arcade.draw_rectangle_filled(center_x,
-                                         h_center_y,
-                                         self.bar_width,
-                                         bar_height,
-                                         arcade.color.BLACK)
+                # Vida
+                arcade.draw_rectangle_filled(center_x,
+                                             h_center_y,
+                                             self.bar_width + 5,
+                                             bar_height + 5,
+                                             arcade.color.WHITE)
 
-            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
-                                               center_x - self.bar_width / 2 + self.enemy_health_bars[bar_pos],
-                                               h_center_y + y_fix,
-                                               h_center_y - y_fix,
-                                               arcade.color.OLD_MAUVE)
+                arcade.draw_rectangle_filled(center_x,
+                                             h_center_y,
+                                             self.bar_width,
+                                             bar_height,
+                                             arcade.color.BLACK)
 
-            # Stamina
-            arcade.draw_rectangle_filled(center_x,
-                                         s_center_y,
-                                         self.bar_width + 5,
-                                         bar_height + 5,
-                                         arcade.color.WHITE)
+                arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                                   center_x - self.bar_width / 2 + self.enemy_health_bars[bar_pos],
+                                                   h_center_y + y_fix,
+                                                   h_center_y - y_fix,
+                                                   arcade.color.OLD_MAUVE)
 
-            arcade.draw_rectangle_filled(center_x,
-                                         s_center_y,
-                                         self.bar_width,
-                                         bar_height,
-                                         arcade.color.BLACK)
+                # Stamina
+                arcade.draw_rectangle_filled(center_x,
+                                             s_center_y,
+                                             self.bar_width + 5,
+                                             bar_height + 5,
+                                             arcade.color.WHITE)
 
-            arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
-                                               center_x - self.bar_width / 2 + self.enemy_sta_bars[bar_pos],
-                                               s_center_y + y_fix,
-                                               s_center_y - y_fix,
-                                               arcade.color.MIDNIGHT_BLUE)
+                arcade.draw_rectangle_filled(center_x,
+                                             s_center_y,
+                                             self.bar_width,
+                                             bar_height,
+                                             arcade.color.BLACK)
+
+                arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
+                                                   center_x - self.bar_width / 2 + self.enemy_sta_bars[bar_pos],
+                                                   s_center_y + y_fix,
+                                                   s_center_y - y_fix,
+                                                   arcade.color.MIDNIGHT_BLUE)
+
+            else:
+                pass
+
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
@@ -520,6 +589,99 @@ class InBattleView(arcade.View):
         for i in range(len(self.enemy_y_positions)):
             self.enemy_y_positions[i] *= self.height_scaling_factor
 
+        self.player_sprites.on_update(delta_time)
+        self.enemy_sprites.on_update(delta_time)
+
+        self.elapsed_time += delta_time
+        self.attack_time += delta_time
+
+        self.enemy_elapsed_time += delta_time
+
+        if self.player_team[self.remaining_allies.index(self.current_ally)].currentAnimation == Anim.BATTLEIDLE:
+            if self.elapsed_time >= self.interval:
+                for player in self.player_team:
+                    player.setPulseAnim(Anim.BATTLEIDLE)
+
+                self.elapsed_time = 0
+
+        if self.enemy_attacking.currentAnimation == Anim.BATTLEIDLE:
+            if self.enemy_elapsed_time >= self.enemy_interval:
+                for enemy in self.enemy_team:
+                    enemy.setPulseAnim(Anim.BATTLEIDLE)
+
+                self.enemy_elapsed_time = 0
+
+
+        if self.waiting_for_action:
+            if self.previous_option == "attack":
+                self.time = self.attack_duration
+            elif self.previous_option == "skill":
+                self.time = self.skill_duration
+
+            self.attack_time += delta_time
+            if self.attack_time >= self.time:
+                if not self.hurt:
+                    self.enemy_team[self.remaining_enemies.index(self.current_selected_enemy)].setPulseAnim(Anim.HURT)
+                    self.hurt = True
+
+                if self.attack_time >= 2 * self.time:
+                    self.waiting_for_action = False
+                    self.attack_time = 0
+                    self.hurt = False
+                    self.perform_action()
+
+        self.attack_anim_done = False
+        self.hurt_anim_done = False
+
+        if self.enemy_waiting_for_action:
+            self.enemy_attack_time += delta_time
+
+            self.pointer_x = 100000
+
+            if self.enemy_attack_time >= self.attack_duration:
+                enemy = self.enemy_team[self.enemy_turn_index]
+                self.enemy_attacking = enemy
+
+                action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(enemy)
+                self.enemy_action_performed = action_to_execute
+
+                if not self.attack_anim_done:
+                    self.enemy_attacking.setPulseAnim(Anim.ATTACK)
+                    self.attack_anim_done = True
+
+                if self.enemy_attack_time >= 1.5 * self.attack_duration:
+                    if not self.hurt_anim_done:
+                        ally_target.setPulseAnim(Anim.HURT)
+                        self.hurt_anim_done = True
+
+                    if self.enemy_attack_time >= 3 * self.attack_duration:
+                        idx_ally = self.player_team.index(ally_target)
+                        self.player_team[idx_ally].changeHealth(-action_to_execute.amount)
+
+                        print(f"{enemy.displayName} gasta {action_to_execute.staminaExpense} de stamina")
+                        print(f"{ally_target.displayName} recibe {action_to_execute.amount} de daño")
+
+                        self.check_health_status()
+
+                        self.enemy_attack_time = 0
+                        self.enemy_turn_index += 1
+                        print(f"eti {self.enemy_turn_index}")
+
+                        if not self.player_team:
+                            self.enemy_waiting_for_action = False
+                            return
+
+                        if self.enemy_turn_index >= len(self.enemy_team):
+                            print("hola")
+                            self.enemy_waiting_for_action = False
+                            self.attack_anim_done = False
+                            self.hurt_anim_done = False
+                            self.enemy_attacking = self.enemy_team[0]
+                            for enemy in self.enemy_team:
+                                enemy.setPulseAnim(Anim.BATTLEIDLE)
+                            self.round_end()
+                            return
+
     def get_pointer_positions(self):
         if self.option == "select_enemy":
             return self.enemy_y_positions[self.current_selected_enemy] + self.pointer_height_offset
@@ -587,44 +749,25 @@ class InBattleView(arcade.View):
         if self.option == "item":
             self.perform_action()
 
-    def setup_team(self, sheet_name, x, y):
-        self.character_sprite = CharacterSprite(sheet_name)
+    def setup_team(self, ally, x, y):
+        character_sprite = ally
+        character_sprite.center_x = x
+        character_sprite.center_y = y
 
-        self.character_sprite.center_x = x
-        self.character_sprite.center_y = y
+        character_sprite.scale = 2
 
-        self.character_sprite.scale = 2
+        character_sprite.setPulseAnim(Anim.BATTLEIDLE)
 
-        self.character_sprite.textures = arcade.load_spritesheet(
-            sheet_name,
-            sprite_width = CHARACTER_SPRITE_SIZE,
-            sprite_height = CHARACTER_SPRITE_SIZE,
-            columns = 9,
-            count = 36,
-        )
-        start_index = SPRITE_INFO[Anim.RIGHT][0]
-        self.character_sprite.texture = self.character_sprite.textures[start_index]
+        self.player_sprites.append(character_sprite)
 
-        self.player_sprites.append(self.character_sprite)
+    def setup_enemies(self, enemy, x, y):
+        character_sprite = enemy
+        character_sprite.scale = 2
 
-    def setup_enemies(self, sheet_name, x, y):
-        self.character_sprite = CharacterSprite(sheet_name)
-        self.character_sprite.scale = 2
+        character_sprite.center_x = x
+        character_sprite.center_y = y
 
-        self. character_sprite.center_x = x
-        self.character_sprite.center_y = y
-
-        self.character_sprite.textures = arcade.load_spritesheet(
-            sheet_name,
-            sprite_width = CHARACTER_SPRITE_SIZE,
-            sprite_height= CHARACTER_SPRITE_SIZE,
-            columns = 9,
-            count = 36,
-        )
-        start_index = SPRITE_INFO[Anim.LEFT][0]
-        self.character_sprite.texture = self.character_sprite.textures[start_index]
-
-        self.enemy_sprites.append(self.character_sprite)
+        self.enemy_sprites.append(character_sprite)
 
     def on_key_press(self, key, _modifiers):
         if self.allow_inputs:
@@ -659,7 +802,15 @@ class InBattleView(arcade.View):
                     self.select_enemy_to_attack()
 
                 if key == arcade.key.ENTER:
-                    self.perform_action()
+                    if self.previous_option == "attack":
+                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.ATTACK)
+                    elif self.previous_option == "skill":
+                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.SKILL)
+
+                    #self.player_team[self.current_ally].setPulseAnim(Anim.ATTACK)
+                    self.attack_time = 0
+                    self.waiting_for_action = True
+                    self.allow_inputs = False
 
             else:
                 if key == arcade.key.ESCAPE:
@@ -908,20 +1059,13 @@ class InBattleView(arcade.View):
                 self.next_ally()
                         # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
         else:
-            print("TURNO ENEMIGO")
-            for enemy in self.enemy_team:
-                action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(enemy)
-                # Aplica daño
-                idx_ally = self.player_team.index(ally_target)
-                self.player_team[idx_ally].changeHealth(-action_to_execute.amount)
-                "enemy.changeStamina(-action_to_execute.staminaExpense)"
-                print(f"{enemy.displayName} gasta {action_to_execute.staminaExpense} de stamina")
-                print(f"{ally_target.displayName} recibe {action_to_execute.amount} de daño")
-
-
-            self.round_end()
+            self.enemy_waiting_for_action = True
+            self.enemy_turn_index = 0
+            self.enemy_attack_time = 0
+            self.allow_inputs = False
 
     def round_end(self):
+        print("entré")
         self.r_done = True
 
         self.player_turn = True
@@ -950,8 +1094,6 @@ class InBattleView(arcade.View):
                             self.player_team[target_ally_index].changeHealth(-(effect.amount))
                         elif effect.effectType == "Heal":
                             self.player_team[target_ally_index].changeHealth(effect.amount)
-                        #elif effect.effectType == "Multiplier":
-                            #
                     else:
                         unique_list.remove(effect)
                 except:
@@ -987,6 +1129,14 @@ class InBattleView(arcade.View):
             if ally.currentStamina > ally.maxStamina:
                 ally.currentStamina = ally.maxStamina
 
+        self.enemy_waiting_for_action = False
+        self.enemy_attack_time = 0
+        self.enemy_turn_index = 0
+        self.attack_anim_done = False
+        self.hurt_anim_done = False
+
+        self.allow_inputs = True
+
     def check_health_status(self):
         print("NO NEGATIVO PLSSSSSS")
         print(self.player_team[0].currentHealth)
@@ -995,7 +1145,7 @@ class InBattleView(arcade.View):
             if ally.currentHealth <= 0:
                 removed_sprite_index = self.player_team.index(ally)
 
-                self.player_team.pop(removed_sprite_index)
+                self.dead_allies.append(self.player_team.pop(removed_sprite_index))
                 self.player_sprites.pop(removed_sprite_index)
 
                 popped_index = self.remaining_allies.pop(removed_sprite_index)
@@ -1038,8 +1188,12 @@ class InBattleView(arcade.View):
             self.pointer_x = self.x_positions[self.current_ally]
             self.pointer_y = self.y_positions[self.current_ally]
 
-        if not self.player_team or not self.enemy_team:
-            self.battle_end()
+        if not self.enemy_team:
+            self.game_win()
+            return
+
+        if not self.player_team:
+            self.game_over()
             return
 
         # Para que vuelva al turno del jugador y aparezca el menu
@@ -1049,5 +1203,21 @@ class InBattleView(arcade.View):
             self.option = "menu"
             self.next_ally()
 
-    def battle_end(self):
+    def game_over(self):
         self.window.show_view(self.window.views["menu"])
+
+    def game_win(self):
+        for ally in self.dead_allies:
+            ally.setHealth(10)
+            self.player_team.append(ally)
+
+        battle_end_list = [None, None, None, None]
+        for ally in self.player_team:
+            ally_init_index = self.initial_team.index(ally)
+
+            battle_end_list.pop(ally_init_index)
+            battle_end_list.insert(ally_init_index, ally)
+
+        self.window.views["game"].player_sprite.player_team = battle_end_list
+
+        self.window.show_view(self.window.views["game"])

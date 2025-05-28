@@ -19,7 +19,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJy7wciwYAsjgwI18A1GhgNA2mELxExq4AaQeQxUAqPmjZo3at6oeQNpHlD+ATImxjx0PWi4QYYJjEHqMcxHV3uDCDWyTGBM0DygWQkA4YaK+w==",
+         "data":"eJy7wciwYAsjgwI18A1GhgNA2mELxExq4AaQeQxUAqPmjZo3at6oeQNpHlD+ATY2PvNA6vDgBhkmMAapZyCk9gYRamSZwJigeUCzEgBnhofR",
          "encoding":"base64",
          "height":20,
          "id":4,
@@ -81,9 +81,86 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":16,
+         "name":"doors",
+         "objects":[
+                {
+                 "gid":436,
+                 "height":32,
+                 "id":14,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_cyberpunk"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"float",
+                         "value":52.5
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":59
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":-90,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":576
+                }, 
+                {
+                 "gid":436,
+                 "height":32,
+                 "id":15,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_cyberpunk"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"float",
+                         "value":52.5
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":59
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":-90,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":352,
+                 "y":576
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":16,
- "nextobjectid":14,
+ "nextlayerid":17,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -147,6 +224,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":20
 }

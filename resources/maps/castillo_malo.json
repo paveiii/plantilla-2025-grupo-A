@@ -79,7 +79,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 1055, 0, 0, 0, 0, 862, 0, 1055, 0, 0, 862, 0, 0, 0, 0, 1055, 0, 0,
+            0, 0, 1055, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0,
             0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 1055, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -491,6 +491,17 @@
                  "id":1,
                  "name":"perro malo",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"boss"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Boss2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -503,9 +514,68 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"searchable",
+         "objects":[
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level2Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":239.911111111111,
+                 "y":435.044444444444
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level2Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":399.984027777778,
+                 "y":435.148611111111
+                }, 
+                {
+                 "gid":4286,
+                 "height":32,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":878,
+                 "y":2164
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":17,
+ "nextlayerid":9,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -534,6 +604,10 @@
         {
          "firstgid":4249,
          "source":"..\/tilesets\/lava_tileset.json"
+        }, 
+        {
+         "firstgid":4258,
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Carretera BIEN Iluminada-1.png.tsx"
         }],
  "tilewidth":32,
  "type":"map",

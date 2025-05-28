@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "maps/mapa_cyberpunk.json",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -197,22 +197,63 @@
         "C:/Users/johnn/OneDrive/Downloads/cyberpunk_tileset.tsx": {
             "scaleInDock": 1
         },
+        "[A]Water_pipo.tsx": {
+            "scaleInDock": 1
+        },
         "maps/Suburbio Casa Pequeña.tsx": {
             "scaleInDock": 0.125
+        },
+        "maps/casa_mago.json": {
+            "scale": 1.550347222222222,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 416.03583426651744,
+                "y": 288.00000000000006
+            }
+        },
+        "maps/castillo_bueno.json": {
+            "scale": 1.3953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 303.87458006718924,
+                "y": 320
+            }
+        },
+        "maps/castillo_malo.json": {
+            "scale": 1.3953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 320.35834266517355,
+                "y": 320
+            }
         },
         "maps/cueva.json": {
             "scale": 1.3953125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.6416573348264,
+                "x": 319.2833146696528,
                 "y": 319.64165733482645
             }
+        },
+        "maps/cueva_final.json": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.3953125,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320.35834266517355,
+                "y": 320
+            }
+        },
+        "maps/cueva_final.json#imagen_negra": {
+            "scaleInDock": 1
         },
         "maps/dungeon_lvl_three_maze.json": {
             "scale": 0.2790625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1598.2082866741323,
+                "x": 1600.0000000000002,
                 "y": 1598.2082866741323
             }
         },
@@ -233,7 +274,7 @@
             "scale": 1.744140625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 255.7133258678612,
+                "x": 256,
                 "y": 255.71332586786116
             }
         },
@@ -241,7 +282,7 @@
             "scale": 0.8720703125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 255.7133258678611,
+                "x": 255.13997760358347,
                 "y": 511.4266517357223
             }
         },
@@ -252,6 +293,17 @@
                 "x": 695.5296190266461,
                 "y": 319.6476547016075
             }
+        },
+        "maps/interior_arbol.json": {
+            "scale": 1.6415441176470589,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 272,
+                "y": 271.69540873460244
+            }
+        },
+        "maps/interior_arbol.json#imagen_negra": {
+            "scaleInDock": 1
         },
         "maps/main_map.json": {
             "scale": 0.5,
@@ -265,22 +317,28 @@
             "expandedObjectLayers": [
                 13
             ],
-            "scale": 0.25,
-            "selectedLayer": 6,
+            "scale": 0.125,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 2324,
-                "y": 1756
+                "x": 2176,
+                "y": 2076
             }
         },
         "maps/mapa_edad_media.json": {
             "scale": 0.125,
-            "selectedLayer": 5,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 3464,
-                "y": 2872
+                "x": 3704,
+                "y": 2660
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
+            "scaleInDock": 1
+        },
+        "maps/mapa_edad_media.json#tiles": {
+            "scaleInDock": 1
+        },
+        "maps/mapa_edad_media.json#tilesCueva": {
             "scaleInDock": 1
         },
         "maps/mapa_edad_media.json#tileset_cueva": {
@@ -288,19 +346,41 @@
         },
         "maps/power_plant_interior.json": {
             "scale": 1,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 291.5,
-                "y": 379
+                "x": 320,
+                "y": 320.5
             }
         },
         "maps/prehistoric_map.json": {
-            "scale": 0.25,
+            "scale": 0.33,
+            "selectedLayer": 14,
+            "viewCenter": {
+                "x": 1536.3636363636365,
+                "y": 1022.7272727272727
+            }
+        },
+        "maps/submapa alcantarillado.tmx": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -1.875,
+                "y": 81.75
+            }
+        },
+        "maps/submapa.json": {
+            "scale": 0.9302083333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1290,
-                "y": 664
+                "x": 479.9999999999999,
+                "y": 479.46248600223964
             }
+        },
+        "maps/submapa.json#imagen_negra": {
+            "scaleInDock": 1
+        },
+        "maps/submapa.json#tilesCueva": {
+            "scaleInDock": 1
         },
         "maps/test_map.json": {
             "scale": 0.43603515625,
@@ -312,10 +392,10 @@
         },
         "maps/time_company_interior.json": {
             "scale": 1,
-            "selectedLayer": 2,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 134.5,
-                "y": 344
+                "x": 256,
+                "y": 384.5
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -323,10 +403,19 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "sin nombre.tmx": {
+            "scale": 0.03125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 20944,
+                "y": 24192
+            }
+        },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk.tsx": {
             "scaleInDock": 1.5
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk2.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Acera Cyberpunk3.tsx": {
@@ -356,6 +445,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN Iluminada-1.png.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Carretera BIEN.tsx": {
@@ -390,6 +480,7 @@
             "scaleInDock": 0.33
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Elevacion de terreno cyberpunk.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 4
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Farola Cyberpunk.tsx": {
@@ -431,6 +522,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (3).tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (4).tsx": {
@@ -440,6 +532,7 @@
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (6).tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Poste electrico.tsx": {
@@ -499,6 +592,9 @@
         "tilesets/Tilesets Cyberpunk/Archivos.tsx/Town Hall1.tsx": {
             "scaleInDock": 0.5
         },
+        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Valla cyberpunk.tsx": {
+            "scaleInDock": 2
+        },
         "tilesets/[A]Grass_pipo.json": {
             "scaleInDock": 1
         },
@@ -515,32 +611,46 @@
         "tilesets/tiles.json": {
             "scaleInDock": 1
         },
+        "tilesets/tiles1.json": {
+            "scaleInDock": 1
+        },
         "tilesets/tilesCueva.json": {
             "scaleInDock": 1
         }
     },
     "frame.defaultDuration": 200,
     "last.externalTilesetPath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk/Archivos.tsx",
-    "last.imagePath": "C:/Users/johnn/OneDrive/Downloads",
-    "map.fixedSize": false,
-    "map.height": 100,
-    "map.width": 135,
+    "last.imagePath": "C:/Users/johnn/PycharmProjects/plantilla-2025-grupo-A/resources/tilesets/Tilesets Cyberpunk",
+    "map.fixedSize": true,
+    "map.height": 5,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 1,
     "openFiles": [
+        "maps/prehistoric_map.json",
+        "maps/mapa_edad_media.json",
+        "maps/casa_mago.json",
+        "maps/castillo_bueno.json",
+        "maps/castillo_malo.json",
+        "maps/cueva_final.json",
+        "maps/mapa_cyberpunk.json",
+        "maps/time_company_interior.json",
+        "maps/power_plant_interior.json"
     ],
     "project": "rpg.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
+        "maps/prehistoric_map.json",
+        "maps/mapa_edad_media.json",
+        "maps/casa_mago.json",
+        "maps/castillo_bueno.json",
+        "maps/castillo_malo.json",
+        "maps/cueva_final.json",
         "maps/power_plant_interior.json",
         "maps/time_company_interior.json",
-        "maps/main_map.json",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Animacion Portal.tsx",
         "maps/mapa_cyberpunk.json",
-        "sample_map/Animacion portal.tsx",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Portal del tiempo (1).tsx",
-        "maps/farmhouse - copia.json",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Tienda.tsx",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Bar-Club pequeño.tsx",
-        "tilesets/Tilesets Cyberpunk/Archivos.tsx/Suburbio Casa Pequeña Iluminado.tsx",
-        "C:/Users/johnn/OneDrive/Downloads/Juego/resources/maps/mapa_cyberpunk.json"
+        "maps/submapa alcantarillado.tmx",
+        "maps/submapa.json",
+        "sin nombre.tmx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFilter": "Todos los archivos (*)",

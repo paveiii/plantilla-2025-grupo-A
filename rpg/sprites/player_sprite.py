@@ -11,7 +11,7 @@ class PlayerSprite(CharacterSprite):
     def __init__(self, sheet_name):
         super().__init__(sheet_name)
         self.sound_update = 0
-        self.footstep_sound = arcade.load_sound(":sounds:footstep00.wav")
+        #self.footstep_sound = arcade.load_sound(":sounds:footstep00.wav")
 
         self.player_team = []
         self.player_team.append(self.create_battle_player())
@@ -21,7 +21,7 @@ class PlayerSprite(CharacterSprite):
     def on_update(self, delta_time):
         super().on_update(delta_time)
 
-        if not self.change_x and not self.change_y:
+        """if not self.change_x and not self.change_y:
             self.sound_update = 0
             return
 
@@ -30,7 +30,7 @@ class PlayerSprite(CharacterSprite):
 
         if self.sound_update >= 3:
             arcade.play_sound(self.footstep_sound)
-            self.sound_update = 0
+            self.sound_update = 0"""
 
     def get_player_team(self):
         return self.player_team

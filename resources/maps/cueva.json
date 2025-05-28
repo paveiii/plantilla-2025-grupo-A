@@ -1,13 +1,5 @@
 { "backgroundcolor":"#5f8702",
  "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "format":"json",
-         "target":"cueva.json"
-        }
-    },
  "height":20,
  "infinite":false,
  "layers":[
@@ -142,7 +134,7 @@
          "objects":[
                 {
                  "height":0,
-                 "id":64,
+                 "id":71,
                  "name":"ENEMY",
                  "point":true,
                  "properties":[
@@ -154,18 +146,18 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldEnemyTest"
+                         "value":"Level1_Cueva"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":431.5,
-                 "y":277
+                 "x":416,
+                 "y":416
                 }, 
                 {
                  "height":0,
-                 "id":67,
+                 "id":72,
                  "name":"ENEMY",
                  "point":true,
                  "properties":[
@@ -177,37 +169,37 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldEnemyTest"
+                         "value":"Level1_Cueva"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":280,
-                 "y":276
+                 "x":440,
+                 "y":19
                 }, 
                 {
                  "height":0,
-                 "id":68,
-                 "name":"ALLY",
+                 "id":75,
+                 "name":"ENEMY",
                  "point":true,
                  "properties":[
                         {
                          "name":"movement",
                          "type":"string",
-                         "value":"ally"
+                         "value":"enemy"
                         }, 
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"WorldAllyTest"
+                         "value":"Level1_Cueva"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":574,
-                 "y":568
+                 "x":384,
+                 "y":448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -220,118 +212,6 @@
          "id":2,
          "name":"doors",
          "objects":[
-                {
-                 "gid":37,
-                 "height":32,
-                 "id":12,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":38
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":4
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":480,
-                 "y":640
-                }, 
-                {
-                 "gid":37,
-                 "height":32,
-                 "id":13,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":38
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":4
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":512,
-                 "y":640
-                }, 
-                {
-                 "gid":37,
-                 "height":32,
-                 "id":16,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":38
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":4
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":544,
-                 "y":640
-                }, 
-                {
-                 "gid":37,
-                 "height":32,
-                 "id":43,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"prehistoric_map"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":38
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":4
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":576,
-                 "y":640
-                }, 
                 {
                  "gid":37,
                  "height":32,
@@ -351,13 +231,51 @@
                         {
                          "name":"start_y",
                          "type":"int",
-                         "value":4
+                         "value":5
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":608,
+                 "width":158.666666666667,
+                 "x":481.333333333333,
+                 "y":640
+                }, 
+                {
+                 "gid":37,
+                 "height":33.3333333333333,
+                 "id":70,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"prehistoric_map"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":7
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":4
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96.5003333333333,
+                 "x":190.833166666667,
                  "y":640
                 }],
          "opacity":1,
@@ -369,40 +287,118 @@
         {
          "draworder":"topdown",
          "id":7,
-         "name":"items",
+         "name":"searchable",
          "objects":[
                 {
+                 "gid":2049,
+                 "height":32,
+                 "id":69,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":-782.666666666667,
+                 "y":273.575757575758
+                }, 
+                {
                  "height":0,
-                 "id":65,
+                 "id":78,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":468.667,
-                 "y":39.3333
+                 "x":224,
+                 "y":256
+                }, 
+                {
+                 "height":0,
+                 "id":79,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":288,
+                 "y":288
+                }, 
+                {
+                 "height":0,
+                 "id":80,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":32,
+                 "y":64
+                }, 
+                {
+                 "height":0,
+                 "id":81,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":480,
+                 "y":288
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"item_key",
+                 "type":"string",
+                 "value":"AllyRequirement"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":69,
+ "nextobjectid":82,
  "orientation":"orthogonal",
-  "properties":[
+ "properties":[
         {
          "name":"isSubmap",
          "type":"bool",
          "value":false
-        },
+        }, 
         {
          "name":"start_x",
          "type":"int",
          "value":7
-        },
+        }, 
         {
          "name":"start_y",
          "type":"int",
@@ -415,6 +411,10 @@
         {
          "firstgid":1,
          "source":"..\/tilesets\/tilesCueva.json"
+        }, 
+        {
+         "firstgid":2049,
+         "source":"..\/tilesets\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",
