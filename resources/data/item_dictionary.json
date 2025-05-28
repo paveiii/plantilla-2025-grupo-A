@@ -11,8 +11,8 @@
   "TEST6": {"sheet_name": "Test/Revivir_prehistoria.png","name": "Corazon de mamut","type": "REVIVE","amount": 1,"description": "Usa este valiosisimo corazon de mamut para revivir"},
   "TEST7": {"sheet_name": "Test/Revivir_edadmedia.png","name": "Lagrima sagrada","type": "REVIVE","amount": 1,"description": "Usa esta lagrima proveniente de una ninfa ancestral para revivir"},
   "TEST8": {"sheet_name": "Test/Revivir_cyberpunk.png","name": "ChronoRestore Capsule","type": "REVIVE","amount": 1,"description": "Usa este artefacto para retroceder en el tiempo y revivir"},
-  "TEST9": {"sheet_name": "Test/Efecto_prehistoria.png","name": "Daga de colmillo envenenado","type": "DAMAGE","amount": 1,"description": "Lanza esta daga al enemigo para inflingirle daño"},
-  "TEST10": {"sheet_name": "Test/Efecto_edadmedia.png","name": "Pastel envenenado","type": "DAMAGE","amount": 1,"description": "Lanzale este pastel al enemigo, no sabra que esta envenenado..."},
-  "TEST11": {"sheet_name": "Test/Efecto_cyberpunk.png","name": "Granada de pulso electromagnetico","type": "DAMAGE","amount": 1,"description": "Arroja esta bomba a un enemigo, quizas no la ve..."}}
+  "TEST9": {"sheet_name": "Test/Efecto_prehistoria.png","name": "Daga de colmillo envenenado","type": "DAMAGE","amount": 10,"description": "Lanza esta daga al enemigo para inflingirle daño"},
+  "TEST10": {"sheet_name": "Test/Efecto_edadmedia.png","name": "Pastel envenenado","type": "DAMAGE","amount": 10,"description": "Lanzale este pastel al enemigo, no sabra que esta envenenado..."},
+  "TEST11": {"sheet_name": "Test/Efecto_cyberpunk.png","name": "Granada de pulso electromagnetico","type": "DAMAGE","amount": 10,"description": "Arroja esta bomba a un enemigo, quizas no la ve..."}}
 
 

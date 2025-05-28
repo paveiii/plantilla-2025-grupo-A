@@ -750,6 +750,9 @@ class InBattleView(arcade.View):
                         print(f"STAMINA ACTUAL {self.player_team[self.current_ally_index].currentStamina}")
                         self.main_buttons()
 
+            self.manager.clear()
+            self.manager.disable()
+            self.action_buttons.clear()
 
         elif self.previous_option == "item":
             for item in self.inventory:
@@ -758,9 +761,50 @@ class InBattleView(arcade.View):
 
             self.perform_action()
 
-        self.manager.clear()
-        self.manager.disable()
-        self.action_buttons.clear()
+        elif self.option == "revive_ally":
+            for ally in self.dead_allies:
+                if ally.displayName == self.clicked_button_name:
+                    index = self.dead_allies.index(ally)
+
+                    # Restaurar salud y estado
+                    ally.setHealth(ally.maxHealth // 2)
+                    ally.setPulseAnim(Anim.BATTLEIDLE)
+                    ally.currentStamina = ally.restoredStamina
+
+                    # Añadir a listas activas
+                    self.player_team.append(ally)
+                    self.player_sprites.append(ally)
+                    revived_index = self.defeated_allies.pop(index)
+                    self.remaining_allies.append(revived_index)
+
+                    # Regenerar completamente la rotación de aliados
+                    self.ally_rotation = self.remaining_allies.copy()
+
+                    # Añadir sus barras de salud
+                    self.ally_health_bars.append(ally.currentHealth * self.bar_width / ally.maxHealth)
+                    self.ally_sta_bars.append(ally.currentStamina * self.bar_width / ally.maxStamina)
+
+                    # Consumir ítem
+                    if self.item_used in self.inventory:
+                        self.inventory.remove(self.item_used)
+
+                    self.current_ally = revived_index  # Usar el índice revivido
+                    self.current_ally_index = self.remaining_allies.index(revived_index)
+                    self.pointer_x = self.x_positions[self.current_ally]
+                    self.pointer_y = self.y_positions[self.current_ally] + self.pointer_height_offset
+
+                    # Restablecer estados
+                    self.option = "menu"
+                    self.allow_inputs = True
+                    self.player_turn = True
+
+                    self.dead_allies.remove(ally)
+
+                    self.item_used = None
+
+                    break
+
+            self.next_ally()
 
     def setup_team(self, ally, x, y):
         character_sprite = ally
@@ -814,16 +858,23 @@ class InBattleView(arcade.View):
                             break
                     self.select_enemy_to_attack()
 
-                if key == arcade.key.ENTER:
-                    if self.previous_option == "attack":
-                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.ATTACK)
-                    elif self.previous_option == "skill":
-                        self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.SKILL)
+                if self.item_used is not None:
+                    if self.item_used["type"] == "DAMAGE":
+                        if key == arcade.key.ENTER:
+                            self.enemy_team[self.current_selected_enemy].changeHealth(-self.item_used["amount"])
+                            self.next_ally()
 
-                    #self.player_team[self.current_ally].setPulseAnim(Anim.ATTACK)
-                    self.attack_time = 0
-                    self.waiting_for_action = True
-                    self.allow_inputs = False
+                else:
+                    if key == arcade.key.ENTER:
+                        if self.previous_option == "attack":
+                            self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.ATTACK)
+                        elif self.previous_option == "skill":
+                            self.player_team[self.remaining_allies.index(self.current_ally)].setPulseAnim(Anim.SKILL)
+
+                        #self.player_team[self.current_ally].setPulseAnim(Anim.ATTACK)
+                        self.attack_time = 0
+                        self.waiting_for_action = True
+                        self.allow_inputs = False
 
             elif self.option == "revive_ally":
                 if key == arcade.key.ENTER:
@@ -884,6 +935,8 @@ class InBattleView(arcade.View):
         )
 
     def change_buttons(self):
+        print(f"cb {self.dead_allies}")
+
         self.manager.clear()
         self.contenedor.clear()
 
@@ -1000,6 +1053,39 @@ class InBattleView(arcade.View):
                     )
                 )
 
+        elif self.option == "revive_ally":
+            print("si bro no te rayes")
+            for ally in self.dead_allies:
+                button = arcade.gui.UIFlatButton(
+                    text=ally.displayName,
+                    width=300,
+                    height=30)
+                self.contenedor.add(button.with_space_around(10))
+                self.manager.add(self.contenedor)
+                button.on_click = self.on_click_button
+                self.action_buttons.append(button)
+                num_buttons += 1
+
+            y_pos = 0
+            if num_buttons == 4:
+                y_pos = 25
+            if num_buttons == 3:
+                y_pos = 65
+            if num_buttons == 2:
+                y_pos = 105
+            if num_buttons == 1:
+                y_pos = 145
+
+            self.manager.add(
+                arcade.gui.UIAnchorWidget(
+                    anchor_x="left",
+                    anchor_y="bottom",
+                    align_x=30,
+                    align_y=y_pos,
+                    child=self.contenedor
+                )
+            )
+
         self.manager.enable()
         self.manager.draw()
 
@@ -1099,7 +1185,6 @@ class InBattleView(arcade.View):
             self.player_attacks = 0
 
     def perform_action(self):
-
         if self.player_turn:
             print("TURNO JUGADOR")
             if self.previous_option == "attack" or self.previous_option == "skill":
@@ -1107,7 +1192,13 @@ class InBattleView(arcade.View):
                 for action in self.actions.values():
                     if action["name"] == self.clicked_button_name:
                         target = self.remaining_enemies.index(self.current_selected_enemy)
-                        self.enemy_team[target].changeHealth(-(action["amount"]))
+
+                        multiplier = 1
+                        for effect in self.ally_effects_list[self.current_ally]:
+                            if effect.effectType == "Multiplier":
+                                multiplier = effect.amount
+
+                        self.enemy_team[target].changeHealth(-(action["amount"]) * multiplier)
 
                         print(f"enemy index number: {self.current_selected_enemy} -{action['amount']} health")
                         for enemy in self.enemy_team:
@@ -1138,27 +1229,32 @@ class InBattleView(arcade.View):
 
                 self.check_health_status()
 
-            elif self.option == "item":
+            elif self.previous_option == "item":
                 if self.item_used["type"] == "HEAL":
                     self.player_team[self.current_ally].changeHealth(self.item_used["amount"])
                     self.next_ally()
 
                 elif self.item_used["type"] == "MULTIPLIER":
-                    """self.ally_effects_list[self.current_ally].append(Effect("Item Multiplier",
-                                                                            ""),
-                                                                     "Multiplier",
-                                                                     self.item_used["amount"],
-                                                                     )"""
+                    for effect in self.effects:
+                        if self.item_used["amount"] == self.effects["name"]:
+                            efecto = Effect(effect["name"], effect["description"], effect["effectType"], effect["amount"], effect["durationInTurns"], None)
+
+                            self.ally_effects_list[self.current_ally].append(efecto)
 
                 elif self.item_used["type"] == "REVIVE":
                     self.option = "revive_ally"
 
                     if self.defeated_allies:
+                        print("entra?")
                         self.manager.clear()
-                        self.contenedor.clear()
 
-                        self.contenedor.add(arcade.gui.UILabel(width=100, height=20, text="Elige a un jugador para revivir: ", anchor_x="center", y=100))
-                        self.manager.add(self.contenedor)
+                        self.change_buttons()
+                        self.display_action_description("Elige un jugador para revivir")
+
+                elif self.item_used["type"] == "DAMAGE":
+                    self.manager.clear()
+                    self.manager.disable()
+                    self.select_enemy_to_attack()
 
         else:
             self.manager.clear()
