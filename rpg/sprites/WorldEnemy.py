@@ -15,7 +15,7 @@ class WorldEnemy(CharacterSprite):
         super().__init__(sheet_name)
         #Notese que esto es una lista de las Keys de battleCharacters_dictionary
         #para que puedan ser cargados posteriormente cuando se inicie una batalla.
-        self.enemigos_batalla = enemigosBatallaNombres
+        self.enemigosBatalla = enemigosBatallaNombres
         self.speed = velocidad
         self.scene = scene
         self.jugador = jugador

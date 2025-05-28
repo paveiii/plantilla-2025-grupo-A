@@ -10,9 +10,9 @@ from rpg.views.activate_in_battle_view import ActivateInBattleView
 
 class WorldBoss(CharacterSprite):
 
-    def __init__(self, sheet_name, scene, player, battleBoss):
+    def __init__(self, sheet_name, scene, player, boss):
         super().__init__(sheet_name)
-        self.battleBoss= battleBoss
+        self.enemigosBatalla= boss
         self.setPulseAnim(Anim.BATTLEIDLE)
         self.scene = scene
         self.jugador = player
@@ -22,7 +22,7 @@ class WorldBoss(CharacterSprite):
     def checkCollision(self):
         if self.distanciaJugador <= 128 and self.distanciaJugador >= 0:
             print("JUGADOR COLISIONA CON EL ENEMIGO")
-            switch_to_battle = ActivateInBattleView(self.battleBoss)
+            switch_to_battle = ActivateInBattleView(self)
 
     def on_update(self, delta_time):
         super().on_update(delta_time)
