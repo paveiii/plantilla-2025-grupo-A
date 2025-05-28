@@ -42,6 +42,21 @@ Para el boss final se tienen varios ataques normales para acabar combinándolos 
 
 **MECÁNICAS**
 
+*      Un sistema que permite la eleccion de cómo actuar en caso de batalla: ataque a un solo enemigo, ataque a varios enemigos, curar a un aliado o a varios, revivir a un aliado.
+*      Guardado de partida manual y automático.
+*      El boss final experimentará una evolución que implica tanto ataques como la caracterización, hasta su forma final.
+*      El reclutamiento de aliados tendrá una capacidad de hasta tres miembros, con los cuales se puede interaccionar como otorgandoles objetos.
+*      Cajas de diálogos predeterminados y opciones para hablar con otros personajes con el fin de reclutarlos.
+*      Aprendizaje de habilidades nuevas.
+*      Selección en el menú principal de skin.
+*      Ataques combinados y ultimates.
+*      Logros
+*      Tienda de objetos y vestimentas
+*      Traductor universal comerciable.
+
+**FÍSICAS**
+
+*      Correr rápido
 
 
 
