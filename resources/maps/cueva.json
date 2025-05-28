@@ -1,5 +1,13 @@
 { "backgroundcolor":"#5f8702",
  "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"cueva.json"
+        }
+    },
  "height":24,
  "infinite":false,
  "layers":[
@@ -440,6 +448,11 @@
  "nextobjectid":82,
  "orientation":"orthogonal",
  "properties":[
+        {
+         "name":"ambient_color",
+         "type":"color",
+         "value":"#ff686868"
+        }, 
         {
          "name":"isSubmap",
          "type":"bool",

@@ -922,19 +922,19 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/tiles.json"
+         "source":"..\/tilesets\/tiles.json"
         }, 
         {
          "firstgid":6721,
-         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/tiles1.json"
+         "source":"..\/tilesets\/tiles1.json"
         }, 
         {
          "firstgid":13441,
-         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/[A]Grass_pipo.json"
+         "source":"..\/tilesets\/[A]Grass_pipo.json"
         }, 
         {
          "firstgid":13969,
-         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
+         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
         }, 
         {
          "firstgid":13975,
