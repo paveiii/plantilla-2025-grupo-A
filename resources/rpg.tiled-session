@@ -242,8 +242,8 @@
             "scale": 1.3953125,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 319.99999999999994,
-                "y": 319.64165733482645
+                "x": 320.35834266517355,
+                "y": 320
             }
         },
         "maps/cueva_final.json#imagen_negra": {
@@ -320,8 +320,8 @@
             "scale": 0.125,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 2732,
-                "y": 2120
+                "x": 2176,
+                "y": 2076
             }
         },
         "maps/mapa_edad_media.json": {

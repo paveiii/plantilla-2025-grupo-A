@@ -25,7 +25,7 @@ BOTTOM_VIEWPORT_MARGIN = 300
 TOP_VIEWPORT_MARGIN = 300
 
 # Map where we start.
-STARTING_MAP = "mapa_cyberpunk"
+STARTING_MAP = "prehistoric_map"
 
 # Key mappings
 KEY_UP = [arcade.key.UP, arcade.key.W]
