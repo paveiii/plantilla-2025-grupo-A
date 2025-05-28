@@ -111,7 +111,7 @@ class InBattleView(arcade.View):
         self.round = 1
         self.r_done = False
 
-        self.player_attacks = 0
+        self.player_attacks = 1
 
         self.ally_health_bars = []
         self.ally_sta_bars = []
@@ -174,7 +174,7 @@ class InBattleView(arcade.View):
         self.enemy_effects_list.clear()
         self.action_buttons.clear()
 
-        self.player_attacks = 0
+        self.player_attacks = 1
         self.stage = 1
         self.round = 1
         self.r_done = False
@@ -1316,7 +1316,11 @@ class InBattleView(arcade.View):
             ally.setHealth(10)
             self.player_team.append(ally)
 
-        battle_end_list = [None, None, None, None]
+        battle_end_list = []
+
+        for i in range(len(self.initial_team)):
+            battle_end_list.append(None)
+
         for ally in self.player_team:
             ally_init_index = self.initial_team.index(ally)
 
