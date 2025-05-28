@@ -25,6 +25,7 @@
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" : 10,
       "dialogueNoItem" : ["Veo en tus ojos el brillo de quien busca aliados... pero yo no lucho por cualquiera. Mis espadas se desenvainan por causas justas... y por quienes demuestran compromiso.",
                           "¿Una batalla, dices? Todos vienen con palabras urgentes y promesas vacias. Yo escucho hechos, no discursos. ",
+                          "En este cementerio yace mi madre, la que una vez fue reina de este lugar, y jure que solo lucharía por las causas en las que ella creia",
                           "He visto demasiadas causas nobles marchar hacia el abismo por falta de conviccion.",
                           "Quizás tú seas distinto, o quizás solo otro iluso con prisa. Si quieres mi ayuda, tráeme el Emblema de los Caídos. Quien lo porta honra a los que lucharon antes, y eso merece respeto."],
       "dialogueWithItem" : ["Asi que no solo hablabas en serio… lo has traido. El Emblema. ",

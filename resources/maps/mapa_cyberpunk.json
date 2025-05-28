@@ -868,30 +868,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":25,
-                 "name":"Vagabundo (NPC)",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":3535.33333333333,
-                 "y":3529.33333333333
-                }, 
-                {
-                 "height":0,
-                 "id":26,
-                 "name":"Alcalde (NPC)",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":3824,
-                 "y":1289
-                }, 
-                {
-                 "height":0,
                  "id":29,
                  "name":"Borracho (Enemy)",
                  "point":true,
@@ -931,6 +907,17 @@
                  "id":39,
                  "name":"Sigma-8 (Reclutable)",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"ally"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Characters_Level3"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -949,54 +936,71 @@
                  "width":0,
                  "x":2394,
                  "y":1452
-                }, 
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":17,
+         "name":"items",
+         "objects":[
                 {
                  "height":0,
-                 "id":48,
+                 "id":52,
                  "name":"ITEM",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1908,
-                 "y":332
+                 "x":1869.69696969697,
+                 "y":363.636363636364
                 }, 
                 {
                  "height":0,
-                 "id":49,
+                 "id":53,
                  "name":"ITEM",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3684,
-                 "y":504
+                 "x":3677.87878787879,
+                 "y":500
                 }, 
                 {
                  "height":0,
-                 "id":50,
+                 "id":54,
                  "name":"ITEM",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":428,
-                 "y":3920
+                 "x":3440.5,
+                 "y":2519.5
                 }, 
                 {
                  "height":0,
-                 "id":51,
+                 "id":55,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3436,
-                 "y":2572
+                 "x":367.757575757576,
+                 "y":3897.93939393939
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1246,8 +1250,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":17,
- "nextobjectid":52,
+ "nextlayerid":18,
+ "nextobjectid":56,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -1403,6 +1407,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":136
 }
