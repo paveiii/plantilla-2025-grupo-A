@@ -479,9 +479,6 @@ class InBattleView(arcade.View):
                                              bar_height,
                                              arcade.color.BLACK)
 
-
-                print(self.enemy_health_bars)
-                print(self.enemy_health_bars[bar_pos])
                 arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
                                                    center_x - self.bar_width / 2 + self.enemy_health_bars[bar_pos],
                                                    h_center_y + y_fix,
@@ -688,6 +685,10 @@ class InBattleView(arcade.View):
         else:
             if len(self.player_team) == 1:
                 self.player_turn = True
+
+        print(f"{self.player_attacks} == {len(self.player_team)}")
+        if self.player_attacks == len(self.player_team):
+            print("AHORA DEBERÍA ENTRAR")
 
     def get_pointer_positions(self):
         if self.option == "select_enemy":
@@ -1093,7 +1094,7 @@ class InBattleView(arcade.View):
             self.main_buttons()
             self.option = "menu"
 
-        elif self.player_attacks == len(self.player_team):
+        elif self.player_attacks >= len(self.player_team):
             print("ACABADO TURNO JUGADOR")
             self.player_turn = False
             self.perform_action()
