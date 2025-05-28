@@ -197,13 +197,13 @@
                         }, 
                         {
                          "name":"start_x",
-                         "type":"int",
-                         "value":255
+                         "type":"float",
+                         "value":254.5
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":82
+                         "type":"float",
+                         "value":81.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
