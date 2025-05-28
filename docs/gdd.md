@@ -4,7 +4,7 @@
 
 **INTRODUCCIÓN**
 
-En un futuro donde la barrera del tiempo ha sido superada, surje una agencia destinada a arreglar las lineas temporales dañadas
+En un futuro donde la barrera del tiempo ha sido superada, surge una agencia destinada a arreglar las lineas temporales dañadas
 por sujetos desviados de su lugar espacio-temporal.\
 Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman (nombre)...
 
