@@ -68,8 +68,6 @@ class InBattleView(arcade.View):
 
         self.stage = 1
 
-        self.inventory = []
-
         self.current_width = self.get_width()
         self.width_scaling_factor = self.current_width / 1280
 
@@ -152,6 +150,8 @@ class InBattleView(arcade.View):
 
         self.attack_anim_done = False
         self.hurt_anim_done = False
+
+        self.item_used = None
 
     def on_show_view(self):
         self.activated = True
@@ -479,6 +479,9 @@ class InBattleView(arcade.View):
                                              bar_height,
                                              arcade.color.BLACK)
 
+
+                print(self.enemy_health_bars)
+                print(self.enemy_health_bars[bar_pos])
                 arcade.draw_lrtb_rectangle_filled(center_x - self.bar_width / 2,
                                                    center_x - self.bar_width / 2 + self.enemy_health_bars[bar_pos],
                                                    h_center_y + y_fix,
@@ -634,6 +637,7 @@ class InBattleView(arcade.View):
         self.hurt_anim_done = False
 
         if self.enemy_waiting_for_action:
+            self.player_turn = False
             self.enemy_attack_time += delta_time
 
             self.pointer_x = 100000
@@ -681,6 +685,9 @@ class InBattleView(arcade.View):
                                 enemy.setPulseAnim(Anim.BATTLEIDLE)
                             self.round_end()
                             return
+        else:
+            if len(self.player_team) == 1:
+                self.player_turn = True
 
     def get_pointer_positions(self):
         if self.option == "select_enemy":
@@ -724,6 +731,7 @@ class InBattleView(arcade.View):
             self.next_ally()
 
     def on_click_button(self, event):
+        self.clicked_button_name = event.source.text
         print(f"button clicked: {self.clicked_button_name}")
         self.previous_option = self.option
 
@@ -746,8 +754,16 @@ class InBattleView(arcade.View):
                         self.main_buttons()
 
 
-        if self.option == "item":
+        elif self.previous_option == "item":
+            for item in self.inventory:
+                if self.clicked_button_name == item["name"]:
+                    self.item_used = item
+
             self.perform_action()
+
+        self.manager.clear()
+        self.manager.disable()
+        self.action_buttons.clear()
 
     def setup_team(self, ally, x, y):
         character_sprite = ally
@@ -812,6 +828,10 @@ class InBattleView(arcade.View):
                     self.waiting_for_action = True
                     self.allow_inputs = False
 
+            elif self.option == "revive_ally":
+                if key == arcade.key.ENTER:
+                    self.next_ally()
+
             else:
                 if key == arcade.key.ESCAPE:
                     self.stage = 1
@@ -869,9 +889,11 @@ class InBattleView(arcade.View):
     def change_buttons(self):
         self.manager.clear()
         self.contenedor.clear()
+
         num_buttons = 0
         button_width = 300
 
+        print(f"option en change_buttons {self.option}")
         if self.option == "attack" or self.option == "skill":
 
             # Transformar el diccionario en una lista (excluyendo el template) para poder acceder por índice
@@ -886,49 +908,100 @@ class InBattleView(arcade.View):
                     if current_action == global_action: # Compara los nombres de las acciones del personaje con los del JSON de acciones
                         action_data = self.actions[global_action] # Guarda los datos de la acción del JSON que se está mirando
 
+                        print(f"{action_data['option']} == {self.option}")
                         if action_data["option"] == self.option: # Compara si la opción actual es igual que la de la acción del JSON
-                            button_row = arcade.gui.UIBoxLayout(vertical = False, space_between = 10)
 
                             button = arcade.gui.UIFlatButton(
                                 text = action_data["name"],
                                 width = button_width,
                                 height = 30)
                             self.contenedor.add(button.with_space_around(10))
+                            self.manager.add(self.contenedor)
                             button.on_click = self.on_click_button
                             self.action_buttons.append(button)
                             num_buttons += 1
 
+            y_pos = 0
+            if num_buttons == 4:
+                y_pos = 25
+            if num_buttons == 3:
+                y_pos = 65
+            if num_buttons == 2:
+                y_pos = 105
+            if num_buttons == 1:
+                y_pos = 145
+
+            self.manager.add(
+                arcade.gui.UIAnchorWidget(
+                    anchor_x="left",
+                    anchor_y="bottom",
+                    align_x=30,
+                    align_y=y_pos,
+                    child=self.contenedor
+                )
+            )
+
         elif self.option == "item":
+            columns = []
+            lengths_list = []
+            contenedor = []
+
+            column_width = button_width + 20  # espacio entre columnas
+            item_counter = 0
+
             for item in self.inventory:
                 if item['type'] != "REQUIREMENT":
+                    if item_counter >= 16:
+                        break
+
+                    if item_counter % 4 == 0:
+                        contenedor = arcade.gui.UIBoxLayout(vertical=True, space_between=10)
+                        columns.append(contenedor)
+                        lengths_list.append(0)
+
                     try:
                         button = arcade.gui.UIFlatButton(text = item["name"], width = button_width, height = 30)
                     except:
                         button = arcade.gui.UIFlatButton(text=item["short_name"], width=button_width, height=30)
-                    self.contenedor.add(button.with_space_around(10))
+
+                    contenedor.add(button)
+
                     button.on_click = self.on_click_button
                     self.action_buttons.append(button)
+
+                    lengths_list[-1] += 1
                     num_buttons += 1
+                    item_counter += 1
 
-        y_pos = 0
-        if num_buttons == 4:
-            y_pos = 25
-        if num_buttons == 3:
-            y_pos = 65
-        if num_buttons == 2:
-            y_pos = 105
-        if num_buttons == 1:
-            y_pos = 145
+            while num_buttons % 4 == 0:
+                lengths_list.append(4)
+                num_buttons -= 4
 
-        self.manager.add(
-            arcade.gui.UIAnchorWidget(
-                anchor_x="left",
-                anchor_y="bottom",
-                align_x = 30,
-                align_y=y_pos,
-                child=self.contenedor
-            )
-        )
+            lengths_list.append(num_buttons)
+
+            y_pos = 0
+
+            for index, column in enumerate(columns):
+                if lengths_list[index] == 4:
+                    y_pos = 25
+                if lengths_list[index] == 3:
+                    y_pos = 65
+                if lengths_list[index] == 2:
+                    y_pos = 105
+                if lengths_list[index] == 1:
+                    y_pos = 145
+
+                x_offset = 30 + (index * column_width)
+
+                self.manager.add(
+                    arcade.gui.UIAnchorWidget(
+                        anchor_x="left",
+                        anchor_y="bottom",
+                        align_x=x_offset,
+                        align_y=y_pos,
+                        child=column
+                    )
+                )
 
         self.manager.enable()
         self.manager.draw()
@@ -940,14 +1013,22 @@ class InBattleView(arcade.View):
                     if self.option == "attack" or self.option == "skill":
                         for action in self.actions.values():
                             if action["name"] == button.text:
+                                print(button.text)
                                 self.display_action_description(f'{action["description"]}\n\nStamina expense: {action["staminaExpense"]} sp')
                                 self.clicked_button_name = button.text
                     elif self.option == "item":
-                        print("Volver a hacer esta parte de código y no olvidar self.clicked_button_name")
-                    #    for item in self.inventory:
-                    #        try:
-                    #            if item["short_name"] == button.text:
-                    #                self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
+                        for item in self.inventory:
+                            try:
+                                if item["name"] == button.text:
+                                    if item["type"] == "HEAL":
+                                        self.display_action_description(f'{item["description"]}\n\n Heal amount: {item["amount"]} lp')
+
+                                    if item["type"] == "REVIVE" or item["type"] == "DAMAGE":
+                                        self.display_action_description(item["description"])
+
+                            except:
+                                if item["short_name"] == button.text:
+                                    self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
 
     def display_action_description(self, text):
         if self.description_is_displayed and self.description_widget.child.text == text:
@@ -1054,11 +1135,31 @@ class InBattleView(arcade.View):
 
                 self.check_health_status()
 
-            if self.previous_option == "item":
-                print("CUANDO LOS ITEMS TENGAN SU FORMA DEFINITIVA HACER ESTA PARTE DE CÓDIGO PARA APLICAR LOS EFECTOS")
-                self.next_ally()
-                        # if item["heal_amount"] >= ¡¡¡HACER LA LISTA DE OBJETOS DE ALIADOS!!!
+            elif self.option == "item":
+                if self.item_used["type"] == "HEAL":
+                    self.player_team[self.current_ally].changeHealth(self.item_used["amount"])
+                    self.next_ally()
+
+                elif self.item_used["type"] == "MULTIPLIER":
+                    """self.ally_effects_list[self.current_ally].append(Effect("Item Multiplier",
+                                                                            ""),
+                                                                     "Multiplier",
+                                                                     self.item_used["amount"],
+                                                                     )"""
+
+                elif self.item_used["type"] == "REVIVE":
+                    self.option = "revive_ally"
+
+                    if self.defeated_allies:
+                        self.manager.clear()
+                        self.contenedor.clear()
+
+                        self.contenedor.add(arcade.gui.UILabel(width=100, height=20, text="Elige a un jugador para revivir: ", anchor_x="center", y=100))
+                        self.manager.add(self.contenedor)
+
         else:
+            self.manager.clear()
+            self.manager.disable()
             self.enemy_waiting_for_action = True
             self.enemy_turn_index = 0
             self.enemy_attack_time = 0
@@ -1069,7 +1170,6 @@ class InBattleView(arcade.View):
         self.r_done = True
 
         self.player_turn = True
-        self.check_health_status()
 
         self.round += 1
 
@@ -1118,6 +1218,8 @@ class InBattleView(arcade.View):
                         unique_list.remove(effect)
                 except:
                     pass
+
+        self.check_health_status()
 
         for enemy in self.enemy_team:
             enemy.changeStamina(enemy.restoredStamina)

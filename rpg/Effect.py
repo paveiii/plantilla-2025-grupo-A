@@ -16,7 +16,7 @@ class Effect():
         self.stat = statAffected #En caso de multiplicador.
 
     def useEffect(self):
-        if(self.duration <= 0):
+        if self.duration <= 0:
             self.duration = 0
         else:
             self.duration -= 1
