@@ -857,7 +857,7 @@
                 {
                  "height":0,
                  "id":24,
-                 "name":"Cyberpsicopata (Enemy)",
+                 "name":"David Martinez",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -869,7 +869,7 @@
                 {
                  "height":0,
                  "id":29,
-                 "name":"Borracho (Enemy)",
+                 "name":"Borracho",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -881,7 +881,7 @@
                 {
                  "height":0,
                  "id":30,
-                 "name":"Monstruo Radioactivo (Enemy)",
+                 "name":"Esqueleto",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -893,7 +893,7 @@
                 {
                  "height":0,
                  "id":37,
-                 "name":"Prisionero (Enemy)",
+                 "name":"Prisionero",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -928,7 +928,7 @@
                 {
                  "height":0,
                  "id":47,
-                 "name":"Ludopata (Enemy)",
+                 "name":"Ludao",
                  "point":true,
                  "rotation":0,
                  "type":"",

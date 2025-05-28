@@ -335,10 +335,10 @@
                 16
             ],
             "scale": 0.125,
-            "selectedLayer": 13,
+            "selectedLayer": 12,
             "viewCenter": {
-                "x": 4028,
-                "y": 2712
+                "x": 4484,
+                "y": 4024
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
