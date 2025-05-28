@@ -154,6 +154,7 @@ class InBattleView(arcade.View):
         self.hurt_anim_done = False
 
     def on_show_view(self):
+        self.activated = True
         self.option = "menu"
         self.previous_option = ""
         self.clicked_button_name = ""
@@ -303,6 +304,7 @@ class InBattleView(arcade.View):
         print(f"enemy {self.remaining_enemies}")
 
     def on_hide_view(self):
+        self.activated = False
         self.manager.clear()
         self.manager.disable()
 
