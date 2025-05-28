@@ -235,8 +235,8 @@
             "scale": 1.3953125,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 319.2833146696529,
-                "y": 319.64165733482645
+                "x": 320.35834266517355,
+                "y": 383.7849944008958
             }
         },
         "maps/cueva_final.json": {
@@ -319,26 +319,26 @@
         },
         "maps/mapa_cyberpunk.json": {
             "expandedObjectLayers": [
-                13,
-                17
+                17,
+                13
             ],
             "scale": 0.25,
-            "selectedLayer": 6,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 2238,
-                "y": 1656
+                "x": 2454,
+                "y": 3068
             }
         },
         "maps/mapa_edad_media.json": {
             "expandedObjectLayers": [
-                18,
-                16
+                16,
+                18
             ],
             "scale": 0.125,
             "selectedLayer": 12,
             "viewCenter": {
-                "x": 4484,
-                "y": 4024
+                "x": 4800,
+                "y": 2660
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
@@ -357,8 +357,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 319.5,
-                "y": 320
+                "x": 320,
+                "y": 320.5
             }
         },
         "maps/prehistoric_map.json": {
@@ -403,8 +403,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 255.5,
-                "y": 384
+                "x": 256,
+                "y": 384.5
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -635,29 +635,25 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 1,
     "openFiles": [
-        "maps/prehistoric_map.json",
-        "maps/mapa_edad_media.json",
-        "maps/casa_mago.json",
-        "maps/castillo_bueno.json",
-        "maps/castillo_malo.json",
-        "maps/cueva_final.json",
         "maps/mapa_cyberpunk.json",
         "maps/time_company_interior.json",
-        "maps/power_plant_interior.json"
+        "maps/power_plant_interior.json",
+        "maps/cueva.json",
+        "maps/mapa_edad_media.json"
     ],
     "project": "rpg.tiled-project",
     "property.type": "bool",
     "recentFiles": [
         "maps/mapa_edad_media.json",
         "maps/cueva.json",
+        "maps/power_plant_interior.json",
+        "maps/time_company_interior.json",
+        "maps/mapa_cyberpunk.json",
         "maps/cueva_final.json",
         "maps/castillo_malo.json",
         "maps/castillo_bueno.json",
         "maps/casa_mago.json",
         "maps/prehistoric_map.json",
-        "maps/power_plant_interior.json",
-        "maps/time_company_interior.json",
-        "maps/mapa_cyberpunk.json",
         "maps/submapa alcantarillado.tmx",
         "maps/submapa.json"
     ],
