@@ -1001,7 +1001,7 @@
         {
          "draworder":"topdown",
          "id":17,
-         "name":"items",
+         "name":"searchable",
          "objects":[
                 {
                  "height":0,
@@ -1056,6 +1056,18 @@
                  "width":0,
                  "x":367.757575757576,
                  "y":3897.93939393939
+                }, 
+                {
+                 "gid":3794,
+                 "height":32,
+                 "id":58,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":1040,
+                 "y":2608
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1298,6 +1310,18 @@
                  "width":32,
                  "x":1408,
                  "y":896
+                }, 
+                {
+                 "gid":3794,
+                 "height":32,
+                 "id":57,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":984,
+                 "y":2696
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1306,7 +1330,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":56,
+ "nextobjectid":59,
  "orientation":"orthogonal",
  "properties":[
         {
