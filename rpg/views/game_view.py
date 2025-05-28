@@ -468,9 +468,10 @@ class GameView(arcade.View):
                 if ally.checkPlayer():
                     if self.dialogues_active:
                         # arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 275, self.window.width, 175, arcade.color.LIGHT_CORAL)
-                        self.dialogue_background.center_x = self.player_sprite.center_x
-                        self.dialogue_background.center_y = self.player_sprite.center_y - 450
-                        self.dialogue_background.draw()
+                        # self.dialogue_background.center_x = self.player_sprite.center_x
+                        # self.dialogue_background.center_y = self.player_sprite.center_y - 450
+                        # self.dialogue_background.draw()
+                        arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 300, self.window.width + 200, 250, arcade.color.BURLYWOOD),
                         if not self.buttons_visible:
                             arcade.draw_text("E para pasar los diálogos", self.player_sprite.center_x + 300, self.player_sprite.center_y - 350, arcade.color.BLACK, bold=True)
                         dialogue, item_bool = ally.get_interaction_dialogue()
