@@ -103,7 +103,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt2NFRgzAcx\/E89Oxzd\/FVh9AFmEFdQPugToAP6rGAO2QKOkO3MChoiAECjYSQ7+cu1\/bKefT3T\/7ECAEAAAAAQNpuNkLcqnG3CX0naXpUuT+p8Uz+Qbyq3N\/UeCd\/zOSwFbIaoe9jTZpMzWF+\/7AV4vg9snB3uw5GpvLYfv16v1evWuatATe2flFnmllyLfTPsuO7F\/J3Umr57evMuuazMf8LYy206nBvrAvYlX97yk\/\/tsxr23XS4Zoi9O9cqvI360zLLrPkKC39qHWNbH9u1kc29d7Ozzz+0AXL+3uNrQ7SkndrVP3\/UI9TpVAHrQayeXZ21EU2c1t2182bFLJv2OZrrvX2qi55vefpy15\/lk\/lI\/ehs7dYzubMulTvPwbyn7oGfM73obO3mM\/mhrJfwp5z6Owt5rO5nmf2YvJfu74a8P\/vPPqeA2OktM\/xqSt\/zMOW\/9Tec+oaiGU\/6Vvuue9PrYPrfjLVOv031\/1kzPv+NYh53491Yx+KlDH\/3V3shLjc+flb5D7elcr+2lP+OmrhzucawHi+1gBzfhmoAwCkh96PVDH3wyB3AEtALwqD3JE61gBSxLwHAABAbD4BDYMegg==",
+         "data":"eJzt2sFNwzAYhmEfKnruLhyBIWCBzAAsUHoAJggHQF2AHXxmgHaGboENCTjGSdzEquP4fSSrrVpV6ffbf4yFEAAAAAAA5O12IcSdGveL2FeSp0eV+5Maz+QfxavK\/U2Nd\/LHieyXQuoR+zrmpM7UHvb7D0shDj+jiHe182BlKg\/Nx+\/nG\/VoZN4Y8OPqF1WmhSPXrflatrz3Qv5edkZ+myqztvlszf+ttRYadVhb6wJuu\/895bd\/O+a163PS4zPb2L9zqnZ\/WRdGdoUjR+noR43PyObren0UQ6\/t\/CzgD52wsrvXuOogHXk3hu7\/+2qM8XmRRx2MGsj63tlSF1nPbdletyByyb7mmq+l0dt1Xcpqz9OVvXkvH6rOXddgqL6zt1TO5uy66OcfPfkPXQMh53vf2VvKZ3N92Y\/pQWPmvKnv7C3ls7mOezZ7\/hPpqgF\/\/55G133gGDntc0Jqy3+MUP0\/B678h\/aesWsglf1kaGXgvj+0Dr77yVzr5GNM7\/HdT6a875+DlPf9mDf2ocgZ89\/f5UqIq1WY7yL3412r7G8C5W+iFv5CrgHOHY4Xag0w56eBOgBAfuj9yBVzPw5yBxCTPvfJ7X+dp0TnztkbckbvQY6Y9wAAAEjNF+AjKL4=",
          "encoding":"base64",
          "height":64,
          "id":13,
@@ -917,24 +917,28 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/tilesets\/tiles.json"
+         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/tiles.json"
         }, 
         {
          "firstgid":6721,
-         "source":"..\/tilesets\/tiles1.json"
+         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/tiles1.json"
         }, 
         {
          "firstgid":13441,
-         "source":"..\/tilesets\/[A]Grass_pipo.json"
+         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/[A]Grass_pipo.json"
         }, 
         {
          "firstgid":13969,
-         "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
+         "source":"..\/..\/..\/plantilla-2025-grupo-A_2\/resources\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
+        }, 
+        {
+         "firstgid":13975,
+         "source":"..\/tilesets\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",
