@@ -557,15 +557,15 @@ class GameView(arcade.View):
         self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
         self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
 
-        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0].displayName, width=150)
+        ally1_button = arcade.gui.UIFlatButton(text=lista_nombres[0].displayName, width=210)
         self.fila1.add(ally1_button)
         ally1_button.on_click = self.ally1
 
-        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1].displayName, width=150)
+        ally2_button = arcade.gui.UIFlatButton(text=lista_nombres[1].displayName, width=210)
         self.fila1.add(ally2_button)
         ally2_button.on_click = self.ally2
 
-        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2].displayName, width=150)
+        ally3_button = arcade.gui.UIFlatButton(text=lista_nombres[2].displayName, width=210)
         self.fila2.add(ally3_button)
         ally3_button.on_click = self.ally3
 
