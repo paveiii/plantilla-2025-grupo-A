@@ -1087,7 +1087,7 @@ class GameView(arcade.View):
                 enemyDict = {}
                 enemyDict["sheetName"] = worldEnemy.sheetName
                 enemyDict["position"] = worldEnemy.position
-                enemyDict["battleEnemies"] = worldEnemy.enemigos_batalla
+                enemyDict["battleEnemies"] = worldEnemy.enemigosBatalla
                 enemyDict["speed"] = worldEnemy.speed
                 enemyDict["detectionRadius"] = worldEnemy.radio_deteccion
 
