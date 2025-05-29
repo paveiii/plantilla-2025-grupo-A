@@ -153,6 +153,50 @@ class InBattleView(arcade.View):
 
         self.item_used = None
 
+        # Sprites de información sobre los controles
+        self.sprites_controles = arcade.SpriteList()
+
+        self.key_height_sub = 595
+
+        self.flechaD = arcade.Sprite("../resources/UIThings/flechaD.png", scale=1.5)
+        self.flechaD.center_x = self.current_width - 250
+        self.flechaD.center_y = self.current_height - self.key_height_sub
+        self.sprites_controles.append(self.flechaD)
+
+        self.flechaI = arcade.Sprite("../resources/UIThings/flechaI.png", scale=1.5)
+        self.flechaI.center_x = self.current_width - 280
+        self.flechaI.center_y = self.current_height - self.key_height_sub
+        self.sprites_controles.append(self.flechaI)
+
+        x_enter = self.current_width - 268
+        y_enter = self.current_height - self.key_height_sub - 40
+
+        self.teclaEnter1 = arcade.Sprite("../resources/UIThings/teclaEnter1.png", scale=1.5)
+        self.teclaEnter1.center_x = x_enter
+        self.teclaEnter1.center_y = y_enter
+        self.sprites_controles.append(self.teclaEnter1)
+
+        self.teclaEnter2 = arcade.Sprite("../resources/UIThings/teclaEnter2.png", scale=1.5)
+        self.teclaEnter2.center_x = x_enter + 16
+        self.teclaEnter2.center_y = y_enter
+        self.sprites_controles.append(self.teclaEnter2)
+
+        self.teclaEsc = arcade.Sprite("../resources/UIThings/teclaEsc.png", scale=1.5)
+        self.teclaEsc.center_x = self.current_width - 252
+        self.teclaEsc.center_y = self.current_height - self.key_height_sub - 80
+        self.sprites_controles.append(self.teclaEsc)
+
+        self.key_controls_options = ["attack", "skill", "select_enemy"]
+
+        self.inventory_empty = False
+
+        self.sta_message = False
+
+        self.fondo = arcade.Sprite("../resources/UIThings/fondo.png", scale=1.5)
+        self.fondo.center_x = self.current_width / 2
+        self.fondo.center_y = self.current_height / 2
+
+
     def on_show_view(self):
         self.activated = True
         self.option = "menu"
@@ -189,7 +233,6 @@ class InBattleView(arcade.View):
 
         self.manager.enable()
         self.main_buttons()
-        arcade.set_background_color(arcade.color.ASH_GREY)
 
         # Load allies
 
@@ -313,9 +356,10 @@ class InBattleView(arcade.View):
 
     def on_draw(self):
         arcade.start_render() # Para que cada vez que se pinte un frame se limpie el de antes
+        self.fondo.draw()
 
         current_width = self.get_width()
-        border_width = 10
+        border_width = 15
 
         # Actualizar posiciones de los aliados en cada momento para poder reescalarlos
         for i in range(len(self.player_sprites)):
@@ -335,18 +379,70 @@ class InBattleView(arcade.View):
             pos_inx = self.remaining_enemies[i]
             self.enemy_sprites[i].center_y = self.enemy_y_positions[pos_inx]
 
-        arcade.draw_rectangle_filled(center_x = current_width / 2,
-                                     center_y = 100,
-                                     width = current_width,
-                                     height = 200,
-                                     color = arcade.color.NAVY_BLUE)
+        arcade.draw_rectangle_filled(center_x=current_width / 2,
+                                     center_y=100,
+                                     width=current_width,
+                                     height=200,
+                                     color=(16, 60, 131))
 
+        arcade.draw_rectangle_filled(center_x=current_width / 2,
+                                     center_y=61,
+                                     width=current_width,
+                                     height=200,
+                                     color=(16, 52, 112))
+
+        arcade.draw_rectangle_filled(center_x=current_width / 2,
+                                     center_y=22,
+                                     width=current_width,
+                                     height=200,
+                                     color=(17, 50, 104))
+
+        arcade.draw_rectangle_filled(center_x=current_width / 2,
+                                     center_y=-17,
+                                     width=current_width,
+                                     height=200,
+                                     color=(17, 47, 101))
+
+        arcade.draw_rectangle_filled(center_x=current_width / 2,
+                                     center_y=-56,
+                                     width=current_width,
+                                     height=200,
+                                     color=(17, 45, 95))
+
+        # Bordes de fuera
         arcade.draw_lrtb_rectangle_outline(left = 5,
                                            right = current_width - border_width / 2,
-                                           top = 200,
+                                           top = 202,
                                            bottom = 5,
                                            border_width = border_width,
-                                           color = arcade.color.WHITE)
+                                           color = (88, 64, 52))
+
+        arcade.draw_lrtb_rectangle_outline(left=5,
+                                           right=current_width - border_width / 2,
+                                           top=200,
+                                           bottom=5,
+                                           border_width=border_width - 4,
+                                           color=(158, 118, 106))
+
+        # Brillos y sombras
+        arcade.draw_line(0, 206, current_width, 206, (222, 180, 138), 2)
+        arcade.draw_line(2, 204, current_width - 2, 204, (241, 221, 192), 2)
+
+        arcade.draw_line(10, 10, current_width - 13, 10, (222, 180, 138), 2)
+        arcade.draw_line(10, 8, current_width - 13, 8, (241, 221, 192), 2)
+
+        arcade.draw_line(2, 0, 2, 204, (222, 180, 138), 2)
+
+        arcade.draw_line(12, 194, current_width - 15, 194, (88, 64, 52), 2)
+
+        # Sombra azul
+        # Horizontal
+        arcade.draw_line(12, 192, current_width - 14, 192, (20, 32, 72), 2)
+        arcade.draw_line(12, 15, current_width - 14, 15, (20, 32, 72), 2)
+
+        # Vetical
+        arcade.draw_line(13, 15, 13, 192, (20, 32, 72), 2)
+        arcade.draw_line(current_width - 15, 15, current_width - 15, 192, (20, 32, 72), 2)
 
         arcade.draw_triangle_filled(x1=self.pointer_x - 2,
                                     y1=self.pointer_y + 64,
@@ -507,6 +603,32 @@ class InBattleView(arcade.View):
             else:
                 pass
 
+        if self.inventory_empty and self.option == "item":
+            arcade.draw_text("El inventario esta vacio", start_y=100, start_x=self.current_width/2 - 100)
+
+        if self.option == "menu" and self.sta_message:
+            arcade.draw_text("La stamina ya esta al maximo", start_y=53, start_x=870)
+
+        if self.option in self.key_controls_options:
+            self.sprites_controles.draw()
+
+            self.draw_text_with_outline("Controles", self.current_width - 291, 155, arcade.color.WHITE, arcade.color.BLACK, font_size=14)
+
+            arcade.draw_text("Cambiar enemigo al atacar",
+                             self.current_width - 220,
+                             120,
+                             font_size=10)
+
+            arcade.draw_text("Confirmar accion",
+                             self.current_width - 220,
+                             80,
+                             font_size=10)
+
+            arcade.draw_text("Volver al menú anterior",
+                             self.current_width - 220,
+                             40,
+                             font_size=10)
+
         self.player_sprites.draw()
         self.enemy_sprites.draw()
 
@@ -525,6 +647,12 @@ class InBattleView(arcade.View):
 
     def on_update(self, delta_time: float):
         pointer_positions = self.get_pointer_positions()
+
+        self.flechaD.center_x = self.current_width - 250
+        self.flechaI.center_x = self.current_width - 280
+        self.teclaEnter1.center_x = self.current_width - 268
+        self.teclaEnter2.center_x = self.current_width - 252
+        self.teclaEsc.center_x = self.current_width - 252
 
         if self.option != "select_enemy":
             self.pointer_x = self.x_positions[self.current_ally]
@@ -696,24 +824,28 @@ class InBattleView(arcade.View):
         self.option = "attack"
         self.stage = 2
         self.change_buttons()
+        self.sta_message = False
 
     def on_click_skill(self, event):
         self.option = "skill"
         self.stage = 2
         self.change_buttons()
+        self.sta_message = False
 
     def on_click_item(self, event):
         self.manager.clear()
-
-        if not self.inventory:
-            self.display_action_description("No hay objetos en el inventario")
-
-            self.option = "menu"
-            self.stage = 1
-            return
+        self.inventory_empty = False
+        self.sta_message = False
 
         self.option = "item"
         self.stage = 2
+
+        if not self.inventory:
+            self.manager.clear()
+            self.inventory_empty = True
+
+            return
+
         self.change_buttons()
 
     def on_click_rest(self, event):
@@ -725,6 +857,8 @@ class InBattleView(arcade.View):
         if self.player_team[self.current_ally_index].currentStamina == self.player_team[self.current_ally_index].maxStamina:
             print("ESTE PERSONAJE YA TIENE LA STAMINA AL MÁXIMO")
             self.main_buttons()
+            self.option = "menu"
+            self.sta_message = True
         else:
             self.player_team[self.current_ally_index].changeStamina(self.player_team[self.current_ally_index].restoredStamina * 2)
 
@@ -1106,7 +1240,7 @@ class InBattleView(arcade.View):
                         for action in self.actions.values():
                             if action["name"] == button.text:
                                 print(button.text)
-                                self.display_action_description(f'{action["description"]}\n\nStamina expense: {action["staminaExpense"]} sp')
+                                self.display_action_description(f'{action["description"]}\n\nCoste de stamina: {action["staminaExpense"]} sp')
                                 self.clicked_button_name = button.text
                     elif self.option == "item":
                         for item in self.inventory:
