@@ -159,5 +159,22 @@
                             "¡SCYTHE SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ5",
       "actions" : ["Action1","Action2","Action3","Action4"]
-    }
+    },
+      "TestCharacter7":
+      {
+       "sheet_name": "Aliados/Prehistoria/Mistica.png","name": "Mistica", "description": "", "type":"Fighter",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" :10,
+      "dialogueNoItem" : ["Ignorante del futuro...¿Acaso te has desviado del plan divino? Nunca te vi por estas tierras.",
+                          "Presagio para ti un futuro incierto, lleno de muerte y destrucción.",
+                          "¿Que te ayude? Nadie puede hacerlo.",
+                          "Eres una víctima de tu destino"],
+      "dialogueWithItem" : ["¡Por todos los Dioses!¿Cómo ha acabado en tus manos, forajido? ",
+                            "Esto es una señal de que acuda en tu ayuda.",
+                            "Me han elegido para acompañarte hacia una muerte segura. Pero si es la voluntad, que así sea.",
+                            "¡MISTICA SE HA UNIDO A TU EQUIPO!"],
+      "requirementItemKey": "REQ6",
+      "actions" : ["Action1","Action2","Action3","Action4"]
+
+
+      }
 }
