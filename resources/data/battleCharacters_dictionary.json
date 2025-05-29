@@ -144,5 +144,20 @@
       "sheet_name": "Boss/BossFinalTerceraFase.png","name": "Boss Phase 3", "description": "",
       "role": "enemy", "maxHealth" : 1000, "maxStamina" : 100, "restoredStamina" : 25,
       "actions" : ["Action3"]
+    },
+      "TestCharacter6":
+      {
+      "sheet_name": "Aliados/Cyberpunk/Alado.png","name": "Scythe", "description": "", "type":"Fighter",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 120, "restoredStamina" :10,
+      "dialogueNoItem" : ["Yo paso, solo estoy aquí por el dinero y la fama",
+                          "Yo estoy de el lado de quien gane",
+                          "Lo bueno de ser sicario es que yo elijo a mis clientes",
+                          "Oye, oye, ya deja de darme la murga."],
+      "dialogueWithItem" : ["Ah...esto, lo perdí hace tiempo",
+                            "Bueno, supongo que será divertido luchar en tan sangrienta batalla",
+                            "Lo haré, pero no por ti, y desde luego no por el objeto",
+                            "¡SCYTHE SE HA UNIDO A TU EQUIPO!"],
+      "requirementItemKey": "REQ5",
+      "actions" : ["Action1","Action2","Action3","Action4"]
     }
 }
