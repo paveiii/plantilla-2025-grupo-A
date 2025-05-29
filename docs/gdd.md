@@ -1,6 +1,6 @@
 # Documento de diseño
 
-## No time left
+## No Time Left
 
 **INTRODUCCIÓN**
 
