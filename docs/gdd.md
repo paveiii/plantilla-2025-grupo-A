@@ -21,7 +21,7 @@ Es esencial para la supervivencia de nuestro tiempo tal y como lo conocemos repa
 
 **PERSONAJES**
 
-Second es nuestro protagonista, y el jugador solo lo maneja a él. Sin embargo estará acompañado de otros personajes que lo seguirán en su aventura y lucharán a su lado. Pero el jugador ha de estar avispado, pues debe encontrárselos y, solo si, tiene el "objeto de requirimiento", será capaz de reclutarlos.\
+(nombre) es nuestro protagonista, y el jugador solo lo maneja a él. Sin embargo estará acompañado de otros personajes que lo seguirán en su aventura y lucharán a su lado. Pero el jugador ha de estar avispado, pues debe encontrárselos y, solo si, tiene el "objeto de requirimiento", será capaz de reclutarlos.\
 Existen varios personajes reclutables a través de la historia, algunos "curanderos" y otros solo con el poder de inflingir daño a los enemigos. Y todos ellos tienen la capacidad de morir, por lo que si esto sucede, el jugador ya no contará con ellos en lo que reste de aventura.\
 Como extra para favorecer la estética del juego y mayor comprensión de la historia, se tiene el personaje que es el encargado de la agencia, el cual nos indicará nuestro propósito y misión.\
 Diseño de varios NPC´s para dar ambiente a las distintas líneas temporales encontradas en el juego.\
