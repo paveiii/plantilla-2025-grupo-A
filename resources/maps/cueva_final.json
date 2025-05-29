@@ -371,9 +371,9 @@
                  "y":160
                 }, 
                 {
-                 "gid":7396,
+                 "gid":7401,
                  "height":96,
-                 "id":13,
+                 "id":15,
                  "name":"",
                  "properties":[
                         {
@@ -390,13 +390,18 @@
                          "name":"start_y",
                          "type":"int",
                          "value":8
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":96,
-                 "x":272.666666666667,
-                 "y":192
+                 "x":271.5,
+                 "y":193.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -405,7 +410,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":14,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":[
         {
