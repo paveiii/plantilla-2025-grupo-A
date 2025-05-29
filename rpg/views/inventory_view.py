@@ -13,6 +13,7 @@ from rpg.constants import (CHARACTER_SPRITE_SIZE, SCREEN_WIDTH, ally_x_positions
 class InventoryView(arcade.View):
     def __init__(self):
         super().__init__()
+        self.tankIcon = None
         self.hover_item = None
         self.hover_index = None
         self.item_list = arcade.SpriteList()
@@ -169,6 +170,7 @@ class InventoryView(arcade.View):
         sprite.center_y = 550
         self.player = sprite
 
+        self.tankIcon = arcade.Sprite("../resources/UIThings/tankIcon.png")
         self.captainIcon = arcade.Sprite("../resources/UIThings/captainIcon.png")
         self.medicIcon = arcade.Sprite("../resources/UIThings/medicIcon.png")
         self.fighterIcon = arcade.Sprite("../resources/UIThings/fighterIcon.png")
@@ -357,10 +359,13 @@ class InventoryView(arcade.View):
         self.inventory = self.window.views["game"].player_sprite.inventory
 
         if self.selected_item in self.characters:
-            if self.selected_item.type == "Captain" or self.selected_item.type == "Tank":
+            if self.selected_item.type == "Tank":
+                self.icon = self.tankIcon
+            elif self.selected_item.type == "Captain":
                 self.icon = self.captainIcon
             elif self.selected_item.type == "Medic":
                 self.icon = self.medicIcon
             elif self.selected_item.type == "Fighter":
                 self.icon = self.fighterIcon
+
         # print(self.inventory)
