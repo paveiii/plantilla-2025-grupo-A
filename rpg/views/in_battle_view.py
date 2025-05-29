@@ -196,6 +196,7 @@ class InBattleView(arcade.View):
         self.fondo.center_x = self.current_width / 2
         self.fondo.center_y = self.current_height / 2
 
+        self.att_sta_message = False
 
     def on_show_view(self):
         self.activated = True
@@ -610,6 +611,9 @@ class InBattleView(arcade.View):
         if self.option == "menu" and self.sta_message:
             arcade.draw_text("La stamina ya esta al maximo", start_y=53, start_x=870)
 
+        if self.att_sta_message:
+            arcade.draw_text("No hay suficiente stamina", start_y=125, start_x=220)
+
         if self.option in self.key_controls_options:
             self.sprites_controles.draw()
 
@@ -826,6 +830,7 @@ class InBattleView(arcade.View):
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.att_sta_message = False
         self.item_used = None
 
     def on_click_skill(self, event):
@@ -833,12 +838,14 @@ class InBattleView(arcade.View):
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.att_sta_message = False
         self.item_used = None
 
     def on_click_item(self, event):
         self.manager.clear()
         self.inventory_empty = False
         self.sta_message = False
+        self.att_sta_message = False
 
         self.option = "item"
         self.stage = 2
@@ -873,6 +880,7 @@ class InBattleView(arcade.View):
                 self.player_team[self.current_ally_index].currentStamina = self.player_team[self.current_ally_index].maxStamina
 
             self.next_ally()
+            self.manager.clear()
 
     def on_click_button(self, event):
         self.clicked_button_name = event.source.text
@@ -896,6 +904,7 @@ class InBattleView(arcade.View):
                         print("NO TIENES SUFICIENTE STAMINA")
                         print(f"STAMINA ACTUAL {self.player_team[self.current_ally_index].currentStamina}")
                         self.main_buttons()
+                        self.att_sta_message = True
 
             self.manager.clear()
             self.manager.disable()
