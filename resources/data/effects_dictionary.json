@@ -13,8 +13,8 @@
 
     "Bleeding":
     {
-      "name": "Bleeding Effect", "description": "", "effectType":"Damage",
-      "durationInTurns": 3,"amount" : 20, "statAffected" : "health"
+      "name": "Efecto de sangrado", "description": "Quita 10 puntos de vida por cada ronda. Tarda 3 turnos en desaparecer.", "effectType":"Damage",
+      "durationInTurns": 3,"amount" : 10, "statAffected" : "health"
     },
 
     "Poison":

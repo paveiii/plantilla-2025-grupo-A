@@ -16,7 +16,7 @@
       "dialogueNoItem" : [],
       "dialogueWithItem" : [],
       "requirementItemKey": "",
-      "actions" : ["Action1","Action2", "Action3", "Action4", "Action5"]
+      "actions" : ["Ataque_Normal","Ataque_Fuerte", "Ataque_Sangrado"]
     },
 
   "TestCharacter2":
@@ -83,13 +83,13 @@
     {
       "sheet_name": "Enemigos/Gargola.png","name": "TestEnemy1", "description": "Test1",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 5,
-      "actions" : ["Action1"]
+      "actions" : ["Ataque_Debil"]
     },
     "TestEnemy2":
     {
       "sheet_name": "Enemigos/Vaquero.png","name": "TestEnemy2", "description": "Test2",
-      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
-      "actions" : ["Action3"]
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 5,
+      "actions" : ["Ataque_Debil"]
     },
     "TestEnemy3":
     {

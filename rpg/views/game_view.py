@@ -471,7 +471,15 @@ class GameView(arcade.View):
                         # self.dialogue_background.center_x = self.player_sprite.center_x
                         # self.dialogue_background.center_y = self.player_sprite.center_y - 450
                         # self.dialogue_background.draw()
-                        arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 300, self.window.width + 200, 250, arcade.color.BURLYWOOD),
+                        arcade.draw_rectangle_filled(self.player_sprite.center_x, self.player_sprite.center_y - 300, self.window.width + 200, 250, arcade.color.DARK_VANILLA),
+                        arcade.draw_rectangle_outline(
+                            self.player_sprite.center_x,
+                            self.player_sprite.center_y - 266,
+                            self.window.width - 3,
+                            185,
+                            arcade.color.BLACK,
+                            border_width=3
+                        )
                         if not self.buttons_visible:
                             arcade.draw_text("E para pasar los diálogos", self.player_sprite.center_x + 300, self.player_sprite.center_y - 350, arcade.color.BLACK, bold=True)
                         dialogue, item_bool = ally.get_interaction_dialogue()
