@@ -703,6 +703,15 @@ class InBattleView(arcade.View):
         self.change_buttons()
 
     def on_click_item(self, event):
+        self.manager.clear()
+
+        if not self.inventory:
+            self.display_action_description("No hay objetos en el inventario")
+
+            self.option = "menu"
+            self.stage = 1
+            return
+
         self.option = "item"
         self.stage = 2
         self.change_buttons()
@@ -906,19 +915,19 @@ class InBattleView(arcade.View):
         self.fila1 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
         self.fila2 = arcade.gui.UIBoxLayout(vertical=False, space_between=20)
 
-        attack_button = arcade.gui.UIFlatButton(text="Attack", width=200)
+        attack_button = arcade.gui.UIFlatButton(text="Ataque", width=200)
         self.fila1.add(attack_button)
         attack_button.on_click = self.on_click_attack
 
-        skill_button = arcade.gui.UIFlatButton(text="Skill", width=200)
+        skill_button = arcade.gui.UIFlatButton(text="Habilidad", width=200)
         self.fila1.add(skill_button)
         skill_button.on_click = self.on_click_skill
 
-        item_button = arcade.gui.UIFlatButton(text="Item", width=200)
+        item_button = arcade.gui.UIFlatButton(text="Objeto", width=200)
         self.fila2.add(item_button)
         item_button.on_click = self.on_click_item
 
-        rest_button = arcade.gui.UIFlatButton(text="Rest", width=200)
+        rest_button = arcade.gui.UIFlatButton(text="Descansar", width=200)
         self.fila2.add(rest_button)
         rest_button.on_click = self.on_click_rest
 
