@@ -1011,6 +1011,7 @@ class InBattleView(arcade.View):
                             self.enemy_team[self.current_selected_enemy].changeHealth(-self.item_used["amount"])
                             self.item_used = None
                             self.option = "menu"
+                            self.check_health_status()
                             self.next_ally()
 
                 else:
@@ -1099,7 +1100,7 @@ class InBattleView(arcade.View):
             characters = list(self.team.values())[1:] # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
 
             # Crear una lista con las acciones del personaje al que le toca el turno
-            current_ally_actions = self.player_team[self.current_ally].actions
+            current_ally_actions = self.player_team[self.remaining_allies.index(self.current_ally)].actions
 
             # Crear el nuevo layout de botones a partir de la opción elegida en el menú principal de botones
 
@@ -1155,7 +1156,7 @@ class InBattleView(arcade.View):
 
             for item in self.inventory:
                 if item['type'] != "REQUIREMENT":
-                    if item_counter >= 16:
+                    if item_counter >= 12:
                         break
 
                     if item_counter % 4 == 0:
@@ -1262,16 +1263,16 @@ class InBattleView(arcade.View):
                             try:
                                 if item["name"] == button.text:
                                     if item["type"] == "HEAL":
-                                        self.display_action_description(f'{item["description"]}\n\n Heal amount: {item["amount"]} lp')
+                                        self.display_action_description_right(f'{item["description"]}\n\n Heal amount: {item["amount"]} lp')
 
                                     if item["type"] == "REVIVE" or item["type"] == "DAMAGE":
-                                        self.display_action_description(item["description"])
+                                        self.display_action_description_right(item["description"])
 
                             except:
                                 if item["short_name"] == button.text:
-                                    self.display_action_description(f'Heal amount: {item["heal_amount"]} lp')
+                                    self.display_action_description_right(f'Heal amount: {item["heal_amount"]} lp')
 
-    def display_action_description(self, text):
+    def display_action_description_right(self, text):
         if self.description_is_displayed and self.description_widget.child.text == text:
             return
 
@@ -1287,11 +1288,36 @@ class InBattleView(arcade.View):
         )
 
         self.description_widget = arcade.gui.UIAnchorWidget(
-                anchor_x="center",
+                anchor_x="right",
                 anchor_y="bottom",
                 align_y=40,
                 child=label
             )
+
+        self.manager.add(self.description_widget)
+        self.description_is_displayed = True
+
+    def display_action_description(self, text):
+        if self.description_is_displayed and self.description_widget.child.text == text:
+            return
+
+        if self.description_is_displayed:
+            self.manager.remove(self.description_widget)
+
+        label = arcade.gui.UITextArea(
+            text=text,
+            text_color=arcade.color.WHITE,
+            font_size=12,
+            height=100,
+            width=300
+        )
+
+        self.description_widget = arcade.gui.UIAnchorWidget(
+            anchor_x="center",
+            anchor_y="bottom",
+            align_y=40,
+            child=label
+        )
 
         self.manager.add(self.description_widget)
         self.description_is_displayed = True
