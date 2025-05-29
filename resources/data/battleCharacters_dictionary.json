@@ -174,7 +174,13 @@
                             "¡MISTICA SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ6",
       "actions" : ["Action1","Action2","Action3","Action4"]
-
+      },
+      "TestEnemy4":
+      {
+        "sheet_name": "Enemigos/Bruja.png","name": "TestEnemy4", "description": "Test4",
+      "role": "enemy", "maxHealth" : 100, "maxStamina" : 70, "restoredStamina" : 5,
+      "actions" : ["Action3"]
 
       }
+
 }
