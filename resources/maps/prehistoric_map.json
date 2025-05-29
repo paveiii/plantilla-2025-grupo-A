@@ -590,17 +590,17 @@
                         {
                          "name":"map_name",
                          "type":"string",
-                         "value":"mapa_edad_media"
+                         "value":"inicial_edad_media"
                         }, 
                         {
                          "name":"start_x",
                          "type":"int",
-                         "value":0
+                         "value":7
                         }, 
                         {
                          "name":"start_y",
                          "type":"int",
-                         "value":0
+                         "value":5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -1030,7 +1030,7 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
