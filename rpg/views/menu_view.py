@@ -13,7 +13,7 @@ class MenuView(arcade.View):
 
         # Create a vertical BoxGroup to align buttons
         self.v_box = arcade.gui.UIBoxLayout()
-
+        self.background = None
         self.window.views["load_game"] = g.LoadGameView()
 
         start_game_button = arcade.gui.UIFlatButton(text="Start", width=200)
@@ -38,14 +38,17 @@ class MenuView(arcade.View):
 
     def on_show_view(self):
         self.manager.enable()
-        arcade.set_background_color(arcade.color.ALMOND)
+        # arcade.set_background_color(arcade.color.ALMOND)
 
 
     def on_hide_view(self):
         self.manager.disable()
 
     def setup(self):
-        pass
+        self.background = arcade.Sprite("../resources/UIThings/fondoInicio.png", scale=0.85)
+        self.background.center_x = 650
+        self.background.center_y = 350
+        self.background.height = self.background.height - 125
 
     def on_draw(self):
         """
@@ -53,7 +56,10 @@ class MenuView(arcade.View):
         input: None
         output: None
         """
+
         self.clear()
+        if self.background:
+            self.background.draw()
         self.manager.draw()
 
     # call back methods for buttons:
