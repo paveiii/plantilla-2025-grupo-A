@@ -22,16 +22,22 @@ from rpg.views.menu_view import MenuView
 class LoadingView(arcade.View):
     def __init__(self, savefile):
         super().__init__()
+        self.background = None
         self.started = False
         self.progress = 0
         self.map_list = {}
-        arcade.set_background_color(arcade.color.ALMOND)
+        # arcade.set_background_color(arcade.color.ALMOND)
         self.player_sprite = PlayerSprite(":characters:" + constants.PLAYER_SPRITE_PATH)
 
         self.savefile = savefile
-
+        self.background = arcade.Sprite("../resources/UIThings/fondoInicio.png", scale=0.85)
+        self.background.center_x = 650
+        self.background.center_y = 350
+        self.background.height = self.background.height - 125
     def on_draw(self):
         arcade.start_render()
+        if self.background:
+            self.background.draw()
         arcade.draw_text(
             "Loading...",
             self.window.width / 2,
