@@ -1,6 +1,15 @@
 # Memoria
 
-## Nombre del videojuego
+## No Time Left
 
+**Miembros del equipo**
 
-TODO
+**organizacion del equipo**
+
+**Lo que se hizo**
+
+**Lo que no se hizo**
+
+**Aspectos tecnicos destacables**
+
+**Información adicional**
