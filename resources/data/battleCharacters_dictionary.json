@@ -152,8 +152,9 @@
       "dialogueNoItem" : ["Yo paso, solo estoy aquí por el dinero y la fama",
                           "Yo estoy de el lado de quien gane",
                           "Lo bueno de ser sicario es que yo elijo a mis clientes",
-                          "Oye, oye, ya deja de darme la murga."],
-      "dialogueWithItem" : ["Ah...esto, lo perdí hace tiempo",
+                          "Oye, oye, ya deja de darme la murga. Si de verdad quieres comprar mi favor, traeme un cigarro",
+                          "O algo que pueda vender en el mercado negro"],
+      "dialogueWithItem" : ["A ver si tus capacidades en batalla, son comparables a las de tu habilidad para encontrar objetos",
                             "Bueno, supongo que será divertido luchar en tan sangrienta batalla",
                             "Lo haré, pero no por ti, y desde luego no por el objeto",
                             "¡SCYTHE SE HA UNIDO A TU EQUIPO!"],
@@ -166,8 +167,9 @@
       "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" :10,
       "dialogueNoItem" : ["Ignorante del futuro...¿Acaso te has desviado del plan divino? Nunca te vi por estas tierras.",
                           "Presagio para ti un futuro incierto, lleno de muerte y destrucción.",
-                          "¿Que te ayude? Nadie puede hacerlo.",
-                          "Eres una víctima de tu destino"],
+                          "¿Qué te ayude? Nadie puede hacerlo.",
+                          "Eres una víctima de tu destino. Conozco muy bien lo que se siente. Perdí hace tiempo un objeto que me era muy preciado.",
+                          "Si tan solo lo pudiese resuperar..."],
       "dialogueWithItem" : ["¡Por todos los Dioses!¿Cómo ha acabado en tus manos, forajido? ",
                             "Esto es una señal de que acuda en tu ayuda.",
                             "Me han elegido para acompañarte hacia una muerte segura. Pero si es la voluntad, que así sea.",
@@ -180,6 +182,22 @@
         "sheet_name": "Enemigos/Bruja.png","name": "TestEnemy4", "description": "Test4",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 70, "restoredStamina" : 5,
       "actions" : ["Action3"]
+
+      },
+      "TestCharacter8":
+      {
+        "sheet_name": "Aliados/Prehistoria/CuranderoFuturista.png","name": "Taurus", "description": "", "type":"Medic",
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 100, "restoredStamina" :10,
+      "dialogueNoItem" : ["No interrumpas mi camino. Mi deber es estar con los heridos y brindarles mis servicios",
+                          "Aquí no encontrarás a alguien que simpatice contigo y acuda en tu ayuda. ",
+                          "No insistas, nosotros ya tenemos nuestros propios problemas.",
+                          "Si quieres vivir, aléjate de este lugar. O mejor, si quieres ser de ayuda, encuentra una medicina que mis subordinados perdieron cerca de aquí "],
+      "dialogueWithItem" : ["No esperaba que lo encontrases tan rápido. Lo único que quería era librarme de ti.",
+                            "Supongo que estoy en deuda contigo, y yo odio deberle nada a nadie.",
+                            "En fin. Pero con una condición, no me va el rollo de matar. Te ayudaré siempre y cuando no levante un arma. ",
+                            "¡TAURUS SE HA UNIDO A TU EQUIPO!"],
+      "requirementItemKey": "REQ7",
+      "actions" : ["Action1","Action2","Action3","Action4"]
 
       }
 
