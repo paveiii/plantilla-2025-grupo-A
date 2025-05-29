@@ -826,12 +826,14 @@ class InBattleView(arcade.View):
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.item_used = None
 
     def on_click_skill(self, event):
         self.option = "skill"
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.item_used = None
 
     def on_click_item(self, event):
         self.manager.clear()
@@ -851,6 +853,7 @@ class InBattleView(arcade.View):
 
     def on_click_rest(self, event):
         self.option = "rest"
+        self.item_used = None
 
         print(f"current {self.player_team[self.current_ally_index].currentStamina}")
         print(f"max {self.player_team[self.current_ally_index].maxStamina}")
@@ -1380,6 +1383,10 @@ class InBattleView(arcade.View):
                 if self.item_used["type"] == "HEAL":
                     self.player_team[self.current_ally].changeHealth(self.item_used["amount"])
                     self.next_ally()
+                    self.option = "menu"
+                    self.stage = 1
+
+                    return
 
                 elif self.item_used["type"] == "MULTIPLIER":
                     for effect in self.effects:
@@ -1387,6 +1394,8 @@ class InBattleView(arcade.View):
                             efecto = Effect(effect["name"], effect["description"], effect["effectType"], effect["amount"], effect["durationInTurns"], None)
 
                             self.ally_effects_list[self.current_ally].append(efecto)
+
+                    return
 
                 elif self.item_used["type"] == "REVIVE":
                     self.option = "revive_ally"
@@ -1398,12 +1407,17 @@ class InBattleView(arcade.View):
                         self.change_buttons()
                         self.display_action_description("Elige un jugador para revivir")
 
+                    return
+
                 elif self.item_used["type"] == "DAMAGE":
                     self.manager.clear()
                     self.manager.disable()
                     self.select_enemy_to_attack()
 
+                    return
+
                 self.inventory.remove(self.item_used)
+                self.item_used = None
 
         else:
             self.manager.clear()
