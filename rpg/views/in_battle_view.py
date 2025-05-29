@@ -271,11 +271,12 @@ class InBattleView(arcade.View):
 
                 enemy_actions.append(action_object)
 
-            enemy_object = BattleEnemy(enemy,f":characters:{self.enemies[enemy]['sheet_name']}",
+            enemy_object = BattleEnemy(enemy,
+                                       f":characters:{self.enemies[enemy]['sheet_name']}",
                                        self.enemies[enemy]['name'],
                                        self.enemies[enemy]['description'],
-                                       self.enemies[enemy]['maxStamina'],
                                        self.enemies[enemy]['maxHealth'],
+                                       self.enemies[enemy]['maxStamina'],
                                        self.enemies[enemy]['restoredStamina'],
                                        enemy_actions)
 
@@ -345,6 +346,8 @@ class InBattleView(arcade.View):
         print("AQUIIIIIIIIIIIIIIIII")
         print(f"ally {self.remaining_allies}")
         print(f"enemy {self.remaining_enemies}")
+
+        print(self.enemy_team[0].currentStamina)
 
     def on_hide_view(self):
         self.activated = False
