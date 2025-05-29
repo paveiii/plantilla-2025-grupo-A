@@ -386,8 +386,8 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                  print(f"Adding item {item_sprite.itemKey} at {item_sprite.position}")
                  game_map.scene.add_sprite("searchable", item_sprite)
 
-    if len(spawnedAlliesKeys) > 0:
-        raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
+  #  if len(spawnedAlliesKeys) > 0:
+   #     raise Exception("Existen mas aliados spawneados que items de requerimiento posibles.")
 
     if "lights" in my_map.object_lists:
         lights_object_list = my_map.object_lists["lights"]
