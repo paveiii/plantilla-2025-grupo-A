@@ -580,6 +580,39 @@
                  "width":32,
                  "x":1248,
                  "y":128
+                }, 
+                {
+                 "gid":13969,
+                 "height":96,
+                 "id":140,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"map_name",
+                         "type":"string",
+                         "value":"mapa_edad_media"
+                        }, 
+                        {
+                         "name":"start_x",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"start_y",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"wipePreviousMaps",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":96,
+                 "x":2909,
+                 "y":1947
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -830,8 +863,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2400,
-                 "y":96
+                 "x":2367.5,
+                 "y":67.5
                 }, 
                 {
                  "gid":6721,
@@ -970,39 +1003,6 @@
                  "width":0,
                  "x":3030,
                  "y":374
-                }, 
-                {
-                 "gid":13969,
-                 "height":96,
-                 "id":135,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"map_name",
-                         "type":"string",
-                         "value":"inicial_edad_media"
-                        }, 
-                        {
-                         "name":"start_x",
-                         "type":"int",
-                         "value":7
-                        }, 
-                        {
-                         "name":"start_y",
-                         "type":"int",
-                         "value":5
-                        }, 
-                        {
-                         "name":"wipePreviousMaps",
-                         "type":"bool",
-                         "value":true
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":96,
-                 "x":2912,
-                 "y":1952
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1011,7 +1011,7 @@
          "y":0
         }],
  "nextlayerid":27,
- "nextobjectid":139,
+ "nextobjectid":141,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -1030,7 +1030,7 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {
