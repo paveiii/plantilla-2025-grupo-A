@@ -13,7 +13,14 @@
               "heal_amount": 10},
   "WorldItemTest": {"item_keys": ["TEST1","TEST2","TEST3","TEST4","TEST5","TEST6","TEST7","TEST8","TEST9","TEST10","TEST11"]},
 
-  "Level1Items": {"item_keys" : ["TEST3","TEST6","TEST9"]},
-  "Level2Items": {"item_keys" : ["TEST4","TEST7","TEST10"]},
-  "Level3Items": {"item_keys" : ["TEST5","TEST8","TEST11"]}
+  "Level1Items": {"item_keys" : ["Level1_Curacion","Level1_Efecto"]},
+  "Level1Revivir":{"item_keys" : ["Level1_Revivir"]},
+  "Level2Items": {"item_keys" : ["Level2_Curacion","Level2_Efecto"]},
+  "Level2Revivir": {"item_keys" : ["Level2_Revivir"]},
+  "Level3Items": {"item_keys" : ["Level3_Curacion","Level3_Efecto"]},
+  "Level3Revivir": {"item_keys": ["Level3_Revivir"]},
+  "ReqLevel1": {"item_keys" :  ["REQ2"]},
+  "ReqLevel2.1": {"item_keys" : ["REQ1"]},
+  "ReqLevel2.2": {"item_keys" :  ["REQ4"]},
+  "ReqLevel3" : {"item_keys" :  ["REQ3"]}
 }

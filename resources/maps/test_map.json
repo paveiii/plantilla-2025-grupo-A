@@ -340,7 +340,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level3Items"
                         }],
                  "rotation":0,
                  "type":"",
@@ -370,7 +370,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level2Items"
                         }],
                  "rotation":0,
                  "type":"",
@@ -388,7 +388,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"WorldItemTest"
+                         "value":"Level1Items"
                         }],
                  "rotation":0,
                  "type":"",
@@ -399,6 +399,60 @@
                 }, 
                 {
                  "height":0,
+                 "id":34,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Revivir"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":917.333333333333,
+                 "y":678.666666666667
+                }, 
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level2Revivir"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1061.33333333333,
+                 "y":680
+                }, 
+                {
+                 "height":0,
+                 "id":36,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Revivir"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1212,
+                 "y":676
+                }, 
+                {
+                 "height":0,
                  "id":21,
                  "name":"",
                  "point":true,
@@ -406,7 +460,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel2.2"
                         }],
                  "rotation":0,
                  "type":"",
@@ -424,7 +478,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel3"
                         }],
                  "rotation":0,
                  "type":"",
@@ -442,7 +496,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel2.1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -460,7 +514,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -468,6 +522,24 @@
                  "width":0,
                  "x":1440,
                  "y":736
+                }, 
+                {
+                 "height":0,
+                 "id":37,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"AllyRequirement"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":972,
+                 "y":1136
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -476,7 +548,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":34,
+ "nextobjectid":39,
  "orientation":"orthogonal",
  "properties":[
         {

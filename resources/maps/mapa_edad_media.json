@@ -2594,7 +2594,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":2095,
+                 "x":1439,
                  "y":2389.5
                 }, 
                 {
@@ -2993,7 +2993,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"Level2Items"
+                         "value":"Level2Revivir"
                         }],
                  "rotation":0,
                  "type":"",
@@ -3311,7 +3311,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel2.1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -3329,7 +3329,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel2.2"
                         }],
                  "rotation":0,
                  "type":"",

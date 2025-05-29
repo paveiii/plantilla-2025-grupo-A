@@ -103,7 +103,7 @@
         }, 
         {
          "compression":"zlib",
-         "data":"eJzt2sFNwzAYhmEfKnruLhyBIWCBzAAsUHoAJggHQF2AHXxmgHaGboENCTjGSdzEquP4fSSrrVpV6ffbf4yFEAAAAAAA5O12IcSdGveL2FeSp0eV+5Maz+QfxavK\/U2Nd\/LHieyXQuoR+zrmpM7UHvb7D0shDj+jiHe182BlKg\/Nx+\/nG\/VoZN4Y8OPqF1WmhSPXrflatrz3Qv5edkZ+myqztvlszf+ttRYadVhb6wJuu\/895bd\/O+a163PS4zPb2L9zqnZ\/WRdGdoUjR+noR43PyObren0UQ6\/t\/CzgD52wsrvXuOogHXk3hu7\/+2qM8XmRRx2MGsj63tlSF1nPbdletyByyb7mmq+l0dt1Xcpqz9OVvXkvH6rOXddgqL6zt1TO5uy66OcfPfkPXQMh53vf2VvKZ3N92Y\/pQWPmvKnv7C3ls7mOezZ7\/hPpqgF\/\/55G133gGDntc0Jqy3+MUP0\/B678h\/aesWsglf1kaGXgvj+0Dr77yVzr5GNM7\/HdT6a875+DlPf9mDf2ocgZ89\/f5UqIq1WY7yL3412r7G8C5W+iFv5CrgHOHY4Xag0w56eBOgBAfuj9yBVzPw5yBxCTPvfJ7X+dp0TnztkbckbvQY6Y9wAAAEjNF+AjKL4=",
+         "data":"eJzt2sFNwzAYhmEfKnruLlxhCFggMwALQA\/ABOEAqAuwg6dIZ+gWdSAGxziJm1h1HL+PZLVVqyr9fvuPsRACAAAAAIC83a2EuFfjYRX7SvL0rHJ\/UeOV\/KN4V7l\/qPFJ\/jiT\/VrIesS+jiXRmdrDfv9pLcThZxTxrnYZrEzlof34\/XyrHo3MWwN+XP2iybRw5LozX8uO997I30tl5LdtMuuaz9b831lroVWHR2tdwK3631N++7djXrs+Jz0+s4v9O+eq+su6MLIrHDlKRz9qfUa2X+v1UYy9tsuLgD90xsr+XuOqg3Tk3Rp1\/983Y4q6BjnUwaiB1PfOjrpIPbdld92CyCV7zTVfS6O313Upmz1PX\/bmvXwsnfuU\/IfO3lI5m7PrUj\/\/Gsh\/7BoIOd+Hzt5SPpsbyn5KDwpVg6Gzt5TP5nru2ez5z6SvBvz9ex5994FT5LTPCakr\/ymohT9X\/mN7z9TcU9lPhlYG7vtj6+C7n8y1Tj6mrAHf\/WTK+\/4lSHnfj2Vj74OcMf\/9XW2EuN6E+S5yP92Nyv42UP4mauGPNRBXqDVA9vNAHQAgP\/R+5Iq5Hwe5A4hJ\/58zvSgOskfumP\/IEfMeAAAAqTkCaVwgxg==",
          "encoding":"base64",
          "height":64,
          "id":13,
@@ -711,7 +711,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel1"
                         }],
                  "rotation":0,
                  "type":"",
@@ -917,7 +917,7 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
@@ -935,10 +935,6 @@
         {
          "firstgid":13969,
          "source":"..\/tilesets\/Tilesets Cyberpunk\/Archivos.tsx\/Animacion Portal.tsx"
-        }, 
-        {
-         "firstgid":13975,
-         "source":"..\/tilesets\/tiles.json"
         }],
  "tilewidth":32,
  "type":"map",

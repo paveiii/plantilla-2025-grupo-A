@@ -1048,7 +1048,7 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"AllyRequirement"
+                         "value":"ReqLevel3"
                         }],
                  "rotation":0,
                  "type":"",
