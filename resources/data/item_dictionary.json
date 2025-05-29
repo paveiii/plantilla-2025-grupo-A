@@ -1,18 +1,18 @@
 {
   "TEST1": {"sheet_name": "Test/test1.png","name": "BLACKMESA", "type": "REVIVE", "amount": 1, "description":  "test1"},
   "TEST2": {"sheet_name": "Test/test2.png","name": "50BLESSINGS", "type": "REVIVE", "amount": 1, "description":  "test2"},
-  "REQ1": {"sheet_name": "Reclutables/Emblemadeloscaidos.png","name": "Emblema de los caidos", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Elenya de Rohan"},
-  "REQ2": {"sheet_name": "Reclutables/AnillodeArena.png","name": "Anillo de arena", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Akaris, el Colmillo del Sol"},
-  "REQ3": {"sheet_name": "Reclutables/DataCorevZ-4.png","name": "Data Core vZ-4", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Sigma-8"},
-  "REQ4": {"sheet_name": "Reclutables/RaizdeLiria.png","name": "Raiz de Liria", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Tharion el Sereno"},
-  "Level1_Curacion": {"sheet_name": "Test/Curacion_prehistoria.png","name": "Vendas rudimentarias","type": "HEAL","amount": 30,"description": "Al usarlas, otorga 30 puntos de salud."},
-  "Level2_Curacion": {"sheet_name": "Test/Curacion_edadmedia.png","name": "Pocion de curacion","type": "HEAL","amount": 1,"description": "Al consumir esta misteriosa pocion recuperas 5 puntos de salud"},
-  "Level3_Curacion": {"sheet_name": "Test/Curacion_cyberpunk.png","name": "MedPatch-X","type": "HEAL","amount": 1,"description": "Gracias a la empresa TimeCompany, tenemos este extraño artefacto del futuro que otorga 5 puntos de salud al inyectarlo"},
-  "Level1_Revivir": {"sheet_name": "Test/Revivir_prehistoria.png","name": "Corazon de mamut","type": "REVIVE","amount": 1,"description": "Usa este valiosisimo corazon de mamut para revivir"},
-  "Level2_Revivir": {"sheet_name": "Test/Revivir_edadmedia.png","name": "Lagrima sagrada","type": "REVIVE","amount": 1,"description": "Usa esta lagrima proveniente de una ninfa ancestral para revivir"},
-  "Level3_Revivir": {"sheet_name": "Test/Revivir_cyberpunk.png","name": "ChronoRestore Capsule","type": "REVIVE","amount": 1,"description": "Usa este artefacto para retroceder en el tiempo y revivir"},
-  "Level1_Efecto": {"sheet_name": "Test/Efecto_prehistoria.png","name": "Daga de colmillo envenenado","type": "DAMAGE","amount": 20,"description": "Lanza esta daga al enemigo para inflingirle dano"},
-  "Level2_Efecto": {"sheet_name": "Test/Efecto_edadmedia.png","name": "Pastel envenenado","type": "DAMAGE","amount": 1,"description": "Lanzale este pastel al enemigo, no sabra que esta envenenado..."},
-  "Level3_Efecto": {"sheet_name": "Test/Efecto_cyberpunk.png","name": "Granada de pulso electromagnetico","type": "DAMAGE","amount": 1,"description": "Arroja esta bomba a un enemigo, quizas no la ve..."},
-  "REQ7": {"sheet_name": "Reclutables/Medicina.png","name": "Medicina", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Taurus"}}
+  "REQ1": {"sheet_name": "Reclutables/Emblemadeloscaidos.png","name": "Emblema de los caidos", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Elenya de Rohan","quantity": 1},
+  "REQ2": {"sheet_name": "Reclutables/AnillodeArena.png","name": "Anillo de arena", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Akaris, el Colmillo del Sol","quantity": 1},
+  "REQ3": {"sheet_name": "Reclutables/DataCorevZ-4.png","name": "Data Core vZ-4", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Sigma-8","quantity": 1},
+  "REQ4": {"sheet_name": "Reclutables/RaizdeLiria.png","name": "Raiz de Liria", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Tharion el Sereno","quantity": 1},
+  "Level1_Curacion": {"sheet_name": "Test/Curacion_prehistoria.png","name": "Vendas rudimentarias","type": "HEAL","amount": 30,"description": "Al usarlas, otorga 30 puntos de salud.","quantity": 1},
+  "Level2_Curacion": {"sheet_name": "Test/Curacion_edadmedia.png","name": "Pocion de curacion","type": "HEAL","amount": 1,"description": "Al consumir esta misteriosa pocion recuperas 5 puntos de salud","quantity": 1},
+  "Level3_Curacion": {"sheet_name": "Test/Curacion_cyberpunk.png","name": "MedPatch-X","type": "HEAL","amount": 1,"description": "Gracias a la empresa TimeCompany, tenemos este extraño artefacto del futuro que otorga 5 puntos de salud al inyectarlo","quantity": 1},
+  "Level1_Revivir": {"sheet_name": "Test/Revivir_prehistoria.png","name": "Corazon de mamut","type": "REVIVE","amount": 1,"description": "Usa este valiosisimo corazon de mamut para revivir","quantity": 1},
+  "Level2_Revivir": {"sheet_name": "Test/Revivir_edadmedia.png","name": "Lagrima sagrada","type": "REVIVE","amount": 1,"description": "Usa esta lagrima proveniente de una ninfa ancestral para revivir","quantity": 1},
+  "Level3_Revivir": {"sheet_name": "Test/Revivir_cyberpunk.png","name": "ChronoRestore Capsule","type": "REVIVE","amount": 1,"description": "Usa este artefacto para retroceder en el tiempo y revivir","quantity": 1},
+  "Level1_Efecto": {"sheet_name": "Test/Efecto_prehistoria.png","name": "Daga de colmillo envenenado","type": "DAMAGE","amount": 20,"description": "Lanza esta daga al enemigo para inflingirle dano","quantity": 1},
+  "Level2_Efecto": {"sheet_name": "Test/Efecto_edadmedia.png","name": "Pastel envenenado","type": "DAMAGE","amount": 1,"description": "Lanzale este pastel al enemigo, no sabra que esta envenenado...","quantity": 1},
+  "Level3_Efecto": {"sheet_name": "Test/Efecto_cyberpunk.png","name": "Granada de pulso electromagnetico","type": "DAMAGE","amount": 1,"description": "Arroja esta bomba a un enemigo, quizas no la ve...","quantity": 1}}
+
 

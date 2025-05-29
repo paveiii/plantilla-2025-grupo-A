@@ -81,67 +81,67 @@
     },
     "TestEnemy1":
     {
-      "sheet_name": "Enemigos/Gargola.png","name": "TestEnemy1", "description": "Test1",
+      "sheet_name": "Enemigos/Gargola.png","name": "Gargola", "description": "Test1",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy2":
     {
-      "sheet_name": "Enemigos/Vaquero.png","name": "TestEnemy2", "description": "Test2",
+      "sheet_name": "Enemigos/Vaquero.png","name": "Vaquero", "description": "Test2",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 50, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy3":
     {
-      "sheet_name": "Enemigos/Cyborg.png","name": "TestEnemy3", "description": "Test3",
+      "sheet_name": "Enemigos/Cyborg.png","name": "Cyborg", "description": "Test3",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_1":
     {
-      "sheet_name": "Test/Borracho.png","name": "Enemigo", "description": "borracho",
+      "sheet_name": "Test/Borracho.png","name": "Borracho", "description": "borracho",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_2":
     {
-      "sheet_name": "Test/David Martinez.png","name": "Enemigo", "description": "David Martinez",
+      "sheet_name": "Test/David Martinez.png","name": "Cyberpsicopata", "description": "David Martinez",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_3":
     {
-      "sheet_name": "Test/Esqueleto.png","name": "Enemigo", "description": "Esqueleto",
+      "sheet_name": "Test/Esqueleto.png","name": "Extrabajador", "description": "Esqueleto",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_4":
     {
-      "sheet_name": "Test/Ludao.png","name": "Enemigo", "description": "Ludao",
+      "sheet_name": "Test/Ludao.png","name": "Ludopata", "description": "Ludao",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_5":
     {
-      "sheet_name": "Test/Prisionero.png","name": "Enemigo", "description": "Prisionero",
+      "sheet_name": "Test/Prisionero.png","name": "Prisionero", "description": "Prisionero",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 5,
       "actions" : ["Action3"]
     },
     "Boss1":
     {
-      "sheet_name": "Boss/BossFinalPrimeraFase.png","name": "Boss Phase 1", "description": "",
+      "sheet_name": "Boss/BossFinalPrimeraFase.png","name": "???", "description": "",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 200, "restoredStamina" : 25,
       "actions" : ["Action3"]
     },
       "Boss2":
     {
-      "sheet_name": "Boss/BossFinalSegundaFase.png","name": "Boss Phase 2", "description": "",
+      "sheet_name": "Boss/BossFinalSegundaFase.png","name": "???", "description": "",
       "role": "enemy", "maxHealth" : 500, "maxStamina" : 100, "restoredStamina" : 25,
       "actions" : ["Action3"]
     },
       "Boss3":
     {
-      "sheet_name": "Boss/BossFinalTerceraFase.png","name": "Boss Phase 3", "description": "",
+      "sheet_name": "Boss/BossFinalTerceraFase.png","name": "???", "description": "",
       "role": "enemy", "maxHealth" : 1000, "maxStamina" : 100, "restoredStamina" : 25,
       "actions" : ["Action3"]
     },
@@ -179,7 +179,7 @@
       },
       "TestEnemy4":
       {
-        "sheet_name": "Enemigos/Bruja.png","name": "TestEnemy4", "description": "Test4",
+        "sheet_name": "Enemigos/Bruja.png","name": "Bruja", "description": "Test4",
       "role": "enemy", "maxHealth" : 100, "maxStamina" : 70, "restoredStamina" : 5,
       "actions" : ["Action3"]
 

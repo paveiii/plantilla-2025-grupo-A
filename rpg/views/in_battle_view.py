@@ -347,8 +347,6 @@ class InBattleView(arcade.View):
         print(f"ally {self.remaining_allies}")
         print(f"enemy {self.remaining_enemies}")
 
-        print(self.enemy_team[0].currentStamina)
-
     def on_hide_view(self):
         self.activated = False
         self.manager.clear()
@@ -828,12 +826,14 @@ class InBattleView(arcade.View):
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.item_used = None
 
     def on_click_skill(self, event):
         self.option = "skill"
         self.stage = 2
         self.change_buttons()
         self.sta_message = False
+        self.item_used = None
 
     def on_click_item(self, event):
         self.manager.clear()
@@ -853,6 +853,7 @@ class InBattleView(arcade.View):
 
     def on_click_rest(self, event):
         self.option = "rest"
+        self.item_used = None
 
         print(f"current {self.player_team[self.current_ally_index].currentStamina}")
         print(f"max {self.player_team[self.current_ally_index].maxStamina}")
@@ -1096,26 +1097,29 @@ class InBattleView(arcade.View):
             characters = list(self.team.values())[1:] # ¡¡¡IMPORTANTE!!! Quitar el [1:] si se borra la template del JSON
 
             # Crear una lista con las acciones del personaje al que le toca el turno
-            current_ally_actions = characters[self.current_ally]["actions"]
+            current_ally_actions = self.player_team[self.current_ally].actions
 
             # Crear el nuevo layout de botones a partir de la opción elegida en el menú principal de botones
-            for current_action in current_ally_actions:
-                for global_action in self.actions:
-                    if current_action == global_action: # Compara los nombres de las acciones del personaje con los del JSON de acciones
-                        action_data = self.actions[global_action] # Guarda los datos de la acción del JSON que se está mirando
 
-                        print(f"{action_data['option']} == {self.option}")
-                        if action_data["option"] == self.option: # Compara si la opción actual es igual que la de la acción del JSON
+            for action in current_ally_actions:
+                action_category = None
+                for global_action in self.actions.values():
+                    print(f"{action.displayName} == {global_action['name']}")
+                    if action.displayName == global_action["name"]:
+                        action_category = global_action["option"]
 
+                        if action_category == self.option:
                             button = arcade.gui.UIFlatButton(
-                                text = action_data["name"],
-                                width = button_width,
-                                height = 30)
+                                text=action.displayName,
+                                width=button_width,
+                                height=30)
                             self.contenedor.add(button.with_space_around(10))
                             self.manager.add(self.contenedor)
                             button.on_click = self.on_click_button
                             self.action_buttons.append(button)
                             num_buttons += 1
+                        else:
+                            pass
 
             y_pos = 0
             if num_buttons == 4:
@@ -1379,6 +1383,13 @@ class InBattleView(arcade.View):
                 if self.item_used["type"] == "HEAL":
                     self.player_team[self.current_ally].changeHealth(self.item_used["amount"])
                     self.next_ally()
+                    self.option = "menu"
+                    self.stage = 1
+
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
+
+                    return
 
                 elif self.item_used["type"] == "MULTIPLIER":
                     for effect in self.effects:
@@ -1386,6 +1397,11 @@ class InBattleView(arcade.View):
                             efecto = Effect(effect["name"], effect["description"], effect["effectType"], effect["amount"], effect["durationInTurns"], None)
 
                             self.ally_effects_list[self.current_ally].append(efecto)
+
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
+
+                    return
 
                 elif self.item_used["type"] == "REVIVE":
                     self.option = "revive_ally"
@@ -1397,10 +1413,20 @@ class InBattleView(arcade.View):
                         self.change_buttons()
                         self.display_action_description("Elige un jugador para revivir")
 
+                        self.inventory.remove(self.item_used)
+                        self.item_used = None
+
+                    return
+
                 elif self.item_used["type"] == "DAMAGE":
                     self.manager.clear()
                     self.manager.disable()
                     self.select_enemy_to_attack()
+
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
+
+                    return
 
         else:
             self.manager.clear()

@@ -824,14 +824,14 @@
                         {
                          "name":"item_key",
                          "type":"string",
-                         "value":"ReqLevel1"
+                         "value":"AllyRequirement"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":2400,
-                 "y":128
+                 "y":96
                 }, 
                 {
                  "gid":6721,
@@ -1030,7 +1030,7 @@
          "value":40
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
