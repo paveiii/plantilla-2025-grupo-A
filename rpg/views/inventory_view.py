@@ -78,13 +78,13 @@ class InventoryView(arcade.View):
         for item in self.inventory:
             key = item["sheet_name"]
             if key in grouped_items:
-                grouped_items[key]["amount"] += item.get("amount", 1)
+                grouped_items[key]["quantity"] += item.get("quantity", 1)
             else:
                 grouped_items[key] = {
                     "name": item["name"],
                     "description": item.get("description", "Sin descripción"),
                     "sheet_name": key,
-                    "amount": item.get("amount", 1)
+                    "quantity": item.get("quantity", 1)
                 }
 
         start_x = 100  # posición inicial X
@@ -138,7 +138,7 @@ class InventoryView(arcade.View):
             self.sprite_to_item_map.append(item)
 
             # Dibujar la cantidad encima a la derecha
-            arcade.draw_text(f"x{item['amount']}", x + 12, y - 30, arcade.color.BLACK, 14)
+            arcade.draw_text(f"x{item['quantity']}", x + 12, y - 30, arcade.color.BLACK, 14)
 
         if self.selected_item:
             # Si el selected_item es un item
@@ -294,7 +294,7 @@ class InventoryView(arcade.View):
 
         # Cantidad
         amount_text = arcade.Text(
-            f"Cantidad: {self.selected_item['amount']}",
+            f"Cantidad: {self.selected_item['quantity']}",
             text_x, current_y,
             arcade.color.BLACK, 16,
             font_name="calibri"

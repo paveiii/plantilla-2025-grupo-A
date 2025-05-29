@@ -929,17 +929,9 @@ class GameView(arcade.View):
                     self.other_dialogue = True
                     self.current_dialog += 1
             self.search()
-        #DEBUG -----
-        elif key == arcade.key.B:
-            self.dialogue_list = ["dial1", "dial2", "dial3", "dial4"]
-            self.other_dialogue = True if not self.other_dialogue else False
-
-        elif key == arcade.key.Z:
-            self.player_sprite.debugAnim()
         elif key == arcade.key.X:
             self.save_game()
-        #DEBUG -----
-        elif key == arcade.key.L:
+        elif key == arcade.key.F:
             cur_map = self.map_list[self.cur_map_name]
             if self.player_light in cur_map.light_layer:
                 cur_map.light_layer.remove(self.player_light)
