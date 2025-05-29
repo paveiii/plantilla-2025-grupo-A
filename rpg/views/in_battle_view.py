@@ -1386,6 +1386,9 @@ class InBattleView(arcade.View):
                     self.option = "menu"
                     self.stage = 1
 
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
+
                     return
 
                 elif self.item_used["type"] == "MULTIPLIER":
@@ -1394,6 +1397,9 @@ class InBattleView(arcade.View):
                             efecto = Effect(effect["name"], effect["description"], effect["effectType"], effect["amount"], effect["durationInTurns"], None)
 
                             self.ally_effects_list[self.current_ally].append(efecto)
+
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
 
                     return
 
@@ -1407,6 +1413,9 @@ class InBattleView(arcade.View):
                         self.change_buttons()
                         self.display_action_description("Elige un jugador para revivir")
 
+                        self.inventory.remove(self.item_used)
+                        self.item_used = None
+
                     return
 
                 elif self.item_used["type"] == "DAMAGE":
@@ -1414,10 +1423,10 @@ class InBattleView(arcade.View):
                     self.manager.disable()
                     self.select_enemy_to_attack()
 
-                    return
+                    self.inventory.remove(self.item_used)
+                    self.item_used = None
 
-                self.inventory.remove(self.item_used)
-                self.item_used = None
+                    return
 
         else:
             self.manager.clear()
