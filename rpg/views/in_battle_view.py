@@ -1009,6 +1009,8 @@ class InBattleView(arcade.View):
                     if self.item_used["type"] == "DAMAGE":
                         if key == arcade.key.ENTER:
                             self.enemy_team[self.current_selected_enemy].changeHealth(-self.item_used["amount"])
+                            self.item_used = None
+                            self.option = "menu"
                             self.next_ally()
 
                 else:
@@ -1030,7 +1032,7 @@ class InBattleView(arcade.View):
             else:
                 if key == arcade.key.ESCAPE:
                     self.stage = 1
-                    self.manager.remove(self.description_widget)
+                    self.manager.clear()
                     self.action_buttons.clear()
                     self.main_buttons()
                     self.option = "menu"
@@ -1149,6 +1151,8 @@ class InBattleView(arcade.View):
             column_width = button_width + 20  # espacio entre columnas
             item_counter = 0
 
+            num_buttons = 0
+
             for item in self.inventory:
                 if item['type'] != "REQUIREMENT":
                     if item_counter >= 16:
@@ -1174,8 +1178,12 @@ class InBattleView(arcade.View):
                     item_counter += 1
 
             while num_buttons % 4 == 0:
+                print(num_buttons)
                 lengths_list.append(4)
                 num_buttons -= 4
+
+                if num_buttons < 0:
+                    break
 
             lengths_list.append(num_buttons)
 
@@ -1424,7 +1432,6 @@ class InBattleView(arcade.View):
                     self.select_enemy_to_attack()
 
                     self.inventory.remove(self.item_used)
-                    self.item_used = None
 
                     return
 
