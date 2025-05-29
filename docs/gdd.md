@@ -1,6 +1,6 @@
 # Documento de diseño
 
-## Nombre del videojuego
+## No time left
 
 **INTRODUCCIÓN**
 
