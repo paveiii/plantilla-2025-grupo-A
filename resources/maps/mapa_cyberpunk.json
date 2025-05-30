@@ -1297,7 +1297,7 @@
                         {
                          "name":"start_y",
                          "type":"int",
-                         "value":3
+                         "value":2
                         }, 
                         {
                          "name":"wipePreviousMaps",
