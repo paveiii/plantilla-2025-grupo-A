@@ -920,8 +920,8 @@ class GameView(arcade.View):
                 self.current_dialog = 0
             else:
                 self.window.show_view(self.window.views["main_menu"])
-        elif key == arcade.key.P:
-            self.window.show_view(self.window.views["in_battle"])
+        #elif key == arcade.key.P:
+        #    self.window.show_view(self.window.views["in_battle"])
         #elif key == arcade.key.M:
         #    self.window.show_view(self.window.views["menu"])
         elif key in constants.SEARCH:
