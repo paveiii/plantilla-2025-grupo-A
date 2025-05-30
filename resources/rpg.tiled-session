@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "maps/mapa_cyberpunk.json",
+    "activeFile": "maps/mapa_edad_media.json",
     "expandedProjectPaths": [
         "maps"
     ],
@@ -323,7 +323,7 @@
                 13
             ],
             "scale": 0.25,
-            "selectedLayer": 7,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 2454,
                 "y": 3068
@@ -331,14 +331,15 @@
         },
         "maps/mapa_edad_media.json": {
             "expandedObjectLayers": [
+                17,
                 16,
                 18
             ],
             "scale": 0.125,
-            "selectedLayer": 12,
+            "selectedLayer": 13,
             "viewCenter": {
-                "x": 4800,
-                "y": 2660
+                "x": 4500,
+                "y": 3296
             }
         },
         "maps/mapa_edad_media.json#lava_tileset_2": {
@@ -363,10 +364,10 @@
         },
         "maps/prehistoric_map.json": {
             "scale": 0.33,
-            "selectedLayer": 15,
+            "selectedLayer": 16,
             "viewCenter": {
-                "x": 1536.3636363636365,
-                "y": 1022.7272727272727
+                "x": 1740.909090909091,
+                "y": 1342.4242424242425
             }
         },
         "maps/submapa alcantarillado.tmx": {
@@ -403,8 +404,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 256,
-                "y": 384.5
+                "x": 255.5,
+                "y": 384
             }
         },
         "sample_map/Animacion portal.tsx": {
@@ -617,6 +618,9 @@
         "tilesets/lava_tileset.json": {
             "scaleInDock": 1
         },
+        "tilesets/sombras_blocking.json": {
+            "scaleInDock": 1
+        },
         "tilesets/tiles.json": {
             "scaleInDock": 1
         },
@@ -644,16 +648,16 @@
     "project": "rpg.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "maps/mapa_edad_media.json",
-        "maps/cueva.json",
-        "maps/power_plant_interior.json",
-        "maps/time_company_interior.json",
         "maps/mapa_cyberpunk.json",
+        "maps/time_company_interior.json",
+        "maps/power_plant_interior.json",
+        "maps/cueva.json",
+        "maps/mapa_edad_media.json",
+        "maps/prehistoric_map.json",
         "maps/cueva_final.json",
         "maps/castillo_malo.json",
         "maps/castillo_bueno.json",
         "maps/casa_mago.json",
-        "maps/prehistoric_map.json",
         "maps/submapa alcantarillado.tmx",
         "maps/submapa.json"
     ],

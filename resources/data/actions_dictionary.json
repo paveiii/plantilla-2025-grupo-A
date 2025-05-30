@@ -6,7 +6,7 @@
     },
   "Ataque_Debil":
     {
-      "name": "Ataque debil", "description": "Ataque debil que quita 30 puntos de vida.", "option": "attack", "actionType":"Damage",
+      "name": "Ataque debil", "description": "Ataque debil que quita 15 puntos de vida.", "option": "attack", "actionType":"Damage",
       "effectName" : "", "staminaExpense" : 10, "amount" : 15, "targetQuantity" : 0
     },
   "Ataque_Normal":
@@ -22,12 +22,12 @@
   "Ataque_Sangrado":
     {
       "name": "Estacada", "description": "Ataque normal que quita 10 puntos de vida y deja el efecto de sangrado.", "option": "attack", "actionType":"Damage",
-      "effectName" : "Bleeding", "staminaExpense" : 30, "amount" : 10, "targetQuantity" : 0
+      "effectName" : "Bleeding", "staminaExpense" : 20, "amount" : 10, "targetQuantity" : 0
     },
 
     "Action1":
     {
-      "name": "Attack1", "description": "deals damage", "option": "attack", "actionType":"Damage",
+      "name": "Ataque ligero", "description": "Hace daño", "option": "attack", "actionType":"Damage",
       "effectName" : "TestEffect1", "staminaExpense" : 10, "amount" : 15, "targetQuantity" : 0
     },
     "Action2":
@@ -38,19 +38,25 @@
 
     "Action3":
     {
-      "name": "Attack2", "description": "deals a lot of damage", "option": "attack", "actionType":"ApplyEffect",
+      "name": "Ataque poderoso", "description": "Hace mucho daño", "option": "attack", "actionType":"ApplyEffect",
       "effectName" : "", "staminaExpense" : 25, "amount" : 30, "targetQuantity" : 0
     },
 
     "Action4":
     {
-      "name": "Attack3", "description": "deals area damage", "option": "attack", "actionType":"ApplyEffect",
+      "name": "Ataque de area", "description": "Hace daño en area", "option": "attack", "actionType":"ApplyEffect",
       "effectName" : "", "staminaExpense" : 15, "amount" : 10, "targetQuantity" : 0
     },
 
     "Action5":
     {
-      "name": "Attack4", "description": "deals low damage.", "option": "attack", "actionType":"ApplyEffect",
+      "name": "Ataque minusculo", "description": "Hace muy poco daño", "option": "attack", "actionType":"ApplyEffect",
       "effectName" : "", "staminaExpense" : 3, "amount" : 5, "targetQuantity" : 0
+    },
+
+    "Big_Healing":
+    {
+      "name": "Gran curacion", "description": "Cura 15 puntos de vida durante 3 turnos", "option": "skill", "actionType":"ApplyEffect",
+      "effectName" : "Big Healing", "staminaExpense" : 10, "amount" : 0, "targetQuantity" : 0
     }
 }
