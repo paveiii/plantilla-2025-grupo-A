@@ -947,11 +947,11 @@ class GameView(arcade.View):
                     self.other_dialogue = True
                     self.current_dialog += 1
             self.search()
-        elif key == arcade.key.SPACE:
-            self.window.views["credits"].setup()
-            self.window.show_view(self.window.views["credits"])
-        elif key == arcade.key.C:
-            self.window.show_view(self.window.views["gameOver"])
+        # elif key == arcade.key.SPACE:
+        #     self.window.views["credits"].setup()
+        #     self.window.show_view(self.window.views["credits"])
+        # elif key == arcade.key.C:
+        #     self.window.show_view(self.window.views["gameOver"])
         elif key == arcade.key.X:
             self.save_game()
         elif key == arcade.key.F:
