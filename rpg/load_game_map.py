@@ -37,6 +37,7 @@ class GameMap():
         self.worldAllyList = arcade.SpriteList()
         self.worldItemList = arcade.SpriteList()
         self.backgroundMusicName = ""
+        self.battleMusicName = ""
     name = None
     scene = None
     map_layers = None
@@ -109,6 +110,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
 
     try:
         game_map.backgroundMusicName = game_map.properties.get("musica")
+        game_map.battleMusicName = game_map.properties.get("musicaBatalla")
     except:
         print("EL NIVEL CARGADO NO TIENE MUSICA.")
 
@@ -522,6 +524,7 @@ def loadMapFromSave(player, saveFile, map_name):
 
     try:
         game_map.backgroundMusicName = game_map.properties.get("musica")
+        game_map.battleMusicName = game_map.properties.get("musicaBatalla")
     except:
         print("EL NIVEL CARGADO NO TIENE MUSICA.")
 

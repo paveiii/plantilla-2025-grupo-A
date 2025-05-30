@@ -1033,6 +1033,11 @@
          "value":"Prehistoria_fondo.mp3"
         }, 
         {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Prehistoria_batalla.mp3"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":2

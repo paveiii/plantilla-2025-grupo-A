@@ -5,6 +5,8 @@ import arcade
 import arcade.gui
 import json
 
+import pygame
+
 from rpg.BattleEnemy import BattleEnemy
 from rpg.BattleAlly import BattleAlly
 from rpg.BattleBuddy import *
@@ -199,6 +201,11 @@ class InBattleView(arcade.View):
         self.att_sta_message = False
 
     def on_show_view(self):
+        musicaBatalla = self.window.views['game'].my_map.battleMusicName
+        pygame.mixer.music.load(f"../resources/sounds/{musicaBatalla}")
+        pygame.mixer.music.play(-1)  # bucle infinito
+
+
         self.activated = True
         self.option = "menu"
         self.previous_option = ""
@@ -349,6 +356,8 @@ class InBattleView(arcade.View):
         print(f"enemy {self.remaining_enemies}")
 
     def on_hide_view(self):
+        pygame.mixer.music.load(f"../resources/sounds/{self.window.views['game'].my_map.backgroundMusicName}")
+
         self.activated = False
         self.manager.clear()
         self.manager.disable()
