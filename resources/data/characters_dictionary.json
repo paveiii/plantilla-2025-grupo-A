@@ -19,8 +19,13 @@
   },
     "WorldEnemyTest":
     {
-      "battleTeammate_keys": ["TestEnemy1","TestEnemy2","TestEnemy3"], "battleTeammates_amount" : 4, "random_amount": false ,
+      "battleTeammate_keys": ["TestEnemy1","TestEnemy2","TestEnemy3","TestEnemy4"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 2, "detectionRadius" : 500
+    },
+    "EnemyBruja":
+    {
+      "battleTeammate_keys": ["TestEnemy4"], "battleTeammates_amount" : 2, "random_amount": true ,
+      "speed": 3, "detectionRadius" : 300
     },
     "EnemyBorracho":
     {

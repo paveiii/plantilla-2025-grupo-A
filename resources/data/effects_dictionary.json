@@ -32,7 +32,7 @@
     "Big Healing":
     {
       "name": "Big Healing Effect", "description": "", "effectType":"Heal",
-      "durationInTurns": 5,"amount" : 25, "statAffected" : "health"
+      "durationInTurns": 3,"amount" : 15, "statAffected" : "health"
     },
     "More Stamina":
     {
