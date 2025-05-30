@@ -16,7 +16,7 @@ Año 2089, la humanidad está en el apogeo del proceso tecnológico y ha logrado
 
 Nuestro protagonista, el mejor agente de la agencia con más de 1250 misiones exitosas, le ha sido encomendada la ardua tarea de reparar el tiempo. A través de múltiples épocas, luchará contra enemigos que han sido desviados de su tiempo. Reclutará a personas de diferentes épocas y se enfrentará a la criatura que orquesta todos los movimientos de los sujetos que han huido de su tiempo.
 
-Es esencial para la supervivencia de nuestro tiempo tal y como lo conocemos reparar la principal línea temporal, si fracasa toda la raza humana se sumiría en una paradoja y bucles temporales donde estaríamos condenados a repetir este proyecto por el resto de nuestros dias...
+Es esencial para la supervivencia de nuestro tiempo tal y como lo conocemos reparar la principal línea temporal, si fracasa toda la raza humana se sumiría en una paradoja y bucles temporales donde estaríamos condenados a repetir la historia de nuestras vidas...
 
 **PERSONAJES**
 
