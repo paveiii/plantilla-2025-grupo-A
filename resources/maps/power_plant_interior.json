@@ -101,11 +101,11 @@
                 {
                  "height":0,
                  "id":18,
-                 "name":"Item Creditos",
+                 "name":"item_creditos",
                  "point":true,
                  "properties":[
                         {
-                         "name":"item_keys",
+                         "name":"item_key",
                          "type":"string",
                          "value":"END"
                         }],
@@ -125,8 +125,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":32,
-                 "y":128
+                 "x":-920.292595896521,
+                 "y":156.545941123996
                 }],
          "opacity":1,
          "type":"objectgroup",
