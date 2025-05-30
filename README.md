@@ -14,6 +14,9 @@ En un futuro donde la barrera del tiempo ha sido superada, surge una agencia des
 
 ## Gameplay
 (Poner cosas de como se juega y eso)
+
+
+
 The game is in extremely early stages. For discussion on future direction, see:
 * [the github discussion board](https://github.com/pythonarcade/community-rpg/discussions).
 * [the #community-ideas channel on Arcade's discord server](https://discord.com/channels/458662222697070613/704736572603629589)
