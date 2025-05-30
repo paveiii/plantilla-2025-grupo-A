@@ -1203,7 +1203,7 @@
                         {
                          "name":"start_y",
                          "type":"int",
-                         "value":27
+                         "value":26
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -1236,7 +1236,7 @@
                         {
                          "name":"start_y",
                          "type":"int",
-                         "value":27
+                         "value":26
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -3512,14 +3512,14 @@
  "orientation":"orthogonal",
  "properties":[
         {
-         "name":"musica",
-         "type":"string",
-         "value":"EdadMedia_fondo.mp3"
-                },
-        {
          "name":"isSubmap",
          "type":"bool",
          "value":false
+        }, 
+        {
+         "name":"musica",
+         "type":"string",
+         "value":"EdadMedia_fondo.mp3"
         }, 
         {
          "name":"start_x",

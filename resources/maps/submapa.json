@@ -390,8 +390,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":109
+                         "type":"float",
+                         "value":108.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -423,8 +423,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":109
+                         "type":"float",
+                         "value":108.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -456,8 +456,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":109
+                         "type":"float",
+                         "value":108.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -489,8 +489,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":110
+                         "type":"float",
+                         "value":109.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -522,8 +522,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":110
+                         "type":"float",
+                         "value":109.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -555,8 +555,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":110
+                         "type":"float",
+                         "value":109.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -588,8 +588,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":129
+                         "type":"float",
+                         "value":128.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -621,8 +621,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":129
+                         "type":"float",
+                         "value":128.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -654,8 +654,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":129
+                         "type":"float",
+                         "value":128.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
@@ -687,8 +687,8 @@
                         }, 
                         {
                          "name":"start_y",
-                         "type":"int",
-                         "value":129
+                         "type":"float",
+                         "value":128.5
                         }, 
                         {
                          "name":"wipePreviousMaps",
