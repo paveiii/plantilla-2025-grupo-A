@@ -582,9 +582,9 @@
                  "y":128
                 }, 
                 {
-                 "gid":13969,
+                 "gid":13974,
                  "height":96,
-                 "id":140,
+                 "id":141,
                  "name":"",
                  "properties":[
                         {
@@ -611,8 +611,8 @@
                  "type":"",
                  "visible":true,
                  "width":96,
-                 "x":2909,
-                 "y":1947
+                 "x":2909.25,
+                 "y":1947.75
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1011,13 +1011,18 @@
          "y":0
         }],
  "nextlayerid":27,
- "nextobjectid":141,
+ "nextobjectid":142,
  "orientation":"orthogonal",
  "properties":[
         {
          "name":"isSubmap",
          "type":"bool",
          "value":false
+        }, 
+        {
+         "name":"musica",
+         "type":"string",
+         "value":"Prehistoria_fondo.mp3"
         }, 
         {
          "name":"start_x",

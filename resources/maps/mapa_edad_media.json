@@ -3512,6 +3512,11 @@
  "orientation":"orthogonal",
  "properties":[
         {
+         "name":"musica",
+         "type":"string",
+         "value":"EdadMedia_fondo.mp3"
+                },
+        {
          "name":"isSubmap",
          "type":"bool",
          "value":false
