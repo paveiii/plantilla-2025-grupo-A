@@ -4,6 +4,13 @@
 
 **Miembros del equipo**
 
+* Pável David Tabata Rodríguez
+* Beatriz Arribas Schudeck
+* Daniel Guillén Ruiz
+* Pablo Álvaro Peña Sánchez
+* Rubén Dobre
+* Samuel García de Dios
+
 **organizacion del equipo**
 
 **Lo que se hizo**
