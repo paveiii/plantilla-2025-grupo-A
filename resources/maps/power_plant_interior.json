@@ -84,8 +84,43 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":320.333333333333,
-                 "y":400.333333333333
+                 "x":175.333333333333,
+                 "y":393.333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":17,
+         "name":"searchable",
+         "objects":[
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"Item Creditos",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":176,
+                 "y":208
+                }, 
+                {
+                 "gid":503,
+                 "height":32,
+                 "id":21,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -170,8 +205,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":17,
- "nextobjectid":16,
+ "nextlayerid":18,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -245,6 +280,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":20
 }

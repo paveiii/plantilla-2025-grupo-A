@@ -891,7 +891,7 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"EnemyBorracho"
+                         "value":"EnemyOcioso"
                         }],
                  "rotation":0,
                  "type":"",
@@ -983,7 +983,7 @@
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"EnemyLudao"
+                         "value":"EnemyOcioso"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1008,6 +1008,12 @@
                  "id":52,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1020,6 +1026,12 @@
                  "id":53,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1032,6 +1044,12 @@
                  "id":54,
                  "name":"ITEM",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1042,7 +1060,7 @@
                 {
                  "height":0,
                  "id":55,
-                 "name":"ITEM",
+                 "name":"ITEM_RECLUTABLE",
                  "point":true,
                  "properties":[
                         {
@@ -1058,16 +1076,160 @@
                  "y":3897.93939393939
                 }, 
                 {
-                 "gid":3794,
-                 "height":32,
-                 "id":58,
-                 "name":"",
+                 "height":0,
+                 "id":59,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
+                 "width":0,
+                 "x":3481.33333333333,
+                 "y":3600
+                }, 
+                {
+                 "height":0,
+                 "id":60,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":320.666666666667,
+                 "y":3648.66666666667
+                }, 
+                {
+                 "height":0,
+                 "id":61,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1026.66666666667,
+                 "y":1921.33333333333
+                }, 
+                {
+                 "height":0,
+                 "id":62,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1561,
+                 "y":2809
+                }, 
+                {
+                 "height":0,
+                 "id":63,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2276,
+                 "y":3198
+                }, 
+                {
+                 "height":0,
+                 "id":64,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3951.33333333333,
+                 "y":2527
+                }, 
+                {
+                 "height":0,
+                 "id":65,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3680.66666666667,
+                 "y":1392
+                }, 
+                {
+                 "height":0,
+                 "id":66,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level3Items"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2302.66666666667,
+                 "y":236
+                }, 
+                {
+                 "gid":3859,
+                 "height":32,
+                 "id":67,
+                 "name":"",
+                 "rotation":90,
+                 "type":"",
+                 "visible":true,
                  "width":32,
-                 "x":1040,
-                 "y":2608
+                 "x":0,
+                 "y":3104
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1310,18 +1472,6 @@
                  "width":32,
                  "x":1408,
                  "y":896
-                }, 
-                {
-                 "gid":3794,
-                 "height":32,
-                 "id":57,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":984,
-                 "y":2696
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1330,7 +1480,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":59,
+ "nextobjectid":68,
  "orientation":"orthogonal",
  "properties":[
         {
@@ -1496,6 +1646,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.10",
+ "version":"1.11",
  "width":136
 }

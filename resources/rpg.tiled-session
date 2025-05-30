@@ -221,7 +221,7 @@
         },
         "maps/castillo_malo.json": {
             "scale": 1.3953125,
-            "selectedLayer": 0,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 319.99999999999994,
                 "y": 319.64165733482645
@@ -320,20 +320,21 @@
         "maps/mapa_cyberpunk.json": {
             "expandedObjectLayers": [
                 17,
-                13
+                13,
+                16
             ],
             "scale": 0.25,
-            "selectedLayer": 6,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 2454,
-                "y": 3068
+                "x": 2022,
+                "y": 1540
             }
         },
         "maps/mapa_edad_media.json": {
             "expandedObjectLayers": [
+                18,
                 17,
-                16,
-                18
+                16
             ],
             "scale": 0.125,
             "selectedLayer": 13,
@@ -358,16 +359,20 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 320,
-                "y": 320.5
+                "x": -56.5,
+                "y": 214
             }
         },
         "maps/prehistoric_map.json": {
-            "scale": 0.33,
-            "selectedLayer": 16,
+            "expandedObjectLayers": [
+                23,
+                17
+            ],
+            "scale": 0.5,
+            "selectedLayer": 18,
             "viewCenter": {
-                "x": 1740.909090909091,
-                "y": 1342.4242424242425
+                "x": 2475,
+                "y": 792
             }
         },
         "maps/submapa alcantarillado.tmx": {
@@ -648,11 +653,11 @@
     "project": "rpg.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "maps/mapa_edad_media.json",
+        "maps/cueva.json",
         "maps/mapa_cyberpunk.json",
         "maps/time_company_interior.json",
         "maps/power_plant_interior.json",
-        "maps/cueva.json",
-        "maps/mapa_edad_media.json",
         "maps/prehistoric_map.json",
         "maps/cueva_final.json",
         "maps/castillo_malo.json",
