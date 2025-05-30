@@ -223,7 +223,7 @@
         {
          "name":"musicaBatalla",
          "type":"string",
-         "value":"Cyberpunk_batalla"
+         "value":"Cyberpunk_batalla.mp3"
         }],
  "renderorder":"left-up",
  "tiledversion":"1.11.2",

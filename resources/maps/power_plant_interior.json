@@ -187,7 +187,7 @@
         {
          "name":"musicaBatalla",
          "type":"string",
-         "value":"Cyberpunk_batalla_final"
+         "value":"Cyberpunk_batalla_final.mp3"
         }, 
         {
          "name":"start_x",

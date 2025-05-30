@@ -766,7 +766,7 @@
         {
          "name":"musicaBatalla",
          "type":"string",
-         "value":"EdadMedia_batalla"
+         "value":"EdadMedia_batalla.mp3"
         }, 
         {
          "name":"start_x",
