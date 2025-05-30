@@ -1334,14 +1334,19 @@
  "orientation":"orthogonal",
  "properties":[
         {
-           "name":"musica",
-           "type":"string",
-           "value":"Cyberpunk_fondo_Op1.mp3"
-                },
-        {
          "name":"isSubmap",
          "type":"bool",
          "value":false
+        }, 
+        {
+         "name":"musica",
+         "type":"string",
+         "value":"Cyberpunk_fondo_Op1.mp3"
+        }, 
+        {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Cyberpunk_batalla"
         }, 
         {
          "name":"start_x",

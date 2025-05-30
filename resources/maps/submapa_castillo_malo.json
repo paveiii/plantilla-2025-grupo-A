@@ -310,6 +310,11 @@
          "value":"EdadMedia_fondo.mp3"
         }, 
         {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"EdadMedia_batalla"
+        }, 
+        {
          "name":"start_x",
          "type":"float",
          "value":0
@@ -320,7 +325,7 @@
          "value":0
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {

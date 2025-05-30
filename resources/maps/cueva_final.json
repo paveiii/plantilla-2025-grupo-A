@@ -424,6 +424,11 @@
          "value":"Cyberpunk_fondo_Op1.mp3"
         }, 
         {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Cyberpunk_batalla"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":0
@@ -434,7 +439,7 @@
          "value":0
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {

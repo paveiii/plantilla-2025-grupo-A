@@ -138,6 +138,12 @@
         },
     
         {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Cyberpunk_batalla"
+        },
+    
+        {
          "name":"start_x",
          "type":"float",
          "value":5
@@ -149,7 +155,7 @@
          "value":5
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {

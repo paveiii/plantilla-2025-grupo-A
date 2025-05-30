@@ -69,6 +69,17 @@
                  "id":13,
                  "name":"Malo Maloso",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"movement",
+                         "type":"string",
+                         "value":"boss"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"Boss3"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -174,6 +185,11 @@
          "value":"Cyberpunk_fondo_Op1.mp3"
         }, 
         {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Cyberpunk_batalla_final"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":10
@@ -184,7 +200,7 @@
          "value":10
         }],
  "renderorder":"left-up",
- "tiledversion":"1.11.1-99-gec89c545",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
