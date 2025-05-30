@@ -158,6 +158,9 @@ class GameView(arcade.View):
         self.item = False
         self.dialogue = None
         arcade.set_background_color(arcade.color.AMAZON)
+        self.tile_map = None
+        self.music = None
+        self.music_player = None
 
         self.setup_debug_menu()
 
@@ -271,6 +274,9 @@ class GameView(arcade.View):
 
         self.cur_map_name = map_name
 
+        #      if self.music_player:
+        #         self.music_player = self.music.stop
+
         try:
             self.my_map = self.map_list[self.cur_map_name]
         except KeyError:
@@ -335,6 +341,27 @@ class GameView(arcade.View):
         self.dialogue_background.center_y = self.player_sprite.center_y - 450
         # Set up the hotbar
         self.load_hotbar_sprites()
+
+        ruta_mapa = f"../resources/maps/{self.cur_map_name}.json"
+        self.tile_map = arcade.load_tilemap(ruta_mapa)
+
+        with open(ruta_mapa, "r") as archivo:
+            datos_json = json.load(archivo)
+
+        propiedades = datos_json.get("properties", [])
+
+        nombre_musica = None
+        for prop in propiedades:
+            if prop["name"] == "musica":
+                print("hola")
+                nombre_musica = prop["value"]
+                continue
+
+            if nombre_musica:
+                print("hola")
+                ruta_musica = f"../resources/sounds/{nombre_musica}"
+                self.music = arcade.Sound(ruta_musica, streaming=True)
+                self.music_player = self.music.play(loop=True)
 
     def load_hotbar_sprites(self):
         """Load the sprites for the hotbar at the bottom of the screen.
