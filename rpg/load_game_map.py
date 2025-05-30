@@ -579,17 +579,19 @@ def loadMapFromSave(player, saveFile, map_name):
     f = open("../resources/data/actions_dictionary.json")
     actions_dictionary = json.load(f)
 
-    for character_object in my_map.object_lists["characters"]:
-        if character_object.properties.get("movement") == "boss":
-            battleKey = character_object.properties.get("type")
+    try:
+        for character_object in my_map.object_lists["characters"]:
+            if character_object.properties.get("movement") == "boss":
+                battleKey = character_object.properties.get("type")
 
-            character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
-                                         game_map.scene, player, [battleKey])
-            character_sprite.position = character_object.shape
-            print("BOSS CARGADO")
-            print(character_sprite.position)
-            game_map.scene.add_sprite("characters", character_sprite)
-
+                character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
+                                             game_map.scene, player, [battleKey])
+                character_sprite.position = character_object.shape
+                print("BOSS CARGADO")
+                print(character_sprite.position)
+                game_map.scene.add_sprite("characters", character_sprite)
+    except:
+        print("El mapa cargado no tiene capa 'characters'")
 
     if "worldAllies" in saveFile["maps"][map_name]:
         for worldAlly in saveFile["maps"][map_name]["worldAllies"]:
