@@ -8,6 +8,7 @@ from typing import Callable
 
 import arcade
 import arcade.gui
+import pygame
 from arcade import SpriteList, Sprite, get_image
 from arcade.gui import UIFlatButton
 
@@ -284,10 +285,10 @@ class GameView(arcade.View):
             arcade.set_background_color(self.my_map.background_color)
 
         if (self.my_map.backgroundMusicName != ""):
-            ruta_musica = f":sounds:{self.my_map.backgroundMusicName}"
-            if(self.music != None): self.music.stop(self.music_player)
-            self.music = arcade.Sound(ruta_musica, streaming=True)
-            self.music_player = self.music.play(loop=True)
+            pygame.mixer.init()
+            pygame.mixer.music.load(f"../resources/sounds/{self.my_map.backgroundMusicName}")
+            pygame.mixer.music.play(-1)  # bucle infinito
+
 
         map_height = self.my_map.map_size[1]
 
@@ -612,11 +613,7 @@ class GameView(arcade.View):
             self.main_buttons_widget = None
 
     def on_show_view(self):
-        ruta_musica = f":sounds:{self.my_map.backgroundMusicName}"
-        if (self.music != None): self.music.stop(self.music_player)
-        self.music = arcade.Sound(ruta_musica, streaming=True)
-        self.music_player = self.music.play(loop=True)
-
+        pygame.mixer.music.play(-1)
         self.left_pressed = False
         self.right_pressed = False
         self.up_pressed = False
@@ -627,7 +624,7 @@ class GameView(arcade.View):
         if my_map.background_color:
             arcade.set_background_color(my_map.background_color)
     def on_hide_view(self):
-         self.music.stop(self.music_player)
+         pygame.mixer.music.stop()
 
     # Funciones para cada uno de los botones. Cada una selecciona a un aliado a reemplazar
     def ally1(self, event):

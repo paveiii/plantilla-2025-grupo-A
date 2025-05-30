@@ -214,9 +214,14 @@
          "name":"isSubmap",
          "type":"bool",
          "value":true
+        }, 
+        {
+         "name":"musica",
+         "type":"string",
+         "value":"Cyberpunk_fondo_Op1.mp3"
         }],
  "renderorder":"left-up",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {

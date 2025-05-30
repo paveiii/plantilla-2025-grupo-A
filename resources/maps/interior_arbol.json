@@ -425,6 +425,11 @@
          "value":false
         }, 
         {
+         "name":"musica",
+         "type":"string",
+         "value":"EdadMedia_fondo.mp3"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":7
@@ -435,7 +440,7 @@
          "value":15
         }],
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {

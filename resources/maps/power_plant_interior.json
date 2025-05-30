@@ -169,6 +169,11 @@
          "value":false
         }, 
         {
+         "name":"musica",
+         "type":"string",
+         "value":"Cyberpunk_fondo_Op1.mp3"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":10
@@ -179,7 +184,7 @@
          "value":10
         }],
  "renderorder":"left-up",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.1-99-gec89c545",
  "tileheight":32,
  "tilesets":[
         {

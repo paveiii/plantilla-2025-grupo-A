@@ -1,5 +1,13 @@
 { "backgroundcolor":"#5f8702",
  "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"prehistoric_map.json"
+        }
+    },
  "height":64,
  "infinite":false,
  "layers":[
