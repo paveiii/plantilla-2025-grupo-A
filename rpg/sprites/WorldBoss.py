@@ -20,7 +20,7 @@ class WorldBoss(CharacterSprite):
 
 
     def checkCollision(self):
-        if self.distanciaJugador <= 256 and self.distanciaJugador >= 0:
+        if self.distanciaJugador <= 150 and self.distanciaJugador >= 0:
             print("JUGADOR COLISIONA CON EL ENEMIGO")
             switch_to_battle = ActivateInBattleView(self)
 
