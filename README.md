@@ -1,4 +1,4 @@
-# Nombre del juego
+# No Time Left
 
 ## Equipo
 - Pável David Tabata Rodríguez: Jefatura de proyecto, Programación, Pruebas 
@@ -10,13 +10,13 @@
 
 Modificar lo que sigue a voluntad para que queden unas instrucciones mínimas de cómo ejecutar el juego y de cómo es el *gameplay*.
 
-# Welcome to The Python Arcade Community RPG
+En un futuro donde la barrera del tiempo ha sido superada, surge una agencia destinada a arreglar las lineas temporales dañadas por sujetos desviados de su lugar espacio-temporal. Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman Sorus...
 
-![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-success)
-![First Timer Friendly](https://img.shields.io/badge/First%20Timer-friendly-informational)
-![License MIT](https://img.shields.io/badge/license-MIT-success)
-
-![Screenshot](/screenshot.png)
+## Gameplay
+(Poner cosas de como se juega y eso)
+The game is in extremely early stages. For discussion on future direction, see:
+* [the github discussion board](https://github.com/pythonarcade/community-rpg/discussions).
+* [the #community-ideas channel on Arcade's discord server](https://discord.com/channels/458662222697070613/704736572603629589)
 
 This is an open-source RPG game.
 
@@ -29,18 +29,13 @@ This is an open-source RPG game.
 * All code is written in Python
 
 Graphics Assets From:
-
 * [Pipoya Free RPG Tileset 32x32](https://pipoya.itch.io/pipoya-rpg-tileset-32x32)
 * [Pipoya Free RPG Character Sprites 32x32](https://pipoya.itch.io/pipoya-free-rpg-character-sprites-32x32)
 * [Kenney Input Prompts Pixel 16x16](https://kenney.nl/assets/input-prompts-pixel-16)
 
-## Gameplay
 
-The game is in extremely early stages. For discussion on future direction, see:
-* [the github discussion board](https://github.com/pythonarcade/community-rpg/discussions).
-* [the #community-ideas channel on Arcade's discord server](https://discord.com/channels/458662222697070613/704736572603629589)
 
-### Controls
+### Controles
 - **Movement:** Arrow Keys / WASD
 - **Toggle Light/Torch:** F
 - **Pick Up Items:** E
@@ -62,7 +57,3 @@ The game can then be ran with:
 ```bash
 python -m rpg
 ```
-
-## Contact The Maintainer
-
-paul@cravenfamily.com
