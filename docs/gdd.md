@@ -6,16 +6,16 @@
 
 En un futuro donde la barrera del tiempo ha sido superada, surge una agencia destinada a arreglar las lineas temporales dañadas
 por sujetos desviados de su lugar espacio-temporal.\
-Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman (nombre)...
+Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman Sorus...
 
 **OBJETIVOS** 
 
-Vence a los enemigos y derrota finalmente a (nombre)para evitar las paradojas temporales y la fracturación de la realidad.
+Vence a los enemigos y derrota finalmente a Sorus para evitar las paradojas temporales y la fracturación de la realidad.
 
 **HISTORIA**
 
 Año 2089, la humanidad está en el apogeo del proceso tecnológico y ha logrado viajar en el tiempo.\
-Una agencia gubernamental,(nombre),creada para proteger nuestro tiempo de las alteraciones temporales desatadas tras la invención del acelerador de particulas, el aparto que hace posibles los viajes en el tiempo, ha detectado fuertes anormalidades en la línea temporal pricipal.
+Una agencia gubernamental, Temporis Lex, creada para proteger nuestro tiempo de las alteraciones temporales desatadas tras la invención del acelerador de particulas, el aparto que hace posibles los viajes en el tiempo, ha detectado fuertes anormalidades en la línea temporal pricipal.
 
 
 (nombre), su mejor agente con más de 1250 viajes, le ha sido encomendada esta ardua tarea de reparar el tiempo. A través de múltiples épocas, luchará contra enemigos que han sido desviados de su tiempo. Reclutará a personas de diferentes épocas y se enfrentará a la criatura que orquesta todos los movimientos de los sujetos que han huido de su tiempo.
