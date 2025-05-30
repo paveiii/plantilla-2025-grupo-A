@@ -1643,7 +1643,7 @@ class InBattleView(arcade.View):
             self.next_ally()
 
     def game_over(self):
-        self.window.show_view(self.window.views["menu"])
+        self.window.show_view(self.window.views["gameOver"])
 
     def game_win(self):
         for ally in self.dead_allies:

@@ -46,6 +46,8 @@ class CreditsView(arcade.View):
     def on_draw(self):
         self.clear()
         arcade.start_render()
+        arcade.set_background_color(arcade.color.DARK_BLUE)
+
 
         # Dibuja el texto centrado y multilínea
         arcade.draw_text(
