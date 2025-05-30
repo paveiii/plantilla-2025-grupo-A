@@ -1003,6 +1003,8 @@ class GameView(arcade.View):
         # Funcion para Sprites puestos en el nivel por medio de puntos.
         for sprite in sprites_in_range:
             if sprite.__class__ == WorldItem:
+                if(sprite.itemKey == "END"):
+                    self.window.show_view(self.window.views["credits"])
                 lookup_item = self.item_dictionary[sprite.itemKey]
 
                 self.message_box = MessageBox(
