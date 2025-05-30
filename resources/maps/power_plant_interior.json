@@ -103,6 +103,12 @@
                  "id":18,
                  "name":"Item Creditos",
                  "point":true,
+                 "properties":[
+                        {
+                         "name":"item_keys",
+                         "type":"string",
+                         "value":"END"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -280,6 +286,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.11",
+ "version":"1.10",
  "width":20
 }

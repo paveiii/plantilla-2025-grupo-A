@@ -16,6 +16,8 @@
   "Level3_Efecto": {"sheet_name": "Test/Efecto_cyberpunk.png","name": "Granada de pulso electromagnetico","type": "DAMAGE","amount": 1,"description": "Arroja esta bomba a un enemigo, quizas no la ve...","quantity": 1},
   "REQ5": {"sheet_name": "Reclutables/CajetillaDeCigarros.png","name": "Cajetilla de cigarros", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Scythe","quantity": 1},
   "REQ6": {"sheet_name": "Reclutables/BolaDeCristal.png","name": "Bola de cristal", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Mistica","quantity": 1},
-  "REQ7": {"sheet_name": "Reclutables/Medicina.png","name": "Medicina", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Taurus","quantity": 1}}
+  "REQ7": {"sheet_name": "Reclutables/Medicina.png","name": "Medicina", "type": "REQUIREMENT", "amount": 1, "description":  "Objeto para reclutar a Taurus","quantity": 1},
+  "END": {"sheet_name": "Test/Creditos.png","name": "END", "type": "HEAL", "amount": 1, "description":  "","quantity": 1}}
+
 
 
