@@ -22,5 +22,6 @@
   "ReqLevel1": {"item_keys" :  ["REQ2"]},
   "ReqLevel2.1": {"item_keys" : ["REQ1"]},
   "ReqLevel2.2": {"item_keys" :  ["REQ4"]},
-  "ReqLevel3" : {"item_keys" :  ["REQ3"]}
+  "ReqLevel3" : {"item_keys" :  ["REQ3"]},
+  "END" : {"item_keys" :  ["END"]}
 }

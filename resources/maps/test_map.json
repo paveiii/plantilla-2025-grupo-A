@@ -540,6 +540,24 @@
                  "width":0,
                  "x":972,
                  "y":1136
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"END"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1106.66666666667,
+                 "y":274.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -548,7 +566,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":39,
+ "nextobjectid":40,
  "orientation":"orthogonal",
  "properties":[
         {
