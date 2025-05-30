@@ -1,8 +1,6 @@
-# Memoria
+# No Time Left - Memoria
 
-## No Time Left
-
-**Organizacion del equipo**
+## Organizacion del equipo
 
 - Pável David Tabata Rodríguez: Jefatura de proyecto, Programación, Pruebas 
 - Beatriz Arribas Schudeck: Diseño Gráfico, Pruebas.
@@ -28,9 +26,15 @@ El elemento más complicado durante el desarrollo fue el arte para el proyecto, 
 * [rectTile Universe Basic Dirt](https://dkproductions.itch.io/recttile-universe-basic-dirt)
 * [Pixabay](https://pixabay.com/music/)
 
-El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los primeros aliados. El mapa Cyberpunk recibió la mayoría de arte por parte de generación por Inteligencia Artificial, sin embargo, Pablo Peña tuvo que arreglar bastante de los diseños generados al ser deficientes de una forma u otra. Para el arte de pantallas también se usó IA.
+El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los primeros aliados. Quien desarrollo arte conceptual durante el desarrollo:
+![image](https://github.com/user-attachments/assets/47eefc12-6854-4277-baa4-01c7ad2414a4)
+![image](https://github.com/user-attachments/assets/0bb3fa36-ebbd-41e8-80d2-d459544ed845)
+![image](https://github.com/user-attachments/assets/e8741a60-0109-4e1a-8ece-720173df6587)
+![image](https://github.com/user-attachments/assets/5219b329-292d-4455-856d-07e4f0cf14eb)
 
-**Principales objetivos implementados**
+El mapa Cyberpunk recibió la mayoría de arte por parte de generación por Inteligencia Artificial, sin embargo, Pablo Peña tuvo que arreglar bastante de los diseños generados al ser deficientes de una forma u otra. Para el arte de pantallas también se usó IA.
+
+## Principales objetivos implementados
 *  **Un sistema de batalla basado en turnos**\
   Donde el jugador puede dirigir los ataques que realizan sus aliados al equipo enemigo. También se pueden usar items que el jugador encuentra por el mapa, ya sea con una función defensiva como también una funcion ofensiva. Se han implementado distintos tipos de ataques y habilidades, utilizando diccionarios en.json para almacenar la información de estos. También el jugador tiene la posibilidad de no realizar ningún movimiento y recuperar mucha más Stamina.
   
@@ -38,10 +42,11 @@ El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los pr
    Los aliados se encontrarán estacionados en un punto del mapa específicado por el diseñador, dichos puntos pueden contener a más de un aliado posible, que será elegido aleatoriamente. El jugador podrá reclutar a dichos aliados buscando en el mapa un "Objeto de requerimiento", nombre interno dado por el equipo, el cual aparece aleatoriamente alrededor del mapa en puntos específicos, en cuanto el jugador tenga este objeto, podrá reclutar al personaje y usarse en batalla. Cada aliado tiene habilidades únicas que fueron puestas dependiendo de su clase. En caso de que se intente reclutar a más de tres aliados, se dará la elección al jugador de reemplazar alguno de los que ya tiene por el nuevo que va a entrar en el equipo, aún asi se dará la posibilidad al jugador de volver a reclutar dicho personaje, dejando su objeto de requerimento en el suelo.
    
 *  **Cajas de diálogos de aliados**\
-   Los aliados comunicarán la exigencia del objeto de reclutamiento y su satisfacción una vez encuentres dichos objetos por medio de dialogos mostrados en cajas de texto. Estos cumplen con la función adicional de ilustrar a estos personajes y formar un hilo conductor a lo largo de la aventura.\
+   Los aliados comunicarán la exigencia del objeto de reclutamiento y su satisfacción una vez encuentres dichos objetos por medio de dialogos mostrados en cajas de texto. Estos cumplen con la función adicional de ilustrar a estos personajes y formar un hilo conductor a lo largo de la aventura.
    
 * **Enemigos e Inteligencia Artificial en batalla**
    Los enemigos aparecen similiar a los aliados, aleatoriamente basado en una lista de posibles enemigos de batalla, junto a esto también tienen predefinido atributos como la velocidad, radio de detección y la cantidad de enemigos que pueden aparecer en su equipo en la batalla. Estos se situan por el mapa utilizando la solución de PathFinding A* nativa de Arcade, seguirán al jugador en cuanto este entre dentro de su rango de detección. Una vez en combate, estos luchan basado a un críterio mucho más simple al planteado al GDD, esta vez seleccionando al azar un aliado y atacando, esto se repetirá por cada integrante del equipo enemigo hasta terminar su turno. Una vez el jugador gana, vuelve la pantalla del mapa, en caso contrario el jugador se le mostrará una pantalla de Game Over.\
+  Para el Pathfinding usamos de referencia este [video de Charlie Smith](https://www.youtube.com/watch?v=nh0DHdX11oE&ab_channel=CharlieSmith)
   
 * **Sistema de aparición de objetos extendido**\
   Ahora pueden salir objetos aleatoriamente tomando de una lista predefinida en un diccionario. Haciendo que cada sesión sea única.\
@@ -56,19 +61,26 @@ El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los pr
 * **Sistema de guardado manual del Game State del jugador**
   
 
-**Lo que no se hizo**
+## Sistemas descartados o modificados
 Muchas ideas tuvieron que ser desechadas o modificadas durante el proyecto. Algunas de las más destacables fueron:
 
+* **Una tienda de compra de armamento, vestimenta y objetos especiales, Así como el traductor universal comerciable.**
+* **Un menú principal en el que el jugador pudiese elegir el tipo de indumentaria.**\
+* **Aprendizaje de habilidades nuevas según se superan las batallas.**\
+* **Un sistema de logros con recompensas adicionales.**\
+* **KnockBack**\
+  No fueron tomados como una prioridad desde el inicio.
 * **Ataques múltiples ni últimates.**
-  La falta de tiempo y un diseño convincente fue lo que nos hizo echar para atras esta idea. Dejando un sistema de combate más simple.
-* **Un menú principal en el que el jugador pudiese elegir el tipo de indumentaria.**
-  No fue tomado como una prioridad desde el inicio
-* Un sistema de logros con recompensas adicionales. 
-* Una tienda de compra de armamento, vestimenta y objetos especiales, así como el traductor universal comerciable.
-* KnockBack
-* Aprendizaje de habilidades nuevas según se superan las batallas.
-* Capacidad de dialogar con enemigos. 
+  La falta de tiempo y de un diseño convincente fue lo que nos hizo echar para atras esta idea. Dejando un sistema de combate más simple.
+* **Dialogar con NPCs**
+  La implementación actual de la caja de texto para los items de reclutamiento es muy poco flexible, al punto que no puede ser reciclada para hacer que aparezca arbitrariamente sin hacer vueltas para evitar el problema base. Este problema fue notado muy tarde durante el desarrollo, dando como resultado que se desechara esta idea.
+* **Reclutar a personajes por medio de convencimiento**
+  Un tanto relacionado con el punto anterior pero fue más por no ser una prioridad, al considerarse muy complejo y con muchos casos de error probables.
+* **IA de enemigos en batalla más inteligente**
+  La idea de que el equipo enemigo ataque a los aliados de forma estrategica basandose en sus tipos e información fue implementado bastante temprano en el desarrollo, al menos en forma de funciones que devuelven numeros. Sin embargo el desarrollo extendido de la pantalla de batalla ocasionó que su implementación se hiciera bastante tarde durante el desarrollo, provocando que tuvieramos que simplificar el sistema.
 
-**Aspectos tecnicos destacables**
+Un factor importante para estas complicaciones durante el desarrollo fue la falta de experiencia por parte de los miembros del equipo, tanto con el motor de juego que utilizabamos como el proceso general detras del desarrollo de un videojuego. Con el tiempo ajustamos no consideramos completamente todas las facetas que iba a tener implementar algunas de las mecanicas que fueron planteadas en el GDD, ni mucho menos pensamos a largo plazo que efecto iban a tener con otros sistemas implementados. Ha sido una gran enseñanza sobre nunca subestimar el tiempo que puede tomar diseñar, implementar y probar una característica, especialmente en un desarrollo tan transversal como puede ser el desarrollo de un videojuego, aun siendo tan simple como este.
 
-**Información adicional**
+También la puesta de prioridad sobre cada tarea es algo que falló por parte de la dirección del proyecto, tareas como la creación de los mapas no debieron haber sido dedicadas tanto tiempo como puede ser la implementación de sistemas base en el juego. El tiempo es el que tenemos y lo mejor que se puede hacer es hacer lo máximo con lo minimo que tengas.
+
+Por último, si bien se intentó mantener una comunicación activa entre los miembros del proyecto, ciertamente hubo épocas donde miembros se encontraban aislados trabajando en características escasamente definidas o atendiendo a otras cuestiones personales. Nos guste o no, siempre tenemos que estar pendiente del trabajo de los demás, y cuestionar por qué algo se hace de una forma u otra y si esto podría tener conflictos a futuro, es la mejor forma de trabajar.
