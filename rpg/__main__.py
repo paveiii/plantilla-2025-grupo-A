@@ -14,6 +14,16 @@ def blocking_import(name, globals=None, locals=None, fromlist=(), level=0):
 
 builtins.__import__ = blocking_import
 
+import subprocess
+import sys
+
+try:
+    import pygame
+except ImportError:
+    print("Pygame no está instalado. Instalando...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pygame"])
+    import pygame  # intentar importar nuevamente después de la instalación
+
 import arcade
 
 from rpg.constants import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH

@@ -149,6 +149,7 @@ class InBattleView(arcade.View):
         self.enemy_action_performed = None
         self.enemy_turn_index = 0
         self.enemy_attack_time = 0
+        self.ally_hurt_time = 0
 
         self.attack_anim_done = False
         self.hurt_anim_done = False
@@ -199,6 +200,11 @@ class InBattleView(arcade.View):
         self.fondo.center_y = self.current_height / 2
 
         self.att_sta_message = False
+
+        self.target_ally_selected = False
+
+        self.enemy_chosen_action = None
+        self.enemy_chosen_target = None
 
     def on_show_view(self):
         musicaBatalla = self.window.views['game'].my_map.battleMusicName
@@ -775,6 +781,8 @@ class InBattleView(arcade.View):
         self.attack_anim_done = False
         self.hurt_anim_done = False
 
+        self.ally_hurt_time += delta_time
+
         if self.enemy_waiting_for_action:
             self.player_turn = False
             self.enemy_attack_time += delta_time
@@ -785,8 +793,11 @@ class InBattleView(arcade.View):
                 enemy = self.enemy_team[self.enemy_turn_index]
                 self.enemy_attacking = enemy
 
-                action_to_execute, ally_target = self.enemy_AI.returnTurnToExecute(enemy)
-                self.enemy_action_performed = action_to_execute
+                if self.enemy_chosen_action is None or self.enemy_chosen_target is None:
+                    self.enemy_chosen_action, self.enemy_chosen_target = self.enemy_AI.returnTurnToExecute(enemy)
+                    self.enemy_action_performed = self.enemy_chosen_action
+
+                self.enemy_action_performed = self.enemy_chosen_action
 
                 if not self.attack_anim_done:
                     self.enemy_attacking.setPulseAnim(Anim.ATTACK)
@@ -794,15 +805,15 @@ class InBattleView(arcade.View):
 
                 if self.enemy_attack_time >= 1.5 * self.attack_duration:
                     if not self.hurt_anim_done:
-                        ally_target.setPulseAnim(Anim.HURT)
+                        self.enemy_chosen_target.setPulseAnim(Anim.HURT)
                         self.hurt_anim_done = True
 
                     if self.enemy_attack_time >= 3 * self.attack_duration:
-                        idx_ally = self.player_team.index(ally_target)
-                        self.player_team[idx_ally].changeHealth(-action_to_execute.amount)
+                        idx_ally = self.player_team.index(self.enemy_chosen_target)
+                        self.player_team[idx_ally].changeHealth(-self.enemy_chosen_action.amount)
 
-                        print(f"{enemy.displayName} gasta {action_to_execute.staminaExpense} de stamina")
-                        print(f"{ally_target.displayName} recibe {action_to_execute.amount} de daño")
+                        print(f"{enemy.displayName} gasta {self.enemy_chosen_action.staminaExpense} de stamina")
+                        print(f"{self.enemy_chosen_target.displayName} recibe {self.enemy_chosen_action.amount} de daño")
 
                         self.check_health_status()
 
@@ -819,6 +830,8 @@ class InBattleView(arcade.View):
                             self.enemy_waiting_for_action = False
                             self.attack_anim_done = False
                             self.hurt_anim_done = False
+                            self.enemy_chosen_action = None
+                            self.enemy_chosen_target = None
                             self.enemy_attacking = self.enemy_team[0]
                             for enemy in self.enemy_team:
                                 enemy.setPulseAnim(Anim.BATTLEIDLE)
@@ -1026,7 +1039,7 @@ class InBattleView(arcade.View):
                 if self.item_used is not None:
                     if self.item_used["type"] == "DAMAGE":
                         if key == arcade.key.ENTER:
-                            self.enemy_team[self.current_selected_enemy].changeHealth(-self.item_used["amount"])
+                            self.enemy_team[self.remaining_enemies.index(self.current_selected_enemy)].changeHealth(-self.item_used["amount"])
                             self.item_used = None
                             self.option = "menu"
                             self.check_health_status()
@@ -1482,6 +1495,8 @@ class InBattleView(arcade.View):
         else:
             self.manager.clear()
             self.manager.disable()
+            self.enemy_chosen_action = None
+            self.enemy_chosen_target = None
             self.enemy_waiting_for_action = True
             self.enemy_turn_index = 0
             self.enemy_attack_time = 0
@@ -1645,6 +1660,10 @@ class InBattleView(arcade.View):
 
             battle_end_list.pop(ally_init_index)
             battle_end_list.insert(ally_init_index, ally)
+
+        for ally in self.player_team:
+            ally.changeHealth((ally.currentHealth + ally.maxHealth) * 0.6)
+            ally.changeStamina((ally.currentStamina + ally.maxStamina) * 0.6)
 
         self.window.views["game"].player_sprite.player_team = battle_end_list
 

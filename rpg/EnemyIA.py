@@ -49,14 +49,19 @@ class EnemyIA:
     #Funcion que se encarga de devolver al integrante del equipo del jugador con mayor prioridad de ataque.
 
     def returnHighestPriorityPlayerTeammate(self, tags):
-        print(tags)
-        enemyIndex = 0
-        highestPriority = 0
-        for i in tags:
-            i_value = i
-            if highestPriority == 1:
-                break
-            if i != 0 and tags[len(self.playerTeam)-1] < highestPriority:
-                enemyIndex = i
+        lowHealthThreshold = 10  # Puedes ajustar este valor según balance
+        lowHealthTargets = []
 
-        return self.playerTeam[enemyIndex]
+        # Buscar jugadores con poca vida
+        for i, player in enumerate(self.playerTeam):
+            if player.currentHealth < lowHealthThreshold:
+                lowHealthTargets.append(i)
+
+        if lowHealthTargets:
+            # Atacar a alguien con poca vida (modo oportunista)
+            targetIndex = random.choice(lowHealthTargets)
+        else:
+            # Atacar a un objetivo aleatorio
+            targetIndex = random.randint(0, len(self.playerTeam) - 1)
+
+        return self.playerTeam[targetIndex]
