@@ -10,6 +10,7 @@ from rpg.load_game_map import loadMapsFromSavefile
 from rpg.load_game_map import load_map
 from rpg.sprites.player_sprite import PlayerSprite
 from rpg.views.battle_view import BattleView
+from rpg.views.credits_view import CreditsView
 from rpg.views.game_view import GameView
 from rpg.views.inventory_view import InventoryView
 from rpg.views.load_game_view import LoadGameView
@@ -86,5 +87,7 @@ class LoadingView(arcade.View):
             self.window.views["in_battle"] = InBattleView()
             self.window.views["menu"] = MenuView()
             self.window.views["load_game"] = LoadGameView()
+            self.window.views["credits"] = CreditsView()
+            self.window.views["credits"].setup()
 
             self.window.show_view(self.window.views["game"])
