@@ -13,9 +13,29 @@ Modificar lo que sigue a voluntad para que queden unas instrucciones mínimas de
 En un futuro donde la barrera del tiempo ha sido superada, surge una agencia destinada a arreglar las lineas temporales dañadas por sujetos desviados de su lugar espacio-temporal. Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman Sorus...
 
 ## Gameplay
-(Poner cosas de como se juega y eso)
+"No time left" es un divertido juego en el que tendrás que aventurarte por distintas épocas recogiendo, objetos, luchando contra temibles enemigos y reclutando a distintos personajes que te ayudaran en tu propósito
+
+**Explora distintas épocas**
 
 
+![img_16.png](img_16.png)  
+
+
+**Recluta compañeros**
+
+Hacerte con buenos aliados será la clave para el éxito de la tarea que se te ha encomendado.
+
+![img_17.png](img_17.png)
+
+**Consulta tu armamento y recoge objetos valiosos**
+
+Existen varios objetos que te servirán en tu trepidante aventura. Recógelos y consúltalos siempre que lo necesites.
+
+![img_18.png](img_18.png)
+
+**Y enfrenta tu destino**
+
+![img_19.png](img_19.png)
 
 The game is in extremely early stages. For discussion on future direction, see:
 * [the github discussion board](https://github.com/pythonarcade/community-rpg/discussions).
