@@ -13,7 +13,7 @@ Modificar lo que sigue a voluntad para que queden unas instrucciones mínimas de
 En un futuro donde la barrera del tiempo ha sido superada, surge una agencia destinada a arreglar las lineas temporales dañadas por sujetos desviados de su lugar espacio-temporal. Estos vagan a través del tiempo causando problemas que traeran consigo graves consecuencias, sirviendo ordenes de una criatura ancestral a la que llaman Sorus...
 
 ## Gameplay
-"No time left" es un divertido juego en el que tendrás que aventurarte por distintas épocas recogiendo, objetos, luchando contra temibles enemigos y reclutando a distintos personajes que te ayudaran en tu propósito
+"No time left" es un divertido juego en el que tendrás que aventurarte por distintas épocas recogiendo objetos, luchando contra temibles enemigos y reclutando a distintos personajes que te ayudaran en tu propósito
 
 **Explora distintas épocas**
 
