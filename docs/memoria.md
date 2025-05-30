@@ -17,7 +17,7 @@ Nuestro equipo ha intentado en la manera de lo posible cumplir con lo predetermi
 *  Diseño de tres niveles, que cumplen con la estética inicial de recrear tres etapas diferentes del tiempo. 
 *  Implementación de las animaciones de los sprites, que permiten una mejor visualizacion de los movimientos tanto de los aliados como de los enemigos, sus ataques y sus defensas.
 *  Sistema de guardado que recuerda la posición, inventario, miembros reclutados, mapa, items y enemigos.
-*  Implementación del Spawn del objeto especial de requerimiento, que los personajes reclutables exigirán para poder acompañar al jugador en el resto aventura.
+*  Implementación del Spawn del objeto especial de requerimiento, que los personajes reclutables exigirán para poder acompañar al jugador en el resto de aventura. Además de otros adicionales que pueden llegar a usarse en batalla. 
 *  Aleatoriedad de personajes, que permite la rejugabilidad. Una vez acabado y vuelto a iniciar, el jugador no sabrá de antemano que personajes puede llegar a encontrarse en cada mapa y que objetos requerirán.
 *  IA de los enemigos: una vez que detectan que el jugador está muy próximo a ellos, comienzan a perseguirle hasta que estran en batalla.
 *  Velocidad media del protagonista frente a sus enemigos. 
@@ -29,7 +29,8 @@ Nuestro equipo ha intentado en la manera de lo posible cumplir con lo predetermi
 * Un sistema de logros con recompensas adicionales. 
 * Una tienda de compra de armamento, vestimenta y objetos especiales, así como el traductor universal comerciable.
 * KnockBack
-* Aprendizaje de habilidades nuevas según se superan las batallas. 
+* Aprendizaje de habilidades nuevas según se superan las batallas.
+* Capacidad de dialogar con enemigos. 
 
 **Aspectos tecnicos destacables**
 
