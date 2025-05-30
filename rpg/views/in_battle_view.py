@@ -908,6 +908,7 @@ class InBattleView(arcade.View):
             self.option = "menu"
             self.sta_message = True
         else:
+            self.manager.clear()
             self.player_team[self.current_ally_index].changeStamina(self.player_team[self.current_ally_index].restoredStamina * 2)
 
             print(f"aliado {self.player_team[self.current_ally_index].displayName} gana"
@@ -916,8 +917,8 @@ class InBattleView(arcade.View):
             if self.player_team[self.current_ally_index].currentStamina > self.player_team[self.current_ally_index].maxStamina:
                 self.player_team[self.current_ally_index].currentStamina = self.player_team[self.current_ally_index].maxStamina
 
-            self.next_ally()
             self.manager.clear()
+            self.next_ally()
 
     def on_click_button(self, event):
         self.clicked_button_name = event.source.text
@@ -932,10 +933,32 @@ class InBattleView(arcade.View):
             for action in self.actions.values():
                 if action["name"] == self.clicked_button_name:
                     print(f"stamina gastada {action['staminaExpense']}")
+
                     if self.player_team[self.current_ally_index].currentStamina >= action["staminaExpense"]:
-                        self.manager.clear()
-                        self.manager.disable()
-                        self.select_enemy_to_attack()
+                        if self.option == "skill":
+                            for key, effect in self.effects.items():
+                                effect = self.effects[key]
+                                print("ULTIMO EMPUJON")
+                                print(effect.get("effectType"))
+                                if effect.get("effectType") == "Heal":
+                                    print(effect)
+                                    print(action["effectName"])
+                                    if key == action["effectName"]:
+                                        efecto = Effect(effect["name"],
+                                                effect["description"],
+                                                effect["effectType"],
+                                                effect["amount"],
+                                                effect["durationInTurns"],
+                                                effect["statAffected"])
+
+                                        self.ally_effects_list[self.current_ally].append(efecto)
+
+                            self.next_ally()
+
+                        else:
+                            self.manager.clear()
+                            self.manager.disable()
+                            self.select_enemy_to_attack()
 
                     else:
                         print("NO TIENES SUFICIENTE STAMINA")
@@ -1153,7 +1176,6 @@ class InBattleView(arcade.View):
             for action in current_ally_actions:
                 action_category = None
                 for global_action in self.actions.values():
-                    print(f"{action.displayName} == {global_action['name']}")
                     if action.displayName == global_action["name"]:
                         action_category = global_action["option"]
 
@@ -1538,6 +1560,8 @@ class InBattleView(arcade.View):
 
         for unique_list in self.ally_effects_list:
             for effect in unique_list:
+                print(effect.displayName)
+                print(effect.effectType)
                 try:
                     effect.duration -= 1
                     if effect.duration > 0:
@@ -1545,6 +1569,7 @@ class InBattleView(arcade.View):
                         if effect.effectType == "Damage":
                             self.player_team[target_ally_index].changeHealth(-(effect.amount))
                         elif effect.effectType == "Heal":
+                            print("llega")
                             self.player_team[target_ally_index].changeHealth(effect.amount)
                     else:
                         unique_list.remove(effect)
