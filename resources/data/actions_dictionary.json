@@ -7,17 +7,17 @@
   "Ataque_Debil":
     {
       "name": "Ataque debil", "description": "Ataque debil que quita 15 puntos de vida.", "option": "attack", "actionType":"Damage",
-      "effectName" : "", "staminaExpense" : 10, "amount" : 15, "targetQuantity" : 0
+      "effectName" : "", "staminaExpense" : 10, "amount" : 20, "targetQuantity" : 0
     },
   "Ataque_Normal":
     {
       "name": "Ataque normal", "description": "Ataque normal que quita 30 puntos de vida.", "option": "attack", "actionType":"Damage",
-      "effectName" : "", "staminaExpense" : 25, "amount" : 30, "targetQuantity" : 0
+      "effectName" : "", "staminaExpense" : 25, "amount" : 40, "targetQuantity" : 0
     },
   "Ataque_Fuerte":
     {
       "name": "Ataque fuerte", "description": "Ataque fuerte que quita 70 puntos de vida a un solo objetivo al costo de gastar mucha Stamina.", "option": "attack", "actionType":"Damage",
-      "effectName" : "", "staminaExpense" : 50, "amount" : 70, "targetQuantity" : 0
+      "effectName" : "", "staminaExpense" : 50, "amount" : 75, "targetQuantity" : 0
     },
   "Ataque_Sangrado":
     {

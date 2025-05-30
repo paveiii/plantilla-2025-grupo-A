@@ -22,7 +22,7 @@
   "TestCharacter2":
     {
       "sheet_name": "Aliados/EdadMedia/Elenya_de_Rohan.png","name": "Elenya de Rohan", "description": "", "type":"Tank",
-      "role": "ally", "maxHealth" : 130, "maxStamina" : 85, "restoredStamina" : 15,
+      "role": "ally", "maxHealth" : 145, "maxStamina" : 100, "restoredStamina" : 15,
       "dialogueNoItem" : ["Veo en tus ojos el brillo de quien busca aliados... pero yo no lucho por cualquiera. Mis espadas se desenvainan por causas justas... y por quienes demuestran compromiso.",
                           "¿Una batalla, dices? Todos vienen con palabras urgentes y promesas vacias. Yo escucho hechos, no discursos. ",
                           "En este cementerio yace mi madre, la que una vez fue reina de este lugar, y jure que solo lucharía por las causas en las que ella creia",
@@ -38,7 +38,7 @@
   "TestCharacter3":
     {
       "sheet_name": "Aliados/Prehistoria/Akaris,el_Colmillo del_Sol.png","name": "Akaris, el Colmillo del Sol", "description": "", "type":"Fighter",
-      "role": "ally", "maxHealth" : 85, "maxStamina" : 115, "restoredStamina" : 20,
+      "role": "ally", "maxHealth" : 75, "maxStamina" : 125, "restoredStamina" : 20,
       "dialogueNoItem" : ["¿Quien osa interrumpir mi descanso? Nadie es tan ingenuo como para molestar a Akaris, el Colmillo del Sol sin una buena razón",
                             "Asi que di lo que quieres, ser petulante.",
                           "¿Reclamas mi ayuda para una batalla contra un mal mayor? Reconozco que tienes agallas.",
@@ -54,7 +54,7 @@
   "TestCharacter4":
     {
       "sheet_name": "Aliados/Cyberpunk/Sigma-8.png","name": "Sigma-8", "description": "", "type":"Medic",
-      "role": "ally", "maxHealth" : 150, "maxStamina" : 120, "restoredStamina" : 10,
+      "role": "ally", "maxHealth" : 100, "maxStamina" : 115, "restoredStamina" : 10,
       "dialogueNoItem" : ["Escaneo completado. Identidad: desconocida. Intencion: colaboracion tactica. Solicitud: reclutamiento.",
                           "Mi protocolo de asistencia avanzada se encuentra en estado inactivo. Razon: falta de modulo de criterio de compatibilidad.",
                           "Los parámetros de confianza no pueden establecerse sin una prueba de integridad. Esta unidad requiere el Data Core vZ-4.",
@@ -68,7 +68,7 @@
     "TestCharacter5":
     {
       "sheet_name": "Aliados/EdadMedia/Tharion_el_Sereno.png","name": "Tharion el Sereno", "description": "", "type":"Medic",
-      "role": "ally", "maxHealth" : 80, "maxStamina" : 140, "restoredStamina" : 20,
+      "role": "ally", "maxHealth" : 80, "maxStamina" : 150, "restoredStamina" : 20,
       "dialogueNoItem" : ["Saludos, viajero. Veo cansancio en tu alma... y determinacion en tus pasos.",
                           "¿Qué buscas de un viejo como yo? Curar heridas es sencillo. Sostener la esperanza, eso es más difícil. Pero en tiempos oscuros, toda luz es necesaria.",
                           "Mi saber esta a tu disposicion, pero no lo entrego a la ligera. A lo largo de los años he aprendido que la intención pesa más que la urgencia.",
@@ -82,67 +82,73 @@
     "TestEnemy1":
     {
       "sheet_name": "Enemigos/Gargola.png","name": "Gargola", "description": "Test1",
-      "role": "enemy", "maxHealth" : 45, "maxStamina" : 25, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 115, "maxStamina" : 25, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy2":
     {
       "sheet_name": "Enemigos/Vaquero.png","name": "Vaquero", "description": "Test2",
-      "role": "enemy", "maxHealth" : 45, "maxStamina" : 25, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 115, "maxStamina" : 25, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy3":
     {
       "sheet_name": "Enemigos/Cyborg.png","name": "Mercader", "description": "Test3",
-      "role": "enemy", "maxHealth" : 80, "maxStamina" : 75, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 135, "maxStamina" : 75, "restoredStamina" : 10,
+      "actions" : ["Action3"]
+    },
+    "TestEnemy4":
+    {
+      "sheet_name": "Enemigos/Bruja.png","name": "Bruja", "description": "Test4",
+      "role": "enemy", "maxHealth" : 135, "maxStamina" : 120, "restoredStamina" : 10,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_1":
     {
       "sheet_name": "Test/Borracho.png","name": "Borracho", "description": "borracho",
-      "role": "enemy", "maxHealth" : 105, "maxStamina" : 100, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 155, "maxStamina" : 100, "restoredStamina" : 10,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_2":
     {
       "sheet_name": "Test/David Martinez.png","name": "Cyberpsicopata", "description": "David Martinez",
-      "role": "enemy", "maxHealth" : 120, "maxStamina" : 100, "restoredStamina" : 15,
-      "actions" : ["Action3"]
+      "role": "enemy", "maxHealth" : 375, "maxStamina" : 150, "restoredStamina" : 15,
+      "actions" : ["Ataque_Normal"]
     },
     "Level3_Enemy_3":
     {
       "sheet_name": "Test/Esqueleto.png","name": "Extrabajador", "description": "Esqueleto",
-      "role": "enemy", "maxHealth" : 100, "maxStamina" : 75, "restoredStamina" : 10,
-      "actions" : ["Action3"]
+      "role": "enemy", "maxHealth" : 135, "maxStamina" : 75, "restoredStamina" : 10,
+      "actions" : ["Ataque_Debil"]
     },
     "Level3_Enemy_4":
     {
       "sheet_name": "Test/Ludao.png","name": "Ludopata", "description": "Ludao",
-      "role": "enemy", "maxHealth" : 95, "maxStamina" : 100, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 155, "maxStamina" : 100, "restoredStamina" : 10,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_5":
     {
       "sheet_name": "Test/Prisionero.png","name": "Prisionero", "description": "Prisionero",
-      "role": "enemy", "maxHealth" : 85, "maxStamina" : 190, "restoredStamina" : 30,
+      "role": "enemy", "maxHealth" : 175, "maxStamina" : 190, "restoredStamina" : 30,
       "actions" : ["Action3"]
     },
     "Boss1":
     {
       "sheet_name": "Boss/BossFinalPrimeraFase.png","name": "???", "description": "",
-      "role": "enemy", "maxHealth" : 160, "maxStamina" : 150, "restoredStamina" : 20,
+      "role": "enemy", "maxHealth" : 315, "maxStamina" : 150, "restoredStamina" : 20,
       "actions" : ["Action3"]
     },
       "Boss2":
     {
       "sheet_name": "Boss/BossFinalSegundaFase.png","name": "???", "description": "",
-      "role": "enemy", "maxHealth" : 300, "maxStamina" : 200, "restoredStamina" : 15,
+      "role": "enemy", "maxHealth" : 465, "maxStamina" : 200, "restoredStamina" : 15,
       "actions" : ["Action3"]
     },
       "Boss3":
     {
       "sheet_name": "Boss/BossFinalTerceraFase.png","name": "???", "description": "",
-      "role": "enemy", "maxHealth" : 600, "maxStamina" : 300, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 675, "maxStamina" : 325, "restoredStamina" : 10,
       "actions" : ["Action3"]
     },
       "TestCharacter6":
@@ -177,13 +183,7 @@
       "requirementItemKey": "REQ6",
       "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Stamina_recovery"]
       },
-      "TestEnemy4":
-      {
-        "sheet_name": "Enemigos/Bruja.png","name": "Bruja", "description": "Test4",
-      "role": "enemy", "maxHealth" : 80, "maxStamina" : 120, "restoredStamina" : 10,
-      "actions" : ["Action3"]
 
-      },
       "TestCharacter8":
       {
         "sheet_name": "Aliados/Prehistoria/CuranderoFuturista.png","name": "Taurus", "description": "", "type":"Medic",

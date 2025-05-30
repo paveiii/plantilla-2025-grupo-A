@@ -19,32 +19,22 @@
   },
     "WorldEnemyTest":
     {
-      "battleTeammate_keys": ["TestEnemy1","TestEnemy2","TestEnemy3","TestEnemy4"], "battleTeammates_amount" : 4, "random_amount": false ,
-      "speed": 2, "detectionRadius" : 500
-    },
-    "EnemyBruja":
-    {
-      "battleTeammate_keys": ["TestEnemy4"], "battleTeammates_amount" : 2, "random_amount": true ,
+      "battleTeammate_keys": ["TestEnemy1","TestEnemy2","TestEnemy3","TestEnemy4"], "battleTeammates_amount" : 3, "random_amount": true ,
       "speed": 2, "detectionRadius" : 300
     },
-    "EnemyBorracho":
+    "EnemyOcioso":
     {
-      "battleTeammate_keys": ["Level3_Enemy_1"], "battleTeammates_amount" : 2, "random_amount": true ,
+      "battleTeammate_keys": ["Level3_Enemy_1", "Level3_Enemy_4"], "battleTeammates_amount" : 4, "random_amount": true ,
       "speed": 4, "detectionRadius" : 300
     },
     "EnemyDavidMartinez":
     {
-      "battleTeammate_keys": ["Level3_Enemy_2"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 4, "detectionRadius" : 300
+      "battleTeammate_keys": ["Level3_Enemy_2"], "battleTeammates_amount" : 1, "random_amount": false ,
+      "speed": 5, "detectionRadius" : 400
     },
     "EnemyEsqueleto":
     {
-      "battleTeammate_keys": ["Level3_Enemy_3"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 4, "detectionRadius" : 300
-    },
-    "EnemyLudao":
-    {
-      "battleTeammate_keys": ["Level3_Enemy_4"], "battleTeammates_amount" : 2, "random_amount": true ,
+      "battleTeammate_keys": ["Level3_Enemy_3"], "battleTeammates_amount" : 4, "random_amount": false ,
       "speed": 4, "detectionRadius" : 300
     },
     "EnemyPrisionero":
@@ -59,7 +49,7 @@
     },
     "Level1_Cueva":
     {
-      "battleTeammate_keys": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 2, "random_amount": true ,
+      "battleTeammate_keys": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 1, "random_amount": false ,
       "speed": 2, "detectionRadius" : 200
     },
     "Boss1":
