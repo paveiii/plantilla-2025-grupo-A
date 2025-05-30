@@ -252,6 +252,16 @@
          "value":false
         }, 
         {
+         "name":"musica",
+         "type":"string",
+         "value":"Cyberpunk_fondo_Op2.mp3"
+        }, 
+        {
+         "name":"musicaBatalla",
+         "type":"string",
+         "value":"Cyberpunk_batalla.mp3"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":33

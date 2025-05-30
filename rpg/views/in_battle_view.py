@@ -790,6 +790,7 @@ class InBattleView(arcade.View):
             self.pointer_x = 100000
 
             if self.enemy_attack_time >= self.attack_duration:
+
                 enemy = self.enemy_team[self.enemy_turn_index]
                 self.enemy_attacking = enemy
 
@@ -818,6 +819,8 @@ class InBattleView(arcade.View):
                         self.check_health_status()
 
                         self.enemy_attack_time = 0
+                        self.enemy_chosen_action = None
+                        self.enemy_chosen_target = None
                         self.enemy_turn_index += 1
                         print(f"eti {self.enemy_turn_index}")
 
@@ -1643,7 +1646,7 @@ class InBattleView(arcade.View):
             self.next_ally()
 
     def game_over(self):
-        self.window.show_view(self.window.views["menu"])
+        self.window.show_view(self.window.views["gameOver"])
 
     def game_win(self):
         for ally in self.dead_allies:

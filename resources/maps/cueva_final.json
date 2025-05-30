@@ -421,12 +421,12 @@
         {
          "name":"musica",
          "type":"string",
-         "value":"Cyberpunk_fondo_Op1.mp3"
+         "value":"EdadMedia_fondo.mp3"
         }, 
         {
          "name":"musicaBatalla",
          "type":"string",
-         "value":"Cyberpunk_batalla"
+         "value":"EdadMedia_batalla.mp3"
         }, 
         {
          "name":"start_x",

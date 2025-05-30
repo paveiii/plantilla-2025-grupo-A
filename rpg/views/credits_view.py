@@ -7,7 +7,7 @@ class CreditsView(arcade.View):
     def __init__(self):
         super().__init__()
 
-        arcade.set_background_color(arcade.color.DARK_BLUE)
+        arcade.set_background_color(arcade.color.BLACK)
         self.scroll_speed = 1.5
         self.text = (
             "Créditos del juego\n\n"
@@ -46,6 +46,8 @@ class CreditsView(arcade.View):
     def on_draw(self):
         self.clear()
         arcade.start_render()
+        arcade.set_background_color(arcade.color.BLACK)
+
 
         # Dibuja el texto centrado y multilínea
         arcade.draw_text(
