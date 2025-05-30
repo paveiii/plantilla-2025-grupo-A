@@ -15,7 +15,7 @@ PLAYER_SPRITE_PATH = "Aliados/Protagonista.png"
 
 
 # How fast does the player move
-MOVEMENT_SPEED = 7
+MOVEMENT_SPEED = 4
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
