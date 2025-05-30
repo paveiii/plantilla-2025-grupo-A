@@ -47,8 +47,6 @@ class WorldEnemy(CharacterSprite):
         if(newPath != None):
             self.path = newPath
     def perseguir_jugador(self):
-        #Recordatorio de mencionar en GDD al genio que hizo un video sobre enemigos con Pathfinding de Arcade.
-        #https://www.youtube.com/watch?v=nh0DHdX11oE&ab_channel=CharlieSmith
         if (self.path == None):
             return
         if(len(self.path) <= 1):
