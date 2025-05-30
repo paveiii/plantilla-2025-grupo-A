@@ -32,7 +32,7 @@
                             "Muy bien, luchare a tu lado. Desde este dia, cuentas con Elenya de Rohan.",
                             "¡ELENYA DE ROHAN SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ1",
-      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Stamina_recovery"]
     },
 
   "TestCharacter3":
@@ -48,7 +48,7 @@
                             "Yo, Akaris, el Colmillo del Sol, juro seguirte hasta el final de la batalla.",
                             "¡AKARIS, EL COLMILLO DEL SOL, SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ2",
-      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Poison"]
     },
 
   "TestCharacter4":
@@ -63,7 +63,7 @@
                             "Protocolo de asistencia activado. Sigma-8 operativo. Ahora soy parte de tu unidad, listo para recibir órdenes.",
                             "¡SIGMA-8 SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ3",
-      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Stamina_recovery"]
     },
     "TestCharacter5":
     {
@@ -82,19 +82,19 @@
     "TestEnemy1":
     {
       "sheet_name": "Enemigos/Gargola.png","name": "Gargola", "description": "Test1",
-      "role": "enemy", "maxHealth" : 80, "maxStamina" : 25, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 45, "maxStamina" : 25, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy2":
     {
       "sheet_name": "Enemigos/Vaquero.png","name": "Vaquero", "description": "Test2",
-      "role": "enemy", "maxHealth" : 80, "maxStamina" : 25, "restoredStamina" : 5,
+      "role": "enemy", "maxHealth" : 45, "maxStamina" : 25, "restoredStamina" : 5,
       "actions" : ["Ataque_Debil"]
     },
     "TestEnemy3":
     {
       "sheet_name": "Enemigos/Cyborg.png","name": "Mercader", "description": "Test3",
-      "role": "enemy", "maxHealth" : 90, "maxStamina" : 75, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 80, "maxStamina" : 75, "restoredStamina" : 10,
       "actions" : ["Action3"]
     },
     "Level3_Enemy_1":
@@ -159,7 +159,7 @@
                             "Lo haré, pero no por ti, y desde luego no por el objeto",
                             "¡SCYTHE SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ5",
-      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Poison"]
     },
       "TestCharacter7":
       {
@@ -175,12 +175,12 @@
                             "Me han elegido para acompañarte hacia una muerte segura. Pero si es la voluntad, que así sea.",
                             "¡MISTICA SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ6",
-      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Stamina_recovery"]
       },
       "TestEnemy4":
       {
         "sheet_name": "Enemigos/Bruja.png","name": "Bruja", "description": "Test4",
-      "role": "enemy", "maxHealth" : 90, "maxStamina" : 120, "restoredStamina" : 10,
+      "role": "enemy", "maxHealth" : 80, "maxStamina" : 120, "restoredStamina" : 10,
       "actions" : ["Action3"]
 
       },
@@ -197,7 +197,7 @@
                             "En fin. Pero con una condición, no me va el rollo de matar. Te ayudaré siempre y cuando no levante un arma. ",
                             "¡TAURUS SE HA UNIDO A TU EQUIPO!"],
       "requirementItemKey": "REQ7",
-      "actions" : ["Action1","Action2","Action3","Action4"]
+      "actions" : ["Ataque_Debil", "Ataque_Normal", "Ataque_Fuerte", "Ataque_Sangrado", "Big_Healing"]
 
       }
 

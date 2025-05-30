@@ -58,5 +58,15 @@
     {
       "name": "Gran curacion", "description": "Cura 15 puntos de vida durante 3 turnos", "option": "skill", "actionType":"ApplyEffect",
       "effectName" : "Big Healing", "staminaExpense" : 10, "amount" : 0, "targetQuantity" : 0
+    },
+    "Stamina_recovery":
+    {
+      "name": "Recuperación de stamina", "description": "Recuperas 15 puntos de stamina durante 3 turnos", "option": "skill", "actionType":"ApplyEffect",
+      "effectName" : "More Stamina Effect", "staminaExpense" : 0, "amount" : 0, "targetQuantity" : 0
+    },
+    "Poison":
+    {
+      "name": "Veneno", "description": "Inflinge 10 puntos de daño por 5 turnos", "option": "skill", "actionType":"ApplyEffect",
+      "effectName" : "Poison Effect", "staminaExpense" : 10, "amount" : 0, "targetQuantity" : 0
     }
 }

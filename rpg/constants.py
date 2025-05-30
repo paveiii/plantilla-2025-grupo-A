@@ -15,7 +15,7 @@ PLAYER_SPRITE_PATH = "Aliados/Protagonista.png"
 
 
 # How fast does the player move
-MOVEMENT_SPEED = 6
+MOVEMENT_SPEED = 7
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
@@ -25,7 +25,7 @@ BOTTOM_VIEWPORT_MARGIN = 300
 TOP_VIEWPORT_MARGIN = 300
 
 # Map where we start.
-STARTING_MAP = "mapa_edad_media"
+STARTING_MAP = "prehistoric_map"
 
 # Key mappings
 KEY_UP = [arcade.key.UP, arcade.key.W]

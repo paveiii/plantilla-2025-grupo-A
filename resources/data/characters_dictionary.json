@@ -25,27 +25,27 @@
     "EnemyBruja":
     {
       "battleTeammate_keys": ["TestEnemy4"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 2, "detectionRadius" : 300
     },
     "EnemyBorracho":
     {
       "battleTeammate_keys": ["Level3_Enemy_1"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 4, "detectionRadius" : 300
     },
     "EnemyDavidMartinez":
     {
       "battleTeammate_keys": ["Level3_Enemy_2"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 4, "detectionRadius" : 300
     },
     "EnemyEsqueleto":
     {
       "battleTeammate_keys": ["Level3_Enemy_3"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 4, "detectionRadius" : 300
     },
     "EnemyLudao":
     {
       "battleTeammate_keys": ["Level3_Enemy_4"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 4, "detectionRadius" : 300
     },
     "EnemyPrisionero":
     {
@@ -55,7 +55,7 @@
     "Level1_World":
     {
       "battleTeammate_keys": ["TestEnemy1","TestEnemy2"], "battleTeammates_amount" : 2, "random_amount": true ,
-      "speed": 3, "detectionRadius" : 300
+      "speed": 2, "detectionRadius" : 300
     },
     "Level1_Cueva":
     {
