@@ -203,6 +203,7 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
                     battleKey = character_object.properties.get("type")
 
                     character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}", game_map.scene,player, [battleKey])
+                    print(character_object.shape)
                     character_sprite.position = character_object.shape
                     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
                     print(character_sprite.position)
@@ -585,8 +586,9 @@ def loadMapFromSave(player, saveFile, map_name):
             character_sprite = WorldBoss(f":characters:{battleCharacter_dictionary[battleKey]['sheet_name']}",
                                          game_map.scene, player, [battleKey])
             character_sprite.position = character_object.shape
-            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa")
+            print("BOSS CARGADO")
             print(character_sprite.position)
+            game_map.scene.add_sprite("characters", character_sprite)
 
 
     if "worldAllies" in saveFile["maps"][map_name]:
