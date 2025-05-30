@@ -1,12 +1,12 @@
 # Nombre del juego
 
 ## Equipo
-- <Nombre 1 y roles>
-- <Nombre 2 y roles>
-- <Nombre 3 y roles>
-- <Nombre 4 y roles>
-- <Nombre 5 y roles>
-- <Nombre 6 y roles>
+- Pável David Tabata Rodríguez: Jefatura de proyecto, Programación, Pruebas 
+- Beatriz Arribas Schudeck: Diseño Gráfico, Pruebas.
+- Daniel Guillén Ruiz: Diseño gráfico, Pruebas, Diseño de niveles, Programación. 
+- Pablo Álvaro Peña Sánchez: Diseño Gráfico, Diseño de niveles, Pruebas .
+- Rubén Dobre: Programación, Pruebas.
+- Samuel García de Dios: Programación, Pruebas, Diseño de niveles 
 
 Modificar lo que sigue a voluntad para que queden unas instrucciones mínimas de cómo ejecutar el juego y de cómo es el *gameplay*.
 
@@ -42,10 +42,9 @@ The game is in extremely early stages. For discussion on future direction, see:
 
 ### Controls
 - **Movement:** Arrow Keys / WASD
-- **Toggle Light/Torch:** L
+- **Toggle Light/Torch:** F
 - **Pick Up Items:** E
-- **Open Inventory:** I *(This screen doesn't do anything yet)*
-- **Select Current Item in Hotbar:** 1-0 *(Number keys)*
+- **Open Inventory:** I
 - **Open Menu:** ESC
 
 ## Development
