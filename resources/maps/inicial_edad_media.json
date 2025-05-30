@@ -235,6 +235,11 @@
          "value":false
         }, 
         {
+         "name":"musica",
+         "type":"string",
+         "value":"EdadMedia_fondo.mp3"
+        }, 
+        {
          "name":"start_x",
          "type":"int",
          "value":5

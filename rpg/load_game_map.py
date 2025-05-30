@@ -36,6 +36,7 @@ class GameMap():
         self.worldEnemyList = arcade.SpriteList()
         self.worldAllyList = arcade.SpriteList()
         self.worldItemList = arcade.SpriteList()
+        self.backgroundMusicName = ""
     name = None
     scene = None
     map_layers = None
@@ -105,6 +106,11 @@ map_name, scaling=TILE_SCALING, layer_options=layer_options
     game_map.background_color = my_map.background_color
 
     game_map.properties = my_map.properties
+
+    try:
+        game_map.backgroundMusicName = game_map.properties.get("musica")
+    except:
+        print("EL NIVEL CARGADO NO TIENE MUSICA.")
 
     try:
         #Este bool define si el mapa es un submapa, es decir, un mapa al que eres teletransportado desde otro mapa.
@@ -513,6 +519,11 @@ def loadMapFromSave(player, saveFile, map_name):
     game_map.background_color = my_map.background_color
 
     game_map.properties = my_map.properties
+
+    try:
+        game_map.backgroundMusicName = game_map.properties.get("musica")
+    except:
+        print("EL NIVEL CARGADO NO TIENE MUSICA.")
 
     try:
         # Este bool define si el mapa es un submapa, es decir, un mapa al que eres teletransportado desde otro mapa.
