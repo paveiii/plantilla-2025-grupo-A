@@ -423,6 +423,24 @@
                  "width":0,
                  "x":480,
                  "y":416
+                }, 
+                {
+                 "height":0,
+                 "id":82,
+                 "name":"ITEM",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"item_key",
+                         "type":"string",
+                         "value":"Level1Revivir"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":66,
+                 "y":76
                 }],
          "opacity":1,
          "properties":[
@@ -437,7 +455,7 @@
          "y":0
         }],
  "nextlayerid":11,
- "nextobjectid":82,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "properties":[
         {
