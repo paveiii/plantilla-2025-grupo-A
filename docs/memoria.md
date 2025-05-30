@@ -15,7 +15,7 @@ El equipo fue organizado basado en sus habiliades y debilidades destacables, per
 
 El elemento más complicado durante el desarrollo fue el arte para el proyecto, al no tener la experiencia el tiempo suficiente para desarrollar una estética propia, tuvimos que echar mano de distintos recursos de uso libre y generación por inteligencia artificial. Las fuentes principales fueron:
 * [OpenGameArt.org](https://opengameart.org/): Un repositorio de Assets que pueden ser usados gratuitamente en proyectos, principalmente de código abierto.
-* * [Liberated Pixel Cup](https://lpc.opengameart.org/): La vasta cantidad de enemigos y aliados que fueron creados no sería posible sin el trabajo creado por los artistas que participaron en este evento. para esta competición.
+* [Liberated Pixel Cup](https://lpc.opengameart.org/): La vasta cantidad de enemigos y aliados que fueron creados no sería posible sin el trabajo creado por los artistas que participaron en este evento. para esta competición.
 * [Universal LPC Spritesheet Generator](https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light): Software que usamos para generar los personajes usando los Assets de la Liberated Pixel Cup.
 * [Craftpix Free Rocky Area Objects Pixel Art]([https://opengameart.org/](https://craftpix.net/freebies/free-rocky-area-objects-pixel-art/?srsltid=AfmBOopkGluWB6UjM03wZRjRUa0K62cL9j9jErPmHgEuThCgQvgjc1IO))
 * [Craftpix Free Undead Tileset Top Down Pixel Art](https://craftpix.net/freebies/free-undead-tileset-top-down-pixel-art/?srsltid=AfmBOoo7ri7NnaXeE4C__u1hMCTA2qNxYZUtaeUAAjYyj78FK2Dx3Q6W)
@@ -26,15 +26,25 @@ El elemento más complicado durante el desarrollo fue el arte para el proyecto, 
 El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los primeros aliados. El mapa Cyberpunk recibió la mayoría de arte por parte de generación por Inteligencia Artificial, sin embargo, Pablo Peña tuvo que arreglar bastante de los diseños generados al ser deficientes de una forma u otra. Para el arte de pantallas también se usó IA.
 
 **Principales objetivos implementados**
-* Interfaz del inventario mejorado.
+*  **Un sistema de batalla basado en turnos**\
+  Donde el jugador puede dirigir los ataques que realizan sus aliados al equipo enemigo. También se pueden usar items que el jugador encuentra por el mapa, ya sea con una función defensiva como también una funcion ofensiva. Se han implementado distintos tipos de ataques y habilidades, utilizando diccionarios en.json para almacenar la información de estos. También el jugador tiene la posibilidad de no realizar ningún movimiento y recuperar mucha más Stamina.
+*  Sistema de reclutamiento de aliados\
+   Los aliados se encontrarán estacionados en un punto del mapa específicado por el diseñador, dichos puntos pueden contener a más de un aliado posible, que será elegido aleatoriamente. El jugador podrá reclutar a dichos aliados buscando en el mapa un "Objeto de requerimiento", nombre interno dado por el equipo, el cual aparece aleatoriamente alrededor del mapa en puntos específicos, en cuanto el jugador tenga este objeto, podrá reclutar al personaje y usarse en batalla. Cada personaje tiene habilidades únicas que fueron puestas dependiendo de su clase. En caso de que se intente reclutar a más de tres aliados, se dará la elección al jugador de reemplazar alguno de los que ya tiene por el nuevo que va a entrar en el equipo, aún asi se dará la posibilidad al jugador de volver a reclutar dicho personaje, dejando su objeto de requerimento en el suelo.
+*  Cajas de diálogos de aliados\
+   Los aliados comunicarán la exigencia del objeto de reclutamiento y su satisfacción una vez encuentres dichos objetos por medio de dialogos mostrados en cajas de texto. Estos cumplen con la función adicional de ilustrar a estos personajes y formar un hilo conductor a lo largo de la aventura.
+* Implementación
+* Sistema de aparición de objetos extendido\
+  Ahora pueden salir objetos aleatoriamente tomando de una lista predefinida en un diccionario. Haciendo que cada sesión sea única.
+* Interfaz del inventario mejorado\
+  Posee información sobre los items que carga y los aliados que posee actualmente en su equipo.
+  
 * 
 * Musica ambiental.
 * La interfaz ha sido trabajada para darle al jugador todas las herramientas que necesita para logaraUna interfaz que cuenta con una pantalla individual de batalla, junto con un inventario renovado, musica ambiental para cada nivel adecuada a la época a la que queremos emular  y una pantalla de inicio totalmente nueva.
   
-*  Un sistema de batalla basado en botones de acción, con los que el jugador puede interactuar para atacar a sus enemigos. Implementados también varias opciones de uso de estos mismos ataques, así como la capacidad de no hacer ningún movimiento para la recuperación de vida y barra de poder.
-*  Sistema de reclutamiento por el cual el jugador puede añadir a su arsenal otros personajes que también lucharán contra enemigos. 
+
 *  Diseño  e implementación de las tres fases con las que cuenta el boss a lo largo de los tres niveles.
-*  Cajas de diálogos que se muestran cada vez que el jugador intente reclutar a otro personaje que, además, cumple con la función de ilustrar la historia y formar un hilo conductor a lo largo de la aventura. Sin embargo, estos están predeterminados y el jugador no puede elegirlos libremente. 
+
 *  Diseño de tres niveles, que cumplen con la estética inicial de recrear tres etapas diferentes del tiempo. 
 *  Implementación de las animaciones de los sprites, que permiten una mejor visualizacion de los movimientos tanto de los aliados como de los enemigos, sus ataques y sus defensas.
 *  Sistema de guardado que recuerda la posición, inventario, miembros reclutados, mapa, items y enemigos.
