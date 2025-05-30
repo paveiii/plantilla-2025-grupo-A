@@ -27,7 +27,7 @@ Como extra para favorecer la estética del juego y mayor comprensión de la hist
 **ALIADOS**
 
 La esencia del juego son las batallas que hay que librar para salir con vida tras enfrentarse a los enemigos. Estos son combates en los que todos los personajes permanecen estáticos y solo se permite actuar mediante botones para seleccionar items y ataques.\
-Cada uno está dotado de su propia barra de vida y capacidad de ataque, que pude alcanzar hasta un maximo de tres.\
+Cada uno está dotado de su propia barra de vida y capacidad de ataque, que puede alcanzar hasta un maximo de tres.\
 Los personajes cuentan con sus propios ataques, porcentaje de vitalidad y daño.\
 Existen varias opciones con las que seguir una estrategia a la hora de enfrentarse a algún enemigo. Dependiento de quien ataque y quien es atacado, el daño es mayor, la vida se regenera más rápido, la recuperación de la habilidad de ataque es inmediata dependiendo de si se emplea o no, valoraciones de daño en caso de ser atacado  etc. Teniendo siempre presente que las estadísticas se mantienen después de cada confrontación.
 

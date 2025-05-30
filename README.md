@@ -4,9 +4,9 @@
 - Pável David Tabata Rodríguez: Jefatura de proyecto, Programación, Pruebas 
 - Beatriz Arribas Schudeck: Diseño Gráfico, Pruebas.
 - Daniel Guillén Ruiz: Diseño gráfico, Pruebas, Diseño de niveles, Programación. 
-- Pablo Álvaro Peña Sánchez: Diseño Gráfico, Diseño de niveles, Pruebas .
+- Pablo Álvaro Peña Sánchez: Diseño Gráfico, Diseño de niveles, Pruebas.
 - Rubén Dobre: Programación, Pruebas.
-- Samuel García de Dios: Programación, Pruebas, Diseño de niveles 
+- Samuel García de Dios: Programación, Pruebas, Diseño de niveles.
 
 Modificar lo que sigue a voluntad para que queden unas instrucciones mínimas de cómo ejecutar el juego y de cómo es el *gameplay*.
 
