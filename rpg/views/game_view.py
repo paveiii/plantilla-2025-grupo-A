@@ -137,7 +137,7 @@ class GameView(arcade.View):
 
     def __init__(self, map_list, player, saveFileData):
         super().__init__()
-
+        self.my_map = None
         self.saveFile = None
         if (saveFileData != None):
             self.saveFile = saveFileData
@@ -267,6 +267,8 @@ class GameView(arcade.View):
         :param start_x: Grid x location to spawn at
         :param start_y: Grid y location to spawn at
         """
+        musicaAnterior = ""
+        if(self.my_map != None): musicaAnterior = self.my_map.backgroundMusicName
 
         if(map_name not in self.map_list):
             if(wipePreviousMaps): self.map_list.clear()
@@ -274,8 +276,6 @@ class GameView(arcade.View):
 
         self.cur_map_name = map_name
 
-        #      if self.music_player:
-        #         self.music_player = self.music.stop
 
         try:
             self.my_map = self.map_list[self.cur_map_name]
@@ -284,10 +284,13 @@ class GameView(arcade.View):
         if self.my_map.background_color:
             arcade.set_background_color(self.my_map.background_color)
 
+
         if (self.my_map.backgroundMusicName != ""):
             pygame.mixer.init()
-            pygame.mixer.music.load(f"../resources/sounds/{self.my_map.backgroundMusicName}")
-            pygame.mixer.music.play(-1)  # bucle infinito
+            if musicaAnterior != self.my_map.backgroundMusicName or musicaAnterior == "":
+                pygame.mixer.music.load(f"../resources/sounds/{self.my_map.backgroundMusicName}")
+                pygame.mixer.music.play(-1)  # bucle infinito
+
 
 
         map_height = self.my_map.map_size[1]
