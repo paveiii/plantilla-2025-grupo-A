@@ -195,9 +195,19 @@ class InBattleView(arcade.View):
 
         self.sta_message = False
 
-        self.fondo = arcade.Sprite("../resources/UIThings/fondo.png", scale=1.5)
-        self.fondo.center_x = self.current_width / 2
-        self.fondo.center_y = self.current_height / 2
+        cyberpunk_maps_list = ["mapa_cyberpunk", "power_plant_interior", "submapa_alcantarillado",
+                                    "time_company_interior"]
+
+        if self.window.views["game"].cur_map_name in cyberpunk_maps_list:
+            self.fondo = arcade.Sprite("../resources/UIThings/fondoCyber.png", scale=1.2)
+
+            self.fondo.center_x = self.current_width / 2
+            self.fondo.center_y = self.current_height / 2 + 400
+        else:
+            self.fondo = arcade.Sprite("../resources/UIThings/fondo.png", scale=1.5)
+
+            self.fondo.center_x = self.current_width / 2
+            self.fondo.center_y = self.current_height / 2
 
         self.att_sta_message = False
 
@@ -205,6 +215,8 @@ class InBattleView(arcade.View):
 
         self.enemy_chosen_action = None
         self.enemy_chosen_target = None
+
+
 
     def on_show_view(self):
         musicaBatalla = self.window.views['game'].my_map.battleMusicName
