@@ -23,6 +23,8 @@ El elemento más complicado durante el desarrollo fue el arte para el proyecto, 
 * [Craftpix Free Rocks and Stones Top-Down Pixel Art](https://craftpix.net/freebies/free-rocks-and-stones-top-down-pixel-art/?srsltid=AfmBOor2wo8v8i414nPk-Ex8Ey1CGRuFsQ4pdW6rHDU3HY9xAGrPpUk_)
 * [rectTile Universe Basic Dirt](https://dkproductions.itch.io/recttile-universe-basic-dirt)
 
+El jefe fue diseñado y dibujado por Beatriz Arribas, junto al diseño de los primeros aliados. El mapa Cyberpunk recibió la mayoría de arte por parte de generación por Inteligencia Artificial, sin embargo, Pablo Peña tuvo que arreglar bastante de los diseños generados al ser deficientes de una forma u otra. Para el arte de pantallas también se usó IA.
+
 **Principales objetivos implementados**
 * Interfaz del inventario mejorado.
 * 
